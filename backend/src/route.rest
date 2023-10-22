@@ -1,0 +1,53 @@
+//Users
+
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/users/65102ced5e0fc1e931b89ab4
+
+###
+
+
+DELETE http://localhost:3000/users/65103a9d7bc6d320ffc28307
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Piplup",
+  "age": 21,
+  "avatar": "https://staticg.sportskeeda.com/editor/2021/06/064a3-16233087821077-800.jpg"
+}
+
+//Expenses
+
+###
+
+
+PATCH http://localhost:3000/users/expenses/652d20701d6a6608cc36a7b5
+Content-Type: application/json
+
+{
+  "date": "2023-10-19",
+  "category": "Gifts",
+  "amount": 7280,
+  "desc": "Bulbasaur toy for Steve"
+}
+
+###
+
+GET http://localhost:3000/expenses/65218add0211c6025c56c6f9
+
+//ExpensesCategories
+###
+
+POST http://localhost:3000/expensesCategories
+Content-Type: application/json
+
+{
+  "name": "Bumbus",
+  "color": "#FFFFFF"
+}
