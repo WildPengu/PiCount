@@ -1,0 +1,18 @@
+.Btn {
+    margin: 15px auto;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    background-color: #e7eda3;
+    color: #05386B;
+    width: 100%;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+        border: 2px solid #05386B;
+        background-color: #EDF5E1;
+        color: #05386B;
+    }
+}

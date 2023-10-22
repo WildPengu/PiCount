@@ -1,0 +1,58 @@
+
+.AddExpense {
+    margin: auto;
+    padding: 15px;
+
+    .FormContainer {
+        
+        .FormAddExpense {
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #e7eda3;
+            background-color: #EDF5E1;
+            text-align: center;
+
+            .FormAddExpenseLabel {
+                margin: 0 ;
+            }
+
+            .TypeOfExpense, .FormAddExpenseTextarea {
+                margin: 10px auto;
+                padding: 5px;
+                width: 100%;
+                border-radius: 5px;
+                background-color: #fefefe;
+            }
+
+            .TypeOfExpense {
+                text-transform: uppercase;
+                text-align: center;
+            }
+
+            .FormAddExpenseTextarea {
+                width: calc(100% - 10px);
+                resize: vertical;
+            }
+
+            .AmountContainer {
+                display: flex;
+                align-items: center;
+
+                .AmountInput {
+                    margin: 10px auto;
+                    padding: 5px;   
+                }
+
+                .AmountLabel {
+                    width: 25%;
+                }
+
+                .AmountInput, .TypeOfCurrency {
+                    width: 25%;
+                    background-color: #fefefe;
+                }
+                
+            }
+        }
+    }
+}
