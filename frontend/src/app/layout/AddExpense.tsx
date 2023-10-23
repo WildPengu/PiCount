@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { useSelector } from 'react-redux';
 import { selectUsers } from '../../stores/userModule';
 import Button from '../components/button/Button';
@@ -38,17 +37,33 @@ const AddExpense = () => {
     <div className={styles.AddExpense}>
       <div className={styles.FormContainer}>
         <form className={styles.FormAddExpense}>
-          <label htmlFor='typeOfExpense' className={styles.FormAddExpenseLabel}>Type</label>
-          <select id='typeOfExpense' className={styles.TypeOfExpense}>
+          <label
+            htmlFor='typeOfExpense'
+            className={styles.FormAddExpenseLabel}
+          >Type</label>
+          <select
+            id='typeOfExpense'
+            className={styles.TypeOfExpense}
+          >
             {categories.map((category) => (
               <option key={category._id}>{category.name}</option>
             ))}
           </select>
           <label htmlFor='desc' className={styles.FormAddExpenseLabel}>Description</label>
-          <textarea id='desc' name='desc' placeholder='Type...' className={styles.FormAddExpenseTextarea}></textarea>
+          <textarea
+            id='desc'
+            name='desc'
+            placeholder='Type...'
+            className={styles.FormAddExpenseTextarea}
+          ></textarea>
           <div className={styles.AmountContainer}>
-            <label htmlFor='amount' className={styles.AmountLabel}>Amount</label>
-            <input id='amount' name='amount' type='number' className={styles.AmountInput} />
+            <input
+              id='amount'
+              name='amount'
+              type='number'
+              className={styles.AmountInput}
+              placeholder='Amount'
+            />
             <select id='currency' className={styles.TypeOfCurrency}>
               <option>PLN</option>
             </select>
