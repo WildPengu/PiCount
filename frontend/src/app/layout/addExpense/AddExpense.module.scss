@@ -1,15 +1,15 @@
 
 .AddExpense {
-    margin: auto;
-    padding: 15px;
 
     .FormContainer {
+        margin: auto;
+        padding: 15px;
+        max-width: 600px;
         
         .FormAddExpense {
             margin: 0 auto;
             padding: 20px;
-            border: 1px solid #e7eda3;
-            background-color: #EDF5E1;
+            border: 1px solid #000;
             text-align: center;
 
             .FormAddExpenseLabel {

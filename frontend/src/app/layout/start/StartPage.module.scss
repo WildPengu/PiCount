@@ -1,0 +1,36 @@
+.StartPage {
+    width: 70vw;
+
+    .Introduce {
+        margin: 30px auto;
+        max-width: 50vw;
+
+        h1 {
+            text-align: center;
+        }
+    }
+
+    .ButtonsPanel {
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        padding: 20px 0;
+        max-width: 50vw;
+        text-align: center;
+
+        .Button {
+            padding: 10px 20px;
+            border-radius: 9999px;
+            background-color:  #9530ea;
+            color: #fff;
+            width: 25%;
+            text-decoration: none;
+            cursor: pointer;
+            transition: .3s;
+
+            &:hover {
+                opacity: .7;
+            }
+        }
+    }
+}

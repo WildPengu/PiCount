@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { initialize } from '../stores/userModule';
 import styles from './App.module.scss';
-import AddExpense from './layout/AddExpense';
-import { SignUp } from './layout/SignUp';
+import { AppNav } from './components/appNav/AppNav';
+import { AppRoutes } from './routes/AppRoutes';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <SignUp />
-      <AddExpense />
+      <AppNav />
+      <AppRoutes />
     </div>
   );
 }

@@ -1,0 +1,42 @@
+.AppNav {
+    border-right: 1px solid #9530ea;
+    height: 100vh;
+    width: 200px;
+
+    .AppNavInfContainer {
+        padding: 15px 0;
+        text-align: center;
+
+        .AppNavIcon {
+            border: 1px solid #9530ea;
+            border-radius: 50%;
+            height: 70px;
+            width: 70px;
+        }
+    }
+
+    .AppNavHr {
+        width: 80%;
+    }
+    
+    .AppNavUl {
+        padding: 0;
+        list-style: none;
+
+        .AppNavLi {
+            padding: 20px;
+            text-align: center;
+            color: #9530ea;
+            cursor: pointer;
+            transition: all .3s;
+            
+            a {
+                text-decoration: none;
+            }
+
+            &:hover {
+                background-color: #f3f8f7;
+            }
+        }
+    }
+}

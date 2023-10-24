@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUsers } from '../../stores/userModule';
-import Button from '../components/button/Button';
+import { selectUsers } from '../../../stores/userModule';
+import Button from '../../components/button/Button';
 import styles from './AddExpense.module.scss';
 
 interface Category {
@@ -9,7 +9,7 @@ interface Category {
   name: string;
 }
 
-const AddExpense = () => {
+export const AddExpense = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const players = useSelector(selectUsers);
@@ -76,5 +76,3 @@ const AddExpense = () => {
     </div>
   );
 };
-
-export default AddExpense;

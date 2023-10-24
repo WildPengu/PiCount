@@ -1,0 +1,17 @@
+.Login {
+    width: 70vw;
+
+    .LoginForm {
+        margin: 30px auto;
+        padding: 15px;
+        max-width: 50%;
+        text-align: center;
+    
+        .LoginInput {
+            display: block;
+            margin-bottom: 5px;
+            padding: 5px;
+            width: 100%;
+        }
+    }
+}

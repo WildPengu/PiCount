@@ -1,6 +1,6 @@
 import styles from './SignUp.module.scss';
-import Button from '../components/button/Button';
-import { SignUpForm } from '../types/SignUpForm';
+import Button from '../../components/button/Button';
+import { SignUpForm } from '../../../types/SignUpForm';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 export const SignUp = () => {
@@ -144,8 +144,12 @@ export const SignUp = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+
+        if(!validate()) {
+            return
+        };
+
         const url = 'http://localhost:3000/users';
-        
         
         try {
             const response = await fetch(url, {
@@ -186,6 +190,9 @@ export const SignUp = () => {
                     type='number' 
                     name='age' 
                     placeholder='User age'
+                    min="16" 
+                    max="99" 
+                    step="1"
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
                 />
