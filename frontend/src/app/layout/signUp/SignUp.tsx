@@ -1,7 +1,7 @@
 import styles from './SignUp.module.scss';
-import Button from '../../components/button/Button';
 import { SignUpForm } from '../../../types/SignUpForm';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const SignUp = () => {
 
@@ -20,6 +20,8 @@ export const SignUp = () => {
         password: '',
         confirmPassword: '',
     });
+
+    const [signUpDone, setSignUpDone] = useState(false);
 
     const validate = () => {
         let validationErrors = {
@@ -132,7 +134,6 @@ export const SignUp = () => {
             !validationErrors.confirmPassword
         );
     };
-    console.log(formData);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -166,14 +167,18 @@ export const SignUp = () => {
 
             const data = await response.json();
             console.log('Użytkownik został utworzony:', data);
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Wystąpił błąd podczas tworzenia użytkownika:', error);
         }
+        setSignUpDone(true);
     };
 
 
     return (
         <div className={styles.SignUp}>
+            {!signUpDone ? <h2 className={styles.SignUpMessage}>Fill out the fields to create a new user:</h2> : <h2 className={styles.SignUpMessage}>The user has been created!</h2>}
+            
             <form 
                 className={styles.SignUpForm}
                 onSubmit={handleSubmit}
@@ -220,9 +225,10 @@ export const SignUp = () => {
                     onChange={handleInputChange}
                 />
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                <Button>
-                    Sign Up
-                </Button>
+                <div className={styles.ButtonsPanel}>
+                    <button className={styles.SignUpButton} disabled={signUpDone}>SignUp</button>
+                    {signUpDone && <Link to='/login' className={styles.SignUpButton}>Go to login</Link>}
+                </div>
             </form>
         </div>
     )

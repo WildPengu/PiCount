@@ -5,7 +5,11 @@ interface ButtonProps {
 }
 
 const Button = ({ children }: ButtonProps) => {
-    return <button className={styles.Button}>{children}</button>;
+    return (
+        <button className={styles.Button}>
+            {children}
+        </button>
+    );
 };
 
 export default Button;
