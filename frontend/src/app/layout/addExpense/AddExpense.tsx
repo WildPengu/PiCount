@@ -3,6 +3,12 @@ import { useSelector } from 'react-redux';
 import { selectUsers } from '../../../stores/userModule';
 import Button from '../../components/button/Button';
 import styles from './AddExpense.module.scss';
+import { ButtonBgColor } from '../../components/button/Button';
+
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs';
+
 
 interface Category {
   _id: string;
@@ -33,14 +39,16 @@ export const AddExpense = () => {
     fetchCategories();
   }, []);
 
+
   return (
     <div className={styles.AddExpense}>
       <div className={styles.FormContainer}>
+        <h2 className={styles.FormHeader}>Add New Expense</h2>
         <form className={styles.FormAddExpense}>
           <label
             htmlFor='typeOfExpense'
             className={styles.FormAddExpenseLabel}
-          >Type</label>
+          >Category</label>
           <select
             id='typeOfExpense'
             className={styles.TypeOfExpense}
@@ -56,6 +64,9 @@ export const AddExpense = () => {
             placeholder='Type...'
             className={styles.FormAddExpenseTextarea}
           ></textarea>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker defaultValue={dayjs(Date())} />
+          </LocalizationProvider>
           <div className={styles.AmountContainer}>
             <input
               id='amount'
@@ -68,10 +79,15 @@ export const AddExpense = () => {
               <option>PLN</option>
             </select>
           </div>
-          <Button>
-            Add expense
-          </Button>
         </form>
+        <div className={styles.ButtonsPanel}>
+            <Button>
+              Add expense
+            </Button>
+            <Button backgroundColor={ButtonBgColor.gray}>
+              Cancel
+            </Button>
+          </div>
       </div>
     </div>
   );
