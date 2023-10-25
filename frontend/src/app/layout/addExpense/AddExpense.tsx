@@ -19,7 +19,22 @@ export const AddExpense = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const players = useSelector(selectUsers);
+  const [amount, setAmount] = useState('');
+  const [error, setError] = useState('');
   console.log(players);
+
+  const handleAmountChange = (e: { target: { value: any; }; }) => {
+    const value = e.target.value;
+
+    if (!value) {
+      setError('Amount is required');
+    } else if (parseFloat(value) < 0.01) {
+      setError('Amount must be greater than 0.');
+    } else {
+      setError('');
+    }
+    setAmount(value);
+  };
 
   useEffect(() => {
     async function fetchCategories() {
@@ -72,13 +87,18 @@ export const AddExpense = () => {
               id='amount'
               name='amount'
               type='number'
+              min={0.01}
+              step={0.01}
               className={styles.AmountInput}
               placeholder='Amount'
+              value={amount}
+              onChange={handleAmountChange}
             />
             <select id='currency' className={styles.TypeOfCurrency}>
               <option>PLN</option>
             </select>
           </div>
+          {error && <p className={styles.ErrorMessage}>{error}</p>}
         </form>
         <div className={styles.ButtonsPanel}>
             <Button>

@@ -1,16 +1,20 @@
 
 .AddExpense {
+    padding-top: 20px;
+    width: 70vw;
+    text-align: center;
 
     .FormContainer {
         margin: auto;
         padding: 15px;
         max-width: 600px;
+        border: 1px solid transparent;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
         
         .FormAddExpense {
             margin: 0 auto;
             padding: 20px;
-            border: 1px solid #000;
-            text-align: center;
+            text-align: start;
 
             .FormAddExpenseLabel {
                 margin: 0 ;
@@ -20,13 +24,6 @@
                 margin: 10px auto;
                 padding: 5px;
                 width: 100%;
-                border-radius: 5px;
-                background-color: #fefefe;
-            }
-
-            .TypeOfExpense {
-                text-transform: uppercase;
-                text-align: center;
             }
 
             .FormAddExpenseTextarea {
@@ -35,24 +32,21 @@
             }
 
             .AmountContainer {
-                display: flex;
-                align-items: center;
-
                 .AmountInput {
-                    margin: 10px auto;
-                    padding: 5px;   
-                }
-
-                .AmountLabel {
-                    width: 25%;
+                    margin: 10px 10px 10px 0;
                 }
 
                 .AmountInput, .TypeOfCurrency {
-                    width: 25%;
-                    background-color: #fefefe;
+                    width: 40%;
+                    padding: 10px;
                 }
                 
             }
+        }
+
+        .ButtonsPanel {
+            display: flex;
+            justify-content: space-around;
         }
     }
 }

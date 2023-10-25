@@ -1,4 +1,19 @@
 /* Your styles goes here. */
 .App {
     display: flex;
+
+    select, input, textarea {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    select:focus {
+        border-color: #1976d2;
+    }
+
+    input:focus-visible,
+    textarea:focus-visible {
+        border-color: #1976d2;
+        outline: -webkit-focus-ring-color auto 0;
+    }
 }
