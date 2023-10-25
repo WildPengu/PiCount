@@ -1,12 +1,19 @@
 import styles from './Button.module.scss';
 
-interface ButtonProps {
-    children: string;
+export enum ButtonBgColor {
+    violet = '#9530ea',
+    gray = '#bbb',
 }
 
-const Button = ({ children }: ButtonProps) => {
+export interface ButtonProps {
+    children: string;
+    backgroundColor?: ButtonBgColor;
+}
+
+const Button = ({ children, backgroundColor = ButtonBgColor.violet }: ButtonProps) => { 
+
     return (
-        <button className={styles.Button}>
+        <button className={styles.Button} style={{backgroundColor: backgroundColor}}>
             {children}
         </button>
     );
