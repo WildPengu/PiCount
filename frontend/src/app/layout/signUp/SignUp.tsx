@@ -22,6 +22,7 @@ export const SignUp = () => {
     });
 
     const [signUpDone, setSignUpDone] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const validate = () => {
         let validationErrors = {
@@ -167,18 +168,19 @@ export const SignUp = () => {
 
             const data = await response.json();
             console.log('Użytkownik został utworzony:', data);
+            setSignUpDone(true);
         } 
         catch (error) {
+            setErrorMessage(error.message);
             console.error('Wystąpił błąd podczas tworzenia użytkownika:', error);
         }
-        setSignUpDone(true);
     };
 
 
     return (
         <div className={styles.SignUp}>
             {!signUpDone ? <h2 className={styles.SignUpMessage}>Fill out the fields to create a new user:</h2> : <h2 className={styles.SignUpMessage}>The user has been created!</h2>}
-            
+            {errorMessage && <h2>{errorMessage}</h2>}
             <form 
                 className={styles.SignUpForm}
                 onSubmit={handleSubmit}
