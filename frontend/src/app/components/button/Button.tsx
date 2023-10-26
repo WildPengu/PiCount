@@ -8,12 +8,13 @@ export enum ButtonBgColor {
 export interface ButtonProps {
     children: string;
     backgroundColor?: ButtonBgColor;
+    onClick?: () => void;
 }
 
-const Button = ({ children, backgroundColor = ButtonBgColor.violet }: ButtonProps) => { 
+const Button = ({ children, onClick, backgroundColor = ButtonBgColor.violet }: ButtonProps) => { 
 
     return (
-        <button className={styles.Button} style={{backgroundColor: backgroundColor}}>
+        <button className={styles.Button} style={{backgroundColor: backgroundColor}} onClick={onClick}>
             {children}
         </button>
     );

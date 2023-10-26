@@ -10,12 +10,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
 
 
-interface Category {
+export interface Category {
   _id: string;
   name: string;
 }
 
-export const AddExpense = () => {
+export interface ModalProps {
+  setIsModalVisible: (isVisible: boolean) => void;
+}
+
+export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const players = useSelector(selectUsers);
@@ -56,8 +60,7 @@ export const AddExpense = () => {
 
 
   return (
-    <div className={styles.AddExpense}>
-      <div className={styles.FormContainer}>
+      <div className={styles.AddExpense}>
         <h2 className={styles.FormHeader}>Add New Expense</h2>
         <form className={styles.FormAddExpense}>
           <label
@@ -104,11 +107,10 @@ export const AddExpense = () => {
             <Button>
               Add expense
             </Button>
-            <Button backgroundColor={ButtonBgColor.gray}>
+            <Button backgroundColor={ButtonBgColor.gray} onClick={() => setIsModalVisible(false)}>
               Cancel
             </Button>
           </div>
       </div>
-    </div>
   );
 };

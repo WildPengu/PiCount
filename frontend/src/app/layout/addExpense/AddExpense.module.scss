@@ -1,15 +1,8 @@
-
 .AddExpense {
-    padding-top: 20px;
-    width: 70vw;
-    text-align: center;
-
-    .FormContainer {
         margin: auto;
         padding: 15px;
         max-width: 600px;
-        border: 1px solid transparent;
-        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
+        
         
         .FormAddExpense {
             margin: 0 auto;
@@ -48,5 +41,4 @@
             display: flex;
             justify-content: space-around;
         }
-    }
 }
