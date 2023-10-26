@@ -3,6 +3,7 @@ import express, {
   NextFunction,
   Request,
 } from 'express';
+import { UserExpenses } from '../models/expense';
 import User from '../models/user';
 const router = express.Router();
 
@@ -41,14 +42,22 @@ router.post('/', async (req: Request, res: Response) => {
     name: req.body.name,
     age: req.body.age,
     avatar: req.body.avatar,
-    expenses: [],
+    password: req.body.password,
+    email: req.body.email,
+  });
+
+  const expenses = new UserExpenses({
+    userId: user._id.toString(),
+    expenses: {},
   });
 
   try {
     const newUser = await user.save();
+    const newExpenses = await expenses.save();
 
     res.status(201).json({
       newUser,
+      newExpenses,
     });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -65,31 +74,6 @@ router.patch('/:id', getUser, async (req: Request, res: Response) => {
     res.json(updatedUser);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
-  }
-});
-
-router.patch('/expenses/:id', async (req, res) => {
-  try {
-    const userId = req.params.id;
-
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res
-        .status(404)
-        .json({ message: 'Nie znaleziono wydatku o podanym identyfikatorze.' });
-    }
-
-    const newExpense = req.body;
-    user.expenses.push(newExpense);
-    const updatedExpense = await user.save();
-
-    res.json(updatedExpense);
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ message: 'Wystąpił błąd podczas aktualizacji wydatku.' });
   }
 });
 
