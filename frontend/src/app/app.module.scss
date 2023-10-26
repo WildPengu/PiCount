@@ -6,11 +6,8 @@
         border-radius: 5px;
         border: 1px solid #ccc;
     }
-
-    select:focus {
-        border-color: #1976d2;
-    }
-
+    
+    select:focus-visible,
     input:focus-visible,
     textarea:focus-visible {
         border-color: #1976d2;
