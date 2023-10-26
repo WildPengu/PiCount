@@ -33,14 +33,18 @@ Content-Type: application/json
 GET http://localhost:3000/expenses/653a00353549c5419fa3c107
 
 ###
+//get expenses by category
+GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/Grocery
+
+###
 PATCH http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 Content-Type: application/json
 
 {
   "date": "2023-10-26",
-  "category": "Grocery",
-  "amount": 13580,
-  "desc": "5 kg of Bananas"
+  "category": "Gifts",
+  "amount": 1430,
+  "desc": "fuel for car"
 }
  
 ###
