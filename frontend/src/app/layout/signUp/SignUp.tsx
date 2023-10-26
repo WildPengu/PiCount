@@ -179,7 +179,7 @@ export const SignUp = () => {
 
     return (
         <div className={styles.SignUp}>
-            {!signUpDone ? <h2 className={styles.SignUpMessage}>Fill out the fields to create a new user:</h2> : <h2 className={styles.SignUpMessage}>The user has been created!</h2>}
+            {!signUpDone ? <h2>Fill out the fields to create a new user:</h2> : <h2>The user has been created!</h2>}
             {errorMessage && <h2>{errorMessage}</h2>}
             <form 
                 className={styles.SignUpForm}
