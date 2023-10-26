@@ -1,15 +1,10 @@
 import { Document, Model, model, Schema } from 'mongoose';
-interface Expense extends Document {
-  date: Date;
-  category: string;
-  amount: number;
-  desc: string;
-}
 interface IUser extends Document {
   name: string;
   avatar?: string;
   age?: number;
-  expenses: Expense[];
+  email: string;
+  password: string;
 }
 
 interface IUserModel extends Model<IUser> {}
@@ -20,9 +15,20 @@ const userSchema = new Schema<IUser, IUserModel>({
     required: true,
     unique: true,
   },
-  avatar: String,
+  avatar: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
   age: Number,
-  expenses: [],
 });
 
 const User = model<IUser, IUserModel>('User', userSchema);

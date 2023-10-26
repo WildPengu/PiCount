@@ -1,7 +1,6 @@
 import { Document, Model, model, Schema } from 'mongoose';
 
-interface IExpense extends Document {
-  remove(): unknown;
+interface Expense {
   date: Date;
   category: string;
   amount: number;
@@ -9,11 +8,11 @@ interface IExpense extends Document {
 }
 
 interface IUserExpenses extends Document {
-  expenses: IExpense[];
+  expenses: Map<string, Expense>;
   userId: string;
 }
 
-const expenseSchema = new Schema<IExpense, Model<IExpense>>({
+const expenseSchema = new Schema<Expense, Model<Expense>>({
   date: Date,
   category: {
     type: String,
@@ -30,11 +29,13 @@ const expenseSchema = new Schema<IExpense, Model<IExpense>>({
     required: true,
     unique: false,
   },
-  _id: Schema.Types.ObjectId,
 });
 
 const userExpensesSchema = new Schema<IUserExpenses, Model<IUserExpenses>>({
-  expenses: [expenseSchema],
+  expenses: {
+    type: Map,
+    of: expenseSchema,
+  },
   userId: String,
 });
 
@@ -58,7 +59,7 @@ function createUserExpensesModel(id: string) {
 export {
   createUserExpensesModel,
   expenseSchema,
-  IExpense,
+  Expense as IExpense,
   IUserExpenses,
   UserExpenses,
 };
