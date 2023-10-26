@@ -3,6 +3,7 @@ import styles from './Button.module.scss';
 export enum ButtonBgColor {
     violet = '#9530ea',
     gray = '#bbb',
+    blue = '#1976d2',
 }
 
 export interface ButtonProps {

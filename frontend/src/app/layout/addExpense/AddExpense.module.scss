@@ -2,18 +2,13 @@
         margin: auto;
         padding: 15px;
         max-width: 600px;
-        
-        
+    
         .FormAddExpense {
             margin: 0 auto;
             padding: 20px;
             text-align: start;
 
-            .FormAddExpenseLabel {
-                margin: 0 ;
-            }
-
-            .TypeOfExpense, .FormAddExpenseTextarea {
+           .FormAddExpenseTextarea {
                 margin: 10px auto;
                 padding: 5px;
                 width: 100%;
