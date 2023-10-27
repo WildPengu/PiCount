@@ -1,10 +1,11 @@
 import styles from './SortedPanel.module.scss';
 import { SelectCategory } from '../selectCategory/SelectCategory';
 import { useState } from 'react';
-import Button, { ButtonBgColor } from '../button/Button';
 import { Modal } from '../modal/Modal';
 import { AddExpense } from '../../layout/addExpense/AddExpense';
 import { SelectDate } from '../datePicker/SelectDate';
+import { Color } from '../../types/Enums';
+import Button from '../button/Button';
 
 
 export const SortedPanel = () => {
@@ -18,7 +19,7 @@ export const SortedPanel = () => {
                 <form className={styles.Sortedform}>
                     <SelectCategory />
                     <SelectDate />
-                    <Button backgroundColor={ButtonBgColor.blue}>
+                    <Button backgroundColor={Color.blue}>
                         Sort
                     </Button>
                 </form>

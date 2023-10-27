@@ -1,21 +1,28 @@
+import { Color } from '../../types/Enums';
 import styles from './Button.module.scss';
 
-export enum ButtonBgColor {
-    violet = '#9530ea',
-    gray = '#bbb',
-    blue = '#1976d2',
-}
 
 export interface ButtonProps {
     children: string;
-    backgroundColor?: ButtonBgColor;
+    backgroundColor?: Color;
+    isDisabled?: boolean;
     onClick?: () => void;
 }
 
-const Button = ({ children, onClick, backgroundColor = ButtonBgColor.violet }: ButtonProps) => { 
+const Button = ({ 
+    children, 
+    onClick, 
+    backgroundColor = Color.violet,
+    isDisabled = false,
+}: ButtonProps) => { 
 
     return (
-        <button className={styles.Button} style={{backgroundColor: backgroundColor}} onClick={onClick}>
+        <button 
+            className={styles.Button} 
+            style={{ backgroundColor: isDisabled ? Color.gray : backgroundColor }} 
+            onClick={onClick}
+            disabled={isDisabled}
+        >
             {children}
         </button>
     );

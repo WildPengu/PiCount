@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { selectUsers } from '../../../stores/userModule';
 import Button from '../../components/button/Button';
 import styles from './AddExpense.module.scss';
-import { ButtonBgColor } from '../../components/button/Button';
 import { SelectCategory } from '../../components/selectCategory/SelectCategory';
 import { SelectDate } from '../../components/datePicker/SelectDate';
+import { Color } from '../../types/Enums';
 
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
@@ -66,7 +66,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
             <Button>
               Add expense
             </Button>
-            <Button backgroundColor={ButtonBgColor.gray} onClick={() => setIsModalVisible(false)}>
+            <Button backgroundColor={Color.gray} onClick={() => setIsModalVisible(false)}>
               Cancel
             </Button>
           </div>

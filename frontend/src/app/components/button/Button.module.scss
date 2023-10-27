@@ -10,4 +10,8 @@
     &:hover {
         opacity: .7;
     }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
 }
