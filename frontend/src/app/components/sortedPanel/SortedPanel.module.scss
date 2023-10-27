@@ -1,0 +1,28 @@
+.SortedPanel {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    width: calc(100vw - 200px);
+    // border-bottom: 1px solid #9530ea;
+    background-color: #f3f8f7;
+
+    .SortedPanelContainer {
+        display: flex;
+        flex-direction: column;
+    
+        .Sortedform {
+            display: flex;
+            align-items: center;
+
+            & > * {
+                margin: 5px;
+            }
+        }
+    }
+
+    .AddExpenseContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

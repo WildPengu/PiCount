@@ -12,13 +12,13 @@ export const AppNav = () => {
             <hr className={styles.AppNavHr}/>
             <ul className={styles.AppNavUl}>
                 <li className={styles.AppNavLi}>
-                    <Link to='/'>Start</Link>
-                </li>
-                <li className={styles.AppNavLi}>
-                    <Link to='/addExpense'>Add Expense</Link>
+                    <Link to='/expenseList'>Expense List</Link>
                 </li>
                 <li className={styles.AppNavLi}>
                     <Link to='/signUp'>Sign Up</Link>
+                </li>
+                <li className={styles.AppNavLi}>
+                    <Link to='/'>Logout</Link>
                 </li>
             </ul>
         </nav>

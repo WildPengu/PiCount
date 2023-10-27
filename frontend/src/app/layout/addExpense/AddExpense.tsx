@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUsers } from '../../../stores/userModule';
 import Button from '../../components/button/Button';
 import styles from './AddExpense.module.scss';
 import { ButtonBgColor } from '../../components/button/Button';
+import { SelectCategory } from '../../components/selectCategory/SelectCategory';
+import { SelectDate } from '../../components/datePicker/SelectDate';
 
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import dayjs from 'dayjs';
-
-
-interface Category {
-  _id: string;
-  name: string;
+export interface ModalProps {
+  setIsModalVisible: (isVisible: boolean) => void;
 }
 
-export const AddExpense = () => {
-
-  const [categories, setCategories] = useState<Category[]>([]);
+export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
+ 
   const players = useSelector(selectUsers);
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
@@ -36,42 +31,11 @@ export const AddExpense = () => {
     setAmount(value);
   };
 
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const response = await fetch('http://localhost:3000/expensesCategories');
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchCategories();
-  }, []);
-
-
   return (
-    <div className={styles.AddExpense}>
-      <div className={styles.FormContainer}>
-        <h2 className={styles.FormHeader}>Add New Expense</h2>
+      <div className={styles.AddExpense}>
+        <h2>Add New Expense</h2>
         <form className={styles.FormAddExpense}>
-          <label
-            htmlFor='typeOfExpense'
-            className={styles.FormAddExpenseLabel}
-          >Category</label>
-          <select
-            id='typeOfExpense'
-            className={styles.TypeOfExpense}
-          >
-            {categories.map((category) => (
-              <option key={category._id}>{category.name}</option>
-            ))}
-          </select>
+          <SelectCategory />
           <label htmlFor='desc' className={styles.FormAddExpenseLabel}>Description</label>
           <textarea
             id='desc'
@@ -79,9 +43,7 @@ export const AddExpense = () => {
             placeholder='Type...'
             className={styles.FormAddExpenseTextarea}
           ></textarea>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker defaultValue={dayjs(Date())} />
-          </LocalizationProvider>
+          <SelectDate />
           <div className={styles.AmountContainer}>
             <input
               id='amount'
@@ -104,11 +66,10 @@ export const AddExpense = () => {
             <Button>
               Add expense
             </Button>
-            <Button backgroundColor={ButtonBgColor.gray}>
+            <Button backgroundColor={ButtonBgColor.gray} onClick={() => setIsModalVisible(false)}>
               Cancel
             </Button>
           </div>
       </div>
-    </div>
   );
 };

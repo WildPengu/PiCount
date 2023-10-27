@@ -3,17 +3,19 @@ import styles from './Button.module.scss';
 export enum ButtonBgColor {
     violet = '#9530ea',
     gray = '#bbb',
+    blue = '#1976d2',
 }
 
 export interface ButtonProps {
     children: string;
     backgroundColor?: ButtonBgColor;
+    onClick?: () => void;
 }
 
-const Button = ({ children, backgroundColor = ButtonBgColor.violet }: ButtonProps) => { 
+const Button = ({ children, onClick, backgroundColor = ButtonBgColor.violet }: ButtonProps) => { 
 
     return (
-        <button className={styles.Button} style={{backgroundColor: backgroundColor}}>
+        <button className={styles.Button} style={{backgroundColor: backgroundColor}} onClick={onClick}>
             {children}
         </button>
     );
