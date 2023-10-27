@@ -17,11 +17,10 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "name": "Naruto",
+  "name": "Jigglypuff",
   "age": 17,
-  "avatar": "https://staticg.sportskeeda.com/editor/2021/06/064a3-16233087821077-800.jpg",
-  "password": "dasdasd",
-  "email": "dasd@gmail.com"
+  "password": "jiggly",
+  "email": "dasdasd@gmail.com"
 }
 
 //Expenses
@@ -50,9 +49,6 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/1698308691846
 
-###
-
-GET http://localhost:3000/expenses/65218add0211c6025c56c6f9
 
 //ExpensesCategories
 ###
