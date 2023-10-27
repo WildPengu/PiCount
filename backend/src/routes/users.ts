@@ -14,7 +14,7 @@ interface Response extends ExpressResponse {
 // Get all users
 router.get('/', async (req: Request, res: Response) => {
   try {
-    let users = await User.find({});
+    let users = await User.find({}).select('-password');
 
     const usersObject = users.reduce((acc: any, user) => {
       // poprawic any
@@ -33,7 +33,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 // Get user
 router.get('/:id', getUser, (req: Request, res: Response) => {
-  res.send(res.user!.name);
+  res.send(res.user);
 });
 
 // Add user
@@ -89,7 +89,7 @@ router.delete('/:id', getUser, async (req: Request, res: Response) => {
 async function getUser(req: Request, res: Response, next: NextFunction) {
   let user;
   try {
-    user = await User.findById(req.params.id);
+    user = await User.findById(req.params.id).select('-password');
     if (user == null) {
       return res.status(404).json({ message: 'Cannot find user' });
     }
