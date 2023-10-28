@@ -3,7 +3,7 @@ import { UserAction, UsersActionTypes } from './actions';
 
 const initialState: UsersState = {
   users: {},
-  activeUser: '',
+  activeUserId: '',
 };
 
 export const usersReducer = (
@@ -14,7 +14,7 @@ export const usersReducer = (
     case UsersActionTypes.INITIALIZE:
       return {
         ...state,
-        activeUser: action.payload.activeUser,
+        activeUserId: action.payload.activeUserId,
         users: action.payload.users,
       };
     default:
