@@ -17,11 +17,10 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "name": "Naruto",
+  "name": "Jigglypuff",
   "age": 17,
-  "avatar": "https://staticg.sportskeeda.com/editor/2021/06/064a3-16233087821077-800.jpg",
-  "password": "dasdasd",
-  "email": "dasd@gmail.com"
+  "password": "jiggly",
+  "email": "dasdasd@gmail.com"
 }
 
 //Expenses
@@ -33,22 +32,23 @@ Content-Type: application/json
 GET http://localhost:3000/expenses/653a00353549c5419fa3c107
 
 ###
+//get expenses by category
+GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/Grocery
+
+###
 PATCH http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 Content-Type: application/json
 
 {
   "date": "2023-10-26",
-  "category": "Grocery",
-  "amount": 13580,
-  "desc": "5 kg of Bananas"
+  "category": "Gifts",
+  "amount": 1430,
+  "desc": "fuel for car"
 }
  
 ###
 DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/1698308691846
 
-###
-
-GET http://localhost:3000/expenses/65218add0211c6025c56c6f9
 
 //ExpensesCategories
 ###

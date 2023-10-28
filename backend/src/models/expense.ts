@@ -58,8 +58,8 @@ function createUserExpensesModel(id: string) {
 
 export {
   createUserExpensesModel,
+  Expense,
   expenseSchema,
-  Expense as IExpense,
   IUserExpenses,
   UserExpenses,
 };

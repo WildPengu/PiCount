@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { IExpense as Expense, UserExpenses } from '../models/expense';
+import { Expense, UserExpenses } from '../models/expense';
 
 const router = express.Router();
 
@@ -19,6 +19,33 @@ router.get('/:id', async (req: Request, res: Response) => {
     res.status(500).json({ message: 'There was a problem fetching data' });
   }
 });
+
+// get expenses by category
+router.get(
+  '/:userId/expenses/:category',
+  async (req: Request, res: Response) => {
+    const { category, userId } = req.params;
+    const userExpenses = await UserExpenses.findOne({ userId: userId });
+    try {
+      if (!userExpenses) {
+        return res.status(404).json({ message: 'User expenses not found' });
+      }
+
+      const filteredExpenses: { [key: string]: Expense } = {};
+
+      userExpenses.expenses.forEach((expense, key) => {
+        if (expense.category === category) {
+          filteredExpenses[key] = expense;
+        }
+      });
+
+      res.json(filteredExpenses);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ message: 'There was a problem fetching data' });
+    }
+  }
+);
 
 // Update expense
 router.patch('/:id', async (req: Request, res: Response) => {
