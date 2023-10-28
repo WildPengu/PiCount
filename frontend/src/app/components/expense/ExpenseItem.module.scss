@@ -1,0 +1,38 @@
+.ExpenseItem {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px auto;
+    padding: 15px;
+    max-width: 600px;
+    border: 1px solid #ddd;
+
+    .ExpenseCategory {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        
+
+        .ExpenseInfo {
+            display: flex;
+
+            .ExpenseIco {
+                border: 1px solid #9530ea;
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+            }
+
+            .Category {
+                margin-left: 15px;
+            }
+        }
+    }
+
+    .ExpenseDesc {
+        display: flex;
+
+        .ExpenseDate{
+            width: 35%;
+        }
+    }
+}
