@@ -6,7 +6,7 @@ export interface User {
 }
 
 export interface UsersState {
-  activeUser: string;
+  activeUserId: string;
   users: any;
 }
 
@@ -15,6 +15,6 @@ export interface UsersAwareState {
 }
 
 export interface InitializePayload {
-  activeUser: string;
+  activeUserId: string;
   users: any;
 }

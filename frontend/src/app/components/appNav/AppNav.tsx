@@ -1,26 +1,33 @@
-import styles from './AppNav.module.scss'
-import { Link } from "react-router-dom"
-import logo from './avatar-pikachu-1.jpg'
+import styles from './AppNav.module.scss';
+import { Link } from "react-router-dom";
+import { selectActiveUserId, selectUsers } from '../../../stores/userModule/selectors';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import logo from './avatar-pikachu-1.jpg';
 
 export const AppNav = () => {
+
+    const users = useSelector(selectUsers);
+    const activeUserId = useSelector(selectActiveUserId);
+    const [userActive, setUserActive] = useState(true)
+
     return (
         <nav className={styles.AppNav}>
             <div className={styles.AppNavInfContainer}>
-                <img className={styles.AppNavIcon} src={logo} alt="Pikachu"/>
-                <p className={styles.AppNavUsername}>PiCount</p>
+                <img className={styles.AppNavIcon} src={userActive ? users[activeUserId]?.avatar : logo} alt="UserAvatar"/>
+                <p className={styles.AppNavUsername}>{userActive ? users[activeUserId]?.name : 'PiCount'}</p>
             </div>
             <hr className={styles.AppNavHr}/>
-            <ul className={styles.AppNavUl}>
-                <li className={styles.AppNavLi}>
-                    <Link to='/expenseList'>Expense List</Link>
-                </li>
-                <li className={styles.AppNavLi}>
-                    <Link to='/signUp'>Sign Up</Link>
-                </li>
-                <li className={styles.AppNavLi}>
-                    <Link to='/'>Logout</Link>
-                </li>
-            </ul>
+            {userActive && 
+                <ul className={styles.AppNavUl}>
+                    <li className={styles.AppNavLi}>
+                        <Link to='/expenseList'>Expense List</Link>
+                    </li>
+                    <li className={styles.AppNavLi}>
+                        <Link to='/'>Logout</Link>
+                    </li>
+                </ul>
+            }
         </nav>
     );
 };

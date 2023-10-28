@@ -7,6 +7,7 @@ export interface ButtonProps {
     backgroundColor?: Color;
     isDisabled?: boolean;
     onClick?: () => void;
+    type?: 'submit' | 'button' | 'reset';
 }
 
 const Button = ({ 
@@ -14,6 +15,7 @@ const Button = ({
     onClick, 
     backgroundColor = Color.violet,
     isDisabled = false,
+    type = 'button'
 }: ButtonProps) => { 
 
     return (
@@ -22,6 +24,7 @@ const Button = ({
             style={{ backgroundColor: isDisabled ? Color.gray : backgroundColor }} 
             onClick={onClick}
             disabled={isDisabled}
+            type={type}
         >
             {children}
         </button>
