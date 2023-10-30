@@ -29,7 +29,7 @@ Content-Type: application/json
 
 //Get user expenses
 
-GET http://localhost:3000/expenses/653a00353549c5419fa3c107
+GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 
 ###
 //get expenses by category
@@ -47,7 +47,7 @@ Content-Type: application/json
 }
  
 ###
-DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/1698308691846
+DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/1698662871856
 
 
 //ExpensesCategories

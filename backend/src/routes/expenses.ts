@@ -8,12 +8,25 @@ router.get('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
 
   try {
-    const userExpenses = await UserExpenses.findOne({ userId: userId });
+    const userExpenses: any | null = await UserExpenses.findOne({
+      userId: userId,
+    });
+
     if (!userExpenses) {
       return res.status(404).json({ message: 'Data not found' });
     }
 
-    res.json(userExpenses);
+    const expensesArray: { date: string }[] = Array.from(
+      userExpenses.expenses.values()
+    );
+
+    expensesArray.sort((a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return dateB - dateA;
+    });
+
+    res.json(expensesArray);
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ message: 'There was a problem fetching data' });
@@ -63,9 +76,10 @@ router.patch('/:id', async (req: Request, res: Response) => {
       category: req.body.category,
       amount: req.body.amount,
       desc: req.body.desc,
+      _id: '',
     };
 
-    const uniqueKey: string = Date.now().toString();
+    const uniqueKey: string = newExpense._id;
     userExpenses.expenses.set(uniqueKey, newExpense);
 
     await userExpenses.save();

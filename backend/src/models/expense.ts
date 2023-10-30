@@ -5,6 +5,7 @@ interface Expense {
   category: string;
   amount: number;
   desc: string;
+  _id: string;
 }
 
 interface IUserExpenses extends Document {
@@ -13,7 +14,10 @@ interface IUserExpenses extends Document {
 }
 
 const expenseSchema = new Schema<Expense, Model<Expense>>({
-  date: Date,
+  date: {
+    type: Date,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
@@ -26,7 +30,6 @@ const expenseSchema = new Schema<Expense, Model<Expense>>({
   },
   desc: {
     type: String,
-    required: true,
     unique: false,
   },
 });
