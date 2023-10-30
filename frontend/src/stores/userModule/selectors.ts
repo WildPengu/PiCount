@@ -7,3 +7,6 @@ export const selectUsers = (state: UsersAwareState) =>
 
 export const selectActiveUserId = (state: UsersAwareState) =>
   getUserModule(state).activeUserId;
+
+export const selectExpenses = (state: UsersAwareState) =>
+  getUserModule(state).expenses;

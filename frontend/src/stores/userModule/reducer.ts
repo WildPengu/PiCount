@@ -4,6 +4,7 @@ import { UserAction, UsersActionTypes } from './actions';
 const initialState: UsersState = {
   users: {},
   activeUserId: '',
+  expenses: {},
 };
 
 export const usersReducer = (
@@ -16,6 +17,11 @@ export const usersReducer = (
         ...state,
         activeUserId: action.payload.activeUserId,
         users: action.payload.users,
+      };
+    case UsersActionTypes.UPDATE_EXPENSES:
+      return {
+        ...state,
+        expenses: action.payload,
       };
     default:
       return state;

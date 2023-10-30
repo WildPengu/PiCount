@@ -1,16 +1,18 @@
-import styles from './ExpenseList.module.scss';
-import { SortedPanel } from '../../components/sortedPanel/SortedPanel';
-import { ExpenseItem } from '../../components/expense/ExpenseItem';
-import { appSettings } from '../../config';
-import { Expense } from '../../../types/Expense';
-import { useEffect, useState } from 'react';
 import map from 'lodash/map';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectExpenses, updateExpenses } from '../../../stores/userModule';
+import { Expense } from '../../../types/Expense';
+import { ExpenseItem } from '../../components/expense/ExpenseItem';
+import { SortedPanel } from '../../components/sortedPanel/SortedPanel';
+import { appSettings } from '../../config';
+import styles from './ExpenseList.module.scss';
 
 
 export const ExpenseList = () => {
-    const [expenses, setExpenses] = useState<{ [key: string]: Expense }>({});
     
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}`)
@@ -21,8 +23,7 @@ export const ExpenseList = () => {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
-                setExpenses({...data.expenses, ...expenses});
+                dispatch(updateExpenses(data.expenses));
                 setLoading(false);
             })
             .catch(error => {
@@ -30,7 +31,9 @@ export const ExpenseList = () => {
                 setLoading(false);
             });
     }, []);
-    console.log(expenses)
+
+    const expenses = useSelector(selectExpenses);
+
     return (
         <div className={styles.ExpenseList}>
             <SortedPanel />

@@ -5,9 +5,17 @@ export interface User {
   age: number;
 }
 
+export interface Expense {
+  date: Date;
+  category: string;
+  amount: number;
+  desc: string;
+}
+
 export interface UsersState {
   activeUserId: string;
   users: any;
+  expenses: Record<string, Expense>;
 }
 
 export interface UsersAwareState {
@@ -17,4 +25,11 @@ export interface UsersAwareState {
 export interface InitializePayload {
   activeUserId: string;
   users: any;
+}
+
+export interface Expense {
+  date: Date;
+  category: string;
+  amount: number;
+  desc: string;
 }
