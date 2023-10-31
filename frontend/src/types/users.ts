@@ -1,3 +1,5 @@
+import { Expense, ExpensesCategories } from "./Expense";
+
 export interface User {
   _id: string;
   name: string;
@@ -5,17 +7,11 @@ export interface User {
   age: number;
 }
 
-export interface Expense {
-  date: Date;
-  category: string;
-  amount: number;
-  desc: string;
-}
-
 export interface UsersState {
   activeUserId: string;
   users: any;
-  expenses: Record<string, Expense>;
+  expenses: Expense[];
+  expensesCategories: ExpensesCategories[];
 }
 
 export interface UsersAwareState {
@@ -27,9 +23,4 @@ export interface InitializePayload {
   users: any;
 }
 
-export interface Expense {
-  date: Date;
-  category: string;
-  amount: number;
-  desc: string;
-}
+export type { Expense };
