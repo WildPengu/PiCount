@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Expense, UserExpenses } from '../models/expense';
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -72,17 +73,16 @@ router.patch('/:id', async (req: Request, res: Response) => {
     }
 
     const newExpense: Expense = {
+      id: new mongoose.Types.ObjectId(),
       date: req.body.date,
       category: req.body.category,
       amount: req.body.amount,
       desc: req.body.desc,
-      _id: '',
     };
 
-    const uniqueKey: string = newExpense._id;
-    userExpenses.expenses.set(uniqueKey, newExpense);
-
+    userExpenses.expenses.set(newExpense.id, newExpense);
     await userExpenses.save();
+
     res.json(userExpenses);
   } catch (error: any) {
     res.status(500).json({ message: error.message });

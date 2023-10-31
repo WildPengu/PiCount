@@ -5,7 +5,7 @@ interface Expense {
   category: string;
   amount: number;
   desc: string;
-  _id: string;
+  id: string;
 }
 
 interface IUserExpenses extends Document {

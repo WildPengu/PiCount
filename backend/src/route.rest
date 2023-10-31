@@ -40,14 +40,14 @@ PATCH http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 Content-Type: application/json
 
 {
-  "date": "2023-10-26",
+  "date": "2023-10-31",
   "category": "Gifts",
-  "amount": 1430,
-  "desc": "fuel for car"
+  "amount": 1130,
+  "desc": ":("
 }
  
 ###
-DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/1698662871856
+DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/65414d9b23af34d97e2cdcfc
 
 
 //ExpensesCategories
