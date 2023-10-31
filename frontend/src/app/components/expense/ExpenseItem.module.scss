@@ -30,6 +30,9 @@
 
     .ExpenseDesc {
         display: flex;
+        justify-content: space-between;
+        margin: 0 20px;
+        width: 100%;
 
         .ExpenseDate{
             width: 35%;
