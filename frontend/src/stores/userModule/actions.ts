@@ -5,7 +5,7 @@ import { ExpensesCategories } from '../../types/Expense';
 export enum UsersActionTypes {
   INITIALIZE = '[Users] INITIALIZE',
   UPDATE_EXPENSES = '[Expenses] UPDATE_EXPENSES',
-  UPDATE_EXPENSESCATEGORIES = '[ExpensesCategories] UPDATE_EXPENSES',
+  UPDATE_EXPENSES_CATEGORIES = '[Expenses] UPDATE_EXPENSES_CATEGORIES',
 }
 
 export type Initialize = FSAAuto<
@@ -19,7 +19,7 @@ export type UpdateExpenses = FSAAuto<
 >;
 
 export type UpdateExpensesCategories = FSAAuto<
-  UsersActionTypes.UPDATE_EXPENSESCATEGORIES,
+  UsersActionTypes.UPDATE_EXPENSES_CATEGORIES,
   ExpensesCategories[]
 >;
 
@@ -38,7 +38,7 @@ export const updateExpenses = (
 export const updateExpensesCategories = (
   payload: ExpensesCategories[]
 ): UpdateExpensesCategories => ({
-  type: UsersActionTypes.UPDATE_EXPENSESCATEGORIES,
+  type: UsersActionTypes.UPDATE_EXPENSES_CATEGORIES,
   payload,
 });
 

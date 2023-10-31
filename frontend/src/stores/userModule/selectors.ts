@@ -10,3 +10,6 @@ export const selectActiveUserId = (state: UsersAwareState) =>
 
 export const selectExpenses = (state: UsersAwareState) =>
   getUserModule(state).expenses;
+
+export const selectExpensesCategories = (state: UsersAwareState) =>
+  getUserModule(state).expensesCategories;

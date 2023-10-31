@@ -20,13 +20,12 @@ export const usersReducer = (
         users: action.payload.users,
       };
     case UsersActionTypes.UPDATE_EXPENSES:
-      
       return {
         ...state,
         expenses: action.payload,
       };
-    case UsersActionTypes.UPDATE_EXPENSESCATEGORIES:
-      
+    case UsersActionTypes.UPDATE_EXPENSES_CATEGORIES:
+      console.log(action.payload)
       return {
         ...state,
         expensesCategories: action.payload,
