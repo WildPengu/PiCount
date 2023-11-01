@@ -86,6 +86,33 @@ router.delete('/:id', getUser, async (req: Request, res: Response) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  const { name, password } = req.body;
+
+  try {
+    const user = await User.findOne({ name });
+
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid name' });
+    }
+
+    if (user.password === password) {
+      const userResponse = {
+        _id: user._id,
+        name: user.name,
+        age: user.age,
+        avatar: user.avatar,
+        email: user.email,
+      };
+      res.json(userResponse);
+    } else {
+      res.status(401).json({ message: 'Invalid password' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'There was an error with login' });
+  }
+});
+
 async function getUser(req: Request, res: Response, next: NextFunction) {
   let user;
   try {
