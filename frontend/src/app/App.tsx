@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { initialize } from '../stores/userModule';
+import { initialize, updateExpensesCategories } from '../stores/userModule';
 import styles from './App.module.scss';
 import { AppNav } from './components/appNav/AppNav';
 import { AppRoutes } from './routes/AppRoutes';
@@ -19,6 +19,22 @@ function App() {
       })
       .then((data) => {
         dispatch(initialize({ users: data, activeUserId: '653a222e8ade4cb129d8a44c' }));
+      })
+      .catch((error) => {
+        console.error('There was a problem with fetching data:', error);
+      });
+  }, [])
+
+  useEffect(() => {
+    fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expensesCategories`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json()
+      })
+      .then((data) => {
+        dispatch(updateExpensesCategories(data));
       })
       .catch((error) => {
         console.error('There was a problem with fetching data:', error);
