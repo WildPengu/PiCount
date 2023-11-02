@@ -1,4 +1,3 @@
-import map from 'lodash/map';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectExpenses, updateExpenses } from '../../../stores/userModule';
@@ -23,7 +22,7 @@ export const ExpenseList = () => {
                 return response.json();
             })
             .then(data => {
-                dispatch(updateExpenses(data.expenses));
+                dispatch(updateExpenses(data));
                 setLoading(false);
             })
             .catch(error => {
@@ -32,8 +31,8 @@ export const ExpenseList = () => {
             });
     }, []);
 
-    const expenses = useSelector(selectExpenses);
-
+    const expenses: Expense[] = useSelector(selectExpenses);
+    
     return (
         <div className={styles.ExpenseList}>
             <SortedPanel />
@@ -42,12 +41,12 @@ export const ExpenseList = () => {
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    map(expenses, (expense: Expense) => (
-                        <ExpenseItem
+                    expenses?.map((expense: Expense) => {
+                        return <ExpenseItem
                             expense={expense}
-                            key={expense._id}
+                            key={expense._id}                       
                         />
-                    ))
+                    })
                 )}
             </div>
         </div>

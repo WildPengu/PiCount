@@ -1,22 +1,36 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 import styles from './ExpenseItem.module.scss';
-import icon from '../../components/appNav/avatar-pikachu-1.jpg';
-import { Expense } from '../../../types/Expense';
+import { Expense, ExpensesCategories } from '../../../types/Expense';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaw, faCartShopping, faBagShopping, faUtensils, faCar, faGift, faHouse, faChildren, faHeartPulse, faSpa, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
+import { selectExpensesCategories } from '../../../stores/userModule/selectors';
 
 interface ExpenseItemProps {
     expense: Expense;
 }
 
 export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
+    
+    const expenseCategories: ExpensesCategories[] = useSelector(selectExpensesCategories);
+
+    const categoryInfo = expenseCategories.find((category: { name: string; }) => category.name === expense.category);
 
     return (
         <div className={styles.ExpenseItem}>
             <div className={styles.ExpenseCategory}>
                 <div className={styles.ExpenseInfo}>
-                    <img
+                    <div 
                         className={styles.ExpenseIco}
-                        src={icon}
-                    />
+                        style={{ backgroundColor: categoryInfo?.color }}
+                    >
+                        {categoryInfo && (
+                            <FontAwesomeIcon
+                                icon={categoryInfo.icon}
+                            />
+                        )}
+                    </div>
                     <p className={styles.Category}>{expense.category}</p>
                 </div>
                 <div className={styles.ExpenseAmount}>

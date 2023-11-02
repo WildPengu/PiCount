@@ -5,6 +5,10 @@ import { SelectCategory } from '../../components/selectCategory/SelectCategory';
 import { SelectDate } from '../../components/datePicker/SelectDate';
 import { Color } from '../../types/Enums';
 import { appSettings } from '../../config';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateExpenses } from '../../../stores/userModule/actions';
+import { Expense } from '../../../types/Expense';
+import { selectExpenses } from '../../../stores/userModule';
 
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
@@ -17,6 +21,9 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
+
+  const expenses: Expense[] = useSelector(selectExpenses);
+  const dispatch = useDispatch();
 
   const handleAmountChange = (e: { target: { value: any; }; }) => {
     const value = e.target.value;
@@ -33,7 +40,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
 
   const addExpense = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    
     if (!category || !amount) {
       setError('Both Category of Expense and Amount are required!');
     }
@@ -42,7 +49,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
       category: category,
       desc: description,
       amount: parseFloat(amount),
-      date: date,
+      date: new Date(date),
     };
 
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}`, {
@@ -51,6 +58,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newExpense),
+      
     })
     .then(response => {
       if (!response.ok) {
@@ -64,6 +72,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
         setDate('')
         setAmount('');
         setIsModalVisible(false);
+        dispatch(updateExpenses([newExpense, ...expenses]));
       })
       .catch(error => {
           console.error('Błąd pobierania danych:', error);

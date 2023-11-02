@@ -3,10 +3,11 @@ export interface Expense {
     category: string;
     amount: number;
     desc: string;
-    _id: string;
+    _id?: string;
 };
 
 export interface ExpensesCategories {
+    [x: string]: any;
     name: string;
     image: string;
     color: string;

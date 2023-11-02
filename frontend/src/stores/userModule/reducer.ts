@@ -25,7 +25,6 @@ export const usersReducer = (
         expenses: action.payload,
       };
     case UsersActionTypes.UPDATE_EXPENSES_CATEGORIES:
-      console.log(action.payload)
       return {
         ...state,
         expensesCategories: action.payload,
