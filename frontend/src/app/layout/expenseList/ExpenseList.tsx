@@ -6,12 +6,18 @@ import { ExpenseItem } from '../../components/expense/ExpenseItem';
 import { SortedPanel } from '../../components/sortedPanel/SortedPanel';
 import { appSettings } from '../../config';
 import styles from './ExpenseList.module.scss';
+import { Modal } from '../../components/modal/Modal';
+import { AddExpense } from '../addExpense/AddExpense';
+import Button from '../../components/button/Button';
 
 
 export const ExpenseList = () => {
     
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+    const [deletedExpenseIds, setDeletedExpenseIds] = useState<string[]>([]);
+
 
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}`)
@@ -32,19 +38,40 @@ export const ExpenseList = () => {
     }, []);
 
     const expenses: Expense[] = useSelector(selectExpenses);
+
+    const handleExpenseDeleted = (expenseId: string) => {
+        setDeletedExpenseIds((prevIds) => [...prevIds, expenseId]);
+    };
+
+    const updatedExpenses = expenses.filter(expense => {
+        return typeof expense._id === 'string' && !deletedExpenseIds.includes(expense._id);
+    });
+    
+      
     
     return (
         <div className={styles.ExpenseList}>
             <SortedPanel />
+            <div className={styles.AddExpenseContainer}>
+                <Button 
+                    onClick={() => setIsModalVisible(true)}
+                >
+                    Add New
+                </Button>
+                {isModalVisible && <Modal>
+                    <AddExpense setIsModalVisible={setIsModalVisible}/>
+                </Modal>}
+            </div>
             <div className={styles.ExpenseListContainer}>
                 <h2>Expense List</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    expenses?.map((expense: Expense) => {
+                    updatedExpenses?.map((expense: Expense) => {
                         return <ExpenseItem
                             expense={expense}
-                            key={expense._id}                       
+                            key={expense._id}  
+                            onExpenseDeleted={handleExpenseDeleted}                     
                         />
                     })
                 )}

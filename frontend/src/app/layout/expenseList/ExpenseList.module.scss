@@ -1,7 +1,19 @@
-.ExpenseListContainer {
-    width: calc(100vw - 200px);
+.ExpenseList {
+    .AddExpenseContainer > :first-child {
+        position: fixed;
+        bottom: 5%;
+        right: 10%;
     
-    h2 {
-        text-align: center;
+    }
+
+    .ExpenseListContainer {
+        width: calc(100vw - 200px);
+        
+        h2 {
+            text-align: center;
+        }
     }
 }
+
+
+
