@@ -12,9 +12,9 @@ export const SelectDate = ({ setDate }: SelectDateProps) => {
         <div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker 
+                    label="Select Date"
                     minDate={dayjs('2023-01-01')}
                     maxDate={dayjs(Date())}
-                    defaultValue={dayjs(Date())} 
                     onChange={(newDate) => {
                         if (setDate) {
                             const formattedDate = dayjs(newDate).format('YYYY-MM-DD');
