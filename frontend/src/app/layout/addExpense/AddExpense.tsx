@@ -16,7 +16,7 @@ export interface ModalProps {
 
 export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
 
-  const [category, setCategory] = useState('Shopping');
+  const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState('');
@@ -24,7 +24,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
 
   const expenses: Expense[] = useSelector(selectExpenses);
   const dispatch = useDispatch();
-
+  
   const handleAmountChange = (e: { target: { value: any; }; }) => {
     const value = e.target.value;
     
@@ -42,7 +42,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
     e.preventDefault();
     
     if (!category || !amount || !date) {
-      setError('Probably Category of Expense, Date and Amount are required!');
+      setError('Category of Expense, Date and Amount are required!');
     }
 
     const newExpense = {
