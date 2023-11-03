@@ -41,8 +41,8 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
   const addExpense = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!category || !amount) {
-      setError('Both Category of Expense and Amount are required!');
+    if (!category || !amount || !date) {
+      setError('Probably Category of Expense, Date and Amount are required!');
     }
 
     const newExpense = {
