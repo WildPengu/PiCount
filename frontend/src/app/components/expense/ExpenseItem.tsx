@@ -10,14 +10,13 @@ import { appSettings } from '../../config';
 
 interface ExpenseItemProps {
     expense: Expense;
-    onExpenseDeleted: (expenseId: string) => void;
 }
 
 interface IconMappings {
     [key: string]: IconDefinition;
 }
 
-export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, onExpenseDeleted }) => {
+export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
     
     const expensesCategories: ExpensesCategories[] = useSelector(selectExpensesCategories);
 
@@ -48,7 +47,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, onExpenseDele
           })
             .then(response => {
               if (response.ok) {
-                onExpenseDeleted(expense._id);
+                // onExpenseDeleted(expense._id);
                 console.log('Wydatek został usunięty.');
               } else {
                 console.error('Błąd podczas usuwania wydatku.');

@@ -4,7 +4,7 @@ import { UserAction, UsersActionTypes } from './actions';
 const initialState: UsersState = {
   users: {},
   activeUserId: '',
-  expenses: [],
+  expenses: {},
   expensesCategories: [],
 };
 

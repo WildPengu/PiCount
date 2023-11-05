@@ -51,7 +51,7 @@ export const SelectCategory = ({ setCategory }: SelectCategoryProps) => {
             <label
                 htmlFor='typeOfExpense'
                 className={styles.CategoryLabel}
-            >Category</label>
+            >Select category</label>
             <select
                 id='typeOfExpense'
                 className={styles.CategoryOfExpense}
