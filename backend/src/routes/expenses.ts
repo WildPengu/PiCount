@@ -100,6 +100,48 @@ router.get(
   }
 );
 
+router.get('/expensesByDateRange/:id', async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const { startDate, endDate } = req.query;
+
+  try {
+    const start = new Date(startDate as string);
+    const end = new Date(endDate as string);
+
+    const userExpenses = await UserExpenses.findOne({ userId: userId });
+
+    if (!userExpenses) {
+      return res.status(404).json({ message: 'Data not found' });
+    }
+
+    const expensesInDateRange = Array.from(userExpenses.expenses.values())
+      .filter((expense) => {
+        const expenseDate = new Date(expense.date);
+        return expenseDate >= start && expenseDate <= end;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        return dateB - dateA;
+      });
+
+    const groupedExpenses: Record<string, Expense[]> = {};
+
+    expensesInDateRange.forEach((expense) => {
+      const dateKey = expense.date.toISOString().split('T')[0];
+      if (!groupedExpenses[dateKey]) {
+        groupedExpenses[dateKey] = [];
+      }
+      groupedExpenses[dateKey].push(expense);
+    });
+
+    res.json(groupedExpenses);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ message: 'There was a problem fetching data' });
+  }
+});
+
 // Update expense
 router.patch('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;

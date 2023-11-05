@@ -42,6 +42,8 @@ GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 ###
 GET http://localhost:3000/expenses/expensesByDay/653a222e8ade4cb129d8a44c
 
+###
+GET http://localhost:3000/expenses/expensesByDateRange/653a222e8ade4cb129d8a44c?startDate=2023-11-03&endDate=2023-11-30
 
 ###
 
