@@ -46,7 +46,7 @@ GET http://localhost:3000/expenses/expensesByDay/653a222e8ade4cb129d8a44c
 ###
 
 //get expenses by category
-GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/Grocery
+GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/Shopping
 
 ###
 PATCH http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
