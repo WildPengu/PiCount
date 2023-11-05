@@ -12,8 +12,10 @@ export interface SelectCategoryProps {
 }
 
 export const SelectCategory = ({ setCategory }: SelectCategoryProps) => {
-    const [categories, setCategories] = useState<Category[]>([]);
 
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [activeOption, setActiveOption] = useState<string>('');
+    
     useEffect(() => {
         async function fetchCategories() {
           try {
@@ -28,9 +30,21 @@ export const SelectCategory = ({ setCategory }: SelectCategoryProps) => {
             console.error('Error fetching data:', error);
           }
         }
-    
         fetchCategories();
       }, []);
+
+    const handleChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
+        const selectedCategoryName = e.target.value;
+        setActiveOption(selectedCategoryName);
+    };
+
+    useEffect(() => {
+      setActiveOption('Shopping');
+    }, []);
+
+    useEffect(() => {
+      setCategory && setCategory(activeOption);
+  }, [activeOption]);
     
     return (
         <div className={styles.SelectCategory}>
@@ -41,14 +55,16 @@ export const SelectCategory = ({ setCategory }: SelectCategoryProps) => {
             <select
                 id='typeOfExpense'
                 className={styles.CategoryOfExpense}
-                onChange={(e: ChangeEvent<HTMLSelectElement>): void => {
-                  if (setCategory) {
-                      setCategory(e.target.value);
-                  }
-              }}
+                onChange={(e) => handleChangeCategory(e)}
+                value={activeOption}
             >
                 {categories.map((category) => (
-                <option key={category._id}>{category.name}</option>
+                <option 
+                  key={category._id} 
+                  value={category.name}
+                >
+                  {category.name}
+                </option>
                  ))}
             </select>
         </div>
