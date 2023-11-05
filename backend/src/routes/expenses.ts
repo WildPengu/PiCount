@@ -4,12 +4,17 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 
+interface UserExpenses {
+  userId: string;
+  expenses: Record<string, Expense>;
+}
+
 // Get all user expenses
 router.get('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
 
   try {
-    const userExpenses: any | null = await UserExpenses.findOne({
+    const userExpenses: any = await UserExpenses.findOne({
       userId: userId,
     });
 
@@ -28,6 +33,39 @@ router.get('/:id', async (req: Request, res: Response) => {
     });
 
     res.json(expensesArray);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ message: 'There was a problem fetching data' });
+  }
+});
+
+router.get('/expensesByDay/:id', async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const groupedExpenses: Record<string, Expense[]> = {};
+
+  try {
+    const userExpenses: any = await UserExpenses.findOne({ userId: userId });
+
+    if (!userExpenses) {
+      return res.status(404).json({ message: 'Data not found' });
+    }
+
+    userExpenses.expenses.forEach((expense: Expense) => {
+      const dateKey = expense.date.toISOString().split('T')[0];
+      if (!groupedExpenses[dateKey]) {
+        groupedExpenses[dateKey] = [];
+      }
+      groupedExpenses[dateKey].push(expense);
+    });
+
+    const sortedGroupedExpenses: Record<string, Expense[]> = {};
+    Object.keys(groupedExpenses)
+      .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+      .forEach((key) => {
+        sortedGroupedExpenses[key] = groupedExpenses[key];
+      });
+
+    res.json(sortedGroupedExpenses);
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ message: 'There was a problem fetching data' });
