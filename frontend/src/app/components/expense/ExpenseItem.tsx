@@ -4,7 +4,6 @@ import styles from './ExpenseItem.module.scss';
 import { Expense, ExpensesCategories } from '../../../types/Expense';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw, faCartShopping, faBagShopping, faUtensils, faCar, faGift, faHouse, faChildren, faHeartPulse, faSpa, faDollarSign, faTrashCan, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import dayjs from 'dayjs';
 import { selectExpensesCategories } from '../../../stores/userModule/selectors';
 import { appSettings } from '../../config';
 import { updateExpenses } from '../../../stores/userModule/actions';
@@ -77,16 +76,13 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
                             />
                         )}
                     </div>
-                    <p className={styles.Category}>{expense.category}</p>
+                    <p className={styles.Category} style={{ color: categoryInfo?.color }}>{expense.category}</p>
                 </div>
                 <div className={styles.ExpenseAmount}>
                     <p>- <span>{expense.amount}</span> PLN</p>
                 </div>
             </div>
             <div className={styles.ExpenseDesc}>
-                <p className={styles.ExpenseDate}>
-                    {dayjs(expense.date).format('YYYY-MM-DD')}
-                </p>
                 <p className={styles.Description}>
                     {expense.desc}
                 </p>

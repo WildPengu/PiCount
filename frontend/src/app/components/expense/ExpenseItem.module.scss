@@ -1,10 +1,11 @@
 .ExpenseItem {
     display: flex;
     flex-wrap: wrap;
-    margin: 5px auto;
+    margin: 0 auto;
     padding: 15px;
     max-width: 600px;
     border: 1px solid #ddd;
+    background-color: #fff;
 
     .ExpenseCategory {
         display: flex;
@@ -26,7 +27,11 @@
 
             .Category {
                 margin-left: 15px;
+                font-weight: bold;
             }
+        }
+        .ExpenseAmount {
+            color: rgb(215, 10, 10);
         }
     }
 
@@ -41,12 +46,12 @@
             padding: 10px 12px;
             border-radius: 50%;
             border: 1px solid transparent;
-            color: red;
+            color: rgb(215, 10, 10);
             cursor: pointer;
             transition: all .3s;
 
             &:hover {
-                border: 1px solid red;
+                border: 1px solid rgb(215, 10, 10);
                 background-color: #f3f8f7;
             }
         }

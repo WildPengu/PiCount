@@ -9,6 +9,8 @@ import styles from './ExpenseList.module.scss';
 import { Modal } from '../../components/modal/Modal';
 import { AddExpense } from '../addExpense/AddExpense';
 import Button from '../../components/button/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
 
 export const ExpenseList = () => {
     
@@ -16,8 +18,6 @@ export const ExpenseList = () => {
     const [isModalAddExpenseVisible, setIsModalAddExpenseVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
-    const [deletedExpenseIds, setDeletedExpenseIds] = useState<string[]>([]);
-
 
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
@@ -43,11 +43,12 @@ export const ExpenseList = () => {
     return (
         <div className={styles.ExpenseList}>
             <div className={styles.ButtonsPanel}>
+                <h2 className={styles.ButtonsPanelHeader}>Expense List</h2>
                 <div className={styles.SortedPanelContainer}>
                     <Button 
                         onClick={() => setIsModalSortedVisible(true)}
                     >
-                        Filter
+                        <FontAwesomeIcon icon={faFilter} />
                     </Button>
                     {isModalSortedVisible && <Modal>
                         <SortedPanel setIsModalVisible={setIsModalSortedVisible}/>
@@ -57,7 +58,7 @@ export const ExpenseList = () => {
                     <Button 
                         onClick={() => setIsModalAddExpenseVisible(true)}
                     >
-                        Add New
+                        <FontAwesomeIcon icon={faCirclePlus} />
                     </Button>
                     {isModalAddExpenseVisible && <Modal>
                         <AddExpense setIsModalVisible={setIsModalAddExpenseVisible}/>
@@ -65,7 +66,6 @@ export const ExpenseList = () => {
                 </div>
             </div>
             <div className={styles.ExpenseListContainer}>
-                <h2>Expense List</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
