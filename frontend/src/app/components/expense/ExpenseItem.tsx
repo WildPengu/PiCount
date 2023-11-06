@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './ExpenseItem.module.scss';
 import { Expense, ExpensesCategories } from '../../../types/Expense';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { faPaw, faCartShopping, faBagShopping, faUtensils, faCar, faGift, faHous
 import dayjs from 'dayjs';
 import { selectExpensesCategories } from '../../../stores/userModule/selectors';
 import { appSettings } from '../../config';
+import { updateExpenses } from '../../../stores/userModule/actions';
 
 interface ExpenseItemProps {
     expense: Expense;
@@ -21,6 +22,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
     const expensesCategories: ExpensesCategories[] = useSelector(selectExpensesCategories);
 
     const categoryInfo = expensesCategories.find((category: { name: string; }) => category.name === expense.category);
+    const dispatch = useDispatch();
     
     const iconMappings: IconMappings = {
         faPaw: faPaw,
@@ -46,12 +48,13 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
             },
           })
             .then(response => {
-              if (response.ok) {
-                // onExpenseDeleted(expense._id);
-                console.log('Wydatek został usunięty.');
-              } else {
-                console.error('Błąd podczas usuwania wydatku.');
-              }
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+                return response.json();
+            })
+            .then(data => {
+                dispatch(updateExpenses(data));
             })
             .catch(error => {
               console.error('Wystąpił błąd sieci:', error);
