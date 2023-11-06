@@ -1,21 +1,22 @@
 .SortedPanel {
     display: flex;
-    flex-wrap: nowrap;
     justify-content: space-around;
-    width: calc(100vw - 200px);
     background-color: #f3f8f7;
 
     .SortedPanelContainer {
         display: flex;
         flex-direction: column;
     
-        .Sortedform {
+        .SortedForm {
             display: flex;
-            align-items: center;
 
             & > * {
-                margin: 5px;
+                margin: 10px;
             }
+        }
+
+        .ButtonsPanel > * {
+            margin: 10px 15px 20px 15px;
         }
     }
 }

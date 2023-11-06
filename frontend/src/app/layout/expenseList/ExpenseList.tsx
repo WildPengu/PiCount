@@ -10,17 +10,17 @@ import { Modal } from '../../components/modal/Modal';
 import { AddExpense } from '../addExpense/AddExpense';
 import Button from '../../components/button/Button';
 
-
 export const ExpenseList = () => {
     
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalSortedVisible, setIsModalSortedVisible] = useState(false);
+    const [isModalAddExpenseVisible, setIsModalAddExpenseVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const [deletedExpenseIds, setDeletedExpenseIds] = useState<string[]>([]);
 
 
     useEffect(() => {
-        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}`)
+        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -37,43 +37,51 @@ export const ExpenseList = () => {
             });
     }, []);
 
-    const expenses: Expense[] = useSelector(selectExpenses);
-
-    const handleExpenseDeleted = (expenseId: string) => {
-        setDeletedExpenseIds((prevIds) => [...prevIds, expenseId]);
-    };
-
-    const updatedExpenses = expenses.filter(expense => {
-        return typeof expense._id === 'string' && !deletedExpenseIds.includes(expense._id);
-    });
-    
-      
-    
+    const expenses: Record<string, Expense[]> = useSelector(selectExpenses);
+    const todayDate = new Date().toISOString().split('T')[0]; 
+  
     return (
         <div className={styles.ExpenseList}>
-            <SortedPanel />
-            <div className={styles.AddExpenseContainer}>
-                <Button 
-                    onClick={() => setIsModalVisible(true)}
-                >
-                    Add New
-                </Button>
-                {isModalVisible && <Modal>
-                    <AddExpense setIsModalVisible={setIsModalVisible}/>
-                </Modal>}
+            <div className={styles.ButtonsPanel}>
+                <div className={styles.SortedPanelContainer}>
+                    <Button 
+                        onClick={() => setIsModalSortedVisible(true)}
+                    >
+                        Filter
+                    </Button>
+                    {isModalSortedVisible && <Modal>
+                        <SortedPanel setIsModalVisible={setIsModalSortedVisible}/>
+                    </Modal>}
+                </div>
+                <div className={styles.AddExpenseContainer}>
+                    <Button 
+                        onClick={() => setIsModalAddExpenseVisible(true)}
+                    >
+                        Add New
+                    </Button>
+                    {isModalAddExpenseVisible && <Modal>
+                        <AddExpense setIsModalVisible={setIsModalAddExpenseVisible}/>
+                    </Modal>}
+                </div>
             </div>
             <div className={styles.ExpenseListContainer}>
                 <h2>Expense List</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    updatedExpenses?.map((expense: Expense) => {
-                        return <ExpenseItem
-                            expense={expense}
-                            key={expense._id}  
-                            onExpenseDeleted={handleExpenseDeleted}                     
-                        />
-                    })
+                    Object.entries(expenses).map(([date, expensesByDate]) => (
+                        <div key={date}>
+                          <h3>
+                            {date === todayDate ? 'TODAY' : date}
+                        </h3>
+                          {expensesByDate.map((expense) => (
+                            <ExpenseItem
+                              key={expense._id}
+                              expense={expense}
+                            />
+                          ))}
+                        </div>
+                      ))
                 )}
             </div>
         </div>

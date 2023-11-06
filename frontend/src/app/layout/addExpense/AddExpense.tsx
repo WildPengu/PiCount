@@ -22,10 +22,10 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
 
-  const expenses: Expense[] = useSelector(selectExpenses);
+  const expenses: Record<string, Expense[]> = useSelector(selectExpenses);
   const dispatch = useDispatch();
   
-  const handleAmountChange = (e: { target: { value: any; }; }) => {
+  const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     
     if (!value) {
@@ -46,10 +46,10 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
     }
 
     const newExpense = {
+      date: new Date(date).toISOString(),
       category: category,
-      desc: description,
       amount: parseFloat(amount),
-      date: new Date(date),
+      desc: description,
     };
 
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}`, {
@@ -67,12 +67,16 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
         return response.json();
       })
       .then(data => {
+
+        const dateKey = newExpense.date.split('T')[0];
+        const updatedExpenses = [newExpense, ...(expenses[dateKey] || [])];
+        
         setCategory('')
         setDescription('');
         setDate('')
         setAmount('');
         setIsModalVisible(false);
-        dispatch(updateExpenses([newExpense, ...expenses]));
+        dispatch(updateExpenses({ ...expenses, [dateKey]: updatedExpenses }));
       })
       .catch(error => {
           console.error('Błąd pobierania danych:', error);

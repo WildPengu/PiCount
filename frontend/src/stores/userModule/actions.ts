@@ -15,7 +15,7 @@ export type Initialize = FSAAuto<
 
 export type UpdateExpenses = FSAAuto<
   UsersActionTypes.UPDATE_EXPENSES,
-  Expense[]
+  Record<string, Expense[]>
 >;
 
 export type UpdateExpensesCategories = FSAAuto<
@@ -29,7 +29,7 @@ export const initialize = (payload: InitializePayload): Initialize => ({
 });
 
 export const updateExpenses = (
-  payload: Expense[]
+  payload: Record<string, Expense[]>
 ): UpdateExpenses => ({
   type: UsersActionTypes.UPDATE_EXPENSES,
   payload,

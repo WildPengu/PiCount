@@ -1,16 +1,25 @@
 .ExpenseList {
-    .AddExpenseContainer > :first-child {
-        position: fixed;
-        bottom: 5%;
-        right: 10%;
-    
+    .ButtonsPanel {
+        display: flex;
+        justify-content: flex-end;
+        background-color: #9530ea;
+
+
+        .AddExpenseContainer {
+            margin-left: 15px;
+        }
     }
+    
 
     .ExpenseListContainer {
         width: calc(100vw - 200px);
         
-        h2 {
+        h2, h3 {
             text-align: center;
+        }
+
+        h3 {
+            color: #aaa;
         }
     }
 }

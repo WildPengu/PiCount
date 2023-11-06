@@ -10,7 +10,7 @@ export interface User {
 export interface UsersState {
   activeUserId: string;
   users: any;
-  expenses: Expense[];
+  expenses: Record<string, Expense[]>;
   expensesCategories: ExpensesCategories[];
 }
 
