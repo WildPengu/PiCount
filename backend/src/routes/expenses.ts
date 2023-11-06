@@ -33,7 +33,6 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 router.get('/expensesByDay/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
-  const groupedExpenses: Record<string, Expense[]> = {};
 
   try {
     const userExpenses = await UserExpenses.findOne({ userId: userId });
@@ -42,20 +41,12 @@ router.get('/expensesByDay/:id', async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Data not found' });
     }
 
-    userExpenses.expenses.forEach((expense: Expense) => {
-      const dateKey = expense.date.toISOString().split('T')[0];
-      if (!groupedExpenses[dateKey]) {
-        groupedExpenses[dateKey] = [];
-      }
-      groupedExpenses[dateKey].push(expense);
-    });
+    const groupedExpenses: Record<string, Expense[]> = groupExpensesByDate(
+      userExpenses.expenses
+    );
 
-    const sortedGroupedExpenses: Record<string, Expense[]> = {};
-    Object.keys(groupedExpenses)
-      .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
-      .forEach((key) => {
-        sortedGroupedExpenses[key] = groupedExpenses[key];
-      });
+    const sortedGroupedExpenses: Record<string, Expense[]> =
+      sortGroupedExpensesByDate(groupedExpenses);
 
     res.json(sortedGroupedExpenses);
   } catch (error) {
@@ -164,7 +155,14 @@ router.patch('/:id', async (req: Request, res: Response) => {
     userExpenses.expenses.set(newExpense.id, newExpense);
     await userExpenses.save();
 
-    res.json(userExpenses);
+    const groupedExpenses: Record<string, Expense[]> = groupExpensesByDate(
+      userExpenses.expenses
+    );
+
+    const sortedGroupedExpenses: Record<string, Expense[]> =
+      sortGroupedExpensesByDate(groupedExpenses);
+
+    res.json(sortedGroupedExpenses);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -187,7 +185,14 @@ router.delete(
         userExpenses.expenses.delete(expenseId);
         await userExpenses.save();
 
-        res.json({ message: 'Deleted expense' });
+        const groupedExpenses: Record<string, Expense[]> = groupExpensesByDate(
+          userExpenses.expenses
+        );
+
+        const sortedGroupedExpenses: Record<string, Expense[]> =
+          sortGroupedExpensesByDate(groupedExpenses);
+
+        res.json(sortedGroupedExpenses);
       } else {
         return res.status(404).json({ message: 'Expense not found' });
       }
@@ -196,5 +201,31 @@ router.delete(
     }
   }
 );
+
+const groupExpensesByDate = (expenses: Map<string, Expense>) => {
+  const groupedExpenses: Record<string, Expense[]> = {};
+
+  expenses.forEach((expense: Expense) => {
+    const dateKey = expense.date.toISOString().split('T')[0];
+    if (!groupedExpenses[dateKey]) {
+      groupedExpenses[dateKey] = [];
+    }
+    groupedExpenses[dateKey].push(expense);
+  });
+
+  return groupedExpenses;
+};
+
+const sortGroupedExpensesByDate = (
+  groupedExpenses: Record<string, Expense[]>
+) => {
+  const sortedGroupedExpenses: Record<string, Expense[]> = {};
+  Object.keys(groupedExpenses)
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+    .forEach((key) => {
+      sortedGroupedExpenses[key] = groupedExpenses[key];
+    });
+  return sortedGroupedExpenses;
+};
 
 export default router;

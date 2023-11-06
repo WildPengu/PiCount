@@ -62,7 +62,7 @@ Content-Type: application/json
 }
  
 ###
-DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/65414d9b23af34d97e2cdcfc
+DELETE http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/6547bdfd49a4e3e3d87e1c07
 
 
 //ExpensesCategories
