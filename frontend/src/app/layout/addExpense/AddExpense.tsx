@@ -5,10 +5,8 @@ import { SelectCategory } from '../../components/selectCategory/SelectCategory';
 import { SelectDate } from '../../components/datePicker/SelectDate';
 import { Color } from '../../types/Enums';
 import { appSettings } from '../../config';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateExpenses } from '../../../stores/userModule/actions';
-import { Expense } from '../../../types/Expense';
-import { selectExpenses } from '../../../stores/userModule';
 
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
@@ -22,7 +20,6 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
 
-  const expenses: Record<string, Expense[]> = useSelector(selectExpenses);
   const dispatch = useDispatch();
   
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,16 +64,13 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
         return response.json();
       })
       .then(data => {
-
-        const dateKey = newExpense.date.split('T')[0];
-        const updatedExpenses = [newExpense, ...(expenses[dateKey] || [])];
         
         setCategory('')
         setDescription('');
         setDate('')
         setAmount('');
         setIsModalVisible(false);
-        dispatch(updateExpenses({ ...expenses, [dateKey]: updatedExpenses }));
+        dispatch(updateExpenses(data));
       })
       .catch(error => {
           console.error('Błąd pobierania danych:', error);

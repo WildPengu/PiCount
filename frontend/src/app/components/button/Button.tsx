@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 
 
 export interface ButtonProps {
-    children: string;
+    children: string | JSX.Element;
     backgroundColor?: Color;
     isDisabled?: boolean;
     onClick?: () => void;

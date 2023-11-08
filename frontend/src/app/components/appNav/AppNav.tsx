@@ -4,6 +4,8 @@ import { selectActiveUserId, selectUsers } from '../../../stores/userModule/sele
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import logo from './avatar-pikachu-1.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 
 export const AppNav = () => {
 
@@ -21,10 +23,16 @@ export const AppNav = () => {
             {userActive && 
                 <ul className={styles.AppNavUl}>
                     <li className={styles.AppNavLi}>
-                        <Link to='/expenseList'>Expense List</Link>
+                        <Link to='/expenseList'>
+                            <FontAwesomeIcon icon={faClockRotateLeft} /> 
+                            <br/>History
+                        </Link>
                     </li>
                     <li className={styles.AppNavLi}>
-                        <Link to='/'>Logout</Link>
+                        <Link to='/'>
+                            <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                            <br/>Logout
+                        </Link>
                     </li>
                 </ul>
             }
