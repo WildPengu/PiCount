@@ -268,7 +268,7 @@ const sortGroupedExpensesByDate = (
   Object.keys(groupedExpenses)
     .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
     .forEach((key) => {
-      sortedGroupedExpenses[key] = groupedExpenses[key];
+      sortedGroupedExpenses[key] = groupedExpenses[key].reverse();
     });
   return sortedGroupedExpenses;
 };
