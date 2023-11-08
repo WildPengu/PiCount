@@ -133,6 +133,51 @@ router.get('/expensesByDateRange/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.get(
+  '/expensesByCategoryAndDate/:id',
+  async (req: Request, res: Response) => {
+    const userId = req.params.id;
+    const { startDate, endDate } = req.query;
+
+    try {
+      const start = new Date(startDate as string);
+      const end = new Date(endDate as string);
+
+      const userExpenses = await UserExpenses.findOne({ userId: userId });
+
+      if (!userExpenses) {
+        return res.status(404).json({ message: 'Data not found' });
+      }
+
+      const groupedExpenses: Record<string, Expense[]> = {};
+
+      for (const [category, expense] of Object.entries(userExpenses.expenses)) {
+        if (expense.date >= start && expense.date <= end) {
+          if (!groupedExpenses[category]) {
+            groupedExpenses[category] = [];
+          }
+          groupedExpenses[category].push(expense);
+        }
+      }
+
+      userExpenses.expenses.forEach((expense: Expense) => {
+        const categoryKey = expense.category;
+        if (expense.date >= start && expense.date <= end) {
+          if (!groupedExpenses[categoryKey]) {
+            groupedExpenses[categoryKey] = [];
+          }
+          groupedExpenses[categoryKey].push(expense);
+        }
+      });
+
+      res.json(groupedExpenses);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ message: 'There was a problem fetching data' });
+    }
+  }
+);
+
 // Update expense
 router.patch('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;

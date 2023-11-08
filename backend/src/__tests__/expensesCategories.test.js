@@ -1,12 +1,9 @@
 const request = require('supertest');
-const app = require('../../index');
-const { createServer } = require('http');
-
-let server;
+const { app, server } = require('../../index');
 
 describe('Endpoint: /expensesCategories', () => {
-  beforeAll(() => {
-    server = app.listen(3002);
+  afterAll((done) => {
+    server.close(done); // Zamknięcie serwera i wywołanie funkcji "done" po zakończeniu
   });
 
   test('should return 200 for that endpoint', async () => {
@@ -38,14 +35,6 @@ describe('Endpoint: /expensesCategories', () => {
       expect(category).toHaveProperty('image');
       expect(category).toHaveProperty('color');
       expect(category).toHaveProperty('__v');
-    });
-  });
-
-  afterAll(async () => {
-    return new Promise((resolve) => {
-      server.close(() => {
-        resolve(); // Zamknięcie serwera i rozwiązanie obietnicy
-      });
     });
   });
 });
