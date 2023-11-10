@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 
 export interface SelectDateProps {
     setDate?: (date: string) => void;
+    label?: 'Select Date' | 'From' | 'To';
 }
 
-export const SelectDate = ({ setDate }: SelectDateProps) => {
+export const SelectDate = ({ setDate, label = 'Select Date' }: SelectDateProps) => {
 
     const [day, setDay] = useState('');
 
@@ -29,7 +30,7 @@ export const SelectDate = ({ setDate }: SelectDateProps) => {
         <div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker 
-                    label="Select Date"
+                    label={label}
                     minDate={dayjs('2023-01-01')}
                     maxDate={dayjs(Date())}
                     onChange={(newDate) => handleChange(newDate)}

@@ -1,12 +1,13 @@
 .SortedPanel {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
 
-    .SortedPanelContainer {
+    .SortedForm {
         display: flex;
         flex-direction: column;
+        
     
-        .SortedForm {
+        .SortedPanelContainer {
             display: flex;
 
             & > * {
