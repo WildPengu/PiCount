@@ -50,6 +50,10 @@ GET http://localhost:3000/expenses/expensesByCategory/653a222e8ade4cb129d8a44c?s
 GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/Shopping
 
 ###
+//get data for diagrams
+GET http://localhost:3000/expenses/diagrams/653a222e8ade4cb129d8a44c
+
+###
 PATCH http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 Content-Type: application/json
 

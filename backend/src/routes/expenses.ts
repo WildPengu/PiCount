@@ -176,6 +176,48 @@ router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/diagrams/:id', async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const { startDate, endDate } = req.query;
+
+  try {
+    const start = startDate ? new Date(startDate as string) : new Date(0);
+    const end = endDate ? new Date(endDate as string) : new Date();
+
+    const userExpenses = await UserExpenses.findOne({ userId: userId });
+
+    if (!userExpenses) {
+      return res.status(404).json({ message: 'Data not found' });
+    }
+
+    const groupedExpenses: Record<string, number> = {};
+
+    userExpenses.expenses.forEach((expense: Expense) => {
+      if (expense.date >= start && expense.date <= end) {
+        const categoryKey = expense.category;
+
+        if (!groupedExpenses[categoryKey]) {
+          groupedExpenses[categoryKey] = 0;
+        }
+
+        groupedExpenses[categoryKey] += expense.amount;
+      }
+    });
+
+    const resultArray = Object.entries(groupedExpenses).map(
+      ([category, value]) => ({
+        category,
+        value,
+      })
+    );
+
+    res.json(resultArray);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ message: 'There was a problem fetching data' });
+  }
+});
+
 // Update expense
 router.patch('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
