@@ -1,25 +1,9 @@
 .ExpenseList {
     padding-bottom: 40px;
+    width: calc(100vw - 200px);
     background-color: #ececeb;
-
-    .ButtonsPanel {
-        display: flex;
-        justify-content: flex-end;
-        background-color: #9530ea;
-
-        .ButtonsPanelHeader {
-            margin-right: 40px;
-            color: #fff;
-        }
-
-        .AddExpenseContainer {
-            margin-left: 15px;
-        }
-    }
     
-
     .ExpenseListContainer {
-        width: calc(100vw - 200px);
         
         h3 {
             text-align: center;

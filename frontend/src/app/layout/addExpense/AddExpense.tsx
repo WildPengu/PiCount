@@ -65,9 +65,9 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
       })
       .then(data => {
         
-        setCategory('')
+        setCategory('');
         setDescription('');
-        setDate('')
+        setDate('');
         setAmount('');
         setIsModalVisible(false);
         dispatch(updateExpenses(data));

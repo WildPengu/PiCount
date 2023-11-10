@@ -1,6 +1,11 @@
 .SignUp {
-    width: 70vw;
+    width: calc(100vw - 200px);
     text-align: center;
+
+    .TopPanelContainer {
+        display: flex;
+        align-items: center;
+    }
 
     .SignUpForm {
         margin: auto;

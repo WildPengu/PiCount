@@ -11,6 +11,7 @@ import { AddExpense } from '../addExpense/AddExpense';
 import Button from '../../components/button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { TopPanel } from '../../components/topPanel/TopPanel';
 
 export const ExpenseList = () => {
     
@@ -42,8 +43,7 @@ export const ExpenseList = () => {
   
     return (
         <div className={styles.ExpenseList}>
-            <div className={styles.ButtonsPanel}>
-                <h2 className={styles.ButtonsPanelHeader}>Expense List</h2>
+            <TopPanel headerText="My Expense List">
                 <div className={styles.SortedPanelContainer}>
                     <Button 
                         onClick={() => setIsModalSortedVisible(true)}
@@ -53,8 +53,6 @@ export const ExpenseList = () => {
                     {isModalSortedVisible && <Modal>
                         <SortedPanel setIsModalVisible={setIsModalSortedVisible}/>
                     </Modal>}
-                </div>
-                <div className={styles.AddExpenseContainer}>
                     <Button 
                         onClick={() => setIsModalAddExpenseVisible(true)}
                     >
@@ -64,7 +62,7 @@ export const ExpenseList = () => {
                         <AddExpense setIsModalVisible={setIsModalAddExpenseVisible}/>
                     </Modal>}
                 </div>
-            </div>
+            </TopPanel>
             <div className={styles.ExpenseListContainer}>
                 {loading ? (
                     <p>Loading...</p>

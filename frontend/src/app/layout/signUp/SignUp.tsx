@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { Validate } from '../../helpers/SignUpValidate';
 import { appSettings } from '../../config';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 export const SignUp = () => {
 
@@ -71,6 +74,16 @@ export const SignUp = () => {
 
     return (
         <div className={styles.SignUp}>
+            <TopPanel headerText="Create Account">
+                <div className={styles.TopPanelContainer}>
+                    <Link to='/login'>
+                        <FontAwesomeIcon icon={faRightToBracket} />
+                    </Link>
+                    <Link to='/'>
+                        <FontAwesomeIcon icon={faRightFromBracket} />
+                    </Link>
+                </div>
+            </TopPanel>
             {!signUpDone ? <h2>Fill out the fields to create a new user:</h2> : <h2>The user has been created!</h2>}
             {errorMessage && <h2>{errorMessage}</h2>}
             <form 

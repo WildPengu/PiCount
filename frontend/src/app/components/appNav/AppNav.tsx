@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import logo from './avatar-pikachu-1.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChartPie, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export const AppNav = () => {
 
@@ -29,8 +29,14 @@ export const AppNav = () => {
                         </Link>
                     </li>
                     <li className={styles.AppNavLi}>
+                        <Link to='/expenseChart'>
+                            <FontAwesomeIcon icon={faChartPie} /> 
+                            <br/>Chart
+                        </Link>
+                    </li>
+                    <li className={styles.AppNavLi}>
                         <Link to='/'>
-                            <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                            <FontAwesomeIcon icon={faRightFromBracket} />
                             <br/>Logout
                         </Link>
                     </li>
