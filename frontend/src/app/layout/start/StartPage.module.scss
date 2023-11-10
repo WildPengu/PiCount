@@ -1,13 +1,14 @@
 .StartPage {
-    width: 70vw;
+    width: calc(100vw - 200px);
+
+    .TopPanelContainer {
+        display: flex;
+        align-items: center;
+    }
 
     .Introduce {
         margin: 30px auto;
         max-width: 50vw;
-
-        h1 {
-            text-align: center;
-        }
     }
 
     .ButtonsPanel {
