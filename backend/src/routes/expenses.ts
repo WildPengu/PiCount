@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Expense, UserExpenses } from '../models/expense';
+import { ExpensesCategories } from '../models/expensesCategories';
 const mongoose = require('mongoose');
 
 const router = express.Router();
@@ -185,6 +186,7 @@ router.get('/diagrams/:id', async (req: Request, res: Response) => {
     const end = endDate ? new Date(endDate as string) : new Date();
 
     const userExpenses = await UserExpenses.findOne({ userId: userId });
+    const expensesCategories = await ExpensesCategories.find({});
 
     if (!userExpenses) {
       return res.status(404).json({ message: 'Data not found' });
@@ -205,10 +207,25 @@ router.get('/diagrams/:id', async (req: Request, res: Response) => {
     });
 
     const resultArray = Object.entries(groupedExpenses).map(
-      ([category, value]) => ({
-        category,
-        value,
-      })
+      ([category, value]) => {
+        const categoryDetails = expensesCategories.find(
+          (cat) => cat.name === category
+        );
+
+        if (categoryDetails) {
+          return {
+            category,
+            value,
+            color: categoryDetails.color,
+            image: categoryDetails.image,
+          };
+        }
+
+        return {
+          category,
+          value,
+        };
+      }
     );
 
     res.json(resultArray);
