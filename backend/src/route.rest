@@ -40,17 +40,12 @@ Content-Type: application/json
 GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c
 
 ###
-GET http://localhost:3000/expenses/expensesByDay/653a222e8ade4cb129d8a44c
+GET http://localhost:3000/expenses/expensesByDate/653a222e8ade4cb129d8a44c?startDate=2023-11-03&endDate=2023-11-30
 
 ###
-GET http://localhost:3000/expenses/expensesByDateRange/653a222e8ade4cb129d8a44c?startDate=2023-11-03&endDate=2023-11-30
+GET http://localhost:3000/expenses/expensesByCategory/653a222e8ade4cb129d8a44c?startDate=2023-11-06&endDate=2023-11-30
 
 ###
-
-GET http://localhost:3000/expenses/expensesByCategoryAndDate/653a222e8ade4cb129d8a44c?startDate=2023-11-06&endDate=2023-11-30
-
-###
-
 //get expenses by category
 GET http://localhost:3000/expenses/653a222e8ade4cb129d8a44c/expenses/Shopping
 
