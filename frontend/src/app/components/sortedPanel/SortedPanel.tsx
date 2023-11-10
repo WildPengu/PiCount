@@ -10,7 +10,7 @@ import { updateExpenses } from '../../../stores/userModule/actions';
 
 export interface ModalProps {
     setIsModalVisible: (isVisible: boolean) => void;
-  }
+}
 
 export const SortedPanel = ({ setIsModalVisible }:ModalProps) => {
 
@@ -19,6 +19,26 @@ export const SortedPanel = ({ setIsModalVisible }:ModalProps) => {
     const [dateTo, setDateTo] = useState('');
 
     const dispatch = useDispatch();
+
+    const resetFilters = () => {
+        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setCategory('');
+            setDateFrom('');
+            setDateTo('');
+            setIsModalVisible(false);
+            dispatch(updateExpenses(data));
+        })
+        .catch(error => {
+            console.error('Błąd pobierania danych:', error);
+        });
+    };
     
     const sortedExpenseList = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -72,7 +92,7 @@ export const SortedPanel = ({ setIsModalVisible }:ModalProps) => {
                     <Button type='submit'>
                         Filter
                     </Button>
-                    <Button backgroundColor={Color.blue} >
+                    <Button backgroundColor={Color.blue} onClick={resetFilters}>
                         Reset
                     </Button>
                     <Button backgroundColor={Color.gray} onClick={() => setIsModalVisible(false)}>
