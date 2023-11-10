@@ -1,0 +1,24 @@
+.TopPanel {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #9530ea;
+
+    .TopPanelHeader {
+        margin-right: 40px;
+        color: #fff;
+    }
+
+    a {
+        margin: 15px auto;
+        padding: 10px 20px;
+        border-radius: 9999px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+            opacity: .7;
+        }
+    }
+}
