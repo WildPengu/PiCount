@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectExpenses, updateExpenses } from '../../../stores/userModule';
 import { Expense } from '../../../types/Expense';
 import { ExpenseItem } from '../../components/expense/ExpenseItem';
-import { SortedPanel } from '../../components/sortedPanel/SortedPanel';
+import { FilterPanel } from '../../components/filterPanel/FilterPanel';
 import { appSettings } from '../../config';
 import styles from './ExpenseList.module.scss';
 import { Modal } from '../../components/modal/Modal';
@@ -12,6 +12,7 @@ import Button from '../../components/button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { TopPanel } from '../../components/topPanel/TopPanel';
+import { Loader } from '../../components/loader/Loader';
 
 export const ExpenseList = () => {
     
@@ -19,6 +20,10 @@ export const ExpenseList = () => {
     const [isModalAddExpenseVisible, setIsModalAddExpenseVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+
+    const [category, setCategory] = useState('');
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
 
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
@@ -51,7 +56,12 @@ export const ExpenseList = () => {
                         <FontAwesomeIcon icon={faFilter} />
                     </Button>
                     {isModalSortedVisible && <Modal>
-                        <SortedPanel setIsModalVisible={setIsModalSortedVisible}/>
+                        <FilterPanel
+                            setIsModalVisible={setIsModalSortedVisible}
+                            currentCategory={category}
+                            currentDateFrom={dateFrom}
+                            currentDateTo={dateTo}
+                        />
                     </Modal>}
                     <Button 
                         onClick={() => setIsModalAddExpenseVisible(true)}
@@ -65,7 +75,7 @@ export const ExpenseList = () => {
             </TopPanel>
             <div className={styles.ExpenseListContainer}>
                 {loading ? (
-                    <p>Loading...</p>
+                    <Loader />
                 ) : (
                     Object.entries(expenses).map(([date, expensesByDate]) => (
                         <div key={date}>
