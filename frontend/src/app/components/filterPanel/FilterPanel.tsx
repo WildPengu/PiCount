@@ -1,4 +1,4 @@
-import styles from './SortedPanel.module.scss';
+import styles from './FilterPanel.module.scss';
 import { SelectCategory } from '../selectCategory/SelectCategory';
 import { SelectDate } from '../datePicker/SelectDate';
 import { Color } from '../../types/Enums';
@@ -12,11 +12,25 @@ export interface ModalProps {
     setIsModalVisible: (isVisible: boolean) => void;
 }
 
-export const SortedPanel = ({ setIsModalVisible }:ModalProps) => {
+export interface FilterPanelProps extends ModalProps {
+    currentCategory?: string;
+    currentDateFrom?: string;
+    currentDateTo?: string;
+}
 
-    const [category, setCategory] = useState('');
-    const [dateFrom, setDateFrom] = useState('');
-    const [dateTo, setDateTo] = useState('');
+export const FilterPanel = ({
+    setIsModalVisible,
+    currentCategory,
+    currentDateFrom,
+    currentDateTo,
+}:FilterPanelProps) => {
+
+    const [category, setCategory] = useState(currentCategory);
+    const [dateFrom, setDateFrom] = useState(currentDateFrom);
+    const [dateTo, setDateTo] = useState(currentDateTo);
+
+    console.log(category, dateFrom, dateTo);
+    
 
     const dispatch = useDispatch();
 
@@ -40,25 +54,8 @@ export const SortedPanel = ({ setIsModalVisible }:ModalProps) => {
         });
     };
     
-    const sortedExpenseList = (e: FormEvent<HTMLFormElement>) => {
+    const filteredExpenseList = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        // fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}/expenses/${category}`)
-        // .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error('Network response was not ok');
-        //     }
-        //     return response.json();
-        // })
-        // .then(data => {
-        //     console.log(data);
-            
-        //     setIsModalVisible(false);
-        //     dispatch(updateExpenses(data));
-        // })
-        // .catch(error => {
-        //     console.error('Błąd pobierania danych:', error);
-        // });
 
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDateRange/${appSettings.user_id}?startDate=${dateFrom}&endDate=${dateTo}`)
         .then(response => {
@@ -81,7 +78,7 @@ export const SortedPanel = ({ setIsModalVisible }:ModalProps) => {
             <h2>Sort of</h2>
             <form 
                 className={styles.SortedForm}
-                onSubmit={sortedExpenseList}
+                onSubmit={filteredExpenseList}
             >
                 <div className={styles.SortedPanelContainer}>
                     <SelectCategory setCategory={setCategory}/>
