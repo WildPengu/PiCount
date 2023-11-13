@@ -5,6 +5,18 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 
+interface Category {
+  category: string;
+  value: number;
+  color?: string;
+  image?: string;
+}
+
+interface Diagrams {
+  totalAmount: number;
+  categories: Category[];
+}
+
 // Get all user expenses
 router.get('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
@@ -180,6 +192,10 @@ router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
 router.get('/diagrams/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
   const { startDate, endDate } = req.query;
+  const diagrams: Diagrams = {
+    totalAmount: 0,
+    categories: [],
+  };
 
   try {
     const start = startDate ? new Date(startDate as string) : new Date(0);
@@ -211,7 +227,7 @@ router.get('/diagrams/:id', async (req: Request, res: Response) => {
         const categoryDetails = expensesCategories.find(
           (cat) => cat.name === category
         );
-
+        diagrams.totalAmount += value;
         if (categoryDetails) {
           return {
             category,
@@ -228,7 +244,9 @@ router.get('/diagrams/:id', async (req: Request, res: Response) => {
       }
     );
 
-    res.json(resultArray);
+    diagrams.categories = resultArray;
+
+    res.json(diagrams);
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ message: 'There was a problem fetching data' });
