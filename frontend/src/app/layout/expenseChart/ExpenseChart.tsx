@@ -7,15 +7,18 @@ import { Modal } from '../../components/modal/Modal';
 import { FilterPanel } from '../../components/filterPanel/FilterPanel';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import { appSettings } from '../../config';
-import { PieChartComponent } from '../../components/pieChart/PieChart';
+import { PieChartComponent } from '../../components/charts/pieChart/PieChart';
 import { Loader } from '../../components/loader/Loader';
+import { DataItems } from '../../../types/Chart';
+import { ChartItem } from '../../components/charts/chartItem/ChartItem';
+
 
 export const ExpenseChart = () => {
 
     const [isModalSortedVisible, setIsModalSortedVisible] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [dataChart, setDataChart] = useState([]);
-
+    const [dataChart, setDataChart] = useState<DataItems>({ categories: [] });
+    
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/diagrams/${appSettings.user_id}`)
             .then(response => {
@@ -33,7 +36,7 @@ export const ExpenseChart = () => {
                 setLoading(false);
             });
     }, []);
-    
+
     return (
         <div className={styles.ExpenseChart}>
             <TopPanel headerText="My Chart">
@@ -57,16 +60,28 @@ export const ExpenseChart = () => {
                     </Modal>}
                 </div>
             </TopPanel>
-            <div className={styles.ExpenseChartContainer}>
             {loading ? (
                 <Loader />
-                ) : (
-                    <PieChartComponent 
-                    dataChart={dataChart}
-                />
-                )}
-                
-            </div>
+            ) : (
+                <div className={styles.ExpenseChartContainer}>
+                    <div className={styles.TotalAmountHeader}>
+                        <h3>Total Expenses: <span>{dataChart.totalAmount} ZŁ</span></h3>
+                    </div>
+                    <div className={styles.ChartsContainer}>
+                        <PieChartComponent 
+                            dataChart={dataChart}
+                        />
+                        <div className={styles.ChartsItemsContainer}>
+                            {dataChart.categories.map((category) => (
+                                <ChartItem 
+                                    categoryItem={category}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                )
+            } 
         </div>
     );
 };

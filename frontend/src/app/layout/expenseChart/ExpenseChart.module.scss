@@ -1,8 +1,33 @@
 .ExpenseChart {
     width: calc(100vw - 200px);
+
+    .ExpenseChartContainer {
+        display: flex;
+        flex-wrap: wrap;
+
+        .TotalAmountHeader {
+            padding: 15px 0;
+            text-align: center;
+            width: 100%;
+            color: #969595;
+
+            span {
+                color: #b50707;
+            }
+        }
+
+        .ChartsContainer {
+            display: flex;
+            width: 100%;
+            height: 500px;
+
+            .ChartsItemsContainer {
+                display: flex;
+                flex-wrap: wrap;
+                padding-right: 50px;
+                width: 50%;
+            }
+        }
+    }
 }
 
-.ExpenseChartContainer {
-    width: 100%;
-    height: 500px;
-}

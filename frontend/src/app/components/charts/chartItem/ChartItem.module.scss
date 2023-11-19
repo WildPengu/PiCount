@@ -1,0 +1,18 @@
+.ChartItem {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #fff;
+
+    .ChartItemIco {
+        border: 1px solid transparent;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 40px;
+    }
+}
