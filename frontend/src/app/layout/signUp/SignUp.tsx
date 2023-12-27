@@ -37,7 +37,7 @@ export const SignUp = () => {
           ...formData,
           [name]: value,
         });
-    }; 
+    };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
@@ -46,31 +46,34 @@ export const SignUp = () => {
             return;
         };
 
-        const url = `${appSettings.apiHost}:${appSettings.apiPort}/users`;
-        
+        const url = `${appSettings.apiHost}:${appSettings.apiPort}/users`; 
         try {
             const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
             });
-
+    
             if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
+        
             const data = await response.json();
-            console.log('Użytkownik został utworzony:', data);
             setSignUpDone(true);
-        } 
-        catch (error) {
-            setErrorMessage(error.message);
-            console.error('Wystąpił błąd podczas tworzenia użytkownika:', error);
-        };
+            setFormData({
+                name: '',
+                age: 0,
+                email: '',
+                password: '',
+                confirmPassword: '',
+            });
+        } catch (error) {
+            setErrorMessage('Blad!')
+            console.error('Błąd pobierania danych:', error);
+        }; 
     };
-
 
     return (
         <div className={styles.SignUp}>
@@ -133,7 +136,7 @@ export const SignUp = () => {
                 />
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <div className={styles.ButtonsPanel}>
-                    <Button isDisabled={signUpDone}>
+                    <Button type="submit" isDisabled={signUpDone}>
                         SignUp
                     </Button>
                     {signUpDone && <Link to='/login' className={styles.SignUpButton}>Go to login</Link>}
