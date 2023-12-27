@@ -8,6 +8,7 @@ export interface ButtonProps {
     isDisabled?: boolean;
     onClick?: () => void;
     type?: 'submit' | 'button' | 'reset';
+    formAction?: string;
 }
 
 const Button = ({ 
@@ -15,7 +16,8 @@ const Button = ({
     onClick, 
     backgroundColor = Color.violet,
     isDisabled = false,
-    type = 'button'
+    type = 'button',
+    formAction = ''
 }: ButtonProps) => { 
 
     return (
@@ -25,6 +27,7 @@ const Button = ({
             onClick={onClick}
             disabled={isDisabled}
             type={type}
+            formAction={formAction}
         >
             {children}
         </button>

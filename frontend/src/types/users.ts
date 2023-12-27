@@ -5,6 +5,7 @@ export interface User {
   name: string;
   avatar: string;
   age: number;
+  password: string;
 }
 
 export interface UsersState {
