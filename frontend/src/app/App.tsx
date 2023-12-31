@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initialize, selectActiveUserId, updateExpensesCategories } from '../stores/userModule';
 import styles from './App.module.scss';
 import { AppNav } from './components/appNav/AppNav';
 import { AppRoutes } from './routes/AppRoutes';
-import { appSettings } from './config';
-import { User } from '../types/users';
+import { AppSettingsProvider } from './config';
 
 function App() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState<User | null>(null);
 
   const activeUserId: string = useSelector(selectActiveUserId);
+  const { appSettings } = AppSettingsProvider();
 
   useEffect(() => {
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/users`)

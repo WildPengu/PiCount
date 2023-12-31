@@ -5,7 +5,7 @@ import { Expense, ExpensesCategories } from '../../../types/Expense';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw, faCartShopping, faBagShopping, faUtensils, faCar, faGift, faHouse, faChildren, faHeartPulse, faSpa, faDollarSign, faTrashCan, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { selectExpensesCategories } from '../../../stores/userModule/selectors';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 import { updateExpenses } from '../../../stores/userModule/actions';
 
 interface ExpenseItemProps {
@@ -19,7 +19,7 @@ interface IconMappings {
 export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
     
     const expensesCategories: ExpensesCategories[] = useSelector(selectExpensesCategories);
-
+    const { appSettings } = AppSettingsProvider();
     const categoryInfo = expensesCategories.find((category: { name: string; }) => category.name === expense.category);
     const dispatch = useDispatch();
     

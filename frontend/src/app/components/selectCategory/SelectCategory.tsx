@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styles from './Selectcategory.module.scss';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 
 export interface Category {
     _id: string;
@@ -15,6 +15,7 @@ export const SelectCategory = ({ setCategory }: SelectCategoryProps) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
     const [activeOption, setActiveOption] = useState<string>('');
+    const { appSettings } = AppSettingsProvider();
     
     useEffect(() => {
         async function fetchCategories() {

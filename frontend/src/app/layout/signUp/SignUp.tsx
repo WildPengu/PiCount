@@ -4,13 +4,15 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { Validate } from '../../helpers/SignUpValidate';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 export const SignUp = () => {
 
+    const { appSettings } = AppSettingsProvider();
+    
     const [formData, setFormData] = useState<SignUpForm>({
         name: '',
         age: 0,

@@ -4,7 +4,7 @@ import { selectExpenses, updateExpenses } from '../../../stores/userModule';
 import { Expense } from '../../../types/Expense';
 import { ExpenseItem } from '../../components/expense/ExpenseItem';
 import { FilterPanel } from '../../components/filterPanel/FilterPanel';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 import styles from './ExpenseList.module.scss';
 import { Modal } from '../../components/modal/Modal';
 import { AddExpense } from '../addExpense/AddExpense';
@@ -24,6 +24,8 @@ export const ExpenseList = () => {
     const [category, setCategory] = useState('');
     const [dateFrom, setDateFrom] = useState('');
     const [dateTo, setDateTo] = useState('');
+    
+    const { appSettings } = AppSettingsProvider();
 
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
@@ -95,3 +97,7 @@ export const ExpenseList = () => {
         </div>
     );
 };
+function useAuth(): { appSettings: any; } {
+    throw new Error('Function not implemented.');
+}
+

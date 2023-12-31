@@ -4,7 +4,7 @@ import { SelectDate } from '../datePicker/SelectDate';
 import { Color } from '../../types/Enums';
 import Button from '../button/Button';
 import { FormEvent, useState } from 'react';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 import { useDispatch } from 'react-redux';
 import { updateExpenses } from '../../../stores/userModule/actions';
 
@@ -29,9 +29,8 @@ export const FilterPanel = ({
     const [dateFrom, setDateFrom] = useState(currentDateFrom);
     const [dateTo, setDateTo] = useState(currentDateTo);
 
-    console.log(category, dateFrom, dateTo);
+    const { appSettings } = AppSettingsProvider();
     
-
     const dispatch = useDispatch();
 
     const resetFilters = () => {

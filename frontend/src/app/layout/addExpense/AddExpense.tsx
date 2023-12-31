@@ -4,7 +4,7 @@ import styles from './AddExpense.module.scss';
 import { SelectCategory } from '../../components/selectCategory/SelectCategory';
 import { SelectDate } from '../../components/datePicker/SelectDate';
 import { Color } from '../../types/Enums';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 import { useDispatch } from 'react-redux';
 import { updateExpenses } from '../../../stores/userModule/actions';
 
@@ -21,6 +21,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
   const [error, setError] = useState('');
 
   const dispatch = useDispatch();
+  const { appSettings } = AppSettingsProvider();
   
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

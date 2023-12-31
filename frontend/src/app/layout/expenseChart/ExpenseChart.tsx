@@ -6,7 +6,7 @@ import { faChartColumn, faChartPie, faFilter } from '@fortawesome/free-solid-svg
 import { Modal } from '../../components/modal/Modal';
 import { FilterPanel } from '../../components/filterPanel/FilterPanel';
 import { TopPanel } from '../../components/topPanel/TopPanel';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 import { PieChartComponent } from '../../components/charts/pieChart/PieChartComponent';
 import { Loader } from '../../components/loader/Loader';
 import { DataItems } from '../../../types/Chart';
@@ -21,6 +21,7 @@ export const ExpenseChart = () => {
 
     const [selectedChart, setSelectedChart] = useState('pie');
     const [isModalSortedVisible, setIsModalSortedVisible] = useState(false);
+    const { appSettings } = AppSettingsProvider();
   
     const handleChartButtonClick = (chartType: SetStateAction<string>) => {
       setSelectedChart(chartType);

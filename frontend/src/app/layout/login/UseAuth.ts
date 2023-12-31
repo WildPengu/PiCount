@@ -8,6 +8,8 @@ export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const { appSettings } = AppSettingsProvider();
+  
   const dispatch = useDispatch();
 
   const login = async (username: string, password: string) => {
