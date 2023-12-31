@@ -29,7 +29,6 @@ export const usersReducer = (
         expensesCategories: action.payload,
       };
     case UsersActionTypes.UPDATE_ACTIVE_USER_ID:
-      console.log('ueu', action.payload)
       return {
         ...state,
         activeUserId: action.payload,
