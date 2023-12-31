@@ -46,6 +46,7 @@ export const useAuth = () => {
 
   const logout = () => {
     setUser(null);
+    dispatch(updateActiveUserId(''));
   };
 
   return { user, error, login, logout };
