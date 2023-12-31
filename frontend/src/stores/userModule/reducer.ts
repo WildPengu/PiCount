@@ -16,7 +16,6 @@ export const usersReducer = (
     case UsersActionTypes.INITIALIZE:
       return {
         ...state,
-        activeUserId: action.payload.activeUserId,
         users: action.payload.users,
       };
     case UsersActionTypes.UPDATE_EXPENSES:
@@ -29,6 +28,12 @@ export const usersReducer = (
         ...state,
         expensesCategories: action.payload,
       };
+    case UsersActionTypes.UPDATE_ACTIVE_USER_ID:
+      console.log('ueu', action.payload)
+      return {
+        ...state,
+        activeUserId: action.payload,
+      };      
     default:
       return state;
   }

@@ -1,13 +1,17 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { initialize, updateExpensesCategories } from '../stores/userModule';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { initialize, selectActiveUserId, updateExpensesCategories } from '../stores/userModule';
 import styles from './App.module.scss';
 import { AppNav } from './components/appNav/AppNav';
 import { AppRoutes } from './routes/AppRoutes';
 import { appSettings } from './config';
+import { User } from '../types/users';
 
 function App() {
   const dispatch = useDispatch();
+  const [user, setUser] = useState<User | null>(null);
+
+  const activeUserId: string = useSelector(selectActiveUserId);
 
   useEffect(() => {
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/users`)
@@ -18,11 +22,12 @@ function App() {
         return response.json()
       })
       .then((data) => {
-        dispatch(initialize({ users: data, activeUserId: '653a222e8ade4cb129d8a44c' }));
+        dispatch(initialize({ users: data, activeUserId }));
       })
       .catch((error) => {
         console.error('There was a problem with fetching data:', error);
       });
+
   }, [])
 
   useEffect(() => {
@@ -41,6 +46,8 @@ function App() {
       });
   }, [])
 
+  
+  
   return (
     <div className={styles.App}>
       <AppNav />

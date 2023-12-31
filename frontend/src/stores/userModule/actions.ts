@@ -1,11 +1,13 @@
 import type { FSAAuto } from 'flux-standard-action';
-import type { Expense, InitializePayload } from '../../types/users';
+import type { Expense, InitializePayload, UsersState } from '../../types/users';
 import { ExpensesCategories } from '../../types/Expense';
+
 
 export enum UsersActionTypes {
   INITIALIZE = '[Users] INITIALIZE',
   UPDATE_EXPENSES = '[Expenses] UPDATE_EXPENSES',
   UPDATE_EXPENSES_CATEGORIES = '[Expenses] UPDATE_EXPENSES_CATEGORIES',
+  UPDATE_ACTIVE_USER_ID = "[Users] UPDATE_ACTIVE_USER_ID"
 }
 
 export type Initialize = FSAAuto<
@@ -21,6 +23,11 @@ export type UpdateExpenses = FSAAuto<
 export type UpdateExpensesCategories = FSAAuto<
   UsersActionTypes.UPDATE_EXPENSES_CATEGORIES,
   ExpensesCategories[]
+>;
+
+export type UpdateActiveUserId = FSAAuto<
+  UsersActionTypes.UPDATE_ACTIVE_USER_ID,
+  string
 >;
 
 export const initialize = (payload: InitializePayload): Initialize => ({
@@ -42,4 +49,11 @@ export const updateExpensesCategories = (
   payload,
 });
 
-export type UserAction = Initialize | UpdateExpenses | UpdateExpensesCategories;
+export const updateActiveUserId = (
+  payload: string
+): UpdateActiveUserId => ({
+  type: UsersActionTypes.UPDATE_ACTIVE_USER_ID,
+  payload,
+});
+
+export type UserAction = Initialize | UpdateExpenses | UpdateExpensesCategories | UpdateActiveUserId;
