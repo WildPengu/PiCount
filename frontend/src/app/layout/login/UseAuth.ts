@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateActiveUserId } from '../../../stores/userModule';
 import { User } from '../../../types/users';
-import { appSettings } from '../../config';
+import { AppSettingsProvider } from '../../config';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
