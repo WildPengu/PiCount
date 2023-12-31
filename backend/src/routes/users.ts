@@ -88,7 +88,6 @@ router.delete('/:id', getUser, async (req: Request, res: Response) => {
 
 router.post('/login', async (req, res) => {
   const { name, password } = req.body;
-
   try {
     const user = await User.findOne({ name });
 

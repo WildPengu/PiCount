@@ -1,18 +1,19 @@
+import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import styles from './Login.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket,  faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { FC, useState } from 'react';
 import { useAuth } from './UseAuth';
 
 export const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { user, login, error } = useAuth();
+    const { login, error } = useAuth();
 
-    const handleLogin = () => {
+    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         login(username, password);
     };
     return (
@@ -27,7 +28,11 @@ export const Login: React.FC = () => {
                     </Link>
                 </div>
             </TopPanel>
-            <form className={styles.LoginForm} onSubmit={handleLogin}>
+            <form
+                className={styles.LoginForm}
+                onSubmit={(e) => handleLogin(e)}
+                method="POST"
+            >
                 {error && <h2>{error}</h2>}
                 <input 
                     className={styles.LoginInput}
@@ -43,7 +48,7 @@ export const Login: React.FC = () => {
                     placeholder='User password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button type='submit' formAction='/expenseList'>
+                <Button type='submit'>
                     Login
                 </Button>
             </form>
