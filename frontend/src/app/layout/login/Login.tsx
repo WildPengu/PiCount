@@ -1,7 +1,7 @@
 import { faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import styles from './Login.module.scss';
@@ -11,10 +11,13 @@ export const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login, error } = useAuth();
+    
+    const navigate = useNavigate();
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         login(username, password);
+        navigate('/expenseList');
     };
     return (
         <div className={styles.Login}>
@@ -48,7 +51,7 @@ export const Login: React.FC = () => {
                     placeholder='User password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button type='submit'>
+                <Button type='submit' >
                     Login
                 </Button>
             </form>
