@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectExpenses, updateExpenses } from '../../../stores/userModule';
+import { selectActiveUserId, selectExpenses, updateExpenses } from '../../../stores/userModule';
 import { Expense } from '../../../types/Expense';
 import { ExpenseItem } from '../../components/expense/ExpenseItem';
 import { FilterPanel } from '../../components/filterPanel/FilterPanel';
@@ -27,8 +27,10 @@ export const ExpenseList = () => {
     
     const { appSettings } = AppSettingsProvider();
 
+    const activeUserId = useSelector(selectActiveUserId);
+
     useEffect(() => {
-        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
+        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${activeUserId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -43,7 +45,7 @@ export const ExpenseList = () => {
                 console.error('Błąd pobierania danych:', error);
                 setLoading(false);
             });
-    }, []);
+    }, [activeUserId]);
 
     const expenses: Record<string, Expense[]> = useSelector(selectExpenses);
     const todayDate = new Date().toISOString().split('T')[0]; 

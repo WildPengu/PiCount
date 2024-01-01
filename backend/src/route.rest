@@ -11,6 +11,10 @@ Content-Type: application/json
   "name": "Naruto",
   "password": "dasdasd"
 }
+{
+  "name": "lukasz",
+  "password": "Test@123"
+}
 ###
 
 GET http://localhost:3000/users/65102ced5e0fc1e931b89ab4

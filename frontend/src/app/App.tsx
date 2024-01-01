@@ -1,16 +1,26 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { initialize, selectActiveUserId, updateExpensesCategories } from '../stores/userModule';
+import Cookies from 'js-cookie';
+import { initialize, selectActiveUserId, updateActiveUserId, updateExpensesCategories } from '../stores/userModule';
 import styles from './App.module.scss';
 import { AppNav } from './components/appNav/AppNav';
 import { AppRoutes } from './routes/AppRoutes';
 import { AppSettingsProvider } from './config';
 
-function App() {
+export const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const activeUserId: string = useSelector(selectActiveUserId);
+  
   const { appSettings } = AppSettingsProvider();
+  const userCookie = Cookies.get('user');
+
+  useEffect(() => {
+    if (userCookie) {
+      const activeUserId = JSON.parse(userCookie);
+      dispatch(updateActiveUserId( activeUserId ))
+    }
+  }, [userCookie]);
 
   useEffect(() => {
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/users`)
@@ -27,7 +37,7 @@ function App() {
         console.error('There was a problem with fetching data:', error);
       });
 
-  }, [])
+  }, []);
 
   useEffect(() => {
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expensesCategories`)
@@ -43,16 +53,12 @@ function App() {
       .catch((error) => {
         console.error('There was a problem with fetching data:', error);
       });
-  }, [])
+  }, []);
 
-  
-  
   return (
     <div className={styles.App}>
       <AppNav />
       <AppRoutes />
     </div>
   );
-}
-
-export default App;
+};

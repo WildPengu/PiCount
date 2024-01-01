@@ -12,10 +12,6 @@ export const AppNav = () => {
     const users = useSelector(selectUsers);
     const activeUserId = useSelector(selectActiveUserId);
     const { logout } = useAuth();
-
-    const handleLogout = () => {
-        logout();
-    };
     
     return (
         <nav className={styles.AppNav}>
@@ -38,7 +34,7 @@ export const AppNav = () => {
                             <br/>Chart
                         </Link>
                     </li>
-                    <li className={styles.AppNavLi} onClick={handleLogout}>
+                    <li className={styles.AppNavLi} onClick={() => logout()}>
                         <Link to='/'>
                             <FontAwesomeIcon icon={faRightFromBracket} />
                             <br/>Logout

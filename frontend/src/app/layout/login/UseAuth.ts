@@ -3,13 +3,15 @@ import { useDispatch } from 'react-redux';
 import { updateActiveUserId } from '../../../stores/userModule';
 import { User } from '../../../types/users';
 import { AppSettingsProvider } from '../../config';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const { appSettings } = AppSettingsProvider();
-  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const login = async (username: string, password: string) => {
@@ -33,8 +35,14 @@ export const useAuth = () => {
         setUser(data);
         setError(null);
         dispatch(updateActiveUserId(data._id));
+        Cookies.set('user', JSON.stringify(data._id), { expires: 1 });
+        navigate('/expenseList');
       } else {
         setUser(null);
+        if (!username || !password) {
+          setError('Username or password are required.');
+          return;
+        }
         setError('Incorrect username or password.');
       }
     } catch (error) {
@@ -47,6 +55,7 @@ export const useAuth = () => {
   const logout = () => {
     setUser(null);
     dispatch(updateActiveUserId(''));
+    Cookies.remove('user');
   };
 
   return { user, error, login, logout };
