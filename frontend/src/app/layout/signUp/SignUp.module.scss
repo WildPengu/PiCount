@@ -18,6 +18,10 @@
             padding: 5px;
             width: calc(100% - 10px);
         }
+        .SignUpErrors {
+            color: red;
+            font-size: small;
+        }
 
         .ButtonsPanel {
             display: flex;

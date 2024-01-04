@@ -5,6 +5,7 @@ import { SignUpForm } from "../../types/SignUpForm";
 export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateAction<SignUpForm>>): boolean => {
     let validationErrors = {
         name: false,
+        avatar: false,
         email: false,
         password: false,
         confirmPassword: false,
@@ -15,7 +16,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
         setErrors(prevErrors => {
             return {
                 ...prevErrors, 
-                name: 'User name should have at least 4 characters'
+                name: 'User name should have at least 4 characters*'
             };
         });
     } else if(!/^[^\s]*$/.test(formData.name.trim())) {
@@ -23,7 +24,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
         setErrors(prevErrors => {
             return {
                 ...prevErrors, 
-                name: 'User name should`n have empty characters'
+                name: 'User name should`n have empty characters*'
             };
         });
     } else {
@@ -35,13 +36,30 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
             };
         });
     };
+    if(formData.avatar.length < 1) {
+        validationErrors.avatar = true;
+        setErrors(prevErrors => {
+            return {
+                ...prevErrors, 
+                avatar: 'Please selecte Avatar*'
+            };
+        });
+    } else {
+        validationErrors.avatar = false;
+        setErrors(prevErrors => {
+            return {
+                ...prevErrors, 
+                avatar: ''
+            };
+        });
+    };
 
     if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email.trim())) {
         validationErrors.email = true;
         setErrors(prevErrors => {
             return {
                 ...prevErrors, 
-                email: 'There is no valid email'
+                email: 'There is no valid email*'
             };
         });
     } else {
@@ -59,7 +77,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
         setErrors(prevErrors => {
             return {
                 ...prevErrors, 
-                password: 'Password should have at least 6 characters',
+                password: 'Password should have at least 6 characters*',
             };
         });
     } else if(!/^[^\s]*$/.test(formData.password.trim())) {
@@ -67,7 +85,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
         setErrors(prevErrors => {
             return {
                 ...prevErrors, 
-                password: 'Password shouldn`t have empty characters',
+                password: 'Password shouldn`t have empty characters*',
             };
         });
     } else if(!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(formData.password.trim())) {
@@ -93,7 +111,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
         setErrors(prevErrors => {
             return {
                 ...prevErrors, 
-                confirmPassword: 'Password should be the same',
+                confirmPassword: 'Password should be the same*',
             };
         });
     } else {
@@ -108,6 +126,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
 
     return(
         !validationErrors.name && 
+        !validationErrors.avatar && 
         !validationErrors.email && 
         !validationErrors.password &&
         !validationErrors.confirmPassword

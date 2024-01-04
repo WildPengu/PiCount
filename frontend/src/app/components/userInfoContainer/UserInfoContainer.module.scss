@@ -1,0 +1,24 @@
+.UserInfoContainer {
+    .UserContainer {
+        padding: 15px 0;
+        text-align: center;
+        .AvatarContainer {
+            margin: 20px auto;
+    
+            .Avatar {
+                border: 1px solid #9530ea;
+                border-radius: 50%;
+                height: 70px;
+                width: 70px;
+            }
+        }
+        .AppNavUsername {
+            color: #9530ea;
+            font-weight: 700;
+        }
+    }
+    
+    .AppNavHr {
+        width: 80%;
+    }
+}

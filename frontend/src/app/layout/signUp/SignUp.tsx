@@ -8,6 +8,16 @@ import { AppSettingsProvider } from '../../config';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { AvatarGallery } from '../../components/avatarGallery/AvatarGallery';
+
+import eeve from '../../img/avatarsImage/eeve-avatar.png';
+import charizard from '../../img/avatarsImage/charizard-avatar.jpg';
+import bulbasaur from '../../img/avatarsImage/bulbasaur-avatar.jpg';
+import charmander from '../../img/avatarsImage/charmander-avatar.png';
+import jigglypuff from '../../img/avatarsImage/jigglypuff-avatar.png';
+import piplup from '../../img/avatarsImage/piplup-avatar.png';
+import squirtle from '../../img/avatarsImage/squirtle-avatar.png';
+import logo from '../../img/avatarsImage/logo-pikachu.jpg';
 
 export const SignUp = () => {
 
@@ -17,6 +27,7 @@ export const SignUp = () => {
         name: '',
         age: 0,
         email: '',
+        avatar: '',
         password: '',
         confirmPassword: '',
     });
@@ -25,6 +36,7 @@ export const SignUp = () => {
         name: '',
         age: 0,
         email: '',
+        avatar: '',
         password: '',
         confirmPassword: '',
     });
@@ -39,6 +51,12 @@ export const SignUp = () => {
           ...formData,
           [name]: value,
         });
+    };
+
+    const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+
+    const handleAvatarSelect = (avatar: string) => {
+        setSelectedAvatar(avatar);
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -68,6 +86,7 @@ export const SignUp = () => {
                 name: '',
                 age: 0,
                 email: '',
+                avatar: '',
                 password: '',
                 confirmPassword: '',
             });
@@ -102,7 +121,7 @@ export const SignUp = () => {
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
                 />
-                {errors.name && <p>{errors.name}</p>}
+                {errors.name && <p className={styles.SignUpErrors}>{errors.name}</p>}
                 <input 
                     type='number' 
                     name='age' 
@@ -113,6 +132,8 @@ export const SignUp = () => {
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
                 />
+                <AvatarGallery avatars={[logo, eeve, charizard, bulbasaur, charmander, jigglypuff, piplup, squirtle]} onAvatarSelect={handleAvatarSelect} />
+                {errors.avatar && <p className={styles.SignUpErrors}>{errors.avatar}</p>}
                 <input 
                     type='email' 
                     name='email' 
@@ -120,7 +141,7 @@ export const SignUp = () => {
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
                 />
-                {errors.email && <p>{errors.email}</p>}
+                {errors.email && <p className={styles.SignUpErrors}>{errors.email}</p>}
                 <input 
                     type='password' 
                     name='password' 
@@ -128,7 +149,7 @@ export const SignUp = () => {
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
                 />
-                {errors.password && <p>{errors.password}</p>}
+                {errors.password && <p className={styles.SignUpErrors}>{errors.password}</p>}
                 <input 
                     type='password' 
                     name='confirmPassword' 
@@ -136,7 +157,7 @@ export const SignUp = () => {
                     className={styles.SignUpInput} 
                     onChange={handleInputChange}
                 />
-                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                {errors.confirmPassword && <p className={styles.SignUpErrors}>{errors.confirmPassword}</p>}
                 <div className={styles.ButtonsPanel}>
                     <Button type="submit" isDisabled={signUpDone}>
                         SignUp
