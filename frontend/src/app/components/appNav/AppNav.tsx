@@ -4,12 +4,12 @@ import { selectActiveUserId } from '../../../stores/userModule/selectors';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartPie, faClockRotateLeft, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from '../../layout/login/UseAuth';
+import { LoginUseAuth } from '../../helpers/LoginUseAuth';
 import { UserInfoContainer } from '../userInfoContainer/UserInfoContainer';
 
 export const AppNav = () => {
     const activeUserId = useSelector(selectActiveUserId);
-    const { logout } = useAuth();
+    const { logout } = LoginUseAuth();
     
     return (
         <nav className={styles.AppNav}>
@@ -28,8 +28,8 @@ export const AppNav = () => {
                             <br/>Chart
                         </Link>
                     </li>
-                    <li className={styles.AppNavLi} onClick={() => logout()}>
-                        <Link to='/'>
+                    <li className={styles.AppNavLi}>
+                        <Link to='/' onClick={() => logout()}>
                             <FontAwesomeIcon icon={faRightFromBracket} />
                             <br/>Logout
                         </Link>

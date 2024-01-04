@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateActiveUserId } from '../../../stores/userModule';
-import { User } from '../../../types/users';
-import { AppSettingsProvider } from '../../config';
+import { updateActiveUserId } from '../../stores/userModule';
+import { User } from '../../types/users';
+import { AppSettingsProvider } from '../config';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
-export const useAuth = () => {
+export const LoginUseAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,6 +37,7 @@ export const useAuth = () => {
         dispatch(updateActiveUserId(data._id));
         Cookies.set('user', JSON.stringify(data._id), { expires: 1 });
         navigate('/expenseList');
+        window.location.reload()
       } else {
         setUser(null);
         if (!username || !password) {

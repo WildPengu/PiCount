@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import styles from './Login.module.scss';
-import { useAuth } from './UseAuth';
+import { LoginUseAuth } from '../../helpers/LoginUseAuth';
 
 export const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login, error } = useAuth();
+    const { login, error } = LoginUseAuth();
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

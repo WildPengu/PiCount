@@ -47,7 +47,7 @@ export const SignUp = () => {
     });
     
     const [signUpDone, setSignUpDone] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleAvatarSelect = (avatar: string) => {
         setSelectedAvatar(avatar); 
@@ -75,7 +75,7 @@ export const SignUp = () => {
                 [name]: ''
             };
         });
-        setErrorMessage('');
+        setErrorMessage(null);
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {

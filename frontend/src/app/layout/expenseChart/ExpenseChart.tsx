@@ -12,6 +12,8 @@ import { Loader } from '../../components/loader/Loader';
 import { DataItems } from '../../../types/Chart';
 import { ChartItem } from '../../components/charts/chartItem/ChartItem';
 import { BarChartComponent } from '../../components/charts/barChart/BarChartComponent';
+import { useSelector } from 'react-redux';
+import { selectActiveUserId } from '../../../stores/userModule';
 
 
 export const ExpenseChart = () => {
@@ -26,9 +28,11 @@ export const ExpenseChart = () => {
     const handleChartButtonClick = (chartType: SetStateAction<string>) => {
       setSelectedChart(chartType);
     };
+
+    const activeUserId = useSelector(selectActiveUserId);
     
     useEffect(() => {
-        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/diagrams/${appSettings.user_id}`)
+        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/diagrams/${activeUserId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -26,11 +26,11 @@ export const ExpenseList = () => {
     const [dateTo, setDateTo] = useState('');
     
     const { appSettings } = AppSettingsProvider();
-
     const activeUserId = useSelector(selectActiveUserId);
 
     useEffect(() => {
         fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${activeUserId}`)
+        
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
