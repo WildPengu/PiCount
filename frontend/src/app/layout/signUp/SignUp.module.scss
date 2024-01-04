@@ -6,6 +6,10 @@
         display: flex;
         align-items: center;
     }
+    .SignUpErrors {
+        color: red;
+        font-size: medium;
+    }
 
     .SignUpForm {
         margin: auto;
@@ -19,7 +23,6 @@
             width: calc(100% - 10px);
         }
         .SignUpErrors {
-            color: red;
             font-size: small;
         }
 

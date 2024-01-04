@@ -1,6 +1,6 @@
 export interface SignUpForm {
     name: string;
-    age: number;
+    age: number | null;
     email: string;
     avatar: string;
     password: string;

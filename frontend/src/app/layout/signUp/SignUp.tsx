@@ -10,22 +10,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { AvatarGallery } from '../../components/avatarGallery/AvatarGallery';
 
-import eeve from '../../img/avatarsImage/eeve-avatar.png';
+import eeve from '../../img/avatarsImage/eeve-avatar.jpg';
 import charizard from '../../img/avatarsImage/charizard-avatar.jpg';
 import bulbasaur from '../../img/avatarsImage/bulbasaur-avatar.jpg';
 import charmander from '../../img/avatarsImage/charmander-avatar.png';
-import jigglypuff from '../../img/avatarsImage/jigglypuff-avatar.png';
+import jigglypuff from '../../img/avatarsImage/jigglypuff-avatar.jpg';
 import piplup from '../../img/avatarsImage/piplup-avatar.png';
-import squirtle from '../../img/avatarsImage/squirtle-avatar.png';
+import piplup2 from '../../img/avatarsImage/piplup-avatar2.jpg';
+import squirtle from '../../img/avatarsImage/squirtle-avatar.jpg';
+import squirtle2 from '../../img/avatarsImage/squirtle-avatar-glass.jpg';
 import logo from '../../img/avatarsImage/logo-pikachu.jpg';
+import ash from '../../img/avatarsImage/ash-with-pikachu.png';
 
 export const SignUp = () => {
 
     const { appSettings } = AppSettingsProvider();
+    const [selectedAvatar, setSelectedAvatar] = useState<string>('');
     
+
     const [formData, setFormData] = useState<SignUpForm>({
         name: '',
-        age: 0,
+        age: null,
         email: '',
         avatar: '',
         password: '',
@@ -34,16 +39,29 @@ export const SignUp = () => {
 
     const [errors, setErrors] = useState<SignUpForm>({
         name: '',
-        age: 0,
+        age: null,
         email: '',
         avatar: '',
         password: '',
         confirmPassword: '',
     });
-
+    
     const [signUpDone, setSignUpDone] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
+    const handleAvatarSelect = (avatar: string) => {
+        setSelectedAvatar(avatar); 
+        setFormData({
+            ...formData,
+            avatar: avatar,
+        });
+        setErrors(prevErrors => {
+            return {
+                ...prevErrors, 
+                avatar: ''
+            };
+        });
+    };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -51,12 +69,13 @@ export const SignUp = () => {
           ...formData,
           [name]: value,
         });
-    };
-
-    const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-
-    const handleAvatarSelect = (avatar: string) => {
-        setSelectedAvatar(avatar);
+        setErrors(prevErrors => {
+            return {
+                ...prevErrors, 
+                [name]: ''
+            };
+        });
+        setErrorMessage('');
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -65,7 +84,7 @@ export const SignUp = () => {
         if (!Validate(formData, setErrors)) {
             return;
         };
-
+        
         const url = `${appSettings.apiHost}:${appSettings.apiPort}/users`; 
         try {
             const response = await fetch(url, {
@@ -84,14 +103,15 @@ export const SignUp = () => {
             setSignUpDone(true);
             setFormData({
                 name: '',
-                age: 0,
+                age: null,
                 email: '',
                 avatar: '',
                 password: '',
                 confirmPassword: '',
             });
+            setSelectedAvatar(''); 
         } catch (error) {
-            setErrorMessage('Blad!')
+            setErrorMessage('Username or email has been used')
             console.error('Błąd pobierania danych:', error);
         }; 
     };
@@ -109,7 +129,7 @@ export const SignUp = () => {
                 </div>
             </TopPanel>
             {!signUpDone ? <h2>Fill out the fields to create a new user:</h2> : <h2>The user has been created!</h2>}
-            {errorMessage && <h2>{errorMessage}</h2>}
+            {errorMessage && <h2 className={styles.SignUpErrors}>{errorMessage}</h2>}
             <form 
                 className={styles.SignUpForm}
                 onSubmit={handleSubmit}
@@ -120,6 +140,7 @@ export const SignUp = () => {
                     placeholder='User name'
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
+                    value={formData.name}
                 />
                 {errors.name && <p className={styles.SignUpErrors}>{errors.name}</p>}
                 <input 
@@ -131,8 +152,12 @@ export const SignUp = () => {
                     step="1"
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
+                    value={formData.age !== null ? formData.age : ''}
                 />
-                <AvatarGallery avatars={[logo, eeve, charizard, bulbasaur, charmander, jigglypuff, piplup, squirtle]} onAvatarSelect={handleAvatarSelect} />
+                <AvatarGallery 
+                    avatars={[logo, eeve, charizard, bulbasaur, charmander, jigglypuff, piplup, squirtle, squirtle2, ash, piplup2]} onAvatarSelect={handleAvatarSelect} 
+                    selectedAvatar={formData.avatar}
+                />
                 {errors.avatar && <p className={styles.SignUpErrors}>{errors.avatar}</p>}
                 <input 
                     type='email' 
@@ -140,6 +165,7 @@ export const SignUp = () => {
                     placeholder='User email' 
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
+                    value={formData.email}
                 />
                 {errors.email && <p className={styles.SignUpErrors}>{errors.email}</p>}
                 <input 
@@ -148,6 +174,7 @@ export const SignUp = () => {
                     placeholder='Password' 
                     className={styles.SignUpInput}
                     onChange={handleInputChange}
+                    value={formData.password}
                 />
                 {errors.password && <p className={styles.SignUpErrors}>{errors.password}</p>}
                 <input 
@@ -156,6 +183,7 @@ export const SignUp = () => {
                     placeholder='Confirm Password'
                     className={styles.SignUpInput} 
                     onChange={handleInputChange}
+                    value={formData.confirmPassword}
                 />
                 {errors.confirmPassword && <p className={styles.SignUpErrors}>{errors.confirmPassword}</p>}
                 <div className={styles.ButtonsPanel}>

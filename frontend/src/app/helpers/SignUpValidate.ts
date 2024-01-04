@@ -11,6 +11,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
         confirmPassword: false,
     };
 
+    //username validation
     if(formData.name.length < 4) {
         validationErrors.name = true;
         setErrors(prevErrors => {
@@ -19,24 +20,11 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
                 name: 'User name should have at least 4 characters*'
             };
         });
-    } else if(!/^[^\s]*$/.test(formData.name.trim())) {
-        validationErrors.name = true;
-        setErrors(prevErrors => {
-            return {
-                ...prevErrors, 
-                name: 'User name should`n have empty characters*'
-            };
-        });
-    } else {
-        validationErrors.name = false;
-        setErrors(prevErrors => {
-            return {
-                ...prevErrors, 
-                name: ''
-            };
-        });
     };
-    if(formData.avatar.length < 1) {
+
+    //avatar validation
+
+    if(formData.avatar === '') {
         validationErrors.avatar = true;
         setErrors(prevErrors => {
             return {
@@ -44,15 +32,9 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
                 avatar: 'Please selecte Avatar*'
             };
         });
-    } else {
-        validationErrors.avatar = false;
-        setErrors(prevErrors => {
-            return {
-                ...prevErrors, 
-                avatar: ''
-            };
-        });
     };
+
+    //email validation
 
     if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email.trim())) {
         validationErrors.email = true;
@@ -62,15 +44,9 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
                 email: 'There is no valid email*'
             };
         });
-    } else {
-        validationErrors.email = false;
-        setErrors(prevErrors => {
-            return {
-                ...prevErrors, 
-                email: ''
-            };
-        });
     };
+
+    //password validation
 
     if(formData.password.trim().length < 6){
         validationErrors.password = true;
@@ -96,15 +72,9 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
                 password: 'Password must contain one of charts: ! # @ $ %',
             };
         });
-    } else {
-        validationErrors.password = false;
-        setErrors(prevErrors => {
-            return {
-                ...prevErrors, 
-                password: '',
-            };
-        });
     };
+
+    //confirm password validation
 
     if(formData.password.trim() !== formData.confirmPassword.trim()) {
         validationErrors.confirmPassword = true;
@@ -114,15 +84,7 @@ export const Validate = (formData: SignUpForm, setErrors: Dispatch<SetStateActio
                 confirmPassword: 'Password should be the same*',
             };
         });
-    } else {
-        validationErrors.confirmPassword = false;
-        setErrors(prevErrors => {
-            return {
-                ...prevErrors, 
-                confirmPassword: '',
-            };
-        });
-    }
+    };
 
     return(
         !validationErrors.name && 

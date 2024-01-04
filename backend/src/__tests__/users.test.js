@@ -26,6 +26,7 @@ describe('Endpoint: /users', () => {
     const newUser = {
       name: 'NewUser',
       age: 30,
+      avatar: '/src/app/img/avatarsImage/jigglypuff-avatar.png',
       password: 'newpassword',
       email: 'newuser@example.com',
     };
@@ -36,6 +37,7 @@ describe('Endpoint: /users', () => {
     expect(response.body).toHaveProperty('newUser');
     expect(response.body.newUser.name).toBe(newUser.name);
     expect(response.body.newUser.age).toBe(newUser.age);
+    expect(response.body.newUser.avatar).toBe(newUser.avatar);
     expect(response.body.newUser.email).toBe(newUser.email);
   });
 });

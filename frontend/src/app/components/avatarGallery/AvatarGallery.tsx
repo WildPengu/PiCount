@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './AvatarGallery.module.scss'
 
 interface AvatarGalleryProps {
   avatars: string[];
   onAvatarSelect: (selectedAvatar: string) => void;
-}
+  selectedAvatar: string;
+};
 
-export const AvatarGallery: React.FC<AvatarGalleryProps> = ({ avatars, onAvatarSelect }) => {
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+export const AvatarGallery: React.FC<AvatarGalleryProps> = ({ avatars, onAvatarSelect, selectedAvatar }) => {
 
   const handleAvatarClick = (avatar: string) => {
-    setSelectedAvatar(avatar);
     onAvatarSelect(avatar);
   };
-
-  console.log(selectedAvatar);
-  
 
   return (
     <div className={styles.AvatarGalleryContainer}>
