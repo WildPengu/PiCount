@@ -15,14 +15,15 @@
 
         .ExpenseInfo {
             display: flex;
-
+            
             .ExpenseIco {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 border: 1px solid transparent;
                 border-radius: 50%;
                 height: 40px;
                 width: 40px;
-                text-align: center;
-                line-height: 40px;
             }
 
             .Category {

@@ -59,7 +59,7 @@ export const ExpenseChart = () => {
               <Button onClick={() => handleChartButtonClick('column')}>
                 <FontAwesomeIcon icon={faChartColumn} />
               </Button>
-              <Button onClick={() => setIsModalSortedVisible(true)}>
+              <Button onClick={() => setIsModalSortedVisible(!isModalSortedVisible)}>
                 <FontAwesomeIcon icon={faFilter} />
               </Button>
               {isModalSortedVisible && (

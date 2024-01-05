@@ -55,7 +55,7 @@ export const ExpenseList = () => {
             <TopPanel headerText="My Expense List">
                 <div className={styles.SortedPanelContainer}>
                     <Button 
-                        onClick={() => setIsModalSortedVisible(true)}
+                        onClick={() => setIsModalSortedVisible(!isModalSortedVisible)}
                     >
                         <FontAwesomeIcon icon={faFilter} />
                     </Button>
@@ -68,7 +68,7 @@ export const ExpenseList = () => {
                         />
                     </Modal>}
                     <Button 
-                        onClick={() => setIsModalAddExpenseVisible(true)}
+                        onClick={() => setIsModalAddExpenseVisible(!isModalAddExpenseVisible)}
                     >
                         <FontAwesomeIcon icon={faCirclePlus} />
                     </Button>
