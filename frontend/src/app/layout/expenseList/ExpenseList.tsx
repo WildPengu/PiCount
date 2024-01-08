@@ -16,7 +16,7 @@ import { Loader } from '../../components/loader/Loader';
 
 export const ExpenseList = () => {
     
-    const [isModalSortedVisible, setIsModalSortedVisible] = useState(false);
+    const [isModalFilterVisible, setIsModalFilterVisible] = useState(false);
     const [isModalAddExpenseVisible, setIsModalAddExpenseVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
@@ -55,13 +55,13 @@ export const ExpenseList = () => {
             <TopPanel headerText="My Expense List">
                 <div className={styles.SortedPanelContainer}>
                     <Button 
-                        onClick={() => setIsModalSortedVisible(!isModalSortedVisible)}
+                        onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}
                     >
                         <FontAwesomeIcon icon={faFilter} />
                     </Button>
-                    {isModalSortedVisible && <Modal>
+                    {isModalFilterVisible && <Modal onClose={() => setIsModalFilterVisible(false)}>
                         <FilterPanel
-                            setIsModalVisible={setIsModalSortedVisible}
+                            setIsModalVisible={setIsModalFilterVisible}
                             currentCategory={category}
                             currentDateFrom={dateFrom}
                             currentDateTo={dateTo}
@@ -72,7 +72,7 @@ export const ExpenseList = () => {
                     >
                         <FontAwesomeIcon icon={faCirclePlus} />
                     </Button>
-                    {isModalAddExpenseVisible && <Modal>
+                    {isModalAddExpenseVisible && <Modal onClose={() => setIsModalAddExpenseVisible(false)}>
                         <AddExpense setIsModalVisible={setIsModalAddExpenseVisible}/>
                     </Modal>}
                 </div>
@@ -99,7 +99,4 @@ export const ExpenseList = () => {
         </div>
     );
 };
-function useAuth(): { appSettings: any; } {
-    throw new Error('Function not implemented.');
-}
 

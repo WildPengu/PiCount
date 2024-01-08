@@ -22,7 +22,7 @@ export const ExpenseChart = () => {
     const [dataChart, setDataChart] = useState<DataItems>({ categories: [] });
 
     const [selectedChart, setSelectedChart] = useState('pie');
-    const [isModalSortedVisible, setIsModalSortedVisible] = useState(false);
+    const [isModalFilterVisible, setIsModalFilterVisible] = useState(false);
     const { appSettings } = AppSettingsProvider();
   
     const handleChartButtonClick = (chartType: SetStateAction<string>) => {
@@ -59,12 +59,12 @@ export const ExpenseChart = () => {
               <Button onClick={() => handleChartButtonClick('column')}>
                 <FontAwesomeIcon icon={faChartColumn} />
               </Button>
-              <Button onClick={() => setIsModalSortedVisible(!isModalSortedVisible)}>
+              <Button onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}>
                 <FontAwesomeIcon icon={faFilter} />
               </Button>
-              {isModalSortedVisible && (
-                <Modal>
-                  <FilterPanel setIsModalVisible={setIsModalSortedVisible} />
+              {isModalFilterVisible && (
+                <Modal onClose={() => setIsModalFilterVisible(false)}>
+                  <FilterPanel setIsModalVisible={setIsModalFilterVisible} />
                 </Modal>
               )}
             </div>

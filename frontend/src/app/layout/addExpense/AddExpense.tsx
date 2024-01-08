@@ -5,8 +5,9 @@ import { SelectCategory } from '../../components/selectCategory/SelectCategory';
 import { SelectDate } from '../../components/datePicker/SelectDate';
 import { Color } from '../../types/Enums';
 import { AppSettingsProvider } from '../../config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateExpenses } from '../../../stores/userModule/actions';
+import { selectActiveUserId } from '../../../stores/userModule';
 
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
@@ -22,6 +23,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
 
   const dispatch = useDispatch();
   const { appSettings } = AppSettingsProvider();
+  const activeUserId = useSelector(selectActiveUserId);
   
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -50,7 +52,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
       desc: description,
     };
 
-    fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}`, {
+    fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/${activeUserId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

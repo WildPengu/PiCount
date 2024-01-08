@@ -5,8 +5,9 @@ import { Color } from '../../types/Enums';
 import Button from '../button/Button';
 import { FormEvent, useState } from 'react';
 import { AppSettingsProvider } from '../../config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateExpenses } from '../../../stores/userModule/actions';
+import { selectActiveUserId } from '../../../stores/userModule';
 
 export interface ModalProps {
     setIsModalVisible: (isVisible: boolean) => void;
@@ -30,11 +31,11 @@ export const FilterPanel = ({
     const [dateTo, setDateTo] = useState(currentDateTo);
 
     const { appSettings } = AppSettingsProvider();
-    
+    const activeUserId = useSelector(selectActiveUserId);
     const dispatch = useDispatch();
 
     const resetFilters = () => {
-        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${appSettings.user_id}`)
+        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${activeUserId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -56,7 +57,7 @@ export const FilterPanel = ({
     const filteredExpenseList = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDateRange/${appSettings.user_id}?startDate=${dateFrom}&endDate=${dateTo}`)
+        fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDateRange/${activeUserId}?startDate=${dateFrom}&endDate=${dateTo}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -74,7 +75,7 @@ export const FilterPanel = ({
     
     return (
         <div className={styles.SortedPanel}>
-            <h2>Sort of</h2>
+            <h2>Filter</h2>
             <form 
                 className={styles.SortedForm}
                 onSubmit={filteredExpenseList}
