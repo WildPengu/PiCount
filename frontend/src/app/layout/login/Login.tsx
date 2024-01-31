@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import styles from './Login.module.scss';
+import logo from '../../img/main/picount-logo.png';
 import { LoginUseAuth } from '../../helpers/LoginUseAuth';
 
 export const Login: React.FC = () => {
@@ -29,6 +30,10 @@ export const Login: React.FC = () => {
                     </Link>
                 </div>
             </TopPanel>
+            <div className={styles.LogoContainer}>
+                <h1>Let's</h1>
+                <img className={styles.Logo} src={logo}  />
+            </div>
             <form
                 className={styles.LoginForm}
                 onSubmit={(e) => handleLogin(e)}
@@ -49,7 +54,7 @@ export const Login: React.FC = () => {
                     placeholder='User password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button type='submit' >
+                <Button type='submit'>
                     Login
                 </Button>
             </form>
