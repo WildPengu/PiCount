@@ -22,8 +22,9 @@ export const StartPage = () => {
                 <img className={styles.Logo} src={logo}  />
             </div>
             <article className={styles.Introduce}>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quas reiciendis, provident excepturi temporibus repellendus rem unde similique quam tempora natus voluptas, impedit illo dolore obcaecati praesentium nostrum inventore ad.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quas reiciendis, provident excepturi temporibus repellendus rem unde similique quam tempora natus voluptas, impedit illo dolore obcaecati praesentium nostrum inventore ad.</p>
+                <p>Hey there! Do you ever find yourself struggling to keep track of your expenses?</p>
+                <p>Well, that's where PiCount comes in to make your life easier! With Picount, you can effortlessly manage your finances on a daily basis. Track and analyze your spending, make informed decisions, and take control of your financial journey. Adding transactions is a breeze, and categorizing them helps you understand where your money is going.</p>
+                <p>PiCount brings transparency and simplicity to expense tracking, turning the daily chore of managing your finances into an enjoyable experience. So, are you ready to take charge of your financial well-being? PiCount is here for you.</p>
             </article>
             <div className={styles.ButtonsPanel}>
                 <Link to='/login' className={styles.Button}>Login</Link>
