@@ -1,4 +1,7 @@
+@import '../../../scss/Variables.module.scss';
+
 .StartPage {
+    margin-top: 100px;
     width: calc(100vw - 200px);
 
     .TopPanelContainer {
@@ -6,15 +9,25 @@
         align-items: center;
     }
 
+    .LogoContainer {
+        margin: 50px auto;
+        text-align: center;
+        .Logo {
+            max-width: 200px;
+            height: auto;
+        }
+    }
+
     .Introduce {
         margin: 30px auto;
         max-width: 50vw;
+        color: $txt;
     }
 
     .ButtonsPanel {
         display: flex;
         justify-content: space-around;
-        margin: auto;
+        margin: 20px auto;
         padding: 20px 0;
         max-width: 50vw;
         text-align: center;
@@ -22,10 +35,12 @@
         .Button {
             padding: 10px 20px;
             border-radius: 9999px;
-            background-color:  #9530ea;
-            color: #fff;
+            color: $txt;
             width: 25%;
+            font-size: $baseline;
+            font-weight: bold;
             text-decoration: none;
+            background-image: $smooth-bgc-img;
             cursor: pointer;
             transition: .3s;
 

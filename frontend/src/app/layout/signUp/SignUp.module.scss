@@ -1,4 +1,7 @@
+@import '../../../scss/Variables.module.scss';
+
 .SignUp {
+    margin-top: 100px;
     width: calc(100vw - 200px);
     text-align: center;
 
@@ -6,6 +9,14 @@
         display: flex;
         align-items: center;
     }
+
+    .SignUpNewUser {
+        font-size: 2rem;
+        background: -webkit-linear-gradient(45deg, $yellow 0%, $violet 50%, $blue 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
     .SignUpErrors {
         color: red;
         font-size: medium;
@@ -35,7 +46,8 @@
                 padding: 10px 20px;
                 border-radius: 9999px;
                 border: none;
-                background-color:  #9530ea;
+                font-weight: bold;
+                background-image: $smooth-bgc-img;
                 color: #fff;
                 text-decoration: none;
                 cursor: pointer;

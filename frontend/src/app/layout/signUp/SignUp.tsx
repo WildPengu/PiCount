@@ -128,7 +128,7 @@ export const SignUp = () => {
                     </Link>
                 </div>
             </TopPanel>
-            {!signUpDone ? <h2>Fill out the fields to create a new user:</h2> : <h2>The user has been created!</h2>}
+            {!signUpDone ? <h2>Fill out the fields to create a new user:</h2> : <h2>Welcome <span className={styles.SignUpNewUser}>new PiCounter</span></h2>}
             {errorMessage && <h2 className={styles.SignUpErrors}>{errorMessage}</h2>}
             <form 
                 className={styles.SignUpForm}
