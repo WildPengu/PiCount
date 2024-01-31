@@ -1,6 +1,8 @@
 /* Your styles goes here. */
 .App {
-    display: flex;
+    .AppContainer {
+        display: flex;
+    }
 
     select, input, textarea {
         border-radius: 5px;

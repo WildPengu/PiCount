@@ -6,6 +6,7 @@ import styles from './App.module.scss';
 import { AppNav } from './components/appNav/AppNav';
 import { AppRoutes } from './routes/AppRoutes';
 import { AppSettingsProvider } from './config';
+import { Footer } from './components/footer/Footer';
 
 export const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -57,8 +58,11 @@ export const App: React.FC = () => {
 
   return (
     <div className={styles.App}>
-      <AppNav />
-      <AppRoutes />
+      <div className={styles.AppContainer}>
+        <AppNav />
+        <AppRoutes />
+      </div>
+      <Footer />
     </div>
   );
 };
