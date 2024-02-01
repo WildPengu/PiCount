@@ -2,6 +2,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import styles from './SelectDate.module.scss';
 
 export interface SelectDateProps {
     setDate?: (date: string) => void;
@@ -29,7 +30,8 @@ export const SelectDate = ({ setDate, label = 'Select Date' }: SelectDateProps) 
     return (
         <div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker 
+                    <DatePicker
+                    className={styles.SelectDate} 
                     label={label}
                     minDate={dayjs('2023-01-01')}
                     maxDate={dayjs(Date())}

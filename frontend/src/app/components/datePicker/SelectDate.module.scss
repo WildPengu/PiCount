@@ -1,0 +1,16 @@
+@import '../../../scss/Variables.module.scss';
+
+.SelectDate {
+    div button {
+        color: $blue;
+    }
+}
+
+div[role='dialog'] {
+    div[tabindex='-1'] {
+        background-color: $bgc-input;
+        div, button, span {
+            color: $txt !important;
+        }
+    }
+}

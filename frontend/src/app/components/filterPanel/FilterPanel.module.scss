@@ -1,15 +1,19 @@
-.SortedPanel {
+@import '../../../scss/Variables.module.scss';
+
+.FilterPanel {
     display: flex;
     flex-direction: column;
 
-    .SortedForm {
+    .FilterPanelH2 {
+        @extend %gradient-txt;
+    }
+
+    .FilterForm {
         display: flex;
         flex-direction: column;
-        
     
-        .SortedPanelContainer {
+        .FilterPanelContainer {
             display: flex;
-
             & > * {
                 margin: 10px;
             }

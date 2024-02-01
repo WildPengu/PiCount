@@ -1,7 +1,13 @@
+@import '../../../scss/Variables.module.scss';
+
 .AddExpense {
         margin: auto;
         padding: 15px;
         max-width: 600px;
+
+        .AddExpenseH2 {
+            @extend %gradient-txt;
+        }
     
         .FormAddExpense {
             margin: 0 auto;
@@ -28,7 +34,6 @@
                     width: 40%;
                     padding: 10px;
                 }
-                
             }
         }
 

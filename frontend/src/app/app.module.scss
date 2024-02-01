@@ -15,7 +15,11 @@
         &::placeholder {
             color: $txt;
             opacity: 1;
-          }
+        }
+    }
+
+    label {
+        color: $txt;
     }
     
     select:focus-visible,
