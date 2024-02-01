@@ -1,7 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './scss/Variables.module.scss';
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: $bgc-dark;
+    letter-spacing: 1px;
+
+    h1, h2, p {
+        color: $txt;
+    }
 }

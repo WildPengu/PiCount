@@ -12,9 +12,7 @@
 
     .SignUpNewUser {
         font-size: 2rem;
-        background: -webkit-linear-gradient(45deg, $yellow 0%, $violet 50%, $blue 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        @extend %gradient-txt;
     }
 
     .SignUpErrors {
@@ -48,7 +46,7 @@
                 border: none;
                 font-weight: bold;
                 background-image: $smooth-bgc-img;
-                color: #fff;
+                color: $txt;
                 text-decoration: none;
                 cursor: pointer;
                 transition: .3s;

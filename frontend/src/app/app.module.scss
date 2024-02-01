@@ -1,4 +1,6 @@
 /* Your styles goes here. */
+@import '../scss/Variables.module.scss';
+
 .App {
     .AppContainer {
         display: flex;
@@ -6,13 +8,20 @@
 
     select, input, textarea {
         border-radius: 5px;
-        border: 1px solid #ccc;
+        border: 1px solid $blue;
+        background-color: $bgc-input;
+        color: $txt;
+        
+        &::placeholder {
+            color: $txt;
+            opacity: 1;
+          }
     }
     
     select:focus-visible,
     input:focus-visible,
     textarea:focus-visible {
-        border-color: #1976d2;
+        border-color: $violet;
         outline: -webkit-focus-ring-color auto 0;
     }
 

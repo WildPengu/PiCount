@@ -1,3 +1,5 @@
+@import '../../../scss/Variables.module.scss';
+
 .UserInfoContainer {
     .UserContainer {
         padding: 15px 0;
@@ -6,19 +8,14 @@
             margin: 20px auto;
     
             .Avatar {
-                border: 1px solid #9530ea;
+                border: 1px solid $violet;
                 border-radius: 50%;
-                height: 70px;
-                width: 70px;
+                height: 100px;
+                width: 100px;
             }
         }
         .AppNavUsername {
-            color: #9530ea;
-            font-weight: 700;
+            @extend %gradient-txt;
         }
-    }
-    
-    .AppNavHr {
-        width: 80%;
     }
 }

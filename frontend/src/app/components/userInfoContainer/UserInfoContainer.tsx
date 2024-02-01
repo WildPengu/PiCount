@@ -12,12 +12,10 @@ export const UserInfoContainer = () => {
         <div className={styles.UserInfoContainer}>
             <div className={styles.UserContainer}>
                 <div className={styles.AvatarContainer}>
-                    <img className={styles.Avatar} src={activeUserId ? users[activeUserId]?.avatar : logo} alt=""/>
+                    <img className={styles.Avatar} src={activeUserId ? users[activeUserId]?.avatar : logo} alt={users[activeUserId]?.name}/>
                 </div>
-                <p className={styles.AppNavUsername}>{activeUserId ? users[activeUserId]?.name : 'PiCount'}</p>
+                <h3 className={styles.AppNavUsername}>{activeUserId ? users[activeUserId]?.name : 'PiCount'}</h3>
             </div>
-            
-            <hr className={styles.AppNavHr}/>
         </div>
     );
 };
