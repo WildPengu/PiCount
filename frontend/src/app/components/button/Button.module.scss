@@ -1,17 +1,25 @@
+@import '../../../scss/Variables.module.scss';
+
 .Button {
     margin: 15px auto;
     padding: 10px 20px;
     border-radius: 9999px;
     border: none;
-    color: #fff;
+    font-size: $baseline;
+    font-weight: bold;
+    color: $txt;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: .3s;
+    transition: 0.3s;
+    background-image: $smooth-bgc-img;
 
     &:hover {
         opacity: .7;
     }
 
     &:disabled {
+        color: #000;
+        background-image: none;
         cursor: not-allowed;
     }
 }

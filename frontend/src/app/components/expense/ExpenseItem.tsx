@@ -79,7 +79,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
                     <p className={styles.Category} style={{ color: categoryInfo?.color }}>{expense.category}</p>
                 </div>
                 <div className={styles.ExpenseAmount}>
-                    <p>- <span>{expense.amount}</span> PLN</p>
+                    <p>- <span>{expense.amount}</span> ZŁ</p>
                 </div>
             </div>
             <div className={styles.ExpenseDesc}>

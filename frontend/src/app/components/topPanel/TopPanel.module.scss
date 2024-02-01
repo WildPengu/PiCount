@@ -1,21 +1,27 @@
+@import '../../../scss/Variables.module.scss';
+
 .TopPanel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
     display: flex;
     justify-content: flex-end;
-    background-color: #9530ea;
+    background-image: $smooth-bgc-img;
 
     .TopPanelHeader {
         margin-right: 40px;
-        color: #fff;
+        color: $txt;
     }
 
     a {
         margin: 15px auto;
         padding: 10px 20px;
-        border-radius: 9999px;
         border: none;
-        color: #fff;
+        color: $txt;
         cursor: pointer;
         transition: .3s;
+        background-color: transparent;
 
         &:hover {
             opacity: .7;

@@ -1,17 +1,18 @@
+@import '../../../scss/Variables.module.scss';
+
 .ExpenseItem {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
     padding: 15px;
     max-width: 600px;
-    border: 1px solid #ddd;
-    background-color: #fff;
+    border: 1px solid $blue;
+    background-color: $bgc-input;
 
     .ExpenseCategory {
         display: flex;
         justify-content: space-between;
         width: 100%;
-        
 
         .ExpenseInfo {
             display: flex;
@@ -31,9 +32,10 @@
                 font-weight: bold;
             }
         }
-        .ExpenseAmount {
-            color: rgb(215, 10, 10);
-        }
+        .ExpenseAmount p {
+            font-weight: bold;
+            color: $blue;
+        }   
     }
 
     .ExpenseDesc {
@@ -42,19 +44,17 @@
         align-items: center;
         margin: 0 0 0 20px;
         width: 100%;
-
+        
         .DeleteButtonContainer {
-            padding: 10px 12px;
-            border-radius: 50%;
-            border: 1px solid transparent;
-            color: rgb(215, 10, 10);
-            cursor: pointer;
-            transition: all .3s;
-
-            &:hover {
-                border: 1px solid rgb(215, 10, 10);
-                background-color: #f3f8f7;
-            }
+            svg {
+                padding: 10px 12px;
+                color: rgb(215, 10, 10);
+                cursor: pointer;
+                transition: 1s;
+                &:hover {
+                    transform: rotateY(180deg);
+                }
+            } 
         }
     }
 }
