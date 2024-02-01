@@ -5,7 +5,10 @@
     align-items: center;
     margin: 0 auto;
     padding: 15px;
-    background-color: #fff;
+
+    &:nth-last-of-type(2) {
+        margin-bottom: 150px;
+    }
 
     .ChartItemIco {
         display: flex;

@@ -1,15 +1,16 @@
 import {
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer,
-    BarChart,
-    Cell,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  BarChart,
+  Cell,
 } from 'recharts';
 import { DataItems } from '../../../../types/Chart';
+import styles from './BarChartComponent.module.scss';
 
 export interface PieChartProps extends IndexType {
   dataChart: DataItems;
@@ -37,7 +38,7 @@ const renderCustomAxisTick = ({ x, y, payload }: renderCustomAxisTickProps) => {
       break;
     default:
       path = '';
-  }
+  };
 
   return (
     <path
@@ -48,10 +49,13 @@ const renderCustomAxisTick = ({ x, y, payload }: renderCustomAxisTickProps) => {
   );
 };
 
-
 export const BarChartComponent = ({ dataChart }: PieChartProps) => {
     return (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer
+        className={styles.BarChart}
+          width="100%" 
+          height="100%"
+        >
           <BarChart
             width={500}
             height={300}
@@ -64,7 +68,12 @@ export const BarChartComponent = ({ dataChart }: PieChartProps) => {
             }}
             barSize={20}
           >
-            <XAxis dataKey="category" tick={renderCustomAxisTick} scale="point" padding={{ left: 10, right: 10 }} />
+            <XAxis
+              dataKey="category" 
+              tick={renderCustomAxisTick} 
+              scale="point" 
+              padding={{ left: 10, right: 10 }}
+            />
             <YAxis />
             <Tooltip />
             <Legend />
