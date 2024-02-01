@@ -20,11 +20,13 @@ interface Diagrams {
 // Get all user expenses
 router.get('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
+  let { page, limit } = req.query;
+
+  const pageNumber = page ? parseInt(page as string, 10) : undefined;
+  const limitNumber = limit ? parseInt(limit as string, 10) : undefined;
 
   try {
-    const userExpenses = await UserExpenses.findOne({
-      userId: userId,
-    });
+    const userExpenses = await UserExpenses.findOne({ userId: userId });
 
     if (!userExpenses) {
       return res.status(404).json({ message: 'Data not found' });
@@ -37,7 +39,15 @@ router.get('/:id', async (req: Request, res: Response) => {
       return dateB - dateA;
     });
 
-    res.json(expensesArray);
+    let paginatedExpenses = expensesArray;
+
+    if (pageNumber && limitNumber) {
+      const startIndex = (pageNumber - 1) * limitNumber;
+      const endIndex = pageNumber * limitNumber;
+      paginatedExpenses = expensesArray.slice(startIndex, endIndex);
+    }
+
+    res.json(paginatedExpenses);
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ message: 'There was a problem fetching data' });
