@@ -19,19 +19,19 @@ export const AppNav = () => {
                     <li className={styles.AppNavLi}>
                         <Link to='/expenseList'>
                             <FontAwesomeIcon icon={faClockRotateLeft} /> 
-                            <br/>History
+                            <span>History</span>
                         </Link>
                     </li>
                     <li className={styles.AppNavLi}>
                         <Link to='/expenseChart'>
                             <FontAwesomeIcon icon={faChartPie} /> 
-                            <br/>Chart
+                            <span>Chart</span>
                         </Link>
                     </li>
                     <li className={styles.AppNavLi}>
                         <Link to='/' onClick={() => logout()}>
                             <FontAwesomeIcon icon={faRightFromBracket} />
-                            <br/>Logout
+                            <span>Logout</span>
                         </Link>
                     </li>
                 </ul>
