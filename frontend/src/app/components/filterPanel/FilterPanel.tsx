@@ -74,13 +74,13 @@ export const FilterPanel = ({
     };
     
     return (
-        <div className={styles.SortedPanel}>
-            <h2>Filter</h2>
+        <div className={styles.FilterPanel}>
+            <h2 className={styles.FilterPanelH2}>Filter</h2>
             <form 
-                className={styles.SortedForm}
+                className={styles.FilterForm}
                 onSubmit={filteredExpenseList}
             >
-                <div className={styles.SortedPanelContainer}>
+                <div className={styles.FilterPanelContainer}>
                     <SelectCategory setCategory={setCategory}/>
                     <SelectDate label='From' setDate={setDateFrom}/>
                     <SelectDate label='To' setDate={setDateTo}/>

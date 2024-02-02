@@ -1,4 +1,3 @@
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DataItem, DataItems } from '../../../../types/Chart';
 import styles from './ChartItem.module.scss';

@@ -14,6 +14,7 @@ import { ChartItem } from '../../components/charts/chartItem/ChartItem';
 import { BarChartComponent } from '../../components/charts/barChart/BarChartComponent';
 import { useSelector } from 'react-redux';
 import { selectActiveUserId } from '../../../stores/userModule';
+import { Color } from '../../types/Enums';
 
 
 export const ExpenseChart = () => {
@@ -53,13 +54,22 @@ export const ExpenseChart = () => {
         <div className={styles.ExpenseChart}>
           <TopPanel headerText="My Chart">
             <div className={styles.TopPanelContainer}>
-              <Button onClick={() => handleChartButtonClick('pie')}>
+              <Button
+                backgroundColor={Color.transparent}
+                onClick={() => handleChartButtonClick('pie')}
+              >
                 <FontAwesomeIcon icon={faChartPie} />
               </Button>
-              <Button onClick={() => handleChartButtonClick('column')}>
+              <Button
+                backgroundColor={Color.transparent}
+                onClick={() => handleChartButtonClick('column')}
+              >
                 <FontAwesomeIcon icon={faChartColumn} />
               </Button>
-              <Button onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}>
+              <Button
+                backgroundColor={Color.transparent}
+                onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}
+              >
                 <FontAwesomeIcon icon={faFilter} />
               </Button>
               {isModalFilterVisible && (

@@ -1,23 +1,23 @@
+@import '../../../scss/Variables.module.scss';
+
 .AvatarGalleryContainer {
+    margin: 10px 0;
     .AvatarGalleryTxt {
         text-align: left;
-        color: gray;
     }
     .AvatarGallery {
         display: flex;
         flex-wrap: wrap;
         img {
-            width: 100px;
-            height: 100px;
             margin: 5px;
             cursor: pointer;
             border: 2px solid transparent;
             border-radius: 50%;
-            height: 70px;
-            width: 70px;
+            height: 80px;
+            width: 80px;
              
             &.SelectedAvatar {
-                border-color: #9530ea;
+                border-color: $violet;
             }
         }
     }

@@ -1,10 +1,11 @@
 import styles from './Loader.module.scss';
+import loadind from './loader-picount.gif';
 
 export const Loader = () => {
     return (
         <div className={styles.LoadingContainer}>
             <img  
-                src='https://i.redd.it/fcys3yr59dax.gif' 
+                src={loadind} 
                 alt='Pikachu loader' 
             />
         </div>

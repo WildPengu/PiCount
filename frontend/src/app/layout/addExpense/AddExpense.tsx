@@ -82,7 +82,7 @@ export const AddExpense = ({ setIsModalVisible }:ModalProps ) => {
 
   return (
       <div className={styles.AddExpense}>
-        <h2>Add New Expense</h2>
+        <h2 className={styles.AddExpenseH2}>Add New Expense</h2>
         <form 
           className={styles.FormAddExpense}
           onSubmit={addExpense}

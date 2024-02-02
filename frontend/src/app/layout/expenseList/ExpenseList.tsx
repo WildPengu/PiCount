@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { TopPanel } from '../../components/topPanel/TopPanel';
 import { Loader } from '../../components/loader/Loader';
+import { Color } from '../../types/Enums';
 
 export const ExpenseList = () => {
     
@@ -53,8 +54,9 @@ export const ExpenseList = () => {
     return (
         <div className={styles.ExpenseList}>
             <TopPanel headerText="My Expense List">
-                <div className={styles.SortedPanelContainer}>
-                    <Button 
+                <div className={styles.TopPanelContainer}>
+                    <Button
+                        backgroundColor={Color.transparent}
                         onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}
                     >
                         <FontAwesomeIcon icon={faFilter} />
@@ -67,7 +69,8 @@ export const ExpenseList = () => {
                             currentDateTo={dateTo}
                         />
                     </Modal>}
-                    <Button 
+                    <Button
+                        backgroundColor={Color.transparent}
                         onClick={() => setIsModalAddExpenseVisible(!isModalAddExpenseVisible)}
                     >
                         <FontAwesomeIcon icon={faCirclePlus} />
