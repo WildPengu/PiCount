@@ -192,10 +192,10 @@ router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
       }
     });
 
-    if (category) {
-      res.json(groupedExpenses[category as string]);
-    } else {
+    if (category === 'All' || !category) {
       res.json(groupedExpenses);
+    } else {
+      res.json(groupedExpenses[category as string]);
     }
   } catch (error) {
     console.error('Error fetching data:', error);
