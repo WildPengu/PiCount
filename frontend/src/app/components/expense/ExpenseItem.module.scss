@@ -46,15 +46,31 @@
         width: 100%;
         
         .DeleteButtonContainer {
-            svg {
-                padding: 10px 12px;
-                color: rgb(215, 10, 10);
-                cursor: pointer;
-                transition: 1s;
-                &:hover {
-                    transform: rotateY(180deg);
-                }
-            } 
+            padding: 10px 12px;
+            color: rgb(215, 10, 10);
+            transition: all .1s ease-in-out;
+            cursor: pointer;
+
+            &:hover svg {
+                -webkit-animation: deleteButtonAnimation .5s;
+                animation: deleteButtonAnimation .5s;
+            }
+            
         }
+    }
+}
+
+@keyframes deleteButtonAnimation {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    50% {
+        -webkit-transform: translateY(-5px) rotateY(1turn);
+        transform: translateY(-5px) rotateY(1turn);
+    }
+    100% {
+        -webkit-transform: translateY(0) rotateY(1turn);
+        transform: translateY(0) rotateY(1turn);
     }
 }
