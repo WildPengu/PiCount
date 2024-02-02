@@ -158,7 +158,7 @@ router.get('/expensesByDate/:id', async (req: Request, res: Response) => {
 
 router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
-  const { startDate, endDate } = req.query;
+  const { startDate, endDate, category } = req.query;
 
   try {
     const start = startDate ? new Date(startDate as string) : new Date(0);
@@ -192,7 +192,11 @@ router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
       }
     });
 
-    res.json(groupedExpenses);
+    if (category) {
+      res.json(groupedExpenses[category as string]);
+    } else {
+      res.json(groupedExpenses);
+    }
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ message: 'There was a problem fetching data' });
