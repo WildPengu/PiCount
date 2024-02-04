@@ -185,7 +185,10 @@ router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
     if (category === 'All' || !category) {
       res.json(groupedExpenses);
     } else {
-      res.json(groupedExpenses[category as string]);
+      const response = {
+        [category as string]: groupedExpenses[category as string] || [],
+      };
+      res.json(response);
     }
   } catch (error) {
     console.error('Error fetching data:', error);
