@@ -182,16 +182,6 @@ router.get('/expensesByCategory/:id', async (req: Request, res: Response) => {
       }
     });
 
-    userExpenses.expenses.forEach((expense: Expense) => {
-      const categoryKey = expense.category;
-      if (expense.date >= start && expense.date <= end) {
-        if (!groupedExpenses[categoryKey]) {
-          groupedExpenses[categoryKey] = [];
-        }
-        groupedExpenses[categoryKey].push(expense);
-      }
-    });
-
     if (category === 'All' || !category) {
       res.json(groupedExpenses);
     } else {
