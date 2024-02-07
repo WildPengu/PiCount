@@ -1,76 +1,80 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .ExpenseItem {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 15px;
+  max-width: 600px;
+  border: 1px solid $blue;
+  border-bottom: none;
+  background-color: $bgc-input;
+
+  &:nth-last-of-type(1) {
+    border-bottom: 1px solid $blue;
+  }
+
+  .ExpenseCategory {
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    padding: 15px;
-    max-width: 600px;
-    border: 1px solid $blue;
-    background-color: $bgc-input;
+    justify-content: space-between;
+    width: 100%;
 
-    .ExpenseCategory {
+    .ExpenseInfo {
+      display: flex;
+
+      .ExpenseIco {
         display: flex;
-        justify-content: space-between;
-        width: 100%;
-
-        .ExpenseInfo {
-            display: flex;
-            
-            .ExpenseIco {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: 1px solid transparent;
-                border-radius: 50%;
-                height: 40px;
-                width: 40px;
-            }
-
-            .Category {
-                margin-left: 15px;
-                font-weight: bold;
-            }
-        }
-        .ExpenseAmount p {
-            font-weight: bold;
-            color: $blue;
-        }   
-    }
-
-    .ExpenseDesc {
-        display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        margin: 0 0 0 20px;
-        width: 100%;
-        
-        .DeleteButtonContainer {
-            padding: 10px 12px;
-            color: rgb(215, 10, 10);
-            transition: all .1s ease-in-out;
-            cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+      }
 
-            &:hover svg {
-                -webkit-animation: deleteButtonAnimation .5s;
-                animation: deleteButtonAnimation .5s;
-            }
-            
-        }
+      .Category {
+        margin-left: 15px;
+        font-weight: bold;
+      }
     }
+    .ExpenseAmount p {
+      font-weight: bold;
+      color: $blue;
+    }
+  }
+
+  .ExpenseDesc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 20px;
+    width: 100%;
+
+    .DeleteButtonContainer {
+      padding: 10px 12px;
+      color: rgb(215, 10, 10);
+      transition: all 0.1s ease-in-out;
+      cursor: pointer;
+
+      &:hover svg {
+        -webkit-animation: deleteButtonAnimation 0.5s;
+        animation: deleteButtonAnimation 0.5s;
+      }
+    }
+  }
 }
 
 @keyframes deleteButtonAnimation {
-    0% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-    50% {
-        -webkit-transform: translateY(-5px) rotateY(1turn);
-        transform: translateY(-5px) rotateY(1turn);
-    }
-    100% {
-        -webkit-transform: translateY(0) rotateY(1turn);
-        transform: translateY(0) rotateY(1turn);
-    }
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-5px) rotateY(1turn);
+    transform: translateY(-5px) rotateY(1turn);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotateY(1turn);
+    transform: translateY(0) rotateY(1turn);
+  }
 }
