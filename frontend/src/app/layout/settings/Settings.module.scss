@@ -1,0 +1,20 @@
+@import "../../../scss/Variables.module.scss";
+
+.Settings {
+  .SettingsContainer {
+    margin-top: 100px;
+    margin-bottom: 150px;
+    padding-bottom: 40px;
+    width: calc(100vw - 200px);
+
+    div {
+      display: flex;
+      padding: 5px 0;
+      margin: 0 auto;
+      height: auto;
+      width: 600px;
+      border: 1px solid $blue;
+      background-color: $bgc-input;
+    }
+  }
+}
