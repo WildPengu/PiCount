@@ -67,7 +67,7 @@
     }
     .Slider.Round {
       border-radius: 34px;
-      &:before {
+      &::before {
         border-radius: 50%;
       }
     }

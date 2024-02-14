@@ -1,35 +1,44 @@
 /* Your styles goes here. */
-@import '../scss/Variables.module.scss';
+@import "../scss/Variables.module.scss";
 
 .App {
-    .AppContainer {
-        display: flex;
-    }
+  .AppContainer {
+    display: flex;
+  }
 
-    select, input, textarea {
-        border-radius: 5px;
-        border: 1px solid $blue;
-        background-color: $bgc-input;
-        color: $txt;
-        
-        &::placeholder {
-            color: $txt;
-            opacity: 1;
-        }
-    }
+  select,
+  input,
+  textarea {
+    border-radius: 5px;
+    border: 1px solid $blue;
+    background-color: $bgc-input;
+    color: $txt;
 
-    label {
-        color: $txt;
+    &::placeholder {
+      color: $txt;
+      opacity: 1;
     }
-    
-    select:focus-visible,
-    input:focus-visible,
-    textarea:focus-visible {
-        border-color: $violet;
-        outline: -webkit-focus-ring-color auto 0;
-    }
+  }
+  label {
+    color: $txt;
+  }
 
-    svg {
-        font-size: 20px;
-    }
+  select:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    border-color: $violet;
+    outline: -webkit-focus-ring-color auto 0;
+  }
+
+  svg {
+    font-size: 20px;
+  }
+}
+
+.DarkTheme {
+  background-color: red;
+}
+
+.LightTheme {
+  background-color: green;
 }
