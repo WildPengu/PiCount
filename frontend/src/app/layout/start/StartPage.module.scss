@@ -1,52 +1,51 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .StartPage {
-    margin-top: 100px;
-    width: calc(100vw - 200px);
+  margin-top: 100px;
+  width: calc(100vw - 200px);
 
-    .TopPanelContainer {
-        display: flex;
-        align-items: center;
+  .TopPanelContainer {
+    display: flex;
+    align-items: center;
+  }
+
+  .LogoContainer {
+    margin: 50px auto;
+    text-align: center;
+    .Logo {
+      max-width: 200px;
+      height: auto;
     }
+  }
 
-    .LogoContainer {
-        margin: 50px auto;
-        text-align: center;
-        .Logo {
-            max-width: 200px;
-            height: auto;
-        }
+  .Introduce {
+    margin: 30px auto;
+    max-width: 50vw;
+  }
+
+  .ButtonsPanel {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+    padding: 20px 0;
+    max-width: 50vw;
+    text-align: center;
+
+    .Button {
+      padding: 10px 20px;
+      border-radius: 9999px;
+      color: $txt-dark;
+      width: 25%;
+      font-size: $baseline;
+      font-weight: bold;
+      text-decoration: none;
+      background-image: $smooth-bgc-img;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
-
-    .Introduce {
-        margin: 30px auto;
-        max-width: 50vw;
-        color: $txt;
-    }
-
-    .ButtonsPanel {
-        display: flex;
-        justify-content: space-around;
-        margin: 20px auto;
-        padding: 20px 0;
-        max-width: 50vw;
-        text-align: center;
-
-        .Button {
-            padding: 10px 20px;
-            border-radius: 9999px;
-            color: $txt;
-            width: 25%;
-            font-size: $baseline;
-            font-weight: bold;
-            text-decoration: none;
-            background-image: $smooth-bgc-img;
-            cursor: pointer;
-            transition: .3s;
-
-            &:hover {
-                opacity: .7;
-            }
-        }
-    }
+  }
 }

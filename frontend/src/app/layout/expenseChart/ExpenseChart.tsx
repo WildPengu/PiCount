@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import Button from "../../components/button/Button";
 import styles from "./ExpenseChart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +19,7 @@ import { BarChartComponent } from "../../components/charts/barChart/BarChartComp
 import { useSelector } from "react-redux";
 import { selectActiveUserId } from "../../../stores/userModule";
 import { Color } from "../../types/Enums";
+import { ThemeContext } from "../../Theme";
 
 export const ExpenseChart = () => {
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,8 @@ export const ExpenseChart = () => {
   };
 
   const activeUserId = useSelector(selectActiveUserId);
+
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     fetch(
@@ -78,7 +81,7 @@ export const ExpenseChart = () => {
             <FontAwesomeIcon icon={faFilter} />
           </Button>
           {isModalFilterVisible && (
-            <Modal onClose={() => setIsModalFilterVisible(false)}>
+            <Modal>
               <FilterPanel
                 setIsModalVisible={setIsModalFilterVisible}
                 setError={setError}
@@ -92,7 +95,7 @@ export const ExpenseChart = () => {
       ) : (
         <div className={styles.ExpenseChartContainer}>
           <h3 className={styles.ErrorText}>{error}</h3>
-          <div className={styles.TotalAmountHeader}>
+          <div className={`${styles.TotalAmountHeader} ${theme}Amount`}>
             <h3>
               Total Expenses: <span>{dataChart.totalAmount} ZŁ</span>
             </h3>

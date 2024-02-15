@@ -65,7 +65,7 @@ export const ExpenseList = () => {
             <FontAwesomeIcon icon={faFilter} />
           </Button>
           {isModalFilterVisible && (
-            <Modal onClose={() => setIsModalFilterVisible(false)}>
+            <Modal>
               <FilterPanel
                 setIsModalVisible={setIsModalFilterVisible}
                 setError={setError}
@@ -81,7 +81,7 @@ export const ExpenseList = () => {
             <FontAwesomeIcon icon={faCirclePlus} />
           </Button>
           {isModalAddExpenseVisible && (
-            <Modal onClose={() => setIsModalAddExpenseVisible(false)}>
+            <Modal>
               <AddExpense setIsModalVisible={setIsModalAddExpenseVisible} />
             </Modal>
           )}

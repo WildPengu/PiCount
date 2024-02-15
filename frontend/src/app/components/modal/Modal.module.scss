@@ -1,16 +1,15 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .ModalContainer {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: auto;
-    text-align: center;
-    background-color: $bgc-dark;
-    border: 1px solid transparent;
-    box-shadow: 0 0 10px 1px $blue;
-    z-index: 10;
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: auto;
+  text-align: center;
+  border: 1px solid transparent;
+  box-shadow: 0 0 10px 1px $blue;
+  z-index: 10;
 }

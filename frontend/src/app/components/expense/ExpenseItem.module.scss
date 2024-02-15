@@ -8,7 +8,6 @@
   max-width: 600px;
   border: 1px solid $blue;
   border-bottom: none;
-  background-color: $bgc-input;
 
   &:nth-last-of-type(1) {
     border-bottom: 1px solid $blue;
@@ -39,7 +38,6 @@
     }
     .ExpenseAmount p {
       font-weight: bold;
-      color: $blue;
     }
   }
 
