@@ -11,16 +11,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { LoginUseAuth } from "../../helpers/LoginUseAuth";
 import { UserInfoContainer } from "../userInfoContainer/UserInfoContainer";
+import { ThemeContext } from "../../Theme";
+import { useContext } from "react";
 
 export const AppNav = () => {
   const activeUserId = useSelector(selectActiveUserId);
   const { logout } = LoginUseAuth();
 
+  const { theme } = useContext(ThemeContext);
+
   return (
     <nav className={styles.AppNav}>
       <UserInfoContainer />
       {activeUserId && (
-        <ul className={styles.AppNavUl}>
+        <ul className={`${styles.AppNavUl} ${theme}Nav`}>
           <li className={styles.AppNavLi}>
             <Link to='/expenseList'>
               <FontAwesomeIcon icon={faClockRotateLeft} />

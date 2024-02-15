@@ -1,69 +1,66 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .AppNav {
-    margin-top: 100px;
-    width: 200px;
-    .AppNavUl {
+  margin-top: 100px;
+  width: 200px;
+
+  .AppNavUl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+
+    .AppNavLi {
+      padding: 20px;
+      list-style: none;
+
+      a {
+        text-decoration: none;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        padding: 0;
-        list-style: none;
-        
-        .AppNavLi {
-            padding: 20px;
-            list-style: none;
-            
-            a {
-                color: $blue; 
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 3rem;
-                height: 3rem;
-                border-radius: 8px;
-                position: relative;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 8px;
+        position: relative;
 
-                &:hover {
-                    background-color: $bgc-hover;
-                    outline: 0;
-                    
-                    span { 
-                        transform: scale(1);
-                        opacity: 1;
-                    }
-                }
+        &:hover {
+          outline: 0;
 
-                svg {
-                    font-size: 1.5rem;
-                }
-
-                span {
-                    position: absolute;
-                    background-color: $bgc-hover;
-                    white-space: nowrap;
-                    padding: .5rem 1rem;
-                    border-radius: 6px;
-                    left: calc(100% + 1.5rem);
-                    transform-origin: center left;
-                    transform: scale(0);
-                    opacity: 0;
-                    transition: .3s ease;
-                    &:before {
-                        content: "";
-                        display: block;
-                        width: 12px;
-                        height: 12px;
-                        position: absolute;
-                        background-color: $bgc-hover;
-                        left: -5px;
-                        top: 50%;
-                        transform: translatey(-50%) rotate(45deg);
-                        border-radius: 3px;
-                    }
-                }
-            }
+          span {
+            transform: scale(1);
+            opacity: 1;
+          }
         }
+
+        svg {
+          font-size: 1.5rem;
+        }
+
+        span {
+          position: absolute;
+          white-space: nowrap;
+          padding: 0.5rem 1rem;
+          border-radius: 6px;
+          left: calc(100% + 1.5rem);
+          transform-origin: center left;
+          transform: scale(0);
+          opacity: 0;
+          transition: 0.3s ease;
+          &::before {
+            content: "";
+            display: block;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translatey(-50%) rotate(45deg);
+            border-radius: 3px;
+          }
+        }
+      }
     }
+  }
 }
