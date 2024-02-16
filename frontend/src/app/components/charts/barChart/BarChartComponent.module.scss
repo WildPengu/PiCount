@@ -1,19 +1,18 @@
-@import '../../../../scss/Variables.module.scss';
+@import "../../../../scss/Variables.module.scss";
 
 .BarChart {
-    li, p {
-        font-weight: bold;
-        background: $blue;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+  li,
+  p {
+    font-weight: bold;
+    background: $violet;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    div[role='dialog'] {
-        div {
-            background-color: $bgc-hover !important;
-            border: 1px solid $blue !important;
-        }
+  div[role="dialog"] {
+    div {
+      background-color: $bgc-hover-light !important;
+      border: 1px solid $blue !important;
     }
+  }
 }
-
-

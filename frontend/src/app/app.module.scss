@@ -2,25 +2,19 @@
 @import "../scss/Variables.module.scss";
 
 .App {
+  min-height: 100vh;
   .AppContainer {
     display: flex;
   }
-
   select,
   input,
   textarea {
     border-radius: 5px;
     border: 1px solid $blue;
-    background-color: $bgc-input;
-    color: $txt;
 
     &::placeholder {
-      color: $txt;
       opacity: 1;
     }
-  }
-  label {
-    color: $txt;
   }
 
   select:focus-visible,
@@ -33,12 +27,4 @@
   svg {
     font-size: 20px;
   }
-}
-
-.DarkTheme {
-  background-color: red;
-}
-
-.LightTheme {
-  background-color: green;
 }

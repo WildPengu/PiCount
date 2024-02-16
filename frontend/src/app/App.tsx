@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import {
@@ -22,8 +22,6 @@ export const App: React.FC = () => {
 
   const { appSettings } = AppSettingsProvider();
   const userCookie = Cookies.get("user");
-
-  // const isDarkTheme = localStorage.getItem("isToggleChecked") === "true";
 
   useEffect(() => {
     if (userCookie) {

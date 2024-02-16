@@ -1,20 +1,34 @@
 // colors
 
-$violet:  #9630ea;
-$yellow:  #ffde51;
-$blue:  #6CD6ED;
+$violet: #9630ea;
+$yellow: #ffde51;
+$blue: #6cd6ed;
 
-$bgc-dark:  #121a26;
-$bgc-input:  rgb(30,43,62);
-$bgc-hover:  #30305a;
-$smooth-bgc-img:  linear-gradient(43deg,$yellow, $violet 46%, $blue);
+$smooth-bgc-img: linear-gradient(43deg, $yellow, $violet 46%, $blue);
 
-$txt: #fff;
+//light theme
+
+$bgc-light: #f6f7fb;
+$bgc-input-light: #ffffff;
+$bgc-hover-light: #e6e1e1;
+$txt-light: #000;
+
+// dark theme
+
+$bgc-dark: #121a26;
+$bgc-input-dark: rgb(30, 43, 62);
+$bgc-hover-dark: #30305a;
+$txt-dark: #fff;
 
 %gradient-txt {
-    background: -webkit-linear-gradient(45deg, $yellow 0%, $violet 50%, $blue 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: -webkit-linear-gradient(
+    45deg,
+    $yellow 0%,
+    $violet 50%,
+    $blue 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 // font

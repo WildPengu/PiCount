@@ -1,60 +1,60 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .SignUp {
-    margin-top: 100px;
-    width: calc(100vw - 200px);
-    text-align: center;
+  margin-top: 100px;
+  width: calc(100vw - 200px);
+  text-align: center;
 
-    .TopPanelContainer {
-        display: flex;
-        align-items: center;
+  .TopPanelContainer {
+    display: flex;
+    align-items: center;
+  }
+
+  .SignUpNewUser {
+    font-size: 2rem;
+    @extend %gradient-txt;
+  }
+
+  .SignUpErrors {
+    color: red;
+    font-size: medium;
+  }
+
+  .SignUpForm {
+    margin: auto;
+    padding: 15px;
+    max-width: 600px;
+
+    .SignUpInput {
+      display: block;
+      margin-bottom: 5px;
+      padding: 5px;
+      width: calc(100% - 10px);
     }
-
-    .SignUpNewUser {
-        font-size: 2rem;
-        @extend %gradient-txt;
-    }
-
     .SignUpErrors {
-        color: red;
-        font-size: medium;
+      font-size: small;
     }
 
-    .SignUpForm {
-        margin: auto;
-        padding: 15px;
-        max-width: 600px;
+    .ButtonsPanel {
+      display: flex;
+      justify-content: space-around;
 
-        .SignUpInput {
-            display: block;
-            margin-bottom: 5px;
-            padding: 5px;
-            width: calc(100% - 10px);
-        }
-        .SignUpErrors {
-            font-size: small;
-        }
+      .SignUpButton {
+        margin: 15px auto;
+        padding: 10px 20px;
+        border-radius: 9999px;
+        border: none;
+        font-weight: bold;
+        background-image: $smooth-bgc-img;
+        color: $txt-dark;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s;
 
-        .ButtonsPanel {
-            display: flex;
-            justify-content: space-around;
-            
-            .SignUpButton {
-                margin: 15px auto;
-                padding: 10px 20px;
-                border-radius: 9999px;
-                border: none;
-                font-weight: bold;
-                background-image: $smooth-bgc-img;
-                color: $txt;
-                text-decoration: none;
-                cursor: pointer;
-                transition: .3s;
-    
-                &:hover {
-                    opacity: .7;
-                }
-            }
+        &:hover {
+          opacity: 0.7;
         }
+      }
     }
+  }
 }

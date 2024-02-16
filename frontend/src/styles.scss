@@ -1,16 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import './scss/Variables.module.scss';
+@import "./scss/Variables.module.scss";
 
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: $bgc-dark;
-    letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
 
-    h1, h2, p {
-        color: $txt;
+  // dark theme
+
+  .DarkTheme {
+    background-color: $bgc-dark;
+
+    .DarkThemeContainer {
+      background-color: $bgc-input-dark;
     }
+
+    .DarkThemeNav li a {
+      color: $blue;
+      &:hover,
+      span,
+      span::before {
+        background-color: $bgc-hover-dark;
+      }
+    }
+
+    .DarkThemeAmount {
+      color: $blue;
+      span {
+        color: $txt-dark;
+      }
+    }
+
+    select,
+    input,
+    textarea {
+      background-color: $bgc-input-dark;
+      color: $txt-dark;
+
+      &::placeholder {
+        color: $txt-dark;
+      }
+    }
+
+    label,
+    h1,
+    h2,
+    p {
+      color: $txt-dark;
+    }
+  }
+
+  // light theme
+
+  .LightTheme {
+    background-color: $bgc-light;
+
+    .LightThemeContainer {
+      background-color: $bgc-input-light;
+    }
+    .LightThemeNav li a {
+      color: $violet;
+
+      &:hover,
+      span,
+      span::before {
+        background-color: $bgc-hover-light;
+      }
+    }
+
+    .LightThemeAmount {
+      color: $violet;
+      span {
+        color: $txt-light;
+      }
+    }
+
+    select,
+    input,
+    textarea {
+      background-color: $bgc-input-light;
+      color: $txt-light;
+
+      &::placeholder {
+        color: $txt-light;
+      }
+    }
+
+    label,
+    h1,
+    h2,
+    p {
+      color: $txt-light;
+    }
+  }
 }

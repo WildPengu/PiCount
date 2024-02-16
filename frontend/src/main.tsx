@@ -1,14 +1,15 @@
-import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import type { IModuleStore } from 'redux-dynamic-modules-core';
-import { createStore } from 'redux-dynamic-modules-core';
-import { App } from './app/App';
-import { UsersModule } from './stores/userModule';
+import { StrictMode } from "react";
+import * as ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import type { IModuleStore } from "redux-dynamic-modules-core";
+import { createStore } from "redux-dynamic-modules-core";
+import { App } from "./app/App";
+import { UsersModule } from "./stores/userModule";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "./app/Theme";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 const store: IModuleStore<unknown> = createStore(
@@ -23,7 +24,9 @@ root.render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </StrictMode>

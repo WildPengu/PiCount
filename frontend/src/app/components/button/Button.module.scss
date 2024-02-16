@@ -1,25 +1,25 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .Button {
-    margin: 15px auto;
-    padding: 10px 20px;
-    border-radius: 9999px;
-    border: none;
-    font-size: $baseline;
-    font-weight: bold;
-    color: $txt;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: 0.3s;
-    background-image: $smooth-bgc-img;
+  margin: 15px auto;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: none;
+  font-size: $baseline;
+  font-weight: bold;
+  color: $txt-dark;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-image: $smooth-bgc-img;
 
-    &:hover {
-        opacity: .7;
-    }
+  &:hover {
+    opacity: 0.7;
+  }
 
-    &:disabled {
-        color: #000;
-        background-image: none;
-        cursor: not-allowed;
-    }
+  &:disabled {
+    color: $txt-light;
+    background-image: none;
+    cursor: not-allowed;
+  }
 }
