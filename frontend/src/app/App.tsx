@@ -1,6 +1,8 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import "./i18next";
+import { useTranslation } from "react-i18next";
 import {
   initialize,
   selectActiveUserId,
@@ -13,13 +15,13 @@ import { AppRoutes } from "./routes/AppRoutes";
 import { AppSettingsProvider } from "./config";
 import { Footer } from "./components/footer/Footer";
 import { ThemeContext } from "./Theme";
+import { LanguageSwitcher } from "./components/settingsComponents/languageSwitcher/LanguageSwitcher";
 
 export const App: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const activeUserId: string = useSelector(selectActiveUserId);
-
   const { theme } = useContext(ThemeContext);
-
   const { appSettings } = AppSettingsProvider();
   const userCookie = Cookies.get("user");
 
@@ -28,42 +30,27 @@ export const App: React.FC = () => {
       const activeUserId = JSON.parse(userCookie);
       dispatch(updateActiveUserId(activeUserId));
     }
-  }, [userCookie]);
+  }, [dispatch, userCookie]);
 
   useEffect(() => {
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/users`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        dispatch(initialize({ users: data, activeUserId }));
-      })
-      .catch((error) => {
-        console.error("There was a problem with fetching data:", error);
-      });
-  }, []);
+      .then((response) => response.json())
+      .then((data) => dispatch(initialize({ users: data, activeUserId })))
+      .catch((error) => console.error("Error fetching users data:", error));
+  }, [dispatch, appSettings.apiHost, appSettings.apiPort, activeUserId]);
 
   useEffect(() => {
     fetch(`${appSettings.apiHost}:${appSettings.apiPort}/expensesCategories`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        dispatch(updateExpensesCategories(data));
-      })
-      .catch((error) => {
-        console.error("There was a problem with fetching data:", error);
-      });
-  }, []);
+      .then((response) => response.json())
+      .then((data) => dispatch(updateExpensesCategories(data)))
+      .catch((error) =>
+        console.error("Error fetching expenses categories data:", error)
+      );
+  }, [dispatch, appSettings.apiHost, appSettings.apiPort]);
 
   return (
     <div className={`${styles.App} ${theme}`}>
+      <LanguageSwitcher />
       <div className={styles.AppContainer}>
         <AppNav />
         <AppRoutes />

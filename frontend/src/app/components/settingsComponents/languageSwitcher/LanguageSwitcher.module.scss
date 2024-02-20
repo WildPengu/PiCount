@@ -1,0 +1,8 @@
+.LanguageSwitcherContainer {
+  position: absolute;
+  z-index: 1000;
+
+  button.selected {
+    background-color: aquamarine;
+  }
+}
