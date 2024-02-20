@@ -1,10 +1,17 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateActiveUserId } from '../../stores/userModule';
-import { User } from '../../types/users';
-import { AppSettingsProvider } from '../config';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateActiveUserId } from "../../stores/userModule";
+import { User } from "../../types/users";
+import { AppSettingsProvider } from "../config";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import "../i18next";
+interface LoginType {
+  validation1: string;
+  validation2: string;
+  validation3: string;
+}
 
 export const LoginUseAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -13,15 +20,19 @@ export const LoginUseAuth = () => {
   const { appSettings } = AppSettingsProvider();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { validation1, validation2, validation3 } = t(
+    "loginComponent"
+  ) as unknown as LoginType;
 
   const login = async (username: string, password: string) => {
     try {
       const response = await fetch(
         `${appSettings.apiHost}:${appSettings.apiPort}/users/login`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name: username,
@@ -35,30 +46,29 @@ export const LoginUseAuth = () => {
         setUser(data);
         setError(null);
         dispatch(updateActiveUserId(data._id));
-        Cookies.set('user', JSON.stringify(data._id), { expires: 1 });
-        navigate('/expenseList');
-        window.location.reload()
+        Cookies.set("user", JSON.stringify(data._id), { expires: 1 });
+        navigate("/expenseList");
+        window.location.reload();
       } else {
         setUser(null);
         if (!username || !password) {
-          setError('Username or password are required.');
+          setError(validation1);
           return;
         }
-        setError('Incorrect username or password.');
+        setError(validation2);
       }
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
       setUser(null);
-      setError('An error occurred while logging in.');
+      setError(validation3);
     }
   };
 
   const logout = () => {
     setUser(null);
-    dispatch(updateActiveUserId(''));
-    Cookies.remove('user');
+    dispatch(updateActiveUserId(""));
+    Cookies.remove("user");
   };
 
   return { user, error, login, logout };
 };
-
