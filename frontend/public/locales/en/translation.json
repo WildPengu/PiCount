@@ -1,0 +1,64 @@
+{
+  "introduce": {
+    "article1": "Hey there! Do you ever find yourself struggling to keep track of your expenses?",
+    "article2": "Well, that is where PiCount comes in to make your life easier! With Picount, you can effortlessly manage your finances on a daily basis. Track and analyze your spending, make informed decisions, and take control of your financial journey. Adding transactions is a breeze, and categorizing them helps you understand where your money is going.",
+    "article3": "PiCount brings transparency and simplicity to expense tracking, turning the daily chore of managing your finances into an enjoyable experience. So, are you ready to take charge of your financial well-being? PiCount is here for you."
+  },
+  "login": "Login",
+  "create": "Create account",
+
+  "loginComponent": {
+    "enter": "Enter Your Account",
+    "username": "User name",
+    "userPass": "User password",
+    "validation1": "Username or password are required.",
+    "validation2": "Incorrect username or password.",
+    "validation3": "An error occurred while logging in."
+  },
+
+  "signUpComponent": {
+    "create": "Create account",
+    "signUp": "SignUp",
+    "goToLogin": "Go to login",
+    "desc": "Fill out the fields to create a new user:",
+    "welcome": "Welcome, new PiCounter!",
+    "username": "User name",
+    "userAge": "User age",
+    "userIco": "Choose Your Pokemon Avatar",
+    "userEmail": "User email",
+    "userPass": "Password",
+    "confPass": "Confirm password",
+    "validationName": "User name should have at least 4 characters*",
+    "validationEmail": "There is no valid email*",
+    "validationIco": "Please selecte Avatar*",
+    "validationPass1": "Password should have at least 6 characters*",
+    "validationPass2": "Password shouldn`t have empty characters*",
+    "validationPass3": "Password must contain one of charts: ! # @ $ %",
+    "validationConfPass": "Password should be the same*",
+    "validationNameAndEmail": "Username or email has been used"
+  },
+
+  "addNewExpense": {
+    "addEx": "Add expense",
+    "addNewEx": "Add New Expense",
+    "cancel": "Cancel",
+    "selectCat": "Select category",
+    "desc": "Description",
+    "descPlaceholder": "Type...",
+    "date": "Select Date",
+    "amount": "Amount"
+  },
+  "category": {
+    "restaurant": "Restaurant",
+    "house": "House",
+    "gifts": "Gifts",
+    "health": "Health",
+    "transport": "Transport",
+    "rest": "Rest",
+    "pet": "Pet",
+    "shopping": "Shopping",
+    "grocery": "Grocery",
+    "family": "Family",
+    "other": "Other"
+  }
+}

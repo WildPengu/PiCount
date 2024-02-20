@@ -1,0 +1,40 @@
+{
+  "introduce": {
+    "article1": "Hej! Czy zdarza ci się mieć trudności z śledzeniem swoich wydatków?",
+    "article2": "No cóż, tutaj z pomocą przychodzi PiCount, aby ułatwić ci życie! Dzięki Picount możesz bezproblemowo zarządzać swoimi finansami na co dzień. Śledź i analizuj swoje wydatki, podejmuj świadome decyzje i zyskaj kontrolę nad swoją podróżą finansową. Dodawanie transakcji jest łatwe, a ich kategoryzowanie pomaga zrozumieć, gdzie trafia twoje pieniądze.",
+    "article3": "PiCount wprowadza przejrzystość i prostotę do śledzenia wydatków, zamieniając codzienny obowiązek zarządzania finansami w przyjemne doświadczenie. Więc, jesteś gotowy, aby przejąć kontrolę nad swoim dobrem finansowym? PiCount jest tutaj dla ciebie."
+  },
+  "login": "Zaloguj się",
+  "create": "Załóż konto",
+
+  "loginComponent": {
+    "enter": "Wejdź na swoje konto",
+    "username": "Nazwa użytkownika",
+    "userPass": "Hasło użytkownika",
+    "validation1": "Wymagana jest nazwa użytkownika lub hasło.",
+    "validation2": "Niepoprawna nazwa użytkownika lub hasło.",
+    "validation3": "Wystąpił błąd podczas logowania."
+  },
+
+  "signUpComponent": {
+    "create": "Tworzenie konta",
+    "signUp": "Załóż konto",
+    "goToLogin": "Przejdź do logowania",
+    "desc": "Wypełnij pola, aby utworzyć nowego użytkownika:",
+    "welcome": "Witamy, nowy PiCounter!",
+    "username": "Nazwa użytkownika",
+    "userAge": "Wiek użytkownika",
+    "userIco": "Wybierz swojego awatara Pokemona",
+    "userEmail": "Adres e-mail użytkownika",
+    "userPass": "Hasło",
+    "confPass": "Potwierdź hasło",
+    "validationName": "Nazwa użytkownika powinna składać się z co najmniej 4 znaków*",
+    "validationEmail": "Brak prawidłowego adresu e-mail*",
+    "validationIco": "Proszę wybrać Awatar*",
+    "validationPass1": "Hasło powinno mieć minimum 6 znaków*",
+    "validationPass2": "Hasło nie powinno zawierać pustych znaków*",
+    "validationPass3": "Hasło musi zawierać jeden z wykresów: ! # @ $%",
+    "validationConfPass": "Hasło powinno być takie samo*",
+    "validationNameAndEmail": "Nazwa użytkownika lub adresu e-mail została już użyta"
+  }
+}
