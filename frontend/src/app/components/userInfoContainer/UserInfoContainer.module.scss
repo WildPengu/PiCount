@@ -1,21 +1,22 @@
-@import '../../../scss/Variables.module.scss';
+@import "../../../scss/Variables.module.scss";
 
 .UserInfoContainer {
-    .UserContainer {
-        padding: 15px 0 0 0;
-        text-align: center;
-        .AvatarContainer {
-            margin: 20px auto;
-    
-            .Avatar {
-                border: 1px solid $violet;
-                border-radius: 50%;
-                height: 100px;
-                width: 100px;
-            }
-        }
-        .AppNavUsername {
-            @extend %gradient-txt;
-        }
+  margin-bottom: 50px;
+  .UserContainer {
+    padding: 15px 0 0 0;
+    text-align: center;
+    .AvatarContainer {
+      margin: 20px auto;
+
+      .Avatar {
+        border: 1px solid $violet;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+      }
     }
+    .AppNavUsername {
+      @extend %gradient-txt;
+    }
+  }
 }

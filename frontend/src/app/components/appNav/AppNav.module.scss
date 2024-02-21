@@ -4,6 +4,12 @@
   margin-top: 100px;
   width: 200px;
 
+  .AppNavWithoutId {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .AppNavUl {
     display: flex;
     flex-direction: column;

@@ -16,6 +16,10 @@ body {
 
     .DarkThemeContainer {
       background-color: $bgc-input-dark;
+
+      select {
+        background-color: $bgc-dark;
+      }
     }
 
     .DarkThemeNav li a {
@@ -60,6 +64,10 @@ body {
 
     .LightThemeContainer {
       background-color: $bgc-input-light;
+
+      select {
+        background-color: $bgc-light;
+      }
     }
     .LightThemeNav li a {
       color: $violet;

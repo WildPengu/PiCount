@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
-import "./i18next";
-import { useTranslation } from "react-i18next";
 import {
   initialize,
   selectActiveUserId,
@@ -15,10 +13,8 @@ import { AppRoutes } from "./routes/AppRoutes";
 import { AppSettingsProvider } from "./config";
 import { Footer } from "./components/footer/Footer";
 import { ThemeContext } from "./Theme";
-import { LanguageSwitcher } from "./components/settingsComponents/languageSwitcher/LanguageSwitcher";
 
 export const App: React.FC = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const activeUserId: string = useSelector(selectActiveUserId);
   const { theme } = useContext(ThemeContext);
@@ -50,7 +46,6 @@ export const App: React.FC = () => {
 
   return (
     <div className={`${styles.App} ${theme}`}>
-      <LanguageSwitcher />
       <div className={styles.AppContainer}>
         <AppNav />
         <AppRoutes />
