@@ -1,4 +1,6 @@
 import { SetStateAction, useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import "../../i18next";
 import Button from "../../components/button/Button";
 import styles from "./ExpenseChart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,7 +37,7 @@ export const ExpenseChart = () => {
   };
 
   const activeUserId = useSelector(selectActiveUserId);
-
+  const { t } = useTranslation();
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -60,7 +62,7 @@ export const ExpenseChart = () => {
 
   return (
     <div className={styles.ExpenseChart}>
-      <TopPanel headerText='My Chart'>
+      <TopPanel headerText={t("chart")}>
         <div className={styles.TopPanelContainer}>
           <Button
             backgroundColor={Color.transparent}
@@ -97,12 +99,12 @@ export const ExpenseChart = () => {
           <h3 className={styles.ErrorText}>{error}</h3>
           <div className={`${styles.TotalAmountHeader} ${theme}Amount`}>
             <h3>
-              Total Expenses: <span>{dataChart.totalAmount} ZŁ</span>
+              {t("total")} <span>{dataChart.totalAmount} ZŁ</span>
             </h3>
           </div>
           <div className={styles.ChartsContainer}>
             {selectedChart === "pie" && (
-              <PieChartComponent dataChart={dataChart} />
+              <PieChartComponent dataChart={dataChart} t={t} />
             )}
             {selectedChart === "column" && (
               <BarChartComponent dataChart={dataChart} name={0} />
