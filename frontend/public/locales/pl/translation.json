@@ -6,6 +6,22 @@
   },
   "login": "Zaloguj się",
   "create": "Załóż konto",
+  "reset": "Resetuj",
+  "cancel": "Anulować",
+  "today": "DZISIAJ",
+  "expList": "Lista moich wydatków",
+  "chart": "Mój wykres",
+  "chartNav": "Wykresy",
+  "total": "Łączne wydatki:",
+  "value": "Wartość",
+  "settings": "Ustawienia",
+  "history": "Historia",
+  "logout": "Wyloguj",
+
+  "settingsComponent": {
+    "theme": "Tryb ciemny / jasny",
+    "language": "Wybierz Swój Język"
+  },
 
   "loginComponent": {
     "enter": "Wejdź na swoje konto",
@@ -36,5 +52,45 @@
     "validationPass3": "Hasło musi zawierać jeden z wykresów: ! # @ $%",
     "validationConfPass": "Hasło powinno być takie samo*",
     "validationNameAndEmail": "Nazwa użytkownika lub adresu e-mail została już użyta"
+  },
+
+  "addNewExpense": {
+    "addEx": "Dodaj wydatek",
+    "addNewEx": "Dodaj nowy wydatek",
+    "selectCat": "Wybierz kategorię",
+    "desc": "Opis",
+    "descPlaceholder": "Napisz coś...",
+    "amount": "Kwota",
+    "validation1": "Kwota jest wymagana.",
+    "validation2": "Kwota musi być większa niż 0.",
+    "validation3": "Kategoria wydatku, data i kwota są wymagane!"
+  },
+
+  "date": {
+    "date": "Wybierz datę",
+    "from": "Od",
+    "to": "Do"
+  },
+
+  "filterModal": {
+    "filter": "Filtrowanie",
+    "filterBtn": "Filtruj",
+    "validation1": "Nie masz jeszcze żadnych wydatków w tym okresie.",
+    "validation2": "Nie masz jeszcze żadnych wydatków w kategorii:"
+  },
+
+  "category": {
+    "All": "Wszystkie kategorię",
+    "Restaurant": "Restauracja",
+    "House": "Dom",
+    "Gifts": "Prezenty",
+    "Health": "Zdrowie",
+    "Transport": "Transport",
+    "Rest": "Odpoczynek",
+    "Pet": "Zwierzaki",
+    "Shopping": "Zakupy",
+    "Grocery": "Jedzienie",
+    "Family": "Rodzina",
+    "Other": "Inne"
   }
 }

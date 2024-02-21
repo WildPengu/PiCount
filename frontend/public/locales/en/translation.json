@@ -6,6 +6,22 @@
   },
   "login": "Login",
   "create": "Create account",
+  "reset": "Reset",
+  "cancel": "Cancel",
+  "today": "TODAY",
+  "expList": "My Expense List",
+  "chart": "My Chart",
+  "chartNav": "Charts",
+  "total": "Total Expenses:",
+  "value": "Value",
+  "settings": "Settings",
+  "history": "History",
+  "logout": "Logout",
+
+  "settingsComponent": {
+    "theme": "Dark / Light Mode",
+    "language": "Choose Your Language"
+  },
 
   "loginComponent": {
     "enter": "Enter Your Account",
@@ -41,24 +57,40 @@
   "addNewExpense": {
     "addEx": "Add expense",
     "addNewEx": "Add New Expense",
-    "cancel": "Cancel",
     "selectCat": "Select category",
     "desc": "Description",
-    "descPlaceholder": "Type...",
-    "date": "Select Date",
-    "amount": "Amount"
+    "descPlaceholder": "Write sth...",
+    "amount": "Amount",
+    "validation1": "Amount is required.",
+    "validation2": "Amount must be greater than 0.",
+    "validation3": "Category of Expense, Date and Amount are required!"
   },
+
+  "date": {
+    "date": "Select Date",
+    "from": "From",
+    "to": "To"
+  },
+
+  "filterModal": {
+    "filter": "Filter",
+    "filterBtn": "Filter",
+    "validation1": "You do not have any expenses in this time yet.",
+    "validation2": "You do not have any expenses in category:"
+  },
+
   "category": {
-    "restaurant": "Restaurant",
-    "house": "House",
-    "gifts": "Gifts",
-    "health": "Health",
-    "transport": "Transport",
-    "rest": "Rest",
-    "pet": "Pet",
-    "shopping": "Shopping",
-    "grocery": "Grocery",
-    "family": "Family",
-    "other": "Other"
+    "All": "All categories",
+    "Restaurant": "Restaurant",
+    "House": "House",
+    "Gifts": "Gifts",
+    "Health": "Health",
+    "Transport": "Transport",
+    "Rest": "Rest",
+    "Pet": "Pet",
+    "Shopping": "Shopping",
+    "Grocery": "Grocery",
+    "Family": "Family",
+    "Other": "Other"
   }
 }
