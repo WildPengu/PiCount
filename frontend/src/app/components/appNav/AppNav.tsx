@@ -25,11 +25,9 @@ export const AppNav = () => {
 
   return (
     <nav className={styles.AppNav}>
-      <div className={styles.AppNavWithoutId}>
-        <UserInfoContainer />
-        <LanguageSwitcher />
-      </div>
-      {activeUserId && (
+      <UserInfoContainer />
+
+      {activeUserId ? (
         <ul className={`${styles.AppNavUl} ${theme}Nav`}>
           <li className={styles.AppNavLi}>
             <Link to='/expenseList'>
@@ -56,6 +54,10 @@ export const AppNav = () => {
             </Link>
           </li>
         </ul>
+      ) : (
+        <div className={styles.AppNavWithoutId}>
+          <LanguageSwitcher />
+        </div>
       )}
     </nav>
   );
