@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./LanguageSwitcher.module.scss";
 import { useTranslation } from "react-i18next";
 
@@ -16,18 +15,24 @@ export const LanguageSwitcher = () => {
   };
 
   return (
-    <div className={styles.LanguageSwitcherContainer}>
-      {languages.map((lng) => {
-        return (
-          <button
-            className={lng.code === i18n.language ? styles.selected : ""}
-            key={lng.code}
-            onClick={() => changeLanguage(lng.code)}
-          >
-            {lng.lang}
-          </button>
-        );
-      })}
-    </div>
+    <>
+      <select
+        name='lang'
+        onChange={(e) => changeLanguage(e.target.value)}
+        className={styles.LanguageSelect}
+      >
+        {languages.map((lng) => {
+          return (
+            <option
+              key={lng.code}
+              value={lng.code}
+              selected={lng.code === i18n.language}
+            >
+              {lng.lang}
+            </option>
+          );
+        })}
+      </select>
+    </>
   );
 };

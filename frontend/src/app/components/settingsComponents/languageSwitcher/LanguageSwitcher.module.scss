@@ -1,8 +1,8 @@
 .LanguageSwitcherContainer {
-  position: absolute;
-  z-index: 1000;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
-  button.selected {
-    background-color: aquamarine;
-  }
+.LanguageSelect {
+  padding: 10px;
 }
