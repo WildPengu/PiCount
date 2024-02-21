@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import "../../i18next";
 import {
   selectActiveUserId,
   selectExpenses,
@@ -25,7 +27,7 @@ export const ExpenseList = () => {
     useState(false);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const [error, setError] = useState<string>("");
 
   const { appSettings } = AppSettingsProvider();
@@ -56,7 +58,7 @@ export const ExpenseList = () => {
 
   return (
     <div className={styles.ExpenseList}>
-      <TopPanel headerText='My Expense List'>
+      <TopPanel headerText={t("expList")}>
         <div className={styles.TopPanelContainer}>
           <Button
             backgroundColor={Color.transparent}
@@ -94,7 +96,7 @@ export const ExpenseList = () => {
         ) : (
           Object.entries(expenses).map(([date, expensesByDate]) => (
             <div key={date}>
-              <h3>{date === todayDate ? "TODAY" : date}</h3>
+              <h3>{date === todayDate ? t("today") : date}</h3>
               {expensesByDate.map((expense) => (
                 <ExpenseItem key={expense._id} expense={expense} />
               ))}

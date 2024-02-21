@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import "../../i18next";
 import styles from "./ExpenseItem.module.scss";
 import { Expense, ExpensesCategories } from "../../../types/Expense";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,7 +42,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
     (category: { name: string }) => category.name === expense.category
   );
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const { theme } = useContext(ThemeContext);
 
   const iconMappings: IconMappings = {
@@ -101,7 +103,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
             )}
           </div>
           <p className={styles.Category} style={{ color: categoryInfo?.color }}>
-            {expense.category}
+            {t(`category.${expense.category}`)}
           </p>
         </div>
         <div className={styles.ExpenseAmount}>

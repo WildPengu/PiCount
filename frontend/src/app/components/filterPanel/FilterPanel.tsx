@@ -1,4 +1,6 @@
 import styles from "./FilterPanel.module.scss";
+import { useTranslation } from "react-i18next";
+import "../../i18next";
 import { SelectCategory } from "../selectCategory/SelectCategory";
 import { SelectDate } from "../datePicker/SelectDate";
 import { Color } from "../../types/Enums";
@@ -8,7 +10,6 @@ import { AppSettingsProvider } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { updateExpenses } from "../../../stores/userModule/actions";
 import { selectActiveUserId } from "../../../stores/userModule";
-
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
 }
@@ -24,6 +25,7 @@ export const FilterPanel = ({
   const [category, setCategory] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
+  const { t } = useTranslation();
 
   const { appSettings } = AppSettingsProvider();
   const activeUserId = useSelector(selectActiveUserId);
@@ -69,9 +71,9 @@ export const FilterPanel = ({
         dispatch(updateExpenses(data));
         setError("");
         if (!Object.keys(data).length) {
-          setError("You do not have any expenses in this time yet.");
+          setError(t("filterModal.validation1"));
         } else if (!data[category as string].length) {
-          setError("You do not have any expenses in category:");
+          setError(t("filterModal.validation2"));
         }
       })
       .catch((error) => {
@@ -81,27 +83,32 @@ export const FilterPanel = ({
 
   return (
     <div className={styles.FilterPanel}>
-      <h2 className={styles.FilterPanelH2}>Filter</h2>
+      <h2 className={styles.FilterPanelH2}>{t("filterModal.filter")}</h2>
       <form className={styles.FilterForm} onSubmit={filteredExpenseList}>
         <div className={styles.FilterPanelContainer}>
-          <SelectCategory selectModal={"filter"} setCategory={setCategory} />
+          <SelectCategory
+            selectModal={"filter"}
+            setCategory={setCategory}
+            t={t}
+          />
           <SelectDate
-            label='From'
+            label='from'
             selectModal={"filter"}
             setDate={setDateFrom}
+            t={t}
           />
-          <SelectDate label='To' setDate={setDateTo} />
+          <SelectDate label='to' setDate={setDateTo} t={t} />
         </div>
         <div className={styles.ButtonsPanel}>
-          <Button type='submit'>Filter</Button>
+          <Button type='submit'>{t("filterModal.filterBtn")}</Button>
           <Button backgroundColor={Color.blue} onClick={resetFilters}>
-            Reset
+            {t("reset")}
           </Button>
           <Button
             backgroundColor={Color.gray}
             onClick={() => setIsModalVisible(false)}
           >
-            Cancel
+            {t("cancel")}
           </Button>
         </div>
       </form>

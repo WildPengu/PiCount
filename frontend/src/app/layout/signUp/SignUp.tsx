@@ -122,7 +122,7 @@ export const SignUp = () => {
 
   return (
     <div className={styles.SignUp}>
-      <TopPanel headerText={t("create")}>
+      <TopPanel headerText={t("signUpComponent.create")}>
         <div className={styles.TopPanelContainer}>
           <Link to='/login'>
             <FontAwesomeIcon icon={faRightToBracket} />

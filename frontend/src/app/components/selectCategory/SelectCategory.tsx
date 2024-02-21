@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./Selectcategory.module.scss";
 import { AppSettingsProvider } from "../../config";
+import "../../i18next";
+import { TFunction } from "i18next";
 
 export interface Category {
   _id: string;
@@ -9,12 +11,14 @@ export interface Category {
 
 export interface SelectCategoryProps {
   setCategory?: (category: string) => void;
-  selectModal: string;
+  selectModal?: string;
+  t: TFunction<"translation", undefined>;
 }
 
 export const SelectCategory = ({
   selectModal,
   setCategory,
+  t,
 }: SelectCategoryProps) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [activeOption, setActiveOption] = useState<string>("");
@@ -59,7 +63,7 @@ export const SelectCategory = ({
   return (
     <div className={styles.SelectCategory}>
       <label htmlFor='typeOfExpense' className={styles.CategoryLabel}>
-        Select category
+        {t("addNewExpense.selectCat")}
       </label>
       <select
         id='typeOfExpense'
@@ -69,12 +73,12 @@ export const SelectCategory = ({
       >
         {selectModal === "filter" ? (
           <option key={"All"} value={"All"}>
-            All
+            {t("category.All")}
           </option>
         ) : null}
         {categories.map((category) => (
           <option key={category._id} value={category.name}>
-            {category.name}
+            {t(`category.${category.name}`)}
           </option>
         ))}
       </select>

@@ -3,17 +3,21 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import styles from "./SelectDate.module.scss";
+import "../../i18next";
+import { TFunction } from "i18next";
 
 export interface SelectDateProps {
   setDate?: (date: string) => void;
-  label?: "Select Date" | "From" | "To";
+  label?: string;
   selectModal?: string;
+  t: TFunction<"translation", undefined>;
 }
 
 export const SelectDate = ({
   setDate,
-  label = "Select Date",
+  label = "date",
   selectModal,
+  t,
 }: SelectDateProps) => {
   const [day, setDay] = useState("");
 
@@ -40,7 +44,7 @@ export const SelectDate = ({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           className={styles.SelectDate}
-          label={label}
+          label={t(`date.${label}`)}
           minDate={dayjs("2023-01-01")}
           maxDate={dayjs(Date())}
           onChange={(newDate) => handleChange(newDate)}
