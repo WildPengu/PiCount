@@ -13,7 +13,7 @@ import { FilterPanel } from "../../components/filterPanel/FilterPanel";
 import { AppSettingsProvider } from "../../config";
 import styles from "./ExpenseList.module.scss";
 import { Modal } from "../../components/modal/Modal";
-import { AddExpense } from "../addExpense/AddExpense";
+import { AddExpense } from "../../components/addExpense/AddExpense";
 import Button from "../../components/button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faFilter } from "@fortawesome/free-solid-svg-icons";
