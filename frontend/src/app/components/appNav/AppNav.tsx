@@ -10,6 +10,7 @@ import {
   faClockRotateLeft,
   faRightFromBracket,
   faGear,
+  faMoneyBillTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { LoginUseAuth } from "../../helpers/LoginUseAuth";
 import { UserInfoContainer } from "../userInfoContainer/UserInfoContainer";
@@ -26,7 +27,6 @@ export const AppNav = () => {
   return (
     <nav className={styles.AppNav}>
       <UserInfoContainer />
-
       {activeUserId ? (
         <ul className={`${styles.AppNavUl} ${theme}Nav`}>
           <li className={styles.AppNavLi}>
@@ -39,6 +39,12 @@ export const AppNav = () => {
             <Link to='/expenseChart'>
               <FontAwesomeIcon icon={faChartPie} />
               <span>{t("chartNav")}</span>
+            </Link>
+          </li>
+          <li className={styles.AppNavLi}>
+            <Link to='/investment'>
+              <FontAwesomeIcon icon={faMoneyBillTrendUp} />
+              <span>{t("invest.investment")}</span>
             </Link>
           </li>
           <li className={styles.AppNavLi}>
