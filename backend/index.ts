@@ -13,6 +13,7 @@ setupDatabase();
 app.use(cors());
 app.use(express.json());
 
+import cryptoRoutes from './src/routes/crypto';
 import expensesRoutes from './src/routes/expenses';
 import expensesCategoriesRoutes from './src/routes/expensesCategories';
 import usersRoutes from './src/routes/users';
@@ -20,6 +21,7 @@ import usersRoutes from './src/routes/users';
 app.use('/users', usersRoutes);
 app.use('/expensesCategories', expensesCategoriesRoutes);
 app.use('/expenses', expensesRoutes);
+app.use('/cryptocurrency', cryptoRoutes);
 
 const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
