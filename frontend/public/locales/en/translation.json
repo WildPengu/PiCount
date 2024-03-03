@@ -92,5 +92,9 @@
     "Grocery": "Grocery",
     "Family": "Family",
     "Other": "Other"
+  },
+
+  "invest": {
+    "investment": "Investment"
   }
 }

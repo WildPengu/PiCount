@@ -53,15 +53,9 @@ export const Investment = () => {
       ) : (
         <div className={styles.InvestmentContainer}>
           <div className={styles.InvestComponentContainer}>
-            {selectedInvestView === "crypto" && (
-              <CryptoChart setLoading={setLoading} />
-            )}
-            {selectedInvestView === "gold" && (
-              <GoldChart setLoading={setLoading} />
-            )}
-            {selectedInvestView === "currency" && (
-              <CurrencyChart setLoading={setLoading} />
-            )}
+            {selectedInvestView === "crypto" && <CryptoChart setLoading={setLoading} />}
+            {selectedInvestView === "gold" && <GoldChart setLoading={setLoading} />}
+            {selectedInvestView === "currency" && <CurrencyChart setLoading={setLoading} />}
           </div>
         </div>
       )}
