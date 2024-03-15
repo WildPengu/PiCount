@@ -1,0 +1,25 @@
+.assetsContainer {
+  color: #dadce0;
+  display: grid;
+  max-height: 548px;
+  overflow-y: scroll;
+  width: 70%;
+  padding: 8px;
+
+  .sortHeader {
+    display: grid;
+    grid-template-columns: 28% 24% 24% 24%;
+    color: #848e9c;
+
+    div {
+      cursor: pointer;
+      &:hover {
+        color: #dadce0;
+      }
+    }
+
+    & > div:not(:first-child) {
+      text-align: right;
+    }
+  }
+}

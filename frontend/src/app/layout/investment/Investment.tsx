@@ -1,19 +1,19 @@
-import { useTranslation } from "react-i18next";
-import styles from "./Investment.module.scss";
-import { TopPanel } from "../../components/topPanel/TopPanel";
-import { SetStateAction, useState } from "react";
 import {
   faBitcoinSign,
-  faEuroSign,
   faCoins,
+  faEuroSign,
 } from "@fortawesome/free-solid-svg-icons";
-import Button from "../../components/button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Color } from "../../types/Enums";
-import { Loader } from "../../components/loader/Loader";
-import { CryptoChart } from "../../components/investment/crypto/CryptoChart";
-import { GoldChart } from "../../components/investment/gold/GoldChart";
+import { SetStateAction, useState } from "react";
+import { useTranslation } from "react-i18next";
+import Button from "../../components/button/Button";
+import { Crypto } from "../../components/investment/crypto/Crypto";
 import { CurrencyChart } from "../../components/investment/currency/CurrencyChart";
+import { GoldChart } from "../../components/investment/gold/GoldChart";
+import { Loader } from "../../components/loader/Loader";
+import { TopPanel } from "../../components/topPanel/TopPanel";
+import { Color } from "../../types/Enums";
+import styles from "./Investment.module.scss";
 
 export const Investment = () => {
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ export const Investment = () => {
       ) : (
         <div className={styles.InvestmentContainer}>
           <div className={styles.InvestComponentContainer}>
-            {selectedInvestView === "crypto" && <CryptoChart setLoading={setLoading} />}
+              {selectedInvestView === "crypto" && <Crypto setLoading={setLoading} />}
             {selectedInvestView === "gold" && <GoldChart setLoading={setLoading} />}
             {selectedInvestView === "currency" && <CurrencyChart setLoading={setLoading} />}
           </div>

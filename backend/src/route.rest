@@ -88,7 +88,7 @@ GET http://localhost:3000/expensesCategories
 
 ###
 //CRYPTO
-GET http://localhost:3000/cryptocurrency/info?crypto=BTC
+GET http://localhost:3000/cryptocurrency/quote?crypto=BTC
 
 ###
-GET http://localhost:3000/cryptocurrency/latest?limit=10
+GET http://localhost:3000/cryptocurrency/latest?limit=1

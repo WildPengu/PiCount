@@ -1,0 +1,47 @@
+.assetRow {
+  display: grid;
+  grid-template-columns: 28% 24% 24% 24%;
+  padding: 8px;
+  align-items: center;
+  transition: 0.3s;
+  border-radius: 10px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #0B0E11;
+  }
+
+  & > div:not(:first-child) {
+    text-align: right;
+  }
+
+  .firstColumn {
+    display: flex;
+    align-items: center;
+
+    .image {
+      width: 25px;
+      height: 25px;
+      margin-right: 8px;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+
+    .upperItem {
+      text-transform: uppercase;
+    }
+
+    .lowerItem {
+      color: #848e9c;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  .todaysPnL {
+    color: #0fac6f;
+  }
+}
