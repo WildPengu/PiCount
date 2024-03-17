@@ -3,6 +3,7 @@ import express, {
   NextFunction,
   Request,
 } from 'express';
+import { UserAssets } from '../models/assets';
 import { UserExpenses } from '../models/expense';
 import User from '../models/user';
 const router = express.Router();
@@ -51,13 +52,24 @@ router.post('/', async (req: Request, res: Response) => {
     expenses: {},
   });
 
+  const assets = new UserAssets({
+    userId: user._id.toString(),
+    assets: {
+      crypto: {},
+      stocks: {},
+      metals: {},
+    },
+  });
+
   try {
     const newUser = await user.save();
     const newExpenses = await expenses.save();
+    const newAssets = await assets.save();
 
     res.status(201).json({
       newUser,
       newExpenses,
+      newAssets,
     });
   } catch (error: any) {
     res.status(500).json({ message: error.message });

@@ -1,30 +1,51 @@
-import { useEffect } from "react";
+import _ from "lodash";
+import { useEffect, useState } from "react";
 import { AppSettingsProvider } from "../../../../config";
+import { Loader } from "../../../loader/Loader";
 import styles from './MyAssets.module.scss';
-import { AssetRow } from './assetRow/assetRow';
+import { AssetRow } from './assetRow/AssetRow';
 
-interface InvestProps {
-  setLoading: (loading: boolean) => void;
+export interface Crypto {
+  name: string;
+  symbol: string;
+  amount: number;
+  logo: string;
+  quote: any;
 }
 
-export const MyAssets: React.FC<InvestProps> = ({ setLoading }) => {
+export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
+  const [crypto, setCrypto] = useState<Crypto>();
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch(
-    //       `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=15`
-    //     );
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`
+        );
 
-    //     console.log(await response.json());
-    //   } catch (error) {
-    //     console.error("Error fetching data:", error);
-    //   }
-    // };
+        setCrypto(await response.json());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-    // fetchData();
+    fetchData();
   }, []);
+
+
+  const cryptoRows = _.map(crypto as any, (row: Crypto, index: number) => {
+    return (
+      <AssetRow
+        key={index}
+        name={row.name}
+        symbol={row.symbol}
+        amount={row.amount}
+        logo={row.logo}
+        quote={row.quote}
+      />
+    );
+  });
 
   return (
     <div className={styles.assetsContainer}>
@@ -35,18 +56,7 @@ export const MyAssets: React.FC<InvestProps> = ({ setLoading }) => {
         <div>Today's PnL</div>
       </div>
       <div className={styles.assetsList}>
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
-        {<AssetRow />}
+        {crypto ? cryptoRows : <Loader />}
       </div>
     </div>
   );

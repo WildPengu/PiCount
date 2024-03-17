@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AppSettingsProvider } from "../../../config";
 import styles from './Crypto.module.scss';
 import { MyAssets } from "./myAssets/MyAssets";
@@ -17,21 +17,21 @@ export const Crypto: React.FC<InvestProps> = ({ setLoading }) => {
   const { appSettings } = AppSettingsProvider();
   const [activeView, setActiveView] = useState(ActiveView.MyAssets);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=15`
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=15`
+  //       );
 
-        console.log(await response.json());
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       console.log(await response.json());
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <div>
@@ -39,7 +39,7 @@ export const Crypto: React.FC<InvestProps> = ({ setLoading }) => {
         <h2 className={styles.cryptoHeaderText} onClick={() => { setActiveView(ActiveView.MyAssets) }}>My Assets</h2>
         <h2 className={styles.cryptoHeaderText} onClick={() => { setActiveView(ActiveView.Chart) }}>All Crypto</h2>
       </div>
-      {activeView === ActiveView.MyAssets && <MyAssets setLoading={setLoading} />}
+      {activeView === ActiveView.MyAssets && <MyAssets />}
       {activeView === ActiveView.Chart && <div>hik</div>}
     </div>
   );
