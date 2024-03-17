@@ -32,12 +32,12 @@ test("Successful SignUp", async ({ page }) => {
     .getByRole("heading", { name: "Fill out the fields to create" })
     .click();
   await page.getByPlaceholder("User name").click();
-  await page.getByPlaceholder("User name").fill("kasia3.0");
+  await page.getByPlaceholder("User name").fill("kasia");
   await page.getByPlaceholder("User age").click();
   await page.getByPlaceholder("User age").fill("24");
   await page.getByRole("img", { name: "Avatar 8" }).click();
   await page.getByPlaceholder("User email").click();
-  await page.getByPlaceholder("User email").fill("kasia3.0@gmail.com");
+  await page.getByPlaceholder("User email").fill("kasia@gmail.com");
   await page.getByPlaceholder("Password", { exact: true }).click();
   await page.getByPlaceholder("Password", { exact: true }).fill("!23456");
   await page.getByPlaceholder("Confirm password").click();
@@ -55,10 +55,10 @@ test("Successful SignUp", async ({ page }) => {
   //login
 
   await page.getByPlaceholder("User name").click();
-  await page.getByPlaceholder("User name").fill("kasia3.0");
+  await page.getByPlaceholder("User name").fill("kasia");
   await page.getByPlaceholder("User password").click();
   await page.getByPlaceholder("User password").fill("!23456");
   await page.getByRole("button", { name: "Login" }).click();
 
-  await page.getByRole("heading", { name: "kasia3.0" }).click();
+  await page.getByRole("heading", { name: "kasia" }).click();
 });
