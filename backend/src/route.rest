@@ -85,3 +85,10 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/expensesCategories
+
+###
+//CRYPTO
+GET http://localhost:3000/cryptocurrency/info?crypto=BTC
+
+###
+GET http://localhost:3000/cryptocurrency/latest?limit=10
