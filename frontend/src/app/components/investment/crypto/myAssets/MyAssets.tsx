@@ -55,18 +55,21 @@ export const MyAssets = () => {
   let totalAssetsPrice = 0;
 
   const cryptoRows = _.map(crypto as any, (row: Crypto, index: number) => {
-    const cryptoValue = parseFloat((row.amount * row.quote.USD.price).toFixed(2));
-    totalAssetsPrice += cryptoValue;
-    return (
-      <AssetRow
-        key={index}
-        name={row.name}
-        symbol={row.symbol}
-        amount={row.amount}
-        logo={row.logo}
-        quote={row.quote}
-      />
-    );
+    if (row.quote && row.quote.USD && row.quote.USD.price) {
+      const cryptoValue = parseFloat((row.amount * row.quote.USD.price).toFixed(2));
+      totalAssetsPrice += cryptoValue;
+
+      return (
+        <AssetRow
+          key={index}
+          name={row.name}
+          symbol={row.symbol}
+          amount={row.amount}
+          logo={row.logo}
+          quote={row.quote}
+        />
+      );
+    }
   });
 
   return (
