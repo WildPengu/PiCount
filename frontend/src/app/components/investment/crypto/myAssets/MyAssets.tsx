@@ -16,6 +16,9 @@ export interface Crypto {
 export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
   const [crypto, setCrypto] = useState<Crypto>();
+  const [inputAmount, setInputAmount] = useState<number>();
+  const [inputSymbol, setInputSymbol] = useState<string>();
+  const [assetsPrice, setAssetsPrice] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,8 +36,27 @@ export const MyAssets = () => {
     fetchData();
   }, []);
 
+  const addCrypto = (symbol: string, amount: number) => {
+    fetch(`${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        symbol,
+        amount
+      })
+    })
+      .catch(error => {
+        console.error('An error occured', error);
+      });
+  };
+
+  let totalAssetsPrice = 0;
 
   const cryptoRows = _.map(crypto as any, (row: Crypto, index: number) => {
+    const cryptoValue = parseFloat((row.amount * row.quote.USD.price).toFixed(2));
+    totalAssetsPrice += cryptoValue;
     return (
       <AssetRow
         key={index}
@@ -49,6 +71,7 @@ export const MyAssets = () => {
 
   return (
     <div className={styles.assetsContainer}>
+      <h2>Portfolio value: {totalAssetsPrice.toLocaleString('en-US')}$</h2>
       <div className={styles.sortHeader}>
         <div>Coin</div>
         <div>Amount</div>
@@ -57,6 +80,29 @@ export const MyAssets = () => {
       </div>
       <div className={styles.assetsList}>
         {crypto ? cryptoRows : <Loader />}
+      </div>
+      <div>
+        <div>
+          <span>Amount</span>
+          <input
+            name='amount'
+            type='number'
+            min={0.000001}
+            step={0.01}
+            value={inputAmount}
+            onChange={(e) => setInputAmount(parseFloat(e.target.value))}
+          />
+        </div>
+        <div>
+          <span>Symbol</span>
+          <input
+            name='symbol'
+            type='string'
+            value={inputSymbol}
+            onChange={(e) => setInputSymbol(e.target.value)}
+          />
+        </div>
+        <button onClick={() => addCrypto(inputSymbol, inputAmount)}>Add</button>
       </div>
     </div>
   );

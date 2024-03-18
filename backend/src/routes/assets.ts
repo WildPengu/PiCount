@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-import request from 'request';
 import { Asset, UserAssets } from '../models/assets';
+const axios = require('axios');
 const mongoose = require('mongoose');
 
 const router = express.Router();
@@ -57,44 +57,31 @@ router.get('/crypto/:id', async (req, res) => {
 
     for (const [cryptoId, asset] of cryptoAssets.entries()) {
       const { symbol, amount } = asset;
-      const options = {
-        url: `http://localhost:3000/cryptocurrency/quote?crypto=${symbol}`,
-        headers: {
-          'X-CMC_PRO_API_KEY': key,
-        },
-      };
+      const quoteUrl = `http://localhost:3000/cryptocurrency/quote?crypto=${symbol}`;
+      const infoUrl = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?CMC_PRO_API_KEY=${key}&symbol=${symbol}`;
 
-      request(options, (error, response, body) => {
-        if (error) {
-          console.error('Error fetching data:', error);
-          res.status(500).json({ error: 'Internal Server Error' });
-        } else {
-          const { name, quote } = JSON.parse(body).data[symbol];
+      try {
+        const quoteResponse = await axios.get(quoteUrl);
+        const { name, quote } = quoteResponse.data.data[symbol];
 
-          request(
-            `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?CMC_PRO_API_KEY=${key}&symbol=${symbol}`,
-            (logoError, logoResponse, logoBody) => {
-              if (logoError) {
-                console.error('Error fetching logo data:', logoError);
-                res.status(500).json({ error: 'Internal Server Error' });
-              } else {
-                const logo = JSON.parse(logoBody).data[symbol]['0'].logo;
-                cryptoQuotes[symbol] = { name, symbol, amount, logo, quote };
+        // const logoResponse = await axios.get(infoUrl);
+        // const logo = logoResponse.data.data[symbol]['0'].logo;
+        const logo =
+          'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png';
 
-                numProcessed++;
+        cryptoQuotes[symbol] = { name, symbol, amount, logo, quote };
+        numProcessed++;
 
-                if (numProcessed === cryptoAssets.size) {
-                  res.json(cryptoQuotes);
-                }
-              }
-            }
-          );
+        if (numProcessed === cryptoAssets.size) {
+          res.json(cryptoQuotes);
         }
-      });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
     }
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 });
-
 export default router;
