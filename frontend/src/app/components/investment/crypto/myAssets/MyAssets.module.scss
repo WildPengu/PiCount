@@ -1,14 +1,12 @@
 .assetsContainer {
   color: #dadce0;
   display: grid;
-  max-height: 548px;
-  overflow-y: scroll;
-  width: 70%;
-  padding: 8px;
+  width: 80%;
+  padding: 16px;
 
   .sortHeader {
     display: grid;
-    grid-template-columns: 28% 24% 24% 24%;
+    grid-template-columns: 19% 19% 19% 19% 7% 7% 7% 3%;
     color: #848e9c;
 
     div {
@@ -20,6 +18,16 @@
 
     & > div:not(:first-child) {
       text-align: right;
+    }
+  }
+
+  .assetsList {
+    max-height: 450px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      display: none;
     }
   }
 }
