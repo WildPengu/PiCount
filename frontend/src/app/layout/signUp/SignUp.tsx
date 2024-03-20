@@ -132,11 +132,12 @@ export const SignUp = () => {
           </Link>
         </div>
       </TopPanel>
-      {!signUpDone ? (
-        <h2>{t("signUpComponent.desc")}</h2>
-      ) : (
-        <h2 className={styles.SignUpNewUser}>{t("signUpComponent.welcome")}</h2>
-      )}
+      <h2
+        className={signUpDone ? styles.SignUpNewUser : ""}
+        data-testid='welcome-message'
+      >
+        {signUpDone ? t("signUpComponent.welcome") : t("signUpComponent.desc")}
+      </h2>
       {errorMessage && <h2 className={styles.SignUpErrors}>{errorMessage}</h2>}
       <form className={styles.SignUpForm} onSubmit={handleSubmit}>
         <input
@@ -147,7 +148,11 @@ export const SignUp = () => {
           onChange={handleInputChange}
           value={formData.name}
         />
-        {errors.name && <p className={styles.SignUpErrors}>{errors.name}</p>}
+        {errors.name && (
+          <p className={styles.SignUpErrors} data-testid='username-error'>
+            {errors.name}
+          </p>
+        )}
         <input
           type='number'
           name='age'
@@ -177,7 +182,9 @@ export const SignUp = () => {
           selectedAvatar={formData.avatar}
         />
         {errors.avatar && (
-          <p className={styles.SignUpErrors}>{errors.avatar}</p>
+          <p className={styles.SignUpErrors} data-testid='avatar-error'>
+            {errors.avatar}
+          </p>
         )}
         <input
           type='email'
@@ -187,7 +194,11 @@ export const SignUp = () => {
           onChange={handleInputChange}
           value={formData.email}
         />
-        {errors.email && <p className={styles.SignUpErrors}>{errors.email}</p>}
+        {errors.email && (
+          <p className={styles.SignUpErrors} data-testid='email-error'>
+            {errors.email}
+          </p>
+        )}
         <input
           type='password'
           name='password'
@@ -197,7 +208,9 @@ export const SignUp = () => {
           value={formData.password}
         />
         {errors.password && (
-          <p className={styles.SignUpErrors}>{errors.password}</p>
+          <p className={styles.SignUpErrors} data-testid='password-error'>
+            {errors.password}
+          </p>
         )}
         <input
           type='password'
@@ -208,14 +221,26 @@ export const SignUp = () => {
           value={formData.confirmPassword}
         />
         {errors.confirmPassword && (
-          <p className={styles.SignUpErrors}>{errors.confirmPassword}</p>
+          <p
+            className={styles.SignUpErrors}
+            data-testid='confirm-password-error'
+          >
+            {errors.confirmPassword}
+          </p>
         )}
         <div className={styles.ButtonsPanel}>
-          <Button type='submit' isDisabled={signUpDone}>
+          <Button
+            type='submit'
+            isDisabled={signUpDone}
+          >
             {t("signUpComponent.signUp")}
           </Button>
           {signUpDone && (
-            <Link to='/login' className={styles.SignUpButton}>
+            <Link
+              to='/login'
+              className={styles.SignUpButton}
+              data-testid='link-to-login'
+            >
               {t("signUpComponent.goToLogin")}
             </Link>
           )}

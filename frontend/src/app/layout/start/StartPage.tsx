@@ -38,7 +38,7 @@ export const StartPage = () => {
         <img className={styles.Logo} src={logo} />
       </div>
       <article className={styles.Introduce}>
-        <p>{article1}</p>
+        <p data-testid='article1'>{article1}</p>
         <p>{article2}</p>
         <p>{article3}</p>
       </article>

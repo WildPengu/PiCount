@@ -45,7 +45,7 @@ export const Login: React.FC = () => {
         onSubmit={(e) => handleLogin(e)}
         method='POST'
       >
-        {error && <h2>{error}</h2>}
+        {error && <h2 data-testid='login-error'>{error}</h2>}
         <input
           className={styles.LoginInput}
           type='text'
