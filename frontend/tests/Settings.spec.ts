@@ -1,13 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Language switcher", () => {
+test.describe("Language switcher tests", () => {
   test("languages switcher in settings", async ({ page }) => {
     await page.goto("http://localhost:5173/");
 
     await page.getByRole("link", { name: "Login" }).click();
-    await page.getByPlaceholder("User name").click();
+
     await page.getByPlaceholder("User name").fill("yarna");
-    await page.getByPlaceholder("User password").click();
     await page.getByPlaceholder("User password").fill("!23456");
     await page.getByRole("button", { name: "Login" }).click();
 

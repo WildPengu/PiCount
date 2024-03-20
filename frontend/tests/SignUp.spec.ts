@@ -1,64 +1,79 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
-test("SignUp with empty or empty data should display error messages", async ({
-  page,
-}) => {
-  await page.goto("http://localhost:5173/signUp");
+test.describe("Sign Up tests", () => {
+  test("SignUp with empty or empty data should display error messages", async ({
+    page,
+  }) => {
+    await page.goto("http://localhost:5173/signUp");
 
-  await page.getByRole("button", { name: "SignUp" }).click();
+    await page.getByRole("button", { name: "SignUp" }).click();
 
-  await page.getByText("User name should have at").click();
-  await page.getByText("Please selecte Avatar*").click();
-  await page.getByText("There is no valid email*").click();
-  await page.getByText("Password should have at least").click();
+    //if website in english
 
-  //error message if confirm password is not the same
+    await expect(page.getByTestId("username-error")).toHaveText(
+      "User name should have at least 4 characters*"
+    );
+    await expect(page.getByTestId("avatar-error")).toHaveText(
+      "Please selecte Avatar*"
+    );
+    await expect(page.getByTestId("email-error")).toHaveText(
+      "There is no valid email*"
+    );
+    await expect(page.getByTestId("password-error")).toHaveText(
+      "Password should have at least 6 characters*"
+    );
 
-  await page.getByPlaceholder("Password", { exact: true }).click();
-  await page.getByPlaceholder("Password", { exact: true }).fill("!23456");
-  await page.getByPlaceholder("Confirm password").click();
-  await page.getByPlaceholder("Confirm password").fill("123456");
-  await page.getByRole("button", { name: "SignUp" }).click();
-  await page.getByText("Password should be the same*").click();
-});
+    //error message if confirm password is not the same
 
-test("Successful SignUp", async ({ page }) => {
-  await page.goto("http://localhost:5173/");
-  await page.getByRole("link", { name: "Create account" }).click();
+    await page.getByPlaceholder("Password", { exact: true }).fill("!23456");
 
-  //enter data for new user
+    await page.getByPlaceholder("Confirm password").fill("123456");
+    await page.getByRole("button", { name: "SignUp" }).click();
+    await expect(page.getByTestId("confirm-password-error")).toHaveText(
+      "Password should be the same*"
+    );
+  });
 
-  await page
-    .getByRole("heading", { name: "Fill out the fields to create" })
-    .click();
-  await page.getByPlaceholder("User name").click();
-  await page.getByPlaceholder("User name").fill("kasia");
-  await page.getByPlaceholder("User age").click();
-  await page.getByPlaceholder("User age").fill("24");
-  await page.getByRole("img", { name: "Avatar 8" }).click();
-  await page.getByPlaceholder("User email").click();
-  await page.getByPlaceholder("User email").fill("kasia@gmail.com");
-  await page.getByPlaceholder("Password", { exact: true }).click();
-  await page.getByPlaceholder("Password", { exact: true }).fill("!23456");
-  await page.getByPlaceholder("Confirm password").click();
-  await page.getByPlaceholder("Confirm password").fill("!23456");
+  test("Successful SignUp", async ({ page }) => {
+    await page.goto("http://localhost:5173/");
+    await page.getByRole("link", { name: "Create account" }).click();
 
-  //create new user
+    //enter data for new user
 
-  await page.getByRole("button", { name: "SignUp" }).click();
+    await expect(page.getByTestId("welcome-message")).toHaveText(
+      "Fill out the fields to create a new user:"
+    );
 
-  await page.waitForTimeout(3000);
+    await page.getByPlaceholder("User name").fill("kasia");
+    await page.getByPlaceholder("User age").fill("24");
+    await page.getByRole("img", { name: "Avatar 8" }).click();
+    await page.getByPlaceholder("User email").fill("kasia@gmail.com");
+    await page.getByPlaceholder("Password", { exact: true }).fill("!23456");
+    await page.getByPlaceholder("Confirm password").fill("!23456");
 
-  await page.getByRole("heading", { name: "Welcome, new PiCounter!" }).click();
-  await page.getByRole("link", { name: "Go to login" }).click();
+    //create new user
 
-  //login
+    await page.getByRole("button", { name: "SignUp" }).click();
 
-  await page.getByPlaceholder("User name").click();
-  await page.getByPlaceholder("User name").fill("kasia");
-  await page.getByPlaceholder("User password").click();
-  await page.getByPlaceholder("User password").fill("!23456");
-  await page.getByRole("button", { name: "Login" }).click();
+    await page.waitForTimeout(3000);
 
-  await page.getByRole("heading", { name: "kasia" }).click();
+    await expect(page.getByTestId("welcome-message")).toHaveText(
+      "Welcome, new PiCounter!"
+    );
+
+    await page.getByTestId("link-to-login").click();
+
+    await page.waitForTimeout(3000);
+
+    const currentUrl = page.url();
+    expect(currentUrl).toEqual("http://localhost:5173/login");
+
+    //login
+
+    await page.getByPlaceholder("User name").fill("kasia");
+    await page.getByPlaceholder("User password").fill("!23456");
+    await page.getByRole("button", { name: "Login" }).click();
+
+    await expect(page.getByTestId("username")).toHaveText("kasia");
+  });
 });
