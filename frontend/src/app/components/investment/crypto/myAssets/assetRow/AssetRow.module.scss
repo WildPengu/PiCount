@@ -1,7 +1,7 @@
 .assetRow {
   display: grid;
-  grid-template-columns: 28% 24% 24% 24%;
-  padding: 8px;
+  grid-template-columns: 19% 19% 19% 19% 7% 7% 7% 3%;
+  padding: 8px 0;
   align-items: center;
   transition: 0.3s;
   border-radius: 10px;
@@ -41,7 +41,15 @@
     }
   }
 
-  .todaysPnL {
-    color: #0fac6f;
+  .trashIcon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+
+    &:hover {
+      color: #EF454A;
+    }
   }
 }

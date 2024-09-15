@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 interface Crypto {
+  cryptoId: string;
   name: string;
   symbol: string;
   amount: number;
@@ -69,7 +70,7 @@ router.get('/crypto/:id', async (req, res) => {
         const logo =
           'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png';
 
-        cryptoQuotes[symbol] = { name, symbol, amount, logo, quote };
+        cryptoQuotes[symbol] = { cryptoId, name, symbol, amount, logo, quote };
         numProcessed++;
 
         if (numProcessed === cryptoAssets.size) {
@@ -84,4 +85,56 @@ router.get('/crypto/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.delete('/crypto/:id/:cryptoId', async (req, res) => {
+  const cryptoId = req.params.cryptoId;
+  const userId = req.params.id;
+
+  try {
+    const userAssets = await UserAssets.findOne({ userId: userId });
+
+    if (!userAssets) {
+      return res.status(404).json({ message: 'User assets not found' });
+    }
+
+    const cryptoAssets = userAssets.assets.crypto;
+    if (cryptoAssets.has(cryptoId)) {
+      cryptoAssets.delete(cryptoId);
+    }
+
+    await userAssets.save();
+
+    res.json({ message: `Crypto asset with ID ${cryptoId} has been deleted` });
+  } catch (error) {
+    console.error('Error deleting crypto asset:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.patch('/crypto/:id/:cryptoId', async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const cryptoId = req.params.cryptoId;
+
+  try {
+    const userAssets = await UserAssets.findOne({ userId: userId });
+    if (!userAssets) {
+      return res.status(404).json({ message: 'User assets not found' });
+    }
+
+    const cryptoToUpdate = userAssets.assets.crypto.get(cryptoId);
+
+    if (!cryptoToUpdate) {
+      return res.status(404).json({ message: 'Crypto asset not found' });
+    }
+
+    cryptoToUpdate.amount = req.body.amount;
+
+    await userAssets.save();
+
+    res.json(cryptoToUpdate);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default router;
