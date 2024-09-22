@@ -7,6 +7,7 @@ import Button from "../../button/Button";
 import { Color } from "../../../types/Enums";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { ChangePassword } from "./changePassword/ChangePassword";
 
 export const PersonalData = () => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
@@ -32,12 +33,7 @@ export const PersonalData = () => {
         className={styles.AccordionContainer}
         style={{ display: isAccordionOpen ? "none" : "block" }}
       >
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit neque
-          ipsum iure facere, perferendis ut quae accusamus unde culpa amet
-          possimus nam sint saepe dolore iste expedita? Provident, quo
-          molestiae.
-        </p>
+        <ChangePassword />
       </div>
     </div>
   );
