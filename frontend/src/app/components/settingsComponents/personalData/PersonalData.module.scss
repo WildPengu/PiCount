@@ -1,0 +1,26 @@
+.PersonalDataContainer {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: all 0.4s;
+
+  .HeaderContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px 0;
+    margin: 10px auto;
+    height: 100%;
+    width: 100%;
+    transition: 0.4s;
+
+    h2 {
+      margin: 0 auto;
+    }
+  }
+
+  .AccordionContainer {
+    padding: 0 18px;
+    overflow: hidden;
+  }
+}
