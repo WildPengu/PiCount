@@ -20,7 +20,12 @@
 
   "settingsComponent": {
     "theme": "Dark / Light Mode",
-    "language": "Choose Your Language"
+    "language": "Choose Your Language",
+    "personalData": "Edit User Information",
+    "changePass": "Change Your Password",
+    "oldPass": "Old password",
+    "newPass": "New password",
+    "change": "Change"
   },
 
   "loginComponent": {
