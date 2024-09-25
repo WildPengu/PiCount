@@ -36,6 +36,17 @@ Content-Type: application/json
   "email": "dasdasd@gmail.com"
 }
 
+###
+
+PATCH http://localhost:3000/users/65f6ee6ae97908a96da1b3f4
+Content-Type: application/json
+
+{
+  "password": "bubus123",
+  "name": "dupciowicz",
+  "avatar": "/src/app/img/avatarsImage/squirtle-avatar-glass.jpg"
+}
+
 //Expenses
 
 ###
