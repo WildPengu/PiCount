@@ -85,7 +85,9 @@ export const AddExpense = ({ setIsModalVisible }: ModalProps) => {
 
   return (
     <div className={styles.AddExpense}>
-      <h2 className={styles.AddExpenseH2}>{t("addNewExpense.addNewEx")}</h2>
+      <h2 className={styles.AddExpenseH2} data-testid='add-expense-h2'>
+        {t("addNewExpense.addNewEx")}
+      </h2>
       <form className={styles.FormAddExpense} onSubmit={addExpense}>
         <SelectCategory setCategory={setCategory} t={t} />
         <label htmlFor='desc' className={styles.FormAddExpenseLabel}>
