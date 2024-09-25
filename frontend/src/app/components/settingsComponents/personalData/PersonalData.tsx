@@ -8,16 +8,17 @@ import { Color } from "../../../types/Enums";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { ChangePassword } from "./changePassword/ChangePassword";
+import { ChangeAvatar } from "./changeAvatar/ChangeAvatar";
 
 export const PersonalData = () => {
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [isAccordionOpen, setIsAccordionOpen] = useState(true);
   const { t } = useTranslation();
   const { theme } = useContext(ThemeContext);
 
   const handleAccordionButton = () => {
-    console.log("click");
     setIsAccordionOpen(!isAccordionOpen);
   };
+
   return (
     <div className={`${styles.PersonalDataContainer} ${theme}Container`}>
       <div className={styles.HeaderContainer}>
@@ -26,7 +27,7 @@ export const PersonalData = () => {
           backgroundColor={Color.transparent}
           onClick={() => handleAccordionButton()}
         >
-          <FontAwesomeIcon icon={isAccordionOpen ? faAngleUp : faAngleDown} />
+          <FontAwesomeIcon icon={isAccordionOpen ? faAngleDown : faAngleUp} />
         </Button>
       </div>
       <div
@@ -34,6 +35,7 @@ export const PersonalData = () => {
         style={{ display: isAccordionOpen ? "none" : "block" }}
       >
         <ChangePassword />
+        <ChangeAvatar />
       </div>
     </div>
   );

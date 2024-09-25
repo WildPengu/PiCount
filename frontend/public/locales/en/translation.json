@@ -25,7 +25,8 @@
     "changePass": "Change Your Password",
     "oldPass": "Old password",
     "newPass": "New password",
-    "change": "Change"
+    "change": "Change",
+    "changeAva": "Change Your Avatar"
   },
 
   "loginComponent": {
