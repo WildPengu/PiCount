@@ -57,7 +57,8 @@
     "validationPass2": "Password shouldn`t have empty characters*",
     "validationPass3": "Password must contain one of charts: ! # @ $ %",
     "validationConfPass": "Password should be the same*",
-    "validationNameAndEmail": "Username or email has been used"
+    "validationNameAndEmail": "Username or email has been used",
+    "validationOldPass": "Please fill your old password"
   },
 
   "addNewExpense": {
