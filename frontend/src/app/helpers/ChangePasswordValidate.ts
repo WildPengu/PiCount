@@ -1,7 +1,7 @@
-import "../i18next";
-import { Dispatch, SetStateAction } from "react";
-import { ChangeUserPasswordForm } from "../../types/LoginForm";
-import { AppSettingsProvider } from "../config";
+import { Dispatch, SetStateAction } from 'react';
+import { ChangeUserPasswordForm } from '../../types/LoginForm';
+import { AppSettingsProvider } from '../config';
+import '../i18next';
 
 interface ChangeUserPasswordType {
   validationOldPass: string;
@@ -10,7 +10,6 @@ interface ChangeUserPasswordType {
   validationPass3: string;
   validationConfPass: string;
 }
-const { appSettings } = AppSettingsProvider();
 
 export const ChangePasswordValidate = async (
   formData: ChangeUserPasswordForm,
@@ -22,23 +21,25 @@ export const ChangePasswordValidate = async (
     newPass: false,
     confirmNewPass: false,
   };
-  console.log(appSettings);
+
+  const { appSettings } = AppSettingsProvider();
+
   const {
     validationOldPass,
     validationPass1,
     validationPass2,
     validationPass3,
     validationConfPass,
-  } = t("signUpComponent") as unknown as ChangeUserPasswordType;
+  } = t('signUpComponent') as unknown as ChangeUserPasswordType;
 
   //old password validacion
   const url = `${appSettings.apiHost}:${appSettings.apiPort}/${appSettings.user_id}`;
 
   try {
     const response = await fetch(url, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         password: formData.oldPass,
@@ -60,7 +61,7 @@ export const ChangePasswordValidate = async (
       ...prevErrors,
       oldPass: validationOldPass,
     }));
-    console.error("Błąd weryfikacji starego hasła:", error);
+    console.error('Błąd weryfikacji starego hasła:', error);
   }
 
   //new password validation
