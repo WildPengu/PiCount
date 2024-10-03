@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useState, ReactNode } from "react";
+import React, { useEffect, createContext, useState, ReactNode } from 'react';
 
 interface ThemeContextProps {
   theme: string;
@@ -7,7 +7,7 @@ interface ThemeContextProps {
 }
 
 export const ThemeContext = createContext<ThemeContextProps>({
-  theme: "DarkTheme",
+  theme: 'DarkTheme',
   setTheme: () => {},
   toggleTheme: () => {},
 });
@@ -17,10 +17,10 @@ interface ThemeProviderProps {
 }
 
 const getTheme = (): string => {
-  const theme = localStorage.getItem("theme");
+  const theme = localStorage.getItem('theme');
   if (!theme) {
-    localStorage.setItem("theme", "DarkTheme");
-    return "DarkTheme";
+    localStorage.setItem('theme', 'DarkTheme');
+    return 'DarkTheme';
   } else {
     return theme;
   }
@@ -31,13 +31,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
-      prevTheme === "DarkTheme" ? "LightTheme" : "DarkTheme"
+      prevTheme === 'DarkTheme' ? 'LightTheme' : 'DarkTheme',
     );
   };
 
   useEffect(() => {
     const refreshTheme = () => {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem('theme', theme);
     };
 
     refreshTheme();

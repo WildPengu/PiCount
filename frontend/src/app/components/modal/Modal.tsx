@@ -1,6 +1,6 @@
-import { ReactNode, useContext } from "react";
-import styles from "./Modal.module.scss";
-import { ThemeContext } from "../../Theme";
+import { ReactNode, useContext } from 'react';
+import styles from './Modal.module.scss';
+import { ThemeContext } from '../../Theme';
 
 interface ModalProps {
   children: ReactNode;

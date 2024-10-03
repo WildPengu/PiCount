@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import "../../i18next";
-import styles from "./ExpenseItem.module.scss";
-import { Expense, ExpensesCategories } from "../../../types/Expense";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import '../../i18next';
+import styles from './ExpenseItem.module.scss';
+import { Expense, ExpensesCategories } from '../../../types/Expense';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPaw,
   faCartShopping,
@@ -19,11 +19,11 @@ import {
   faDollarSign,
   faTrashCan,
   IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
-import { selectExpensesCategories } from "../../../stores/userModule/selectors";
-import { AppSettingsProvider } from "../../config";
-import { updateExpenses } from "../../../stores/userModule/actions";
-import { ThemeContext } from "../../Theme";
+} from '@fortawesome/free-solid-svg-icons';
+import { selectExpensesCategories } from '../../../stores/userModule/selectors';
+import { AppSettingsProvider } from '../../config';
+import { updateExpenses } from '../../../stores/userModule/actions';
+import { ThemeContext } from '../../Theme';
 
 interface ExpenseItemProps {
   expense: Expense;
@@ -35,11 +35,11 @@ interface IconMappings {
 
 export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
   const expensesCategories: ExpensesCategories[] = useSelector(
-    selectExpensesCategories
+    selectExpensesCategories,
   );
   const { appSettings } = AppSettingsProvider();
   const categoryInfo = expensesCategories.find(
-    (category: { name: string }) => category.name === expense.category
+    (category: { name: string }) => category.name === expense.category,
   );
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -67,15 +67,15 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
     fetch(
       `${appSettings.apiHost}:${appSettings.apiPort}/expenses/${appSettings.user_id}/expenses/${expense._id}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     )
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         return response.json();
       })
@@ -83,7 +83,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
         dispatch(updateExpenses(data));
       })
       .catch((error) => {
-        console.error("Wystąpił błąd sieci:", error);
+        console.error('Wystąpił błąd sieci:', error);
       });
   };
 
@@ -98,7 +98,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense }) => {
             {categoryInfo && (
               <FontAwesomeIcon
                 icon={selectedIcon || faDollarSign}
-                color='white'
+                color="white"
               />
             )}
           </div>

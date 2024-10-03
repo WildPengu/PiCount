@@ -1,8 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import styles from "./Selectcategory.module.scss";
-import { AppSettingsProvider } from "../../config";
-import "../../i18next";
-import { TFunction } from "i18next";
+import { ChangeEvent, useEffect, useState } from 'react';
+import styles from './Selectcategory.module.scss';
+import { AppSettingsProvider } from '../../config';
+import '../../i18next';
+import { TFunction } from 'i18next';
 
 export interface Category {
   _id: string;
@@ -12,7 +12,7 @@ export interface Category {
 export interface SelectCategoryProps {
   setCategory?: (category: string) => void;
   selectModal?: string;
-  t: TFunction<"translation", undefined>;
+  t: TFunction<'translation', undefined>;
 }
 
 export const SelectCategory = ({
@@ -21,23 +21,23 @@ export const SelectCategory = ({
   t,
 }: SelectCategoryProps) => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [activeOption, setActiveOption] = useState<string>("");
+  const [activeOption, setActiveOption] = useState<string>('');
   const { appSettings } = AppSettingsProvider();
 
   useEffect(() => {
     async function fetchCategories() {
       try {
         const response = await fetch(
-          `${appSettings.apiHost}:${appSettings.apiPort}/expensesCategories`
+          `${appSettings.apiHost}:${appSettings.apiPort}/expensesCategories`,
         );
 
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         const data = await response.json();
         setCategories(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     }
     fetchCategories();
@@ -49,10 +49,10 @@ export const SelectCategory = ({
   };
 
   useEffect(() => {
-    if (selectModal === "filter") {
-      setActiveOption("All");
+    if (selectModal === 'filter') {
+      setActiveOption('All');
     } else {
-      setActiveOption("Shopping");
+      setActiveOption('Shopping');
     }
   }, []);
 
@@ -62,18 +62,18 @@ export const SelectCategory = ({
 
   return (
     <div className={styles.SelectCategory}>
-      <label htmlFor='typeOfExpense' className={styles.CategoryLabel}>
-        {t("addNewExpense.selectCat")}
+      <label htmlFor="typeOfExpense" className={styles.CategoryLabel}>
+        {t('addNewExpense.selectCat')}
       </label>
       <select
-        id='typeOfExpense'
+        id="typeOfExpense"
         className={styles.CategoryOfExpense}
         onChange={(e) => handleChangeCategory(e)}
         value={activeOption}
       >
-        {selectModal === "filter" ? (
-          <option key={"All"} value={"All"}>
-            {t("category.All")}
+        {selectModal === 'filter' ? (
+          <option key={'All'} value={'All'}>
+            {t('category.All')}
           </option>
         ) : null}
         {categories.map((category) => (

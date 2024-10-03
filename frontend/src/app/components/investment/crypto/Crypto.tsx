@@ -1,19 +1,18 @@
-import { useState } from "react";
-import { AppSettingsProvider } from "../../../config";
+import { useState } from 'react';
+import { AppSettingsProvider } from '../../../config';
 import styles from './Crypto.module.scss';
-import { MyAssets } from "./myAssets/MyAssets";
+import { MyAssets } from './myAssets/MyAssets';
 
 interface InvestProps {
   setLoading: (loading: boolean) => void;
 }
 
 enum ActiveView {
-  Chart = "chart",
-  MyAssets = "myAssets"
+  Chart = 'chart',
+  MyAssets = 'myAssets',
 }
 
 export const Crypto: React.FC<InvestProps> = ({ setLoading }) => {
-
   const { appSettings } = AppSettingsProvider();
   const [activeView, setActiveView] = useState(ActiveView.MyAssets);
 
@@ -36,8 +35,22 @@ export const Crypto: React.FC<InvestProps> = ({ setLoading }) => {
   return (
     <div>
       <div className={styles.cryptoHeader}>
-        <h2 className={styles.cryptoHeaderText} onClick={() => { setActiveView(ActiveView.MyAssets) }}>My Assets</h2>
-        <h2 className={styles.cryptoHeaderText} onClick={() => { setActiveView(ActiveView.Chart) }}>All Crypto</h2>
+        <h2
+          className={styles.cryptoHeaderText}
+          onClick={() => {
+            setActiveView(ActiveView.MyAssets);
+          }}
+        >
+          My Assets
+        </h2>
+        <h2
+          className={styles.cryptoHeaderText}
+          onClick={() => {
+            setActiveView(ActiveView.Chart);
+          }}
+        >
+          All Crypto
+        </h2>
       </div>
       {activeView === ActiveView.MyAssets && <MyAssets />}
       {activeView === ActiveView.Chart && <div>hik</div>}

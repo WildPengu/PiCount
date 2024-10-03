@@ -1,4 +1,4 @@
-import { Expense, ExpensesCategories } from "./Expense";
+import { Expense, ExpensesCategories } from './Expense';
 
 export interface User {
   _id: string;

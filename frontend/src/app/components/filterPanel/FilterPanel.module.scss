@@ -1,27 +1,27 @@
 @import '../../../scss/Variables.module.scss';
 
 .FilterPanel {
-    padding: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+
+  .FilterPanelH2 {
+    @extend %gradient-txt;
+  }
+
+  .FilterForm {
     display: flex;
     flex-direction: column;
 
-    .FilterPanelH2 {
-        @extend %gradient-txt;
+    .FilterPanelContainer {
+      display: flex;
+      & > * {
+        margin: 10px;
+      }
     }
 
-    .FilterForm {
-        display: flex;
-        flex-direction: column;
-    
-        .FilterPanelContainer {
-            display: flex;
-            & > * {
-                margin: 10px;
-            }
-        }
-
-        .ButtonsPanel > * {
-            margin: 10px 15px 20px 15px;
-        }
+    .ButtonsPanel > * {
+      margin: 10px 15px 20px 15px;
     }
+  }
 }

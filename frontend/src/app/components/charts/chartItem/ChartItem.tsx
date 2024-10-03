@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
-import "../../../i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DataItem } from "../../../../types/Chart";
-import styles from "./ChartItem.module.scss";
+import { useTranslation } from 'react-i18next';
+import '../../../i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DataItem } from '../../../../types/Chart';
+import styles from './ChartItem.module.scss';
 import {
   IconDefinition,
   faBagShopping,
@@ -16,7 +16,7 @@ import {
   faPaw,
   faSpa,
   faUtensils,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 interface IconMappings {
   [key: string]: IconDefinition;
@@ -48,7 +48,7 @@ export const ChartItem: React.FC<{ categoryItem: DataItem }> = ({
     <div className={styles.ChartItem}>
       <h4 style={{ color: color }}>{t(`category.${category}`)}</h4>
       <div className={styles.ChartItemIco} style={{ backgroundColor: color }}>
-        <FontAwesomeIcon icon={selectedIcon || faDollarSign} color='white' />
+        <FontAwesomeIcon icon={selectedIcon || faDollarSign} color="white" />
       </div>
       <h4 className={styles.ChartItemAmount} style={{ color: color }}>
         {value.toFixed(2)} ZŁ

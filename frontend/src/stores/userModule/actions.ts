@@ -2,12 +2,11 @@ import type { FSAAuto } from 'flux-standard-action';
 import type { Expense, InitializePayload, UsersState } from '../../types/users';
 import { ExpensesCategories } from '../../types/Expense';
 
-
 export enum UsersActionTypes {
   INITIALIZE = '[Users] INITIALIZE',
   UPDATE_EXPENSES = '[Expenses] UPDATE_EXPENSES',
   UPDATE_EXPENSES_CATEGORIES = '[Expenses] UPDATE_EXPENSES_CATEGORIES',
-  UPDATE_ACTIVE_USER_ID = "[Users] UPDATE_ACTIVE_USER_ID"
+  UPDATE_ACTIVE_USER_ID = '[Users] UPDATE_ACTIVE_USER_ID',
 }
 
 export type Initialize = FSAAuto<
@@ -36,24 +35,26 @@ export const initialize = (payload: InitializePayload): Initialize => ({
 });
 
 export const updateExpenses = (
-  payload: Record<string, Expense[]>
+  payload: Record<string, Expense[]>,
 ): UpdateExpenses => ({
   type: UsersActionTypes.UPDATE_EXPENSES,
   payload,
 });
 
 export const updateExpensesCategories = (
-  payload: ExpensesCategories[]
+  payload: ExpensesCategories[],
 ): UpdateExpensesCategories => ({
   type: UsersActionTypes.UPDATE_EXPENSES_CATEGORIES,
   payload,
 });
 
-export const updateActiveUserId = (
-  payload: string
-): UpdateActiveUserId => ({
+export const updateActiveUserId = (payload: string): UpdateActiveUserId => ({
   type: UsersActionTypes.UPDATE_ACTIVE_USER_ID,
   payload,
 });
 
-export type UserAction = Initialize | UpdateExpenses | UpdateExpensesCategories | UpdateActiveUserId;
+export type UserAction =
+  | Initialize
+  | UpdateExpenses
+  | UpdateExpensesCategories
+  | UpdateActiveUserId;

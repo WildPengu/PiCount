@@ -1,4 +1,4 @@
-@import "../../../../scss/Variables.module.scss";
+@import '../../../../scss/Variables.module.scss';
 
 .BarChart {
   li,
@@ -9,7 +9,7 @@
     -webkit-text-fill-color: transparent;
   }
 
-  div[role="dialog"] {
+  div[role='dialog'] {
     div {
       background-color: $bgc-hover-light !important;
       border: 1px solid $blue !important;

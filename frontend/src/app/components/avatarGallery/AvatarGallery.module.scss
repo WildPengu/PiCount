@@ -1,24 +1,24 @@
 @import '../../../scss/Variables.module.scss';
 
 .AvatarGalleryContainer {
-    margin: 10px 0;
-    .AvatarGalleryTxt {
-        text-align: left;
+  margin: 10px 0;
+  .AvatarGalleryTxt {
+    text-align: left;
+  }
+  .AvatarGallery {
+    display: flex;
+    flex-wrap: wrap;
+    img {
+      margin: 5px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      height: 80px;
+      width: 80px;
+
+      &.SelectedAvatar {
+        border-color: $violet;
+      }
     }
-    .AvatarGallery {
-        display: flex;
-        flex-wrap: wrap;
-        img {
-            margin: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            border-radius: 50%;
-            height: 80px;
-            width: 80px;
-             
-            &.SelectedAvatar {
-                border-color: $violet;
-            }
-        }
-    }
+  }
 }

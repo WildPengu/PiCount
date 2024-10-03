@@ -10,7 +10,7 @@ const initialState: UsersState = {
 
 export const usersReducer = (
   state: UsersState = initialState,
-  action: UserAction
+  action: UserAction,
 ): UsersState => {
   switch (action.type) {
     case UsersActionTypes.INITIALIZE:
@@ -32,7 +32,7 @@ export const usersReducer = (
       return {
         ...state,
         activeUserId: action.payload,
-      };      
+      };
     default:
       return state;
   }

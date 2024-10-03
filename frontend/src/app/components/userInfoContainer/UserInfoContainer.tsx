@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import styles from "./UserInfoContainer.module.scss";
-import { selectActiveUserId, selectUsers } from "../../../stores/userModule";
-import logo from "../../img/avatarsImage/logo-pikachu.jpg";
+import { useSelector } from 'react-redux';
+import styles from './UserInfoContainer.module.scss';
+import { selectActiveUserId, selectUsers } from '../../../stores/userModule';
+import logo from '../../img/avatarsImage/logo-pikachu.jpg';
 
 export const UserInfoContainer = () => {
   const users = useSelector(selectUsers);
@@ -17,8 +17,8 @@ export const UserInfoContainer = () => {
             alt={users[activeUserId]?.name}
           />
         </div>
-        <h3 className={styles.AppNavUsername} data-testid='username'>
-          {activeUserId ? users[activeUserId]?.name : "PiCount"}
+        <h3 className={styles.AppNavUsername} data-testid="username">
+          {activeUserId ? users[activeUserId]?.name : 'PiCount'}
         </h3>
       </div>
     </div>

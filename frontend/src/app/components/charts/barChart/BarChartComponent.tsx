@@ -7,9 +7,9 @@ import {
   ResponsiveContainer,
   BarChart,
   Cell,
-} from "recharts";
-import { DataItems } from "../../../../types/Chart";
-import styles from "./BarChartComponent.module.scss";
+} from 'recharts';
+import { DataItems } from '../../../../types/Chart';
+import styles from './BarChartComponent.module.scss';
 
 export interface PieChartProps extends IndexType {
   dataChart: DataItems;
@@ -21,7 +21,7 @@ export interface IndexType {
 
 export const BarChartComponent = ({ dataChart }: PieChartProps) => {
   return (
-    <ResponsiveContainer className={styles.BarChart} width='100%' height='100%'>
+    <ResponsiveContainer className={styles.BarChart} width="100%" height="100%">
       <BarChart
         width={500}
         height={300}
@@ -35,16 +35,16 @@ export const BarChartComponent = ({ dataChart }: PieChartProps) => {
         barSize={20}
       >
         <XAxis
-          dataKey='category'
-          scale='point'
+          dataKey="category"
+          scale="point"
           padding={{ left: 10, right: 10 }}
         />
         <YAxis />
         <Tooltip />
-        <CartesianGrid strokeDasharray='3 3' />
-        <Bar dataKey='value'>
+        <CartesianGrid strokeDasharray="3 3" />
+        <Bar dataKey="value">
           {dataChart.categories.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color || "#000000"} />
+            <Cell key={`cell-${index}`} fill={entry.color || '#000000'} />
           ))}
         </Bar>
       </BarChart>
