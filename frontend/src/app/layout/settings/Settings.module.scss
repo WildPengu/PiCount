@@ -7,8 +7,10 @@
     padding-bottom: 40px;
     width: calc(100vw - 200px);
 
-    div {
+    & > div {
       display: flex;
+      align-items: center;
+      justify-content: space-evenly;
       padding: 5px 0;
       margin: 10px auto;
       height: auto;
