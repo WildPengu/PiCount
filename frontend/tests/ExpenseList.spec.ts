@@ -1,23 +1,15 @@
 import { expect, test } from '@playwright/test';
-
-//all tests in english app version
+import { URL_EXPENSE } from './utils/constants';
+import { login } from './utils/login';
 
 test.describe('Expense list tests', () => {
-  const urlHome = 'http://localhost:5173/';
-  const urlExpense = 'http://localhost:5173/expenseList';
-  const userName = 'yarna';
-  const userPassword = '!23456';
   test('successful adding new expense', async ({ page }) => {
-    await page.goto(urlHome);
-    await page.getByTestId('login-link').click();
-    await page.getByTestId('login-username').fill(userName);
-    await page.getByTestId('login-password').fill(userPassword);
-    await page.getByTestId('login-button').click();
+    await login(page);
 
     await page.waitForTimeout(1500);
 
     const currentUrl = page.url();
-    expect(currentUrl).toEqual(urlExpense);
+    expect(currentUrl).toEqual(URL_EXPENSE);
 
     await page.getByTestId('add-expense-btn').click();
 
