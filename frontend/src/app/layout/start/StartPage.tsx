@@ -46,7 +46,7 @@ export const StartPage = () => {
         <Link to='/login' className={styles.Button} data-testid='login-link'>
           {t("login")}
         </Link>
-        <Link to='/signUp' className={styles.Button}>
+        <Link to='/signUp' className={styles.Button} data-testid='sign-up-link'>
           {t("create")}
         </Link>
       </div>

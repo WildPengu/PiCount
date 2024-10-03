@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { URL_EXPENSE } from './utils/constants';
+import { URL_EXPENSE, USER_NAME, USER_PASSWORD } from './utils/constants';
 import { login } from './utils/login';
 
 test.describe('Expense list tests', () => {
   test('successful adding new expense', async ({ page }) => {
-    await login(page);
+    await login(page, USER_NAME, USER_PASSWORD);
 
     await page.waitForTimeout(1500);
 

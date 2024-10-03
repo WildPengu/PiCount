@@ -1,5 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { APP_NAME, URL_HOME, USER_NAME } from './utils/constants';
+import {
+  APP_NAME,
+  URL_HOME,
+  USER_NAME,
+  USER_PASSWORD,
+} from './utils/constants';
 import { login } from './utils/login';
 
 test.describe('Language switcher tests', () => {
@@ -12,7 +17,7 @@ test.describe('Language switcher tests', () => {
     const textInPl = 'Wybierz Swój Język';
     const textInUa = 'Вибери мову застосунку';
 
-    await login(page);
+    await login(page, USER_NAME, USER_PASSWORD);
 
     await expect(page.getByTestId('username')).toHaveText(USER_NAME);
 

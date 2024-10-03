@@ -1,13 +1,15 @@
 import { expect, test } from '@playwright/test';
-import { APP_NAME, URL_HOME, USER_NAME } from './utils/constants';
+import {
+  APP_NAME,
+  URL_HOME,
+  USER_NAME,
+  USER_PASSWORD,
+} from './utils/constants';
 import { login } from './utils/login';
 
 test.describe('User login to PiCount', () => {
   test('successful login with correct data and logout', async ({ page }) => {
-    await page.goto(URL_HOME);
-    await page.getByRole('link', { name: 'Login' }).click();
-
-    await login(page);
+    await login(page, USER_NAME, USER_PASSWORD);
 
     const currentUrl = page.url();
     expect(currentUrl).toEqual(`${URL_HOME}expenseList`);
@@ -24,8 +26,8 @@ test.describe('User login to PiCount', () => {
 
     await page.goto(`${URL_HOME}login`);
 
-    await page.getByPlaceholder('User name').fill('agasia');
-    await page.getByPlaceholder('User password').fill('12qwerty');
+    await page.getByTestId('login-username').fill('agasia');
+    await page.getByTestId('login-password').fill('12qwerty');
     await page.getByRole('button', { name: 'Login' }).click();
 
     await expect(page.getByTestId('login-error')).toHaveText(errorMessage);
@@ -39,8 +41,8 @@ test.describe('User login to PiCount', () => {
 
     await page.goto(`${URL_HOME}login`);
 
-    await page.getByPlaceholder('User name').fill('');
-    await page.getByPlaceholder('User password').fill('');
+    await page.getByTestId('login-username').fill('');
+    await page.getByTestId('login-password').fill('');
     await page.getByRole('button', { name: 'Login' }).click();
 
     await expect(page.getByTestId('login-error')).toHaveText(errorMessage);
