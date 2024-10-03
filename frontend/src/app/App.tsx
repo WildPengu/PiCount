@@ -1,6 +1,6 @@
+import Cookies from 'js-cookie';
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Cookies from 'js-cookie';
 import {
   initialize,
   selectActiveUserId,
@@ -9,9 +9,9 @@ import {
 } from '../stores/userModule';
 import styles from './App.module.scss';
 import { AppNav } from './components/appNav/AppNav';
-import { AppRoutes } from './routes/AppRoutes';
-import { AppSettingsProvider } from './config';
 import { Footer } from './components/footer/Footer';
+import { AppSettingsProvider } from './config';
+import { AppRoutes } from './routes/AppRoutes';
 import { ThemeContext } from './Theme';
 
 export const App: React.FC = () => {

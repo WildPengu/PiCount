@@ -17,7 +17,7 @@ export const Validate = (
   setErrors: Dispatch<SetStateAction<SignUpForm>>,
   t: any,
 ): boolean => {
-  let validationErrors = {
+  const validationErrors = {
     name: false,
     avatar: false,
     email: false,
