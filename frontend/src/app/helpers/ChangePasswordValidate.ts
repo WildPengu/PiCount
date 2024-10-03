@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ChangeUserPasswordForm } from '../../types/LoginForm';
-import { AppSettingsProvider } from '../config';
 import '../i18next';
 
 interface ChangeUserPasswordType {
@@ -14,15 +13,14 @@ interface ChangeUserPasswordType {
 export const ChangePasswordValidate = async (
   formData: ChangeUserPasswordForm,
   setErrors: Dispatch<SetStateAction<ChangeUserPasswordForm>>,
-  t: any
+  t: any,
+  appSettings: any
 ): Promise<boolean> => {
   let validationErrors = {
     oldPass: false,
     newPass: false,
     confirmNewPass: false,
   };
-
-  const { appSettings } = AppSettingsProvider();
 
   const {
     validationOldPass,
@@ -37,7 +35,7 @@ export const ChangePasswordValidate = async (
 
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
