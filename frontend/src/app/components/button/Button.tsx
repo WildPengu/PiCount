@@ -9,6 +9,7 @@ export interface ButtonProps {
     onClick?: () => void;
     type?: 'submit' | 'button' | 'reset';
     formAction?: string;
+    dataTestId?: string;
 }
 
 const Button = ({ 
@@ -17,7 +18,8 @@ const Button = ({
     backgroundColor = Color.violet,
     isDisabled = false,
     type = 'button',
-    formAction = ''
+    formAction = '',
+    dataTestId,
 }: ButtonProps) => { 
 
     return (
@@ -28,6 +30,7 @@ const Button = ({
             disabled={isDisabled}
             type={type}
             formAction={formAction}
+            data-testid={dataTestId}
         >
             {children}
         </button>
