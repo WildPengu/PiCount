@@ -1,37 +1,35 @@
-import styles from './SignUp.module.scss';
-import { useTranslation } from 'react-i18next';
-import '../../i18next';
-import { SignUpForm } from '../../../types/SignUpForm';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../../components/button/Button';
-import { Validate } from '../../helpers/SignUpValidate';
-import { AppSettingsProvider } from '../../config';
-import { TopPanel } from '../../components/topPanel/TopPanel';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faRightFromBracket,
   faRightToBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { SignUpForm } from '../../../types/SignUpForm';
 import { AvatarGallery } from '../../components/avatarGallery/AvatarGallery';
+import Button from '../../components/button/Button';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { AppSettingsProvider } from '../../config';
+import { Validate } from '../../helpers/SignUpValidate';
+import '../../i18next';
+import styles from './SignUp.module.scss';
 
-import eeve from '../../img/avatarsImage/eeve-avatar.jpg';
-import charizard from '../../img/avatarsImage/charizard-avatar.jpg';
+import ash from '../../img/avatarsImage/ash-with-pikachu.png';
 import bulbasaur from '../../img/avatarsImage/bulbasaur-avatar.jpg';
+import charizard from '../../img/avatarsImage/charizard-avatar.jpg';
 import charmander from '../../img/avatarsImage/charmander-avatar.png';
+import eeve from '../../img/avatarsImage/eeve-avatar.jpg';
 import jigglypuff from '../../img/avatarsImage/jigglypuff-avatar.jpg';
+import logo from '../../img/avatarsImage/logo-pikachu.jpg';
 import piplup from '../../img/avatarsImage/piplup-avatar.png';
 import piplup2 from '../../img/avatarsImage/piplup-avatar2.jpg';
-import squirtle from '../../img/avatarsImage/squirtle-avatar.jpg';
 import squirtle2 from '../../img/avatarsImage/squirtle-avatar-glass.jpg';
-import logo from '../../img/avatarsImage/logo-pikachu.jpg';
-import ash from '../../img/avatarsImage/ash-with-pikachu.png';
+import squirtle from '../../img/avatarsImage/squirtle-avatar.jpg';
 
 export const SignUp = () => {
   const { appSettings } = AppSettingsProvider();
-  const [selectedAvatar, setSelectedAvatar] = useState<string>('');
   const { t } = useTranslation();
-
   const [formData, setFormData] = useState<SignUpForm>({
     name: '',
     age: null,
@@ -54,7 +52,6 @@ export const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleAvatarSelect = (avatar: string) => {
-    setSelectedAvatar(avatar);
     setFormData({
       ...formData,
       avatar: avatar,
@@ -103,7 +100,6 @@ export const SignUp = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
       setSignUpDone(true);
       setFormData({
         name: '',
@@ -113,7 +109,6 @@ export const SignUp = () => {
         password: '',
         confirmPassword: '',
       });
-      setSelectedAvatar('');
     } catch (error) {
       setErrorMessage(t('signUpComponent.validationNameAndEmail'));
       console.error('Błąd pobierania danych:', error);

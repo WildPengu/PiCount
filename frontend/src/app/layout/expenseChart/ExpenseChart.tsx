@@ -1,27 +1,27 @@
-import { SetStateAction, useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import '../../i18next';
-import Button from '../../components/button/Button';
-import styles from './ExpenseChart.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChartColumn,
   faChartPie,
   faFilter,
 } from '@fortawesome/free-solid-svg-icons';
-import { Modal } from '../../components/modal/Modal';
-import { FilterPanel } from '../../components/filterPanel/FilterPanel';
-import { TopPanel } from '../../components/topPanel/TopPanel';
-import { AppSettingsProvider } from '../../config';
-import { PieChartComponent } from '../../components/charts/pieChart/PieChartComponent';
-import { Loader } from '../../components/loader/Loader';
-import { DataItems } from '../../../types/Chart';
-import { ChartItem } from '../../components/charts/chartItem/ChartItem';
-import { BarChartComponent } from '../../components/charts/barChart/BarChartComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SetStateAction, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { selectActiveUserId } from '../../../stores/userModule';
-import { Color } from '../../types/Enums';
+import { DataItems } from '../../../types/Chart';
+import Button from '../../components/button/Button';
+import { BarChartComponent } from '../../components/charts/barChart/BarChartComponent';
+import { ChartItem } from '../../components/charts/chartItem/ChartItem';
+import { PieChartComponent } from '../../components/charts/pieChart/PieChartComponent';
+import { FilterPanel } from '../../components/filterPanel/FilterPanel';
+import { Loader } from '../../components/loader/Loader';
+import { Modal } from '../../components/modal/Modal';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { AppSettingsProvider } from '../../config';
+import '../../i18next';
 import { ThemeContext } from '../../Theme';
+import { Color } from '../../types/Enums';
+import styles from './ExpenseChart.module.scss';
 
 export const ExpenseChart = () => {
   const [loading, setLoading] = useState(true);
@@ -58,7 +58,7 @@ export const ExpenseChart = () => {
         console.error('Błąd pobierania danych:', error);
         setLoading(false);
       });
-  }, []);
+  }, [appSettings.apiHost, appSettings.apiPort, activeUserId]);
 
   return (
     <div className={styles.ExpenseChart}>

@@ -7,7 +7,6 @@ export interface Expense {
 }
 
 export interface ExpensesCategories {
-  [x: string]: any;
   name: string;
   image: string;
   color: string;

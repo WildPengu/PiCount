@@ -1,25 +1,25 @@
+import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import '../../i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectActiveUserId,
   selectExpenses,
   updateExpenses,
 } from '../../../stores/userModule';
 import { Expense } from '../../../types/Expense';
-import { ExpenseItem } from '../../components/expense/ExpenseItem';
-import { FilterPanel } from '../../components/filterPanel/FilterPanel';
-import { AppSettingsProvider } from '../../config';
-import styles from './ExpenseList.module.scss';
-import { Modal } from '../../components/modal/Modal';
 import { AddExpense } from '../../components/addExpense/AddExpense';
 import Button from '../../components/button/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
-import { TopPanel } from '../../components/topPanel/TopPanel';
+import { ExpenseItem } from '../../components/expense/ExpenseItem';
+import { FilterPanel } from '../../components/filterPanel/FilterPanel';
 import { Loader } from '../../components/loader/Loader';
+import { Modal } from '../../components/modal/Modal';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { AppSettingsProvider } from '../../config';
+import '../../i18next';
 import { Color } from '../../types/Enums';
+import styles from './ExpenseList.module.scss';
 
 export const ExpenseList = () => {
   const [isModalFilterVisible, setIsModalFilterVisible] = useState(false);
@@ -51,7 +51,7 @@ export const ExpenseList = () => {
         console.error('Błąd pobierania danych:', error);
         setLoading(false);
       });
-  }, [activeUserId]);
+  }, [activeUserId, appSettings.apiHost, appSettings.apiPort, dispatch]);
 
   const expenses: Record<string, Expense[]> = useSelector(selectExpenses);
   const todayDate = new Date().toISOString().split('T')[0];

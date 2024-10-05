@@ -1,6 +1,7 @@
-import '../i18next';
+import { TFunction } from 'i18next';
 import { Dispatch, SetStateAction } from 'react';
 import { SignUpForm } from '../../types/SignUpForm';
+import '../i18next';
 
 interface SignUpType {
   validationName: string;
@@ -15,7 +16,7 @@ interface SignUpType {
 export const Validate = (
   formData: SignUpForm,
   setErrors: Dispatch<SetStateAction<SignUpForm>>,
-  t: any,
+  t: TFunction,
 ): boolean => {
   const validationErrors = {
     name: false,

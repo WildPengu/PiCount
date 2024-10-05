@@ -6,7 +6,6 @@ export interface DataItem {
 }
 
 export interface DataItems {
-  [x: string]: any;
   totalAmount?: number;
   categories: DataItem[];
 }

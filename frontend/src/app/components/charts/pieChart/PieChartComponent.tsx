@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { PieChart, Pie, ResponsiveContainer, Sector, Cell } from 'recharts';
-import { DataItems } from '../../../../types/Chart';
 import { TFunction } from 'i18next';
+import React, { useState } from 'react';
+import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts';
+import { DataItems } from '../../../../types/Chart';
 
 export interface PieChartProps {
   dataChart: DataItems;
@@ -21,7 +21,6 @@ export interface ActiveShapeProps extends PieChartProps {
   startAngle: number;
   endAngle: number;
   fill: string;
-  payload?: any;
   percent: number;
   value: number;
   category: string;

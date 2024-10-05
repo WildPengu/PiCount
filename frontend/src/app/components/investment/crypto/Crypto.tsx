@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { AppSettingsProvider } from '../../../config';
 import styles from './Crypto.module.scss';
 import { MyAssets } from './myAssets/MyAssets';
 
@@ -12,8 +11,8 @@ enum ActiveView {
   MyAssets = 'myAssets',
 }
 
-export const Crypto: React.FC<InvestProps> = ({ setLoading }) => {
-  const { appSettings } = AppSettingsProvider();
+export const Crypto: React.FC<InvestProps> = () => {
+  //const { appSettings } = AppSettingsProvider();
   const [activeView, setActiveView] = useState(ActiveView.MyAssets);
 
   // useEffect(() => {

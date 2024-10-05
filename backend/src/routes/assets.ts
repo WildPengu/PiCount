@@ -11,15 +11,36 @@ interface Crypto {
   symbol: string;
   amount: number;
   logo: string;
-  quote: any;
+  quote: Quote;
 }
 
-const key = '4cd90ce2-58d6-4c3a-8250-f4c2bb444ad3';
+interface QuoteData {
+  price: number;
+  volume_24h: number;
+  volume_change_24h: number;
+  percent_change_1h: number;
+  percent_change_24h: number;
+  percent_change_7d: number;
+  percent_change_30d: number;
+  percent_change_60d: number;
+  percent_change_90d: number;
+  market_cap: number;
+  market_cap_dominance: number;
+  fully_diluted_market_cap: number;
+  tvl: number | null;
+  last_updated: string;
+}
+
+interface Quote {
+  USD: QuoteData;
+}
+
+const key = '55a866d8-fc5f-479b-8206-15fa987e95f0';
 
 // Update assets
 router.patch('/crypto/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
-
+  console.log('hej');
   try {
     const userAssets = await UserAssets.findOne({ userId: userId });
 
@@ -64,7 +85,7 @@ router.get('/crypto/:id', async (req, res) => {
       try {
         const quoteResponse = await axios.get(quoteUrl);
         const { name, quote } = quoteResponse.data.data[symbol];
-
+        console.log(quote);
         // const logoResponse = await axios.get(infoUrl);
         // const logo = logoResponse.data.data[symbol]['0'].logo;
         const logo =

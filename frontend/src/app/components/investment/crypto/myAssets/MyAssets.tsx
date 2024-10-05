@@ -11,15 +11,36 @@ export interface Crypto {
   symbol: string;
   amount: number;
   logo: string;
-  quote: any;
+  quote: Quote;
 }
+
+interface QuoteData {
+  price: number;
+  volume_24h: number;
+  volume_change_24h: number;
+  percent_change_1h: number;
+  percent_change_24h: number;
+  percent_change_7d: number;
+  percent_change_30d: number;
+  percent_change_60d: number;
+  percent_change_90d: number;
+  market_cap: number;
+  market_cap_dominance: number;
+  fully_diluted_market_cap: number;
+  tvl: number | null;
+  last_updated: string;
+}
+
+interface Quote {
+  USD: QuoteData;
+}
+
 
 export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
-  const [crypto, setCrypto] = useState<Crypto>();
+  const [crypto, setCrypto] = useState<Record<string, Crypto>>({});
   const [inputAmount, setInputAmount] = useState<number>();
   const [inputSymbol, setInputSymbol] = useState<string>();
-  const [assetsPrice, setAssetsPrice] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +56,7 @@ export const MyAssets = () => {
     };
 
     fetchData();
-  }, []);
+  }, [appSettings.apiHost, appSettings.apiPort, appSettings.user_id]);
 
   async function deleteCryptoAsset(cryptoId: string, symbol: string) {
     try {
@@ -56,7 +77,7 @@ export const MyAssets = () => {
       const updateCrypto = { ...crypto };
       delete updateCrypto[symbol];
       setCrypto(updateCrypto);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting crypto asset:', error.message);
     }
   }
@@ -114,7 +135,7 @@ export const MyAssets = () => {
   let totalAssetsPrice = 0;
 
   const cryptoRows = _.map(
-    crypto as Record<string, any>,
+    crypto as Record<string, Crypto>,
     (row: Crypto, index: number) => {
       if (row.quote && row.quote.USD && row.quote.USD.price) {
         const cryptoValue = parseFloat(

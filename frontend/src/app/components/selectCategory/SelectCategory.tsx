@@ -1,8 +1,8 @@
+import { TFunction } from 'i18next';
 import { ChangeEvent, useEffect, useState } from 'react';
-import styles from './Selectcategory.module.scss';
 import { AppSettingsProvider } from '../../config';
 import '../../i18next';
-import { TFunction } from 'i18next';
+import styles from './Selectcategory.module.scss';
 
 export interface Category {
   _id: string;
@@ -10,7 +10,7 @@ export interface Category {
 }
 
 export interface SelectCategoryProps {
-  setCategory?: (category: string) => void;
+  setCategory: (category: string) => void;
   selectModal?: string;
   t: TFunction<'translation', undefined>;
 }
@@ -41,7 +41,7 @@ export const SelectCategory = ({
       }
     }
     fetchCategories();
-  }, []);
+  }, [appSettings.apiHost, appSettings.apiPort]);
 
   const handleChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedCategoryName = e.target.value;
@@ -54,11 +54,11 @@ export const SelectCategory = ({
     } else {
       setActiveOption('Shopping');
     }
-  }, []);
+  }, [selectModal]);
 
   useEffect(() => {
-    setCategory && setCategory(activeOption);
-  }, [activeOption]);
+    setCategory(activeOption);
+  }, [activeOption, setCategory]);
 
   return (
     <div className={styles.SelectCategory}>

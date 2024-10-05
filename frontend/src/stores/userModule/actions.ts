@@ -1,6 +1,6 @@
 import type { FSAAuto } from 'flux-standard-action';
-import type { Expense, InitializePayload, UsersState } from '../../types/users';
 import { ExpensesCategories } from '../../types/Expense';
+import type { Expense, InitializePayload } from '../../types/users';
 
 export enum UsersActionTypes {
   INITIALIZE = '[Users] INITIALIZE',
