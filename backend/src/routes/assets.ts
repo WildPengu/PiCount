@@ -40,7 +40,7 @@ const key = '55a866d8-fc5f-479b-8206-15fa987e95f0';
 // Update assets
 router.patch('/crypto/:id', async (req: Request, res: Response) => {
   const userId = req.params.id;
-  console.log('hej');
+
   try {
     const userAssets = await UserAssets.findOne({ userId: userId });
 
@@ -85,12 +85,8 @@ router.get('/crypto/:id', async (req, res) => {
       try {
         const quoteResponse = await axios.get(quoteUrl);
         const { name, quote } = quoteResponse.data.data[symbol];
-        console.log(quote);
-        // const logoResponse = await axios.get(infoUrl);
-        // const logo = logoResponse.data.data[symbol]['0'].logo;
-        const logo =
-          'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png';
-
+        const logoResponse = await axios.get(infoUrl);
+        const logo = logoResponse.data.data[symbol]['0'].logo;
         cryptoQuotes[symbol] = { cryptoId, name, symbol, amount, logo, quote };
         numProcessed++;
 

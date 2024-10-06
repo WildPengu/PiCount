@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { AppSettingsProvider } from '../../../../config';
+import Button from '../../../button/Button';
 import { Loader } from '../../../loader/Loader';
 import styles from './MyAssets.module.scss';
 import { AssetRow } from './assetRow/AssetRow';
@@ -39,8 +40,8 @@ interface Quote {
 export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
   const [crypto, setCrypto] = useState<Record<string, Crypto>>({});
-  const [inputAmount, setInputAmount] = useState<number>();
-  const [inputSymbol, setInputSymbol] = useState<string>();
+  const [inputAmount, setInputAmount] = useState<number>(0);
+  const [inputSymbol, setInputSymbol] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,12 +78,20 @@ export const MyAssets = () => {
       const updateCrypto = { ...crypto };
       delete updateCrypto[symbol];
       setCrypto(updateCrypto);
-    } catch (error: unknown) {
-      console.error('Error deleting crypto asset:', error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error deleting crypto asset:', error.message);
+      } else {
+        console.error('An unexpected error occurred:', error);
+      }
     }
   }
 
   const addCrypto = (symbol: string, amount: number) => {
+    if (!symbol || !amount) {
+      return;
+    }
+
     fetch(
       `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
       {
@@ -104,32 +113,36 @@ export const MyAssets = () => {
     amount: number,
     cryptoId: string,
     symbol: string,
-  ) => {
+  ): Promise<void> => {
     const url = `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}/${cryptoId}?amount=${amount}`;
 
-    fetch(url, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        amount,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
+    return new Promise<void>((resolve, reject) => {
+      fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount,
+        }),
       })
-      .then((updatedCrypto) => {
-        const allCrypto = { ...crypto };
-        allCrypto[symbol].amount = updatedCrypto.amount;
-        setCrypto(allCrypto);
-      })
-      .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((updatedCrypto) => {
+          const allCrypto = { ...crypto };
+          allCrypto[symbol].amount = updatedCrypto.amount;
+          setCrypto(allCrypto);
+          resolve();
+        })
+        .catch((error) => {
+          console.error('There was a problem with the fetch operation:', error);
+          reject(error);
+        });
+    });
   };
 
   let totalAssetsPrice = 0;
@@ -191,7 +204,7 @@ export const MyAssets = () => {
             onChange={(e) => setInputSymbol(e.target.value)}
           />
         </div>
-        <button onClick={() => addCrypto(inputSymbol, inputAmount)}>Add</button>
+        <Button onClick={() => addCrypto(inputSymbol, inputAmount)}>Add</Button>
       </div>
     </div>
   );
