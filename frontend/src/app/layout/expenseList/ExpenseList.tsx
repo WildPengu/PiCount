@@ -63,7 +63,7 @@ export const ExpenseList = () => {
           <Button
             backgroundColor={Color.transparent}
             onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}
-            data-test-id="filter-btn"
+            dataTestId="filter-btn"
           >
             <FontAwesomeIcon icon={faFilter} />
           </Button>
@@ -80,7 +80,7 @@ export const ExpenseList = () => {
             onClick={() =>
               setIsModalAddExpenseVisible(!isModalAddExpenseVisible)
             }
-            data-testid="add-expense-btn"
+            dataTestId="add-expense-btn"
           >
             <FontAwesomeIcon icon={faCirclePlus} />
           </Button>

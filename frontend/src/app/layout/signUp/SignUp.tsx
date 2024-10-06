@@ -136,6 +136,7 @@ export const SignUp = () => {
       {errorMessage && <h2 className={styles.SignUpErrors}>{errorMessage}</h2>}
       <form className={styles.SignUpForm} onSubmit={handleSubmit}>
         <input
+          data-testid="sign-up-username"
           type="text"
           name="name"
           placeholder={t('signUpComponent.username')}
@@ -149,6 +150,7 @@ export const SignUp = () => {
           </p>
         )}
         <input
+          data-testid="sign-up-age"
           type="number"
           name="age"
           placeholder={t('signUpComponent.userAge')}
@@ -182,6 +184,7 @@ export const SignUp = () => {
           </p>
         )}
         <input
+          data-testid="sign-up-email"
           type="email"
           name="email"
           placeholder={t('signUpComponent.userEmail')}
@@ -195,6 +198,7 @@ export const SignUp = () => {
           </p>
         )}
         <input
+          data-testid="sign-up-password"
           type="password"
           name="password"
           placeholder={t('signUpComponent.userPass')}
@@ -208,6 +212,7 @@ export const SignUp = () => {
           </p>
         )}
         <input
+          data-testid="sign-up-password-confirm"
           type="password"
           name="confirmPassword"
           placeholder={t('signUpComponent.confPass')}
@@ -224,7 +229,11 @@ export const SignUp = () => {
           </p>
         )}
         <div className={styles.ButtonsPanel}>
-          <Button type="submit" isDisabled={signUpDone}>
+          <Button
+            dataTestId="sign-up-submit"
+            type="submit"
+            isDisabled={signUpDone}
+          >
             {t('signUpComponent.signUp')}
           </Button>
           {signUpDone && (

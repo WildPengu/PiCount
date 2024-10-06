@@ -1,27 +1,25 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
+import {
+  APP_NAME,
+  URL_HOME,
+  USER_NAME,
+  USER_PASSWORD,
+} from './utils/constants';
+import { login } from './utils/login';
 
 test.describe('Language switcher tests', () => {
-  const urlHome = 'http://localhost:5173/';
   const en = 'en';
   const ua = 'ua';
   const pl = 'pl';
 
   test('languages switcher in settings', async ({ page }) => {
-    const username = 'yarna';
-    const userPassword = '!23456';
-    const piCountName = 'PiCount';
-
     const textInEn = 'Choose Your Language';
     const textInPl = 'Wybierz Swój Język';
     const textInUa = 'Вибери мову застосунку';
 
-    await page.goto(urlHome);
-    await page.getByRole('link', { name: 'Login' }).click();
-    await page.getByPlaceholder('User name').fill(username);
-    await page.getByPlaceholder('User password').fill(userPassword);
-    await page.getByRole('button', { name: 'Login' }).click();
+    await login(page, USER_NAME, USER_PASSWORD);
 
-    await expect(page.getByTestId('username')).toHaveText(username);
+    await expect(page.getByTestId('username')).toHaveText(USER_NAME);
 
     await page.getByRole('link', { name: 'Settings' }).click();
     await page.getByRole('combobox').selectOption(en);
@@ -35,7 +33,7 @@ test.describe('Language switcher tests', () => {
 
     await page.getByRole('link', { name: 'Вийти' }).click();
 
-    await expect(page.getByTestId('username')).toHaveText(piCountName);
+    await expect(page.getByTestId('username')).toHaveText(APP_NAME);
   });
 
   test('languages switcher in start page', async ({ page }) => {
@@ -45,7 +43,7 @@ test.describe('Language switcher tests', () => {
     const text2InEn =
       'Hey there! Do you ever find yourself struggling to keep track of your expenses?';
 
-    await page.goto(urlHome);
+    await page.goto(URL_HOME);
 
     await page.getByRole('combobox').selectOption(pl);
     await expect(page.getByTestId('article1')).toHaveText(text2InPl);

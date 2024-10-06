@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test';
+import { URL_HOME } from './utils/constants';
+import { login } from './utils/login';
 
 test.describe('Sign Up tests', () => {
-  const urlHome = 'http://localhost:5173/';
-
-  const newUsername = 'kasia';
   const userPassword = '!23456';
   const wrongPassword = '123456';
   const newUserAge = '24';
-  const newUserEmail = 'kasia@gmail.com';
+  const newUsername = `user_${Date.now()}`;
+  const newUserEmail = `user_${Date.now()}@gmail.com`;
 
   test('SignUp with empty or incorrect data should display error messages', async ({
     page,
@@ -18,8 +18,8 @@ test.describe('Sign Up tests', () => {
     const passwordError = 'Password should have at least 6 characters*';
     const confirmPasswordError = 'Password should be the same*';
 
-    await page.goto(`${urlHome}signUp`);
-    await page.getByRole('button', { name: 'SignUp' }).click();
+    await page.goto(`${URL_HOME}signUp`);
+    await page.getByTestId('sign-up-submit').click();
 
     //if website in english
 
@@ -30,9 +30,9 @@ test.describe('Sign Up tests', () => {
 
     //error message if confirm password is not the same
 
-    await page.getByPlaceholder('Password', { exact: true }).fill(userPassword);
-    await page.getByPlaceholder('Confirm password').fill(wrongPassword);
-    await page.getByRole('button', { name: 'SignUp' }).click();
+    await page.getByTestId('sign-up-password').fill(userPassword);
+    await page.getByTestId('sign-up-password-confirm').fill(wrongPassword);
+    await page.getByTestId('sign-up-submit').click();
     await expect(page.getByTestId('confirm-password-error')).toHaveText(
       confirmPasswordError,
     );
@@ -42,24 +42,24 @@ test.describe('Sign Up tests', () => {
     const headerMessage = 'Fill out the fields to create a new user:';
     const welcomeMessage = 'Welcome, new PiCounter!';
 
-    await page.goto(urlHome);
+    await page.goto(URL_HOME);
     await page.getByRole('link', { name: 'Create account' }).click();
 
     //enter data for new user
 
     await expect(page.getByTestId('welcome-message')).toHaveText(headerMessage);
 
-    await page.getByPlaceholder('User name').fill(newUsername);
-    await page.getByPlaceholder('User age').fill(newUserAge);
+    await page.getByTestId('sign-up-username').fill(newUsername);
+    await page.getByTestId('sign-up-age').fill(newUserAge);
     await page.getByRole('img', { name: 'Avatar 8' }).click();
-    await page.getByPlaceholder('User email').fill(newUserEmail);
+    await page.getByTestId('sign-up-email').fill(newUserEmail);
 
-    await page.getByPlaceholder('Password', { exact: true }).fill(userPassword);
-    await page.getByPlaceholder('Confirm password').fill(userPassword);
+    await page.getByTestId('sign-up-password').fill(userPassword);
+    await page.getByTestId('sign-up-password-confirm').fill(userPassword);
 
     //create new user
 
-    await page.getByRole('button', { name: 'SignUp' }).click();
+    await page.getByTestId('sign-up-submit').click();
 
     await page.waitForTimeout(3000);
 
@@ -72,13 +72,11 @@ test.describe('Sign Up tests', () => {
     await page.waitForTimeout(3000);
 
     const currentUrl = page.url();
-    expect(currentUrl).toEqual(`${urlHome}login`);
+    expect(currentUrl).toEqual(`${URL_HOME}login`);
 
     //login
 
-    await page.getByPlaceholder('User name').fill(newUsername);
-    await page.getByPlaceholder('User password').fill(userPassword);
-    await page.getByRole('button', { name: 'Login' }).click();
+    await login(page, newUsername, userPassword);
 
     await expect(page.getByTestId('username')).toHaveText(newUsername);
   });
