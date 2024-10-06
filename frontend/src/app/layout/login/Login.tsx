@@ -1,17 +1,17 @@
 import {
   faRightFromBracket,
   faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import Button from "../../components/button/Button";
-import { TopPanel } from "../../components/topPanel/TopPanel";
-import { LoginUseAuth } from "../../helpers/LoginUseAuth";
-import "../../i18next";
-import logo from "../../img/main/picount-logo.png";
-import styles from "./Login.module.scss";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import Button from '../../components/button/Button';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { LoginUseAuth } from '../../helpers/LoginUseAuth';
+import '../../i18next';
+import logo from '../../img/main/picount-logo.png';
+import styles from './Login.module.scss';
 
 export const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -47,7 +47,7 @@ export const Login: React.FC = () => {
       >
         {error && <h2 data-testid="login-error">{error}</h2>}
         <input
-          data-testid='login-username'
+          data-testid="login-username"
           className={styles.LoginInput}
           type="text"
           name="username"
@@ -55,14 +55,16 @@ export const Login: React.FC = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          data-testid='login-password'
+          data-testid="login-password"
           className={styles.LoginInput}
           type="password"
           name="password"
           placeholder={t('loginComponent.userPass')}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button dataTestId={'login-button'} type='submit'>{t("login")}</Button>
+        <Button dataTestId={'login-button'} type="submit">
+          {t('login')}
+        </Button>
       </form>
     </div>
   );

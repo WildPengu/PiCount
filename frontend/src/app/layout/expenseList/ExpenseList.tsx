@@ -1,25 +1,25 @@
-import { faCirclePlus, faFilter } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { faCirclePlus, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectActiveUserId,
   selectExpenses,
   updateExpenses,
-} from "../../../stores/userModule";
-import { Expense } from "../../../types/Expense";
-import { AddExpense } from "../../components/addExpense/AddExpense";
-import Button from "../../components/button/Button";
-import { ExpenseItem } from "../../components/expense/ExpenseItem";
-import { FilterPanel } from "../../components/filterPanel/FilterPanel";
-import { Loader } from "../../components/loader/Loader";
-import { Modal } from "../../components/modal/Modal";
-import { TopPanel } from "../../components/topPanel/TopPanel";
-import { AppSettingsProvider } from "../../config";
-import "../../i18next";
-import { Color } from "../../types/Enums";
-import styles from "./ExpenseList.module.scss";
+} from '../../../stores/userModule';
+import { Expense } from '../../../types/Expense';
+import { AddExpense } from '../../components/addExpense/AddExpense';
+import Button from '../../components/button/Button';
+import { ExpenseItem } from '../../components/expense/ExpenseItem';
+import { FilterPanel } from '../../components/filterPanel/FilterPanel';
+import { Loader } from '../../components/loader/Loader';
+import { Modal } from '../../components/modal/Modal';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { AppSettingsProvider } from '../../config';
+import '../../i18next';
+import { Color } from '../../types/Enums';
+import styles from './ExpenseList.module.scss';
 
 export const ExpenseList = () => {
   const [isModalFilterVisible, setIsModalFilterVisible] = useState(false);
@@ -63,7 +63,7 @@ export const ExpenseList = () => {
           <Button
             backgroundColor={Color.transparent}
             onClick={() => setIsModalFilterVisible(!isModalFilterVisible)}
-            dataTestId='filter-btn'
+            dataTestId="filter-btn"
           >
             <FontAwesomeIcon icon={faFilter} />
           </Button>
@@ -80,7 +80,7 @@ export const ExpenseList = () => {
             onClick={() =>
               setIsModalAddExpenseVisible(!isModalAddExpenseVisible)
             }
-            dataTestId='add-expense-btn'
+            dataTestId="add-expense-btn"
           >
             <FontAwesomeIcon icon={faCirclePlus} />
           </Button>

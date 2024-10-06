@@ -36,7 +36,6 @@ interface Quote {
   USD: QuoteData;
 }
 
-
 export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
   const [crypto, setCrypto] = useState<Record<string, Crypto>>({});

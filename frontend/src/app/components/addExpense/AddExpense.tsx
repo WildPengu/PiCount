@@ -1,15 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { selectActiveUserId } from "../../../stores/userModule";
-import { updateExpenses } from "../../../stores/userModule/actions";
-import Button from "../../components/button/Button";
-import { SelectDate } from "../../components/datePicker/SelectDate";
-import { SelectCategory } from "../../components/selectCategory/SelectCategory";
-import { AppSettingsProvider } from "../../config";
-import "../../i18next";
-import { Color } from "../../types/Enums";
-import styles from "./AddExpense.module.scss";
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectActiveUserId } from '../../../stores/userModule';
+import { updateExpenses } from '../../../stores/userModule/actions';
+import Button from '../../components/button/Button';
+import { SelectDate } from '../../components/datePicker/SelectDate';
+import { SelectCategory } from '../../components/selectCategory/SelectCategory';
+import { AppSettingsProvider } from '../../config';
+import '../../i18next';
+import { Color } from '../../types/Enums';
+import styles from './AddExpense.module.scss';
 
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
@@ -121,7 +121,9 @@ export const AddExpense = ({ setIsModalVisible }: ModalProps) => {
         </div>
         {error && <p className={styles.ErrorMessage}>{error}</p>}
         <div className={styles.ButtonsPanel}>
-          <Button dataTestId='add-expense-submit' type='submit'>{t("addNewExpense.addEx")}</Button>
+          <Button dataTestId="add-expense-submit" type="submit">
+            {t('addNewExpense.addEx')}
+          </Button>
           <Button
             backgroundColor={Color.gray}
             onClick={() => setIsModalVisible(false)}

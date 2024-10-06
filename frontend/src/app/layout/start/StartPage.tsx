@@ -1,14 +1,14 @@
 import {
   faRightToBracket,
   faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { TopPanel } from "../../components/topPanel/TopPanel";
-import "../../i18next";
-import logo from "../../img/main/picount-logo.png";
-import styles from "./StartPage.module.scss";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import '../../i18next';
+import logo from '../../img/main/picount-logo.png';
+import styles from './StartPage.module.scss';
 
 interface IntroduceType {
   article1: string;
@@ -43,11 +43,11 @@ export const StartPage = () => {
         <p>{article3}</p>
       </article>
       <div className={styles.ButtonsPanel}>
-        <Link to='/login' className={styles.Button} data-testid='login-link'>
-          {t("login")}
+        <Link to="/login" className={styles.Button} data-testid="login-link">
+          {t('login')}
         </Link>
-        <Link to='/signUp' className={styles.Button} data-testid='sign-up-link'>
-          {t("create")}
+        <Link to="/signUp" className={styles.Button} data-testid="sign-up-link">
+          {t('create')}
         </Link>
       </div>
     </div>

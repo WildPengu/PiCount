@@ -1,31 +1,31 @@
 import {
   faRightFromBracket,
   faRightToBracket,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { SignUpForm } from "../../../types/SignUpForm";
-import { AvatarGallery } from "../../components/avatarGallery/AvatarGallery";
-import Button from "../../components/button/Button";
-import { TopPanel } from "../../components/topPanel/TopPanel";
-import { AppSettingsProvider } from "../../config";
-import { Validate } from "../../helpers/SignUpValidate";
-import "../../i18next";
-import styles from "./SignUp.module.scss";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { SignUpForm } from '../../../types/SignUpForm';
+import { AvatarGallery } from '../../components/avatarGallery/AvatarGallery';
+import Button from '../../components/button/Button';
+import { TopPanel } from '../../components/topPanel/TopPanel';
+import { AppSettingsProvider } from '../../config';
+import { Validate } from '../../helpers/SignUpValidate';
+import '../../i18next';
+import styles from './SignUp.module.scss';
 
-import ash from "../../img/avatarsImage/ash-with-pikachu.png";
-import bulbasaur from "../../img/avatarsImage/bulbasaur-avatar.jpg";
-import charizard from "../../img/avatarsImage/charizard-avatar.jpg";
-import charmander from "../../img/avatarsImage/charmander-avatar.png";
-import eeve from "../../img/avatarsImage/eeve-avatar.jpg";
-import jigglypuff from "../../img/avatarsImage/jigglypuff-avatar.jpg";
-import logo from "../../img/avatarsImage/logo-pikachu.jpg";
-import piplup from "../../img/avatarsImage/piplup-avatar.png";
-import piplup2 from "../../img/avatarsImage/piplup-avatar2.jpg";
-import squirtle2 from "../../img/avatarsImage/squirtle-avatar-glass.jpg";
-import squirtle from "../../img/avatarsImage/squirtle-avatar.jpg";
+import ash from '../../img/avatarsImage/ash-with-pikachu.png';
+import bulbasaur from '../../img/avatarsImage/bulbasaur-avatar.jpg';
+import charizard from '../../img/avatarsImage/charizard-avatar.jpg';
+import charmander from '../../img/avatarsImage/charmander-avatar.png';
+import eeve from '../../img/avatarsImage/eeve-avatar.jpg';
+import jigglypuff from '../../img/avatarsImage/jigglypuff-avatar.jpg';
+import logo from '../../img/avatarsImage/logo-pikachu.jpg';
+import piplup from '../../img/avatarsImage/piplup-avatar.png';
+import piplup2 from '../../img/avatarsImage/piplup-avatar2.jpg';
+import squirtle2 from '../../img/avatarsImage/squirtle-avatar-glass.jpg';
+import squirtle from '../../img/avatarsImage/squirtle-avatar.jpg';
 
 export const SignUp = () => {
   const { appSettings } = AppSettingsProvider();
@@ -137,9 +137,9 @@ export const SignUp = () => {
       <form className={styles.SignUpForm} onSubmit={handleSubmit}>
         <input
           data-testid="sign-up-username"
-          type='text'
-          name='name'
-          placeholder={t("signUpComponent.username")}
+          type="text"
+          name="name"
+          placeholder={t('signUpComponent.username')}
           className={styles.SignUpInput}
           onChange={handleInputChange}
           value={formData.name}
@@ -151,12 +151,12 @@ export const SignUp = () => {
         )}
         <input
           data-testid="sign-up-age"
-          type='number'
-          name='age'
-          placeholder={t("signUpComponent.userAge")}
-          min='16'
-          max='99'
-          step='1'
+          type="number"
+          name="age"
+          placeholder={t('signUpComponent.userAge')}
+          min="16"
+          max="99"
+          step="1"
           className={styles.SignUpInput}
           onChange={handleInputChange}
           value={formData.age !== null ? formData.age : ''}
@@ -184,10 +184,10 @@ export const SignUp = () => {
           </p>
         )}
         <input
-          data-testid='sign-up-email'
-          type='email'
-          name='email'
-          placeholder={t("signUpComponent.userEmail")}
+          data-testid="sign-up-email"
+          type="email"
+          name="email"
+          placeholder={t('signUpComponent.userEmail')}
           className={styles.SignUpInput}
           onChange={handleInputChange}
           value={formData.email}
@@ -198,10 +198,10 @@ export const SignUp = () => {
           </p>
         )}
         <input
-          data-testid='sign-up-password'
-          type='password'
-          name='password'
-          placeholder={t("signUpComponent.userPass")}
+          data-testid="sign-up-password"
+          type="password"
+          name="password"
+          placeholder={t('signUpComponent.userPass')}
           className={styles.SignUpInput}
           onChange={handleInputChange}
           value={formData.password}
@@ -212,10 +212,10 @@ export const SignUp = () => {
           </p>
         )}
         <input
-          data-testid='sign-up-password-confirm'
-          type='password'
-          name='confirmPassword'
-          placeholder={t("signUpComponent.confPass")}
+          data-testid="sign-up-password-confirm"
+          type="password"
+          name="confirmPassword"
+          placeholder={t('signUpComponent.confPass')}
           className={styles.SignUpInput}
           onChange={handleInputChange}
           value={formData.confirmPassword}
@@ -231,10 +231,10 @@ export const SignUp = () => {
         <div className={styles.ButtonsPanel}>
           <Button
             dataTestId="sign-up-submit"
-            type='submit'
+            type="submit"
             isDisabled={signUpDone}
           >
-            {t("signUpComponent.signUp")}
+            {t('signUpComponent.signUp')}
           </Button>
           {signUpDone && (
             <Link
