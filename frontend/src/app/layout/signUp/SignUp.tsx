@@ -29,32 +29,29 @@ import squirtle from "../../img/avatarsImage/squirtle-avatar.jpg";
 
 export const SignUp = () => {
   const { appSettings } = AppSettingsProvider();
-  const [selectedAvatar, setSelectedAvatar] = useState<string>("");
   const { t } = useTranslation();
-
   const [formData, setFormData] = useState<SignUpForm>({
-    name: "",
+    name: '',
     age: null,
-    email: "",
-    avatar: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    avatar: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [errors, setErrors] = useState<SignUpForm>({
-    name: "",
+    name: '',
     age: null,
-    email: "",
-    avatar: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    avatar: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [signUpDone, setSignUpDone] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleAvatarSelect = (avatar: string) => {
-    setSelectedAvatar(avatar);
     setFormData({
       ...formData,
       avatar: avatar,
@@ -62,7 +59,7 @@ export const SignUp = () => {
     setErrors((prevErrors) => {
       return {
         ...prevErrors,
-        avatar: "",
+        avatar: '',
       };
     });
   };
@@ -76,7 +73,7 @@ export const SignUp = () => {
     setErrors((prevErrors) => {
       return {
         ...prevErrors,
-        [name]: "",
+        [name]: '',
       };
     });
     setErrorMessage(null);
@@ -92,9 +89,9 @@ export const SignUp = () => {
     const url = `${appSettings.apiHost}:${appSettings.apiPort}/users`;
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -103,40 +100,38 @@ export const SignUp = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
       setSignUpDone(true);
       setFormData({
-        name: "",
+        name: '',
         age: null,
-        email: "",
-        avatar: "",
-        password: "",
-        confirmPassword: "",
+        email: '',
+        avatar: '',
+        password: '',
+        confirmPassword: '',
       });
-      setSelectedAvatar("");
     } catch (error) {
-      setErrorMessage(t("signUpComponent.validationNameAndEmail"));
-      console.error("Błąd pobierania danych:", error);
+      setErrorMessage(t('signUpComponent.validationNameAndEmail'));
+      console.error('Błąd pobierania danych:', error);
     }
   };
 
   return (
     <div className={styles.SignUp}>
-      <TopPanel headerText={t("signUpComponent.create")}>
+      <TopPanel headerText={t('signUpComponent.create')}>
         <div className={styles.TopPanelContainer}>
-          <Link to='/login'>
+          <Link to="/login">
             <FontAwesomeIcon icon={faRightToBracket} />
           </Link>
-          <Link to='/'>
+          <Link to="/">
             <FontAwesomeIcon icon={faRightFromBracket} />
           </Link>
         </div>
       </TopPanel>
       <h2
-        className={signUpDone ? styles.SignUpNewUser : ""}
-        data-testid='welcome-message'
+        className={signUpDone ? styles.SignUpNewUser : ''}
+        data-testid="welcome-message"
       >
-        {signUpDone ? t("signUpComponent.welcome") : t("signUpComponent.desc")}
+        {signUpDone ? t('signUpComponent.welcome') : t('signUpComponent.desc')}
       </h2>
       {errorMessage && <h2 className={styles.SignUpErrors}>{errorMessage}</h2>}
       <form className={styles.SignUpForm} onSubmit={handleSubmit}>
@@ -150,7 +145,7 @@ export const SignUp = () => {
           value={formData.name}
         />
         {errors.name && (
-          <p className={styles.SignUpErrors} data-testid='username-error'>
+          <p className={styles.SignUpErrors} data-testid="username-error">
             {errors.name}
           </p>
         )}
@@ -164,7 +159,7 @@ export const SignUp = () => {
           step='1'
           className={styles.SignUpInput}
           onChange={handleInputChange}
-          value={formData.age !== null ? formData.age : ""}
+          value={formData.age !== null ? formData.age : ''}
         />
         <AvatarGallery
           avatars={[
@@ -184,7 +179,7 @@ export const SignUp = () => {
           selectedAvatar={formData.avatar}
         />
         {errors.avatar && (
-          <p className={styles.SignUpErrors} data-testid='avatar-error'>
+          <p className={styles.SignUpErrors} data-testid="avatar-error">
             {errors.avatar}
           </p>
         )}
@@ -198,7 +193,7 @@ export const SignUp = () => {
           value={formData.email}
         />
         {errors.email && (
-          <p className={styles.SignUpErrors} data-testid='email-error'>
+          <p className={styles.SignUpErrors} data-testid="email-error">
             {errors.email}
           </p>
         )}
@@ -212,7 +207,7 @@ export const SignUp = () => {
           value={formData.password}
         />
         {errors.password && (
-          <p className={styles.SignUpErrors} data-testid='password-error'>
+          <p className={styles.SignUpErrors} data-testid="password-error">
             {errors.password}
           </p>
         )}
@@ -228,7 +223,7 @@ export const SignUp = () => {
         {errors.confirmPassword && (
           <p
             className={styles.SignUpErrors}
-            data-testid='confirm-password-error'
+            data-testid="confirm-password-error"
           >
             {errors.confirmPassword}
           </p>
@@ -243,11 +238,11 @@ export const SignUp = () => {
           </Button>
           {signUpDone && (
             <Link
-              to='/login'
+              to="/login"
               className={styles.SignUpButton}
-              data-testid='link-to-login'
+              data-testid="link-to-login"
             >
-              {t("signUpComponent.goToLogin")}
+              {t('signUpComponent.goToLogin')}
             </Link>
           )}
         </div>

@@ -1,6 +1,7 @@
-import "../i18next";
-import { Dispatch, SetStateAction } from "react";
-import { SignUpForm } from "../../types/SignUpForm";
+import { TFunction } from 'i18next';
+import { Dispatch, SetStateAction } from 'react';
+import { SignUpForm } from '../../types/SignUpForm';
+import '../i18next';
 
 interface SignUpType {
   validationName: string;
@@ -15,9 +16,9 @@ interface SignUpType {
 export const Validate = (
   formData: SignUpForm,
   setErrors: Dispatch<SetStateAction<SignUpForm>>,
-  t: any
+  t: TFunction,
 ): boolean => {
-  let validationErrors = {
+  const validationErrors = {
     name: false,
     avatar: false,
     email: false,
@@ -33,7 +34,7 @@ export const Validate = (
     validationPass2,
     validationPass3,
     validationConfPass,
-  } = t("signUpComponent") as unknown as SignUpType;
+  } = t('signUpComponent') as unknown as SignUpType;
 
   //username validation
   if (formData.name.length < 4) {
@@ -48,7 +49,7 @@ export const Validate = (
 
   //avatar validation
 
-  if (formData.avatar === "") {
+  if (formData.avatar === '') {
     validationErrors.avatar = true;
     setErrors((prevErrors) => {
       return {

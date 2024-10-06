@@ -1,7 +1,6 @@
 import { Color } from '../../types/Enums';
 import styles from './Button.module.scss';
 
-
 export interface ButtonProps {
     children: string | JSX.Element;
     backgroundColor?: Color;

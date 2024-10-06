@@ -1,4 +1,4 @@
-@import "../../../../scss/Variables.module.scss";
+@import '../../../../scss/Variables.module.scss';
 
 .ThemeSwitcherContainer {
   justify-content: space-evenly;
@@ -29,7 +29,7 @@
 
       &::before {
         position: absolute;
-        content: "";
+        content: '';
         height: 40px;
         width: 40px;
         left: 0px;
@@ -40,7 +40,7 @@
         -webkit-transition: 0.4s;
         transition: 0.4s;
         box-shadow: 0 0px 15px #2020203d;
-        background: $txt-light url("../../../img/themeIcon/darkTheme.png");
+        background: $txt-light url('../../../img/themeIcon/darkTheme.png');
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -58,7 +58,7 @@
       -webkit-transform: translateX(24px);
       -ms-transform: translateX(24px);
       transform: translateX(24px);
-      background: $txt-dark url("../../../img/themeIcon/ligthTheme.png");
+      background: $txt-dark url('../../../img/themeIcon/ligthTheme.png');
       background-repeat: no-repeat;
       background-position: center;
     }

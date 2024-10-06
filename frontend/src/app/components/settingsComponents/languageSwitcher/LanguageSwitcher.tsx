@@ -1,10 +1,10 @@
-import styles from "./LanguageSwitcher.module.scss";
-import { useTranslation } from "react-i18next";
+import styles from './LanguageSwitcher.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const languages = [
-  { code: "en", lang: "English" },
-  { code: "pl", lang: "Polski" },
-  { code: "ua", lang: "Українська" },
+  { code: 'en', lang: 'English' },
+  { code: 'pl', lang: 'Polski' },
+  { code: 'ua', lang: 'Українська' },
 ];
 
 export const LanguageSwitcher = () => {
@@ -17,7 +17,7 @@ export const LanguageSwitcher = () => {
   return (
     <>
       <select
-        name='lang'
+        name="lang"
         onChange={(e) => changeLanguage(e.target.value)}
         className={styles.LanguageSelect}
       >

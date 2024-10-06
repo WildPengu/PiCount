@@ -19,17 +19,17 @@ interface IntroduceType {
 export const StartPage = () => {
   const { t } = useTranslation();
   const { article1, article2, article3 } = t(
-    "introduce"
+    'introduce',
   ) as unknown as IntroduceType;
 
   return (
     <div className={styles.StartPage}>
-      <TopPanel headerText='Let`s PiCount!'>
+      <TopPanel headerText="Let`s PiCount!">
         <div className={styles.TopPanelContainer}>
-          <Link to='/login'>
+          <Link to="/login">
             <FontAwesomeIcon icon={faRightToBracket} />
           </Link>
-          <Link to='/signUp'>
+          <Link to="/signUp">
             <FontAwesomeIcon icon={faUserPlus} />
           </Link>
         </div>
@@ -38,7 +38,7 @@ export const StartPage = () => {
         <img className={styles.Logo} src={logo} />
       </div>
       <article className={styles.Introduce}>
-        <p data-testid='article1'>{article1}</p>
+        <p data-testid="article1">{article1}</p>
         <p>{article2}</p>
         <p>{article3}</p>
       </article>

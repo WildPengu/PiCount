@@ -1,4 +1,4 @@
-import { Expense, ExpensesCategories } from "./Expense";
+import { Expense, ExpensesCategories } from './Expense';
 
 export interface User {
   _id: string;
@@ -10,7 +10,7 @@ export interface User {
 
 export interface UsersState {
   activeUserId: string;
-  users: any;
+  users: Record<string, User>;
   expenses: Record<string, Expense[]>;
   expensesCategories: ExpensesCategories[];
 }
@@ -21,7 +21,7 @@ export interface UsersAwareState {
 
 export interface InitializePayload {
   activeUserId: string;
-  users: any;
+  users: Record<string, User>;
 }
 
 export type { Expense };

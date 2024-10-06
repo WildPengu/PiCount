@@ -2,13 +2,14 @@ import express from 'express';
 import request from 'request';
 
 const router = express.Router();
+const key = '55a866d8-fc5f-479b-8206-15fa987e95f0';
 
 router.get('/latest', (req, res) => {
   const limit = req.query.limit || 10;
   const options = {
     url: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=${limit}&convert=USD`,
     headers: {
-      'X-CMC_PRO_API_KEY': '4cd90ce2-58d6-4c3a-8250-f4c2bb444ad3',
+      'X-CMC_PRO_API_KEY': key,
     },
   };
 
@@ -28,7 +29,7 @@ router.get('/quote', (req, res) => {
   const options = {
     url: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${crypto}`,
     headers: {
-      'X-CMC_PRO_API_KEY': '4cd90ce2-58d6-4c3a-8250-f4c2bb444ad3',
+      'X-CMC_PRO_API_KEY': key,
     },
   };
 

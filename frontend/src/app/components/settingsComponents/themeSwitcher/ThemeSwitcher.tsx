@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import styles from "./ThemeSwitcher.module.scss";
-import { ThemeContext } from "../../../Theme";
-import { useTranslation } from "react-i18next";
-import "../../../i18next";
+import { useContext } from 'react';
+import styles from './ThemeSwitcher.module.scss';
+import { ThemeContext } from '../../../Theme';
+import { useTranslation } from 'react-i18next';
+import '../../../i18next';
 
 export const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -10,15 +10,15 @@ export const ThemeSwitcher = () => {
 
   return (
     <div className={`${styles.ThemeSwitcherContainer} ${theme}Container`}>
-      <h2>{t("settingsComponent.theme")}</h2>
+      <h2>{t('settingsComponent.theme')}</h2>
       <label className={styles.SwitchLabel}>
         <input
-          type='checkbox'
+          type="checkbox"
           className={styles.SliderInput}
-          checked={theme === "LightTheme"}
+          checked={theme === 'LightTheme'}
           onChange={toggleTheme}
         />
-        <span className={styles.Slider + " " + styles.Round}></span>
+        <span className={styles.Slider + ' ' + styles.Round}></span>
       </label>
     </div>
   );

@@ -1,24 +1,21 @@
 @import '../../../scss/Variables.module.scss';
 
 .ExpenseList {
-    margin-top: 100px;
-    margin-bottom: 150px;
-    padding-bottom: 40px;
-    width: calc(100vw - 200px);
+  margin-top: 100px;
+  margin-bottom: 150px;
+  padding-bottom: 40px;
+  width: calc(100vw - 200px);
 
-    .TopPanelContainer {
-        button {
-            background-image: none;
-        }
+  .TopPanelContainer {
+    button {
+      background-image: none;
     }
-    
-    .ExpenseListContainer {
-        h3 {
-            text-align: center;
-            @extend %gradient-txt;
-        }
+  }
+
+  .ExpenseListContainer {
+    h3 {
+      text-align: center;
+      @extend %gradient-txt;
     }
+  }
 }
-
-
-

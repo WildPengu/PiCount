@@ -1,44 +1,45 @@
 @import '../../../scss/Variables.module.scss';
 
 .AddExpense {
-        margin: auto;
-        padding: 15px;
-        max-width: 600px;
+  margin: auto;
+  padding: 15px;
+  max-width: 600px;
 
-        .AddExpenseH2 {
-            @extend %gradient-txt;
-        }
-    
-        .FormAddExpense {
-            margin: 0 auto;
-            padding: 20px;
-            text-align: start;
+  .AddExpenseH2 {
+    @extend %gradient-txt;
+  }
 
-           .FormAddExpenseTextarea {
-                margin: 10px auto;
-                padding: 5px;
-                width: 100%;
-            }
+  .FormAddExpense {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: start;
 
-            .FormAddExpenseTextarea {
-                width: calc(100% - 10px);
-                resize: vertical;
-            }
+    .FormAddExpenseTextarea {
+      margin: 10px auto;
+      padding: 5px;
+      width: 100%;
+    }
 
-            .AmountContainer {
-                .AmountInput {
-                    margin: 10px 10px 10px 0;
-                }
+    .FormAddExpenseTextarea {
+      width: calc(100% - 10px);
+      resize: vertical;
+    }
 
-                .AmountInput, .TypeOfCurrency {
-                    width: 40%;
-                    padding: 10px;
-                }
-            }
-        }
+    .AmountContainer {
+      .AmountInput {
+        margin: 10px 10px 10px 0;
+      }
 
-        .ButtonsPanel {
-            display: flex;
-            justify-content: space-around;
-        }
+      .AmountInput,
+      .TypeOfCurrency {
+        width: 40%;
+        padding: 10px;
+      }
+    }
+  }
+
+  .ButtonsPanel {
+    display: flex;
+    justify-content: space-around;
+  }
 }

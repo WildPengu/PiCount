@@ -14,7 +14,7 @@ test.describe('Expense list tests', () => {
     await page.getByTestId('add-expense-btn').click();
 
     await expect(page.getByTestId('add-expense-h2')).toHaveText(
-      'Add New Expense'
+      'Add New Expense',
     );
 
     await page.locator('#typeOfExpense').selectOption({ value: 'Transport' });

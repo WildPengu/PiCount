@@ -1,4 +1,4 @@
-@import "../../../scss/Variables.module.scss";
+@import '../../../scss/Variables.module.scss';
 
 .AppNav {
   margin: 100px 0 200px 0;
@@ -56,7 +56,7 @@
           opacity: 0;
           transition: 0.3s ease;
           &::before {
-            content: "";
+            content: '';
             display: block;
             width: 12px;
             height: 12px;

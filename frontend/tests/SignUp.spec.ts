@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from '@playwright/test';
 import { URL_HOME } from './utils/constants';
 import { login } from './utils/login';
 
@@ -34,7 +34,7 @@ test.describe('Sign Up tests', () => {
     await page.getByTestId('sign-up-password-confirm').fill(wrongPassword);
     await page.getByTestId('sign-up-submit').click();
     await expect(page.getByTestId('confirm-password-error')).toHaveText(
-      confirmPasswordError
+      confirmPasswordError,
     );
   });
 
@@ -64,7 +64,7 @@ test.describe('Sign Up tests', () => {
     await page.waitForTimeout(3000);
 
     await expect(page.getByTestId('welcome-message')).toHaveText(
-      welcomeMessage
+      welcomeMessage,
     );
 
     await page.getByTestId('link-to-login').click();

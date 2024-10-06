@@ -14,8 +14,8 @@ import logo from "../../img/main/picount-logo.png";
 import styles from "./Login.module.scss";
 
 export const Login: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const { login, error } = LoginUseAuth();
   const { t } = useTranslation();
 
@@ -26,12 +26,12 @@ export const Login: React.FC = () => {
 
   return (
     <div className={styles.Login}>
-      <TopPanel headerText={t("loginComponent.enter")}>
+      <TopPanel headerText={t('loginComponent.enter')}>
         <div className={styles.TopPanelContainer}>
-          <Link to='/'>
+          <Link to="/">
             <FontAwesomeIcon icon={faRightFromBracket} />
           </Link>
-          <Link to='/signUp'>
+          <Link to="/signUp">
             <FontAwesomeIcon icon={faUserPlus} />
           </Link>
         </div>
@@ -43,23 +43,23 @@ export const Login: React.FC = () => {
       <form
         className={styles.LoginForm}
         onSubmit={(e) => handleLogin(e)}
-        method='POST'
+        method="POST"
       >
-        {error && <h2 data-testid='login-error'>{error}</h2>}
+        {error && <h2 data-testid="login-error">{error}</h2>}
         <input
           data-testid='login-username'
           className={styles.LoginInput}
-          type='text'
-          name='username'
-          placeholder={t("loginComponent.username")}
+          type="text"
+          name="username"
+          placeholder={t('loginComponent.username')}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           data-testid='login-password'
           className={styles.LoginInput}
-          type='password'
-          name='password'
-          placeholder={t("loginComponent.userPass")}
+          type="password"
+          name="password"
+          placeholder={t('loginComponent.userPass')}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button dataTestId={'login-button'} type='submit'>{t("login")}</Button>

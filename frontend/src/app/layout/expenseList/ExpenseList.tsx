@@ -28,18 +28,18 @@ export const ExpenseList = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
 
   const { appSettings } = AppSettingsProvider();
   const activeUserId = useSelector(selectActiveUserId);
 
   useEffect(() => {
     fetch(
-      `${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${activeUserId}`
+      `${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${activeUserId}`,
     )
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         return response.json();
       })
@@ -48,17 +48,17 @@ export const ExpenseList = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Błąd pobierania danych:", error);
+        console.error('Błąd pobierania danych:', error);
         setLoading(false);
       });
-  }, [activeUserId]);
+  }, [activeUserId, appSettings.apiHost, appSettings.apiPort, dispatch]);
 
   const expenses: Record<string, Expense[]> = useSelector(selectExpenses);
-  const todayDate = new Date().toISOString().split("T")[0];
+  const todayDate = new Date().toISOString().split('T')[0];
 
   return (
     <div className={styles.ExpenseList}>
-      <TopPanel headerText={t("expList")}>
+      <TopPanel headerText={t('expList')}>
         <div className={styles.TopPanelContainer}>
           <Button
             backgroundColor={Color.transparent}
@@ -98,7 +98,7 @@ export const ExpenseList = () => {
         ) : (
           Object.entries(expenses).map(([date, expensesByDate]) => (
             <div key={date}>
-              <h3>{date === todayDate ? t("today") : date}</h3>
+              <h3>{date === todayDate ? t('today') : date}</h3>
               {expensesByDate.map((expense) => (
                 <ExpenseItem key={expense._id} expense={expense} />
               ))}

@@ -1,22 +1,22 @@
 .ChartItem {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 auto;
+  padding: 15px;
+
+  &:nth-last-of-type(2) {
+    margin-bottom: 150px;
+  }
+
+  .ChartItemIco {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    padding: 15px;
-
-    &:nth-last-of-type(2) {
-        margin-bottom: 150px;
-    }
-
-    .ChartItemIco {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid transparent;
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-    }
+    border: 1px solid transparent;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+  }
 }
