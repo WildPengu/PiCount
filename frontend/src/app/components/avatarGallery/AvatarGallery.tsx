@@ -7,12 +7,14 @@ interface AvatarGalleryProps {
   avatars: string[];
   onAvatarSelect: (selectedAvatar: string) => void;
   selectedAvatar: string;
+  headerText?: string;
 }
 
 export const AvatarGallery: React.FC<AvatarGalleryProps> = ({
   avatars,
   onAvatarSelect,
   selectedAvatar,
+  headerText,
 }) => {
   const { t } = useTranslation();
 
@@ -22,7 +24,7 @@ export const AvatarGallery: React.FC<AvatarGalleryProps> = ({
 
   return (
     <div className={styles.AvatarGalleryContainer}>
-      <p className={styles.AvatarGalleryTxt}>{t("signUpComponent.userIco")}</p>
+      <p className={styles.AvatarGalleryTxt}>{headerText}</p>
       <div className={styles.AvatarGallery}>
         {avatars.map((avatar, index) => (
           <img

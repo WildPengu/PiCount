@@ -14,18 +14,7 @@ import {
   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { AvatarGallery } from "../../components/avatarGallery/AvatarGallery";
-
-import eeve from "../../img/avatarsImage/eeve-avatar.jpg";
-import charizard from "../../img/avatarsImage/charizard-avatar.jpg";
-import bulbasaur from "../../img/avatarsImage/bulbasaur-avatar.jpg";
-import charmander from "../../img/avatarsImage/charmander-avatar.png";
-import jigglypuff from "../../img/avatarsImage/jigglypuff-avatar.jpg";
-import piplup from "../../img/avatarsImage/piplup-avatar.png";
-import piplup2 from "../../img/avatarsImage/piplup-avatar2.jpg";
-import squirtle from "../../img/avatarsImage/squirtle-avatar.jpg";
-import squirtle2 from "../../img/avatarsImage/squirtle-avatar-glass.jpg";
-import logo from "../../img/avatarsImage/logo-pikachu.jpg";
-import ash from "../../img/avatarsImage/ash-with-pikachu.png";
+import { AvatarImages } from "../../helpers/AvatarImages";
 
 export const SignUp = () => {
   const { appSettings } = AppSettingsProvider();
@@ -166,20 +155,21 @@ export const SignUp = () => {
         />
         <AvatarGallery
           avatars={[
-            logo,
-            eeve,
-            charizard,
-            bulbasaur,
-            charmander,
-            jigglypuff,
-            piplup,
-            squirtle,
-            squirtle2,
-            ash,
-            piplup2,
+            AvatarImages.logo,
+            AvatarImages.eeve,
+            AvatarImages.charizard,
+            AvatarImages.bulbasaur,
+            AvatarImages.charmander,
+            AvatarImages.jigglypuff,
+            AvatarImages.piplup,
+            AvatarImages.squirtle,
+            AvatarImages.squirtle2,
+            AvatarImages.ash,
+            AvatarImages.piplup2,
           ]}
           onAvatarSelect={handleAvatarSelect}
           selectedAvatar={formData.avatar}
+          headerText={t("signUpComponent.userIco")}
         />
         {errors.avatar && (
           <p className={styles.SignUpErrors} data-testid='avatar-error'>
@@ -229,10 +219,7 @@ export const SignUp = () => {
           </p>
         )}
         <div className={styles.ButtonsPanel}>
-          <Button
-            type='submit'
-            isDisabled={signUpDone}
-          >
+          <Button type='submit' isDisabled={signUpDone}>
             {t("signUpComponent.signUp")}
           </Button>
           {signUpDone && (

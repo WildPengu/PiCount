@@ -34,12 +34,17 @@ export const ChangePassword = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isValid = await ChangePasswordValidate(formData, setErrors, t, appSettings);
+    const isValid = await ChangePasswordValidate(
+      formData,
+      setErrors,
+      t,
+      appSettings
+    );
 
     if (!isValid) {
       return;
     }
-    const url = `${appSettings.apiHost}:${appSettings.apiPort}/${appSettings.user_id}`;
+    const url = `${appSettings.apiHost}:${appSettings.apiPort}/users/${appSettings.user_id}`;
 
     try {
       const response = await fetch(url, {
