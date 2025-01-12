@@ -1,0 +1,55 @@
+.assetRow {
+  display: grid;
+  grid-template-columns: 19% 14% 11% 11% 11% 18% 16%;
+  padding: 8px 0;
+  align-items: center;
+  transition: 0.3s;
+  border-radius: 10px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #0b0e11;
+  }
+
+  & > div:not(:first-child) {
+    text-align: right;
+  }
+
+  .firstColumn {
+    display: flex;
+    align-items: center;
+
+    .image {
+      width: 25px;
+      height: 25px;
+      margin-right: 8px;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+
+    .upperItem {
+      text-transform: uppercase;
+    }
+
+    .lowerItem {
+      color: #848e9c;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  .trashIcon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+
+    &:hover {
+      color: #ef454a;
+    }
+  }
+}

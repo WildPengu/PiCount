@@ -34,6 +34,10 @@ export const ExpenseList = () => {
   const activeUserId = useSelector(selectActiveUserId);
 
   useEffect(() => {
+    if (!activeUserId) {
+      return;
+    }
+
     fetch(
       `${appSettings.apiHost}:${appSettings.apiPort}/expenses/expensesByDay/${activeUserId}`,
     )

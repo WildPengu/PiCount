@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AllCrypto } from './allCrypto/AllCrypto';
 import styles from './Crypto.module.scss';
 import { MyAssets } from './myAssets/MyAssets';
 
@@ -52,7 +53,7 @@ export const Crypto: React.FC<InvestProps> = () => {
         </h2>
       </div>
       {activeView === ActiveView.MyAssets && <MyAssets />}
-      {activeView === ActiveView.Chart && <div>hik</div>}
+      {activeView === ActiveView.Chart && <AllCrypto />}
     </div>
   );
 };

@@ -75,7 +75,7 @@ router.get('/crypto/:id', async (req, res) => {
 
     const cryptoAssets = userAssets.assets.crypto;
     const cryptoQuotes: Record<string, Crypto> = {};
-    let numProcessed = 0;
+    const errors: string[] = [];
 
     for (const [cryptoId, asset] of cryptoAssets.entries()) {
       const { symbol, amount } = asset;
@@ -84,24 +84,49 @@ router.get('/crypto/:id', async (req, res) => {
 
       try {
         const quoteResponse = await axios.get(quoteUrl);
-        const { name, quote } = quoteResponse.data.data[symbol];
-        const logoResponse = await axios.get(infoUrl);
-        const logo = logoResponse.data.data[symbol]['0'].logo;
-        cryptoQuotes[symbol] = { cryptoId, name, symbol, amount, logo, quote };
-        numProcessed++;
+        const symbolData = quoteResponse.data.data[symbol];
 
-        if (numProcessed === cryptoAssets.size) {
-          res.json(cryptoQuotes);
+        if (!symbolData) {
+          throw new Error(`Symbol not found in response: ${symbol}`);
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+
+        const { name, quote } = symbolData;
+        const logoResponse = await axios.get(infoUrl);
+        const logoData = logoResponse.data.data[symbol]?.['0'];
+
+        if (!logoData) {
+          throw new Error(`Logo not found for symbol: ${symbol}`);
+        }
+
+        const logo = logoData.logo;
+        cryptoQuotes[symbol] = { cryptoId, name, symbol, amount, logo, quote };
+      } catch (error: any) {
+        console.error(
+          `Error fetching data for ${symbol}:`,
+          error.message || error
+        );
+        errors.push(`Failed to fetch data for ${symbol}: ${error.message}`);
       }
     }
+
+    if (Object.keys(cryptoQuotes).length > 0) {
+      res.json({ success: true, data: cryptoQuotes, errors });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Failed to fetch data for all symbols',
+        errors,
+      });
+    }
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    console.error('Error processing request:', error.message || error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Internal Server Error',
+    });
   }
 });
+
 
 router.delete('/crypto/:id/:cryptoId', async (req, res) => {
   const cryptoId = req.params.cryptoId;

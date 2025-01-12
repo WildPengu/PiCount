@@ -1,15 +1,15 @@
-import styles from './FilterPanel.module.scss';
+import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectActiveUserId } from '../../../stores/userModule';
+import { updateExpenses } from '../../../stores/userModule/actions';
+import { AppSettingsProvider } from '../../config';
 import '../../i18next';
-import { SelectCategory } from '../selectCategory/SelectCategory';
-import { SelectDate } from '../datePicker/SelectDate';
 import { Color } from '../../types/Enums';
 import Button from '../button/Button';
-import { FormEvent, useState } from 'react';
-import { AppSettingsProvider } from '../../config';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateExpenses } from '../../../stores/userModule/actions';
-import { selectActiveUserId } from '../../../stores/userModule';
+import { SelectDate } from '../datePicker/SelectDate';
+import { SelectCategory } from '../selectCategory/SelectCategory';
+import styles from './FilterPanel.module.scss';
 export interface ModalProps {
   setIsModalVisible: (isVisible: boolean) => void;
 }
