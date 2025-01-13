@@ -31,6 +31,10 @@ body {
       }
     }
 
+    .DarkThemeNav li .DarkThemeActiveLink {
+      border: 2px solid $blue;
+    }
+
     .DarkThemeAmount {
       color: $blue;
       span {
@@ -77,6 +81,10 @@ body {
       span::before {
         background-color: $bgc-hover-light;
       }
+    }
+
+    .LightThemeNav li .LightThemeActiveLink {
+      border: 2px solid $violet;
     }
 
     .LightThemeAmount {
