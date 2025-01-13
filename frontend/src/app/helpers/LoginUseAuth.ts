@@ -70,5 +70,5 @@ export const LoginUseAuth = () => {
     Cookies.remove('user');
   };
 
-  return { user, error, login, logout };
+  return { user, error, setError, login, logout };
 };
