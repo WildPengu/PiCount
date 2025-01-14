@@ -16,7 +16,7 @@ import { LoginUseAuth } from '../../helpers/LoginUseAuth';
 export const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login, error } = LoginUseAuth();
+  const { login, error, setError } = LoginUseAuth();
   const { t } = useTranslation();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,6 +52,7 @@ export const Login: React.FC = () => {
           name="username"
           placeholder={t('loginComponent.username')}
           onChange={(e) => setUsername(e.target.value)}
+          onFocus={() => setError(null)}
         />
         <input
           className={styles.LoginInput}
@@ -59,6 +60,7 @@ export const Login: React.FC = () => {
           name="password"
           placeholder={t('loginComponent.userPass')}
           onChange={(e) => setPassword(e.target.value)}
+          onFocus={() => setError(null)}
         />
         <Button type="submit">{t('login')}</Button>
       </form>
