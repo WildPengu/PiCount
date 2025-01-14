@@ -1,7 +1,7 @@
 import styles from './AppNav.module.scss';
 import { useTranslation } from 'react-i18next';
 import '../../i18next';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { selectActiveUserId } from '../../../stores/userModule/selectors';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,34 +30,34 @@ export const AppNav = () => {
       {activeUserId ? (
         <ul className={`${styles.AppNavUl} ${theme}Nav`}>
           <li className={styles.AppNavLi}>
-            <Link to="/expenseList">
+            <NavLink to="/expenseList" className={({ isActive }) => (isActive ? `${theme}ActiveLink` : "")}>
               <FontAwesomeIcon icon={faClockRotateLeft} />
               <span>{t('history')}</span>
-            </Link>
+            </NavLink>
           </li>
           <li className={styles.AppNavLi}>
-            <Link to="/expenseChart">
+            <NavLink to="/expenseChart" className={({ isActive }) => (isActive ? `${theme}ActiveLink` : "")}>
               <FontAwesomeIcon icon={faChartPie} />
               <span>{t('chartNav')}</span>
-            </Link>
+            </NavLink>
           </li>
           <li className={styles.AppNavLi}>
-            <Link to="/investment">
+            <NavLink to="/investment" className={({ isActive }) => (isActive ? `${theme}ActiveLink` : "")}>
               <FontAwesomeIcon icon={faMoneyBillTrendUp} />
               <span>{t('invest.investment')}</span>
-            </Link>
+            </NavLink>
           </li>
           <li className={styles.AppNavLi}>
-            <Link to="/settings">
+            <NavLink to="/settings" className={({ isActive }) => (isActive ? `${theme}ActiveLink` : "")}>
               <FontAwesomeIcon icon={faGear} />
               <span>{t('settings')}</span>
-            </Link>
+            </NavLink>
           </li>
           <li className={styles.AppNavLi}>
-            <Link to="/" onClick={() => logout()}>
+            <NavLink to="/" onClick={() => logout()}>
               <FontAwesomeIcon icon={faRightFromBracket} />
               <span>{t('logout')}</span>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       ) : (
