@@ -67,63 +67,51 @@ router.get('/crypto/:id', async (req, res) => {
   const userId = req.params.id;
 
   try {
-    const userAssets = await UserAssets.findOne({ userId: userId });
+    const userAssets = await UserAssets.findOne({ userId });
 
     if (!userAssets) {
-      return res.status(404).json({ message: 'User assets not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'User assets not found' });
     }
 
     const cryptoAssets = userAssets.assets.crypto;
-    const cryptoQuotes: Record<string, Crypto> = {};
+    const symbols = Array.from(cryptoAssets.values())
+      .map((asset) => asset.symbol.toLowerCase())
+      .join(',');
+
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${symbols}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+
+    const response = await axios.get(url);
+    const data = response.data;
+
+    const cryptoQuotes: Record<string, any> = {};
     const errors: string[] = [];
 
     for (const [cryptoId, asset] of cryptoAssets.entries()) {
       const { symbol, amount } = asset;
-      const quoteUrl = `http://localhost:3000/cryptocurrency/quote?crypto=${symbol}`;
-      const infoUrl = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?CMC_PRO_API_KEY=${key}&symbol=${symbol}`;
+      const symbolData = data[symbol.toLowerCase()];
 
-      try {
-        const quoteResponse = await axios.get(quoteUrl);
-        const symbolData = quoteResponse.data.data[symbol];
-
-        if (!symbolData) {
-          throw new Error(`Symbol not found in response: ${symbol}`);
-        }
-
-        const { name, quote } = symbolData;
-        const logoResponse = await axios.get(infoUrl);
-        const logoData = logoResponse.data.data[symbol]?.['0'];
-
-        if (!logoData) {
-          throw new Error(`Logo not found for symbol: ${symbol}`);
-        }
-
-        const logo = logoData.logo;
-        cryptoQuotes[symbol] = { cryptoId, name, symbol, amount, logo, quote };
-      } catch (error: any) {
-        console.error(
-          `Error fetching data for ${symbol}:`,
-          error.message || error
-        );
-        errors.push(`Failed to fetch data for ${symbol}: ${error.message}`);
+      if (symbolData) {
+        cryptoQuotes[symbol] = {
+          cryptoId,
+          symbol,
+          amount,
+          price: symbolData.usd,
+          marketCap: symbolData.usd_market_cap,
+          volume24h: symbolData.usd_24h_vol,
+          change24h: symbolData.usd_24h_change,
+          lastUpdated: symbolData.last_updated_at,
+        };
+      } else {
+        errors.push(`Data for ${symbol} not found`);
       }
     }
 
-    if (Object.keys(cryptoQuotes).length > 0) {
-      res.json({ success: true, data: cryptoQuotes, errors });
-    } else {
-      res.status(500).json({
-        success: false,
-        message: 'Failed to fetch data for all symbols',
-        errors,
-      });
-    }
-  } catch (error: any) {
-    console.error('Error processing request:', error.message || error);
-    res.status(500).json({
-      success: false,
-      message: error.message || 'Internal Server Error',
-    });
+    res.json({ success: true, data: cryptoQuotes, errors });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    res.status(500).json({ success: false, message: errorMessage });
   }
 });
 

@@ -1,47 +1,65 @@
+import axios from 'axios';
 import express from 'express';
-import request from 'request';
 
 const router = express.Router();
-const key = '55a866d8-fc5f-479b-8206-15fa987e95f0';
 
-router.get('/latest', (req, res) => {
+const COINGECKO_API_BASE = 'https://api.coingecko.com/api/v3';
+
+router.get('/latest', async (req, res) => {
   const limit = req.query.limit || 10;
-  const options = {
-    url: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=${limit}&convert=USD`,
-    headers: {
-      'X-CMC_PRO_API_KEY': key,
-    },
-  };
 
-  request(options, (error, response, body) => {
-    if (error) {
-      console.error('Error fetching data:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(body);
-    }
-  });
+  try {
+    const response = await axios.get(`${COINGECKO_API_BASE}/coins/markets`, {
+      params: {
+        vs_currency: 'usd',
+        order: 'market_cap_desc',
+        price_change_percentage: '1h,24h,7d',
+        per_page: limit,
+        page: 1,
+      },
+    });
+    res.json(response.data);
+  } catch (error: any) {
+    console.error('Error fetching data:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-router.get('/quote', (req, res) => {
+router.get('/quote', async (req, res) => {
   const crypto = req.query.crypto;
-  const options = {
-    url: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${crypto}`,
-    headers: {
-      'X-CMC_PRO_API_KEY': key,
-    },
-  };
 
-  request(options, (error, response, body) => {
-    if (error) {
-      console.error('Error fetching data:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(body);
-    }
-  });
+  if (!crypto) {
+    return res.status(400).json({ error: 'Missing "crypto" query parameter' });
+  }
+
+  try {
+    const response = await axios.get(`${COINGECKO_API_BASE}/coins/${crypto}`, {
+      params: {
+        localization: false,
+      },
+    });
+
+    const data = response.data;
+    res.json({
+      id: data.id,
+      symbol: data.symbol,
+      name: data.name,
+      current_price: data.market_data.current_price.usd,
+      price_change_percentage_1h:
+        data.market_data.price_change_percentage_1h_in_currency?.usd,
+      price_change_percentage_24h:
+        data.market_data.price_change_percentage_24h_in_currency?.usd,
+      price_change_percentage_7d:
+        data.market_data.price_change_percentage_7d_in_currency?.usd,
+      market_cap: data.market_data.market_cap.usd,
+      total_volume: data.market_data.total_volume.usd,
+      circulating_supply: data.market_data.circulating_supply,
+      logo: data.image?.thumb,
+    });
+  } catch (error: any) {
+    console.error('Error fetching data:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 export default router;
