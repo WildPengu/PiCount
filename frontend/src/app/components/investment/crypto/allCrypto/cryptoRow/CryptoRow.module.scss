@@ -1,6 +1,6 @@
 .assetRow {
   display: grid;
-  grid-template-columns:  3% 10% 11% 6% 6% 6% 6% 15% 15% 15%;
+  grid-template-columns: 30px 200px 150px 85px 85px 85px 85px 250px 200px 250px;
   padding: 16px 8px;
   align-items: center;
   transition: 0.3s;
@@ -13,7 +13,7 @@
   }
 
   & > div {
-    margin-right: 16px;
+    margin-right: 32px;
   }
 
   .alignRight {
