@@ -9,16 +9,60 @@ router.get('/latest', async (req, res) => {
   const limit = req.query.limit || 10;
 
   try {
-    const response = await axios.get(`${COINGECKO_API_BASE}/coins/markets`, {
-      params: {
-        vs_currency: 'usd',
-        order: 'market_cap_desc',
-        price_change_percentage: '1h,24h,7d',
-        per_page: limit,
-        page: 1,
-      },
-    });
-    res.json(response.data);
+    const response = await axios.get(
+			`${COINGECKO_API_BASE}/coins/markets`,
+			{
+				params: {
+					vs_currency: 'usd',
+					order: 'market_cap_desc',
+					price_change_percentage: '1h,24h,7d,30d',
+					per_page: limit,
+					page: 1,
+					sparkline: true,
+				},
+			},
+		);
+
+		const modifiedData = response.data.map((coin: any) => {
+			coin.price_change_percentage_1h_in_currency =
+				coin.price_change_percentage_1h_in_currency !== null
+					? parseFloat(
+							coin.price_change_percentage_1h_in_currency.toFixed(
+								2,
+							),
+					  )
+					: 'N/A';
+			coin.price_change_percentage_24h_in_currency =
+				coin.price_change_percentage_24h_in_currency !==
+				null
+					? parseFloat(
+							coin.price_change_percentage_24h_in_currency.toFixed(
+								2,
+							),
+					  )
+					: 'N/A';
+			coin.price_change_percentage_7d_in_currency =
+				coin.price_change_percentage_7d_in_currency !== null
+					? parseFloat(
+							coin.price_change_percentage_7d_in_currency.toFixed(
+								2,
+							),
+					  )
+					: 'N/A';
+			coin.price_change_percentage_30d_in_currency =
+				coin.price_change_percentage_30d_in_currency !==
+				null
+					? parseFloat(
+							coin.price_change_percentage_30d_in_currency.toFixed(
+								2,
+							),
+					  )
+					: 'N/A';
+
+			return coin;
+		});
+
+		res.json(modifiedData);
   } catch (error: any) {
     console.error('Error fetching data:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });

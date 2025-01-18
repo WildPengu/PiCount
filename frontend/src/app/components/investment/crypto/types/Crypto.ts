@@ -1,39 +1,39 @@
-interface CryptocurrencyQuote {
-  price: number;
-  volume_24h: number;
-  volume_change_24h: number;
-  percent_change_1h: number;
-  percent_change_24h: number;
-  percent_change_7d: number;
-  percent_change_30d: number;
-  percent_change_60d: number;
-  percent_change_90d: number;
-  market_cap: number;
-  market_cap_dominance: number;
-  fully_diluted_market_cap: number;
-  tvl: number | null;
-  last_updated: string;
-}
-
-interface Cryptocurrency {
-  id: number;
-  name: string;
+type Cryptocurrency = {
+  id: string;
   symbol: string;
-  slug: string;
-  num_market_pairs: number;
-  date_added: string;
-  tags: string[];
-  max_supply: number | null;
+  name: string;
+  image: string;
+  current_price: number;
+  market_cap: number;
+  market_cap_rank: number;
+  fully_diluted_valuation: number | null;
+  total_volume: number;
+  high_24h: number;
+  low_24h: number;
+  price_change_24h: number;
+  price_change_percentage_24h: number;
+  market_cap_change_24h: number;
+  market_cap_change_percentage_24h: number;
   circulating_supply: number;
-  total_supply: number;
-  infinite_supply: boolean;
-  platform: string | null;
-  cmc_rank: number;
-  self_reported_circulating_supply: number | null;
-  self_reported_market_cap: number | null;
-  tvl_ratio: number | null;
+  total_supply: number | null;
+  max_supply: number | null;
+  ath: number;
+  ath_change_percentage: number;
+  ath_date: string;
+  atl: number;
+  atl_change_percentage: number;
+  atl_date: string;
+  roi: {
+    times: number;
+    currency: string;
+    percentage: number;
+  } | null;
   last_updated: string;
-  quote: {
-    USD: CryptocurrencyQuote;
+  sparkline_in_7d: {
+    price: number[];
   };
-}
+  price_change_percentage_1h_in_currency: number;
+  price_change_percentage_24h_in_currency: number;
+  price_change_percentage_7d_in_currency: number;
+  price_change_percentage_30d_in_currency: number;
+};

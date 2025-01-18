@@ -1,28 +1,28 @@
 .assetsContainer {
   color: #dadce0;
   display: grid;
-  width: 80%;
-  padding: 16px;
+  width: 100%;
+  padding: 16px 0;
 
   .sortHeader {
     display: grid;
-    grid-template-columns: 19% 14% 11% 11% 11% 18% 16%;
+    grid-template-columns:  3% 10% 11% 6% 6% 6% 6% 15% 15% 15%;
     color: #848e9c;
+    padding: 8px;
+    border-bottom: 1px solid #202434;
+    border-top: 1px solid #202434;
 
     div {
       cursor: pointer;
+      margin-right: 16px;
+
       &:hover {
         color: #dadce0;
       }
     }
-
-    & > div:not(:first-child) {
-      text-align: right;
-    }
   }
 
   .assetsList {
-    max-height: 450px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -30,4 +30,8 @@
       display: none;
     }
   }
+}
+
+.alignRight {
+  text-align: right;
 }
