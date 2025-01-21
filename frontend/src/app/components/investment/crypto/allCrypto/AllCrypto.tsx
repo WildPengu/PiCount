@@ -1,10 +1,10 @@
-
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { AppSettingsProvider } from '../../../../config';
 import { Loader } from '../../../loader/Loader';
 import styles from './AllCrypto.module.scss';
 import { CryptoRow } from './cryptoRow/CryptoRow';
+import { TooltipIcon } from '../../../tooltip/TooltipIcon';
 
 export const AllCrypto = () => {
   const { appSettings } = AppSettingsProvider();
@@ -36,10 +36,7 @@ export const AllCrypto = () => {
     (row: Cryptocurrency, index: number) => {
       return (
         <div key={`${row.id}-${index}`}>
-          <CryptoRow
-            index={index}
-            row={row}
-          />
+          <CryptoRow index={index} row={row} />
         </div>
       );
     },
@@ -55,13 +52,19 @@ export const AllCrypto = () => {
         <div className={styles.alignRight}>24h %</div>
         <div className={styles.alignRight}>7d %</div>
         <div className={styles.alignRight}>30d %</div>
-        <div className={styles.alignRight}>Circulating Supply</div>
-        <div className={styles.alignRight}>Market Cap</div>
+        <div className={styles.alignRight}>
+          Circulating Supply
+          <TooltipIcon />
+        </div>
+        <div className={styles.alignRight}>
+          Market Cap
+          <TooltipIcon />
+        </div>
         <div className={styles.alignRight}>Last 7 days</div>
       </div>
       <div className={styles.assetsList}>
         {allCrypto ? cryptoRows : <Loader />}
       </div>
     </div>
-  )
-}
+  );
+};
