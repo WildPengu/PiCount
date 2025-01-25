@@ -54,11 +54,22 @@ export const AllCrypto = () => {
         <div className={styles.alignRight}>30d %</div>
         <div className={styles.alignRight}>
           Circulating Supply
-          <TooltipIcon />
+          <TooltipIcon
+            text={`The amount of coins that are circulating in the market and are in public hands. It is analogous to the flowing shares in the stock market.`}
+            link={
+              'https://support.coinmarketcap.com/hc/en-us/articles/360043396252-Supply-Circulating-Total-Max'
+            }
+          />
         </div>
         <div className={styles.alignRight}>
           Market Cap
-          <TooltipIcon />
+          <TooltipIcon
+            text={`The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market. 
+              Market Cap = Current Price x Circulating Supply.`}
+            link={
+              'https://support.coinmarketcap.com/hc/en-us/articles/360043836811-Market-Capitalization-Cryptoasset-Aggregate'
+            }
+          />
         </div>
         <div className={styles.alignRight}>Last 7 days</div>
       </div>
