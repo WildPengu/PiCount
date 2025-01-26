@@ -1,18 +1,18 @@
 .assetRow {
   display: grid;
-  grid-template-columns: 19% 19% 19% 19% 7% 7% 7% 3%;
-  padding: 8px 0;
+  grid-template-columns: 30px 175px 175px 150px 150px 85px 85px 85px 85px 250px 30px;
+  padding: 8px;
   align-items: center;
   transition: 0.3s;
   border-radius: 10px;
   font-weight: 700;
 
   &:hover {
-    background-color: #0b0e11;
+    background-color: #222531;
   }
 
-  & > div:not(:first-child) {
-    text-align: right;
+  & > div {
+    margin-right: 32px;
   }
 
   .firstColumn {
@@ -47,9 +47,14 @@
     justify-content: center;
     align-items: center;
     padding: 4px;
+    margin-left: 24px;
 
     &:hover {
       color: #ef454a;
     }
   }
+}
+
+.alignRight {
+  text-align: right;
 }

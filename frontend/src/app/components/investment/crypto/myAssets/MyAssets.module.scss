@@ -1,23 +1,22 @@
 .assetsContainer {
   color: #dadce0;
   display: grid;
-  width: 80%;
+  width: 100%;
   padding: 16px;
+  font-size: 14px;
 
   .sortHeader {
     display: grid;
-    grid-template-columns: 19% 19% 19% 19% 7% 7% 7% 3%;
+    grid-template-columns: 30px 175px 175px 150px 150px 85px 85px 85px 85px 250px 30px;
     color: #848e9c;
+    padding: 8px;
 
     div {
       cursor: pointer;
+      margin-right: 32px;
       &:hover {
         color: #dadce0;
       }
-    }
-
-    & > div:not(:first-child) {
-      text-align: right;
     }
   }
 
@@ -29,4 +28,8 @@
       display: none;
     }
   }
+}
+
+.alignRight {
+  text-align: right;
 }

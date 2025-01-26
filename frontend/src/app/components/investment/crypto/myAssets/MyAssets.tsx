@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { AppSettingsProvider } from '../../../../config';
 import Button from '../../../button/Button';
@@ -7,40 +6,28 @@ import styles from './MyAssets.module.scss';
 import { AssetRow } from './assetRow/AssetRow';
 
 export interface Crypto {
+  id: string;
   cryptoId: string;
   name: string;
   symbol: string;
   amount: number;
-  logo: string;
-  quote: Quote;
-}
-
-interface QuoteData {
+  image: string;
   price: number;
-  volume_24h: number;
-  volume_change_24h: number;
-  percent_change_1h: number;
-  percent_change_24h: number;
-  percent_change_7d: number;
-  percent_change_30d: number;
-  percent_change_60d: number;
-  percent_change_90d: number;
-  market_cap: number;
-  market_cap_dominance: number;
-  fully_diluted_market_cap: number;
-  tvl: number | null;
-  last_updated: string;
+  percent_change_1h: string;
+  percent_change_24h: string;
+  percent_change_7d: string;
+  percent_change_30d: string;
+  sparkline_in_7d: {
+    price: number[];
+  };
 }
 
-interface Quote {
-  USD: QuoteData;
-}
 
 export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
-  const [crypto, setCrypto] = useState<Record<string, Crypto>>({});
+  const [crypto, setCrypto] = useState<Crypto[]>([]);
   const [inputAmount, setInputAmount] = useState<number>(0);
-  const [inputSymbol, setInputSymbol] = useState<string>('');
+  const [inputCryptoId, setInputCryptoId] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,8 +35,9 @@ export const MyAssets = () => {
         const response = await fetch(
           `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
         );
-
-        setCrypto(await response.json());
+        const result = await response.json()
+        console.log('111', result.data)
+        setCrypto(result.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -58,7 +46,7 @@ export const MyAssets = () => {
     fetchData();
   }, [appSettings.apiHost, appSettings.apiPort, appSettings.user_id]);
 
-  async function deleteCryptoAsset(cryptoId: string, symbol: string) {
+  async function deleteCryptoAsset(cryptoId: string, index: number) {
     try {
       const response = await fetch(
         `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}/${cryptoId}`,
@@ -74,8 +62,8 @@ export const MyAssets = () => {
         throw new Error('Failed to delete crypto asset');
       }
 
-      const updateCrypto = { ...crypto };
-      delete updateCrypto[symbol];
+      const updateCrypto = [...crypto];
+      delete updateCrypto[index];
       setCrypto(updateCrypto);
     } catch (error) {
       if (error instanceof Error) {
@@ -86,98 +74,103 @@ export const MyAssets = () => {
     }
   }
 
-  const addCrypto = (symbol: string, amount: number) => {
-    if (!symbol || !amount) {
+  const addCrypto = async (id: string, amount: number, cryptoId: string) => {
+    if (!id || !amount || !cryptoId) {
       return;
     }
 
-    fetch(
-      `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
+    try {
+      const response = await fetch(
+        `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            assetId: id,
+            amount,
+            cryptoId,
+          }),
         },
-        body: JSON.stringify({
-          symbol,
-          amount,
-        }),
-      },
-    ).catch((error) => {
-      console.error('An error occured', error);
-    });
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to add crypto asset');
+      }
+
+      const updatedCrypto = await response.json();
+
+      setCrypto(updatedCrypto.data);
+    } catch (error) {
+      console.error('An error occurred', error);
+    }
   };
 
-  const updateCryptoAmount = (
+  const updateCryptoAmount = async (
     amount: number,
+    id: string,
     cryptoId: string,
-    symbol: string,
   ): Promise<void> => {
-    const url = `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}/${cryptoId}?amount=${amount}`;
-
-    return new Promise<void>((resolve, reject) => {
-      fetch(url, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
+    try {
+      const response = await fetch(
+        `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            assetId: id,
+            amount,
+            cryptoId
+          }),
         },
-        body: JSON.stringify({
-          amount,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((updatedCrypto) => {
-          const allCrypto = { ...crypto };
-          allCrypto[symbol].amount = updatedCrypto.amount;
-          setCrypto(allCrypto);
-          resolve();
-        })
-        .catch((error) => {
-          console.error('There was a problem with the fetch operation:', error);
-          reject(error);
-        });
-    });
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to update crypto amount');
+      }
+
+      const updatedCrypto = await response.json();
+      console.log(updatedCrypto)
+      setCrypto(updatedCrypto.data);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
   };
 
   let totalAssetsPrice = 0;
 
-  const cryptoRows = _.map(
-    crypto as Record<string, Crypto>,
-    (row: Crypto, index: number) => {
-      if (row.quote && row.quote.USD && row.quote.USD.price) {
-        const cryptoValue = parseFloat(
-          (row.amount * row.quote.USD.price).toFixed(2),
-        );
-        totalAssetsPrice += cryptoValue;
+  const cryptoRows = crypto?.map((row: Crypto, index: number) => {
+    const cryptoValue = row.amount * row.price;
+    totalAssetsPrice += cryptoValue;
 
-        return (
-          <AssetRow
-            key={index}
-            row={row}
-            deleteCryptoAsset={deleteCryptoAsset}
-            updateCryptoAmount={updateCryptoAmount}
-          />
-        );
-      }
-    },
-  );
+    return (
+      <AssetRow
+        index={index}
+        row={row}
+        deleteCryptoAsset={deleteCryptoAsset}
+        updateCryptoAmount={updateCryptoAmount}
+      />
+    );
+  });
+
 
   return (
     <div className={styles.assetsContainer}>
       <h2>Portfolio value: {totalAssetsPrice.toLocaleString('en-US')}$</h2>
       <div className={styles.sortHeader}>
-        <div>Coin</div>
-        <div>Amount</div>
-        <div>Coin Price</div>
-        <div>Today's PnL</div>
-        <div>24h %</div>
-        <div>7d %</div>
-        <div>30d %</div>
+        <div>#</div>
+        <div>Name</div>
+        <div className={styles.alignRight}>Holdings</div>
+        <div className={styles.alignRight}>Price</div>
+        <div className={styles.alignRight}>Today's PnL</div>
+        <div className={styles.alignRight}>1h %</div>
+        <div className={styles.alignRight}>24h %</div>
+        <div className={styles.alignRight}>7d %</div>
+        <div className={styles.alignRight}>30d %</div>
+        <div className={styles.alignRight}>Last 7 days</div>
       </div>
       <div className={styles.assetsList}>
         {crypto ? cryptoRows : <Loader />}
@@ -195,15 +188,15 @@ export const MyAssets = () => {
           />
         </div>
         <div>
-          <span>Symbol:</span>
+          <span>Crypto:</span>
           <input
             name="symbol"
             type="string"
-            value={inputSymbol}
-            onChange={(e) => setInputSymbol(e.target.value)}
+            value={inputCryptoId}
+            onChange={(e) => setInputCryptoId(e.target.value)}
           />
         </div>
-        <Button onClick={() => addCrypto(inputSymbol, inputAmount)}>Add</Button>
+        <Button onClick={() => addCrypto(inputCryptoId, inputAmount)}>Add</Button>
       </div>
     </div>
   );

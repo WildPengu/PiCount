@@ -1,5 +1,4 @@
 
-import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { AppSettingsProvider } from '../../../../config';
 import { Loader } from '../../../loader/Loader';
@@ -16,7 +15,6 @@ export const AllCrypto = () => {
         `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=50`,
       );
       const result = await response.json();
-
       if (result.error) {
         setAllCrypto(null);
       } else {
@@ -31,19 +29,17 @@ export const AllCrypto = () => {
   useEffect(() => {
     fetchData();
   }, [appSettings.apiHost, appSettings.apiPort, appSettings.user_id]);
-  const cryptoRows = _.map(
-    allCrypto as any,
-    (row: Cryptocurrency, index: number) => {
-      return (
-        <div key={`${row.id}-${index}`}>
-          <CryptoRow
-            index={index}
-            row={row}
-          />
-        </div>
-      );
-    },
-  );
+
+  const cryptoRows = allCrypto?.map((row: Cryptocurrency, index: number) => {
+    return (
+      <div key={`${row.id}-${index}`}>
+        <CryptoRow
+          index={index}
+          row={row}
+        />
+      </div>
+    );
+  });
 
   return (
     <div className={styles.assetsContainer}>

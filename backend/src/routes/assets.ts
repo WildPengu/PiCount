@@ -35,136 +35,235 @@ interface Quote {
   USD: QuoteData;
 }
 
-const key = '55a866d8-fc5f-479b-8206-15fa987e95f0';
+const COINGECKO_API_BASE =
+	'https://api.coingecko.com/api/v3';
 
-// Update assets
-router.patch('/crypto/:id', async (req: Request, res: Response) => {
-  const userId = req.params.id;
+async function fetchCryptoData(ids: string): Promise<any> {
+	const url = `${COINGECKO_API_BASE}/coins/markets`;
+	const response = await axios.get(url, {
+		params: {
+			ids,
+			vs_currency: 'usd',
+			order: 'market_cap_desc',
+			price_change_percentage: '1h,24h,7d,30d',
+			sparkline: true,
+		},
+		headers: {
+			accept: 'application/json',
+			'x-cg-demo-api-key': 'CG-Yx8sgE7pUefGoxUBDAzZE6Cz	',
+		},
+	});
+	return response.data;
+}
 
-  try {
-    const userAssets = await UserAssets.findOne({ userId: userId });
-
-    if (!userAssets) {
-      return res.status(404).json({ message: 'User assets not found' });
-    }
-
-    const newAsset: Asset = {
-      id: new mongoose.Types.ObjectId(),
-      symbol: req.body.symbol,
-      amount: req.body.amount,
-    };
-
-    userAssets.assets.crypto.set(newAsset.id, newAsset);
-    await userAssets.save();
-
-    res.json(userAssets.assets.crypto);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-});
+function mapCryptoData(asset: any, symbolData: any) {
+	return {
+		id: asset.id,
+		cryptoId: asset.cryptoId,
+		amount: asset.amount,
+		symbol: symbolData.symbol,
+		name: symbolData.name,
+		image: symbolData.image,
+		price: symbolData.current_price,
+		marketCap: symbolData.market_cap,
+		volume24h: symbolData.total_volume,
+		change24h: symbolData.price_change_percentage_24h,
+		lastUpdated: symbolData.last_updated,
+		percent_change_1h:
+			symbolData.price_change_percentage_1h_in_currency,
+		percent_change_24h:
+			symbolData.price_change_percentage_24h_in_currency,
+		percent_change_7d:
+			symbolData.price_change_percentage_7d_in_currency,
+		percent_change_30d:
+			symbolData.price_change_percentage_30d_in_currency,
+		circulating_supply: symbolData.circulating_supply,
+		max_supply: symbolData.max_supply,
+		sparkline_in_7d: symbolData.sparkline_in_7d,
+	};
+}
 
 router.get('/crypto/:id', async (req, res) => {
-  const userId = req.params.id;
+	const userId = req.params.id;
 
-  try {
-    const userAssets = await UserAssets.findOne({ userId });
+	try {
+		const userAssets = await UserAssets.findOne({ userId });
 
-    if (!userAssets) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'User assets not found' });
-    }
+		if (!userAssets) {
+			return res.status(404).json({
+				success: false,
+				message: 'User assets not found',
+			});
+		}
 
-    const cryptoAssets = userAssets.assets.crypto;
-    const symbols = Array.from(cryptoAssets.values())
-      .map((asset) => asset.symbol.toLowerCase())
-      .join(',');
+		const cryptoAssets = userAssets.assets.crypto;
+		const ids = Array.from(cryptoAssets.values())
+			.map((asset) => asset.cryptoId.toLowerCase())
+			.join(',');
 
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${symbols}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+		const data = await fetchCryptoData(ids);
 
-    const response = await axios.get(url);
-    const data = response.data;
+		const cryptoQuotes: any[] = [];
+		const errors: string[] = [];
 
-    const cryptoQuotes: Record<string, any> = {};
-    const errors: string[] = [];
+		for (const [id, asset] of cryptoAssets.entries()) {
+			const cryptoData = data.find(
+				(item: any) =>
+					item.id.toLowerCase() ===
+					asset.cryptoId.toLowerCase(),
+			);
 
-    for (const [cryptoId, asset] of cryptoAssets.entries()) {
-      const { symbol, amount } = asset;
-      const symbolData = data[symbol.toLowerCase()];
+			if (cryptoData) {
+				cryptoQuotes.push(mapCryptoData(asset, cryptoData));
+			} else {
+				errors.push(`Data for ${asset.cryptoId} not found`);
+			}
+		}
 
-      if (symbolData) {
-        cryptoQuotes[symbol] = {
-          cryptoId,
-          symbol,
-          amount,
-          price: symbolData.usd,
-          marketCap: symbolData.usd_market_cap,
-          volume24h: symbolData.usd_24h_vol,
-          change24h: symbolData.usd_24h_change,
-          lastUpdated: symbolData.last_updated_at,
-        };
-      } else {
-        errors.push(`Data for ${symbol} not found`);
-      }
-    }
-
-    res.json({ success: true, data: cryptoQuotes, errors });
-  } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    res.status(500).json({ success: false, message: errorMessage });
-  }
+		res.json({ success: true, data: cryptoQuotes, errors });
+	} catch (error: unknown) {
+		const errorMessage =
+			error instanceof Error
+				? error.message
+				: 'Unknown error';
+		res
+			.status(500)
+			.json({ success: false, message: errorMessage });
+	}
 });
-
 
 router.delete('/crypto/:id/:cryptoId', async (req, res) => {
-  const cryptoId = req.params.cryptoId;
-  const userId = req.params.id;
+	const cryptoId = req.params.cryptoId;
+	const userId = req.params.id;
 
-  try {
-    const userAssets = await UserAssets.findOne({ userId: userId });
+	try {
+		const userAssets = await UserAssets.findOne({
+			userId: userId,
+		});
 
-    if (!userAssets) {
-      return res.status(404).json({ message: 'User assets not found' });
-    }
+		if (!userAssets) {
+			return res.status(404).json({
+				success: false,
+				message: 'User assets not found',
+			});
+		}
 
-    const cryptoAssets = userAssets.assets.crypto;
-    if (cryptoAssets.has(cryptoId)) {
-      cryptoAssets.delete(cryptoId);
-    }
+		const cryptoAssets = userAssets.assets.crypto;
 
-    await userAssets.save();
+		if (cryptoAssets.has(cryptoId)) {
+			cryptoAssets.delete(cryptoId);
+		}
 
-    res.json({ message: `Crypto asset with ID ${cryptoId} has been deleted` });
-  } catch (error) {
-    console.error('Error deleting crypto asset:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+		await userAssets.save();
+
+		const ids = Array.from(cryptoAssets.values())
+			.map((asset) => asset.cryptoId.toLowerCase())
+			.join(',');
+
+		const data = await fetchCryptoData(ids);
+
+		const cryptoQuotes: any[] = [];
+		const errors: string[] = [];
+
+		for (const [id, asset] of cryptoAssets.entries()) {
+			const symbolData = data.find(
+				(item: any) =>
+					item.id.toLowerCase() ===
+					asset.cryptoId.toLowerCase(),
+			);
+
+			if (symbolData) {
+				cryptoQuotes.push(mapCryptoData(asset, symbolData));
+			} else {
+				errors.push(`Data for ${asset.cryptoId} not found`);
+			}
+		}
+
+		res.json({ success: true, data: cryptoQuotes, errors });
+	} catch (error) {
+		console.error('Error deleting crypto asset:', error);
+		res.status(500).json({
+			success: false,
+			message: 'Internal Server Error',
+		});
+	}
 });
 
-router.patch('/crypto/:id/:cryptoId', async (req: Request, res: Response) => {
-  const userId = req.params.id;
-  const cryptoId = req.params.cryptoId;
+router.patch(
+	'/crypto/:id',
+	async (req: Request, res: Response) => {
+		const userId = req.params.id;
+		const { assetId, amount, cryptoId } = req.body;
+		try {
+			const userAssets = await UserAssets.findOne({
+				userId: userId,
+			});
 
-  try {
-    const userAssets = await UserAssets.findOne({ userId: userId });
-    if (!userAssets) {
-      return res.status(404).json({ message: 'User assets not found' });
-    }
+			if (!userAssets) {
+				return res.status(404).json({
+					success: false,
+					message: 'User assets not found',
+				});
+			}
 
-    const cryptoToUpdate = userAssets.assets.crypto.get(cryptoId);
+			const existingAsset =
+				userAssets.assets.crypto.get(assetId);
 
-    if (!cryptoToUpdate) {
-      return res.status(404).json({ message: 'Crypto asset not found' });
-    }
+			if (existingAsset) {
+				existingAsset.amount = amount;
+			} else {
+				const newAsset: Asset = {
+					id: new mongoose.Types.ObjectId(),
+					cryptoId,
+					amount,
+				};
+				userAssets.assets.crypto.set(cryptoId, newAsset);
+			}
 
-    cryptoToUpdate.amount = req.body.amount;
+			await userAssets.save();
 
-    await userAssets.save();
+			const cryptoAssets = userAssets.assets.crypto;
+			const ids = Array.from(cryptoAssets.values())
+				.map((asset) => asset.cryptoId.toLowerCase())
+				.join(',');
 
-    res.json(cryptoToUpdate);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-});
+			const data = await fetchCryptoData(ids);
+
+			const cryptoQuotes: any[] = [];
+			const errors: string[] = [];
+
+			for (const [id, asset] of cryptoAssets.entries()) {
+				const cryptoData = data.find(
+					(item: any) =>
+						item.id.toLowerCase() ===
+						asset.cryptoId.toLowerCase(),
+				);
+
+				if (cryptoData) {
+					cryptoQuotes.push(
+						mapCryptoData(asset, cryptoData),
+					);
+				} else {
+					errors.push(
+						`Data for ${asset.cryptoId} not found`,
+					);
+				}
+			}
+
+			res.json({
+				success: true,
+				data: cryptoQuotes,
+				errors,
+			});
+		} catch (error: any) {
+			res
+				.status(500)
+				.json({ success: false, message: error.message });
+		}
+	},
+);
+
+
+
 
 export default router;

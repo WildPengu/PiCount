@@ -9,7 +9,7 @@ router.get('/latest', async (req, res) => {
   const limit = req.query.limit || 10;
 
   try {
-    const response = await axios.get(
+		const response = await axios.get(
 			`${COINGECKO_API_BASE}/coins/markets`,
 			{
 				params: {
@@ -61,12 +61,13 @@ router.get('/latest', async (req, res) => {
 
 			return coin;
 		});
-
 		res.json(modifiedData);
-  } catch (error: any) {
-    console.error('Error fetching data:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+	} catch (error: any) {
+		console.error('Error fetching data:', error.message);
+		res
+			.status(500)
+			.json({ error: 'Internal Server Error' });
+	}
 });
 
 router.get('/quote', async (req, res) => {
