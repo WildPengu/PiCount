@@ -49,7 +49,7 @@ export const TooltipComponent: React.FC<TooltipComponentProps> = ({
   }, []);
 
   return (
-    <div
+    <section
       ref={tooltipRef}
       className={styles.tooltipComponentContainer}
       style={tooltipStyle}
@@ -60,6 +60,6 @@ export const TooltipComponent: React.FC<TooltipComponentProps> = ({
       <a href={link} target="_blank" rel="noopener noreferrer">
         Read More
       </a>
-    </div>
+    </section>
   );
 };

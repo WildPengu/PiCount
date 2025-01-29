@@ -65,7 +65,7 @@ export const AllCrypto = () => {
           Market Cap
           <TooltipIcon
             text={`The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market. 
-              Market Cap = Current Price x Circulating Supply.`}
+              \n\nMarket Cap = Current Price x Circulating Supply.`}
             link={
               'https://support.coinmarketcap.com/hc/en-us/articles/360043836811-Market-Capitalization-Cryptoasset-Aggregate'
             }

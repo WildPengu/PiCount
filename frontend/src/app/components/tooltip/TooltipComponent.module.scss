@@ -1,3 +1,5 @@
+@import './../../../scss/Variables.module.scss';
+
 .tooltipWrapper {
   position: relative;
   left: 2%;
@@ -10,7 +12,7 @@
     border-radius: 50px;
     height: 17px;
     width: 100%;
-    background-color: rgb(146 146 146);
+    background-color: #636c7f;
     transition: all 0.3s;
 
     p {
@@ -25,13 +27,14 @@
     transform: translateX(-50%);
     margin-top: 10px;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 20px;
     width: 300px;
-    background-color: #222531;
     transition: transform 0.2s ease-out;
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 12px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 3px 0px #636c7f;
     z-index: 10;
 
     &::after {
@@ -44,12 +47,10 @@
       height: 0;
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
-      border-bottom: 8px solid #222531;
       z-index: 10;
     }
 
     a {
-      color: rgb(124, 124, 239);
       text-decoration: none;
     }
   }

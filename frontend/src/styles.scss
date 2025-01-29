@@ -55,6 +55,25 @@ body {
     p {
       color: $txt-dark;
     }
+
+    .DarkThemeTooltip {
+      p {
+        color: $bgc-dark;
+      }
+
+      section {
+        background-color: $bgc-input-dark;
+        &::after {
+          border-bottom: 8px solid $bgc-input-dark;
+        }
+        p {
+          color: $txt-dark;
+        }
+        a {
+          color: $blue;
+        }
+      }
+    }
   }
 
   // light theme
@@ -102,6 +121,25 @@ body {
     h2,
     p {
       color: $txt-light;
+    }
+  }
+
+  .LightThemeTooltip {
+    p {
+      color: $bgc-light;
+    }
+
+    section {
+      background-color: $bgc-input-light;
+      &::after {
+        border-bottom: 8px solid $bgc-input-light;
+      }
+      p {
+        color: $txt-light;
+      }
+      a {
+        color: $violet;
+      }
     }
   }
 }
