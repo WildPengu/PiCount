@@ -1,0 +1,84 @@
+.addCryptoModal {
+  color:  #ffffff;
+  width: 450px;
+
+  .modalHeader {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .inputModal {
+    @extend .inputBase;
+    width: 100%;
+  }
+
+  .cryptoList {
+    max-height: 320px;
+    overflow-y: scroll;
+    margin: 20px 0;
+    padding: 0 16px;
+  
+    .cryptoLine {
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      border-radius: 8px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.02);
+      }
+
+      &.selected {
+        background-color: #2a5d90;
+        color: #fff;
+      }
+
+      .cryptoItemContainer {
+        display: flex;
+        align-items: center;
+        text-align: left;
+  
+        .image {
+          width: 25px;
+          height: 25px;
+          margin-right: 8px;
+        }
+      }
+
+      .iconsContainer {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .quantityInput {
+    @extend .inputBase;
+    width: 40%;
+    margin-bottom: 32px;
+    margin-left: 16px;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+.inputBase {
+  font-size: 12px;
+  height: 32px;
+  line-height: 18px;
+  border: 1px solid #40424e;
+  outline: 0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #213654;;
+  padding: 0px 16px;
+
+  &::placeholder {
+    color: gray;
+  }
+}

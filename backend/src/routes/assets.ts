@@ -193,10 +193,10 @@ router.patch(
 	'/crypto/:id',
 	async (req: Request, res: Response) => {
 		const userId = req.params.id;
-		const { assetId, amount, cryptoId } = req.body;
+		const { cryptoId, amount } = req.body;
 		try {
 			const userAssets = await UserAssets.findOne({
-				userId: userId,
+				userId,
 			});
 
 			if (!userAssets) {
@@ -206,11 +206,16 @@ router.patch(
 				});
 			}
 
-			const existingAsset =
-				userAssets.assets.crypto.get(assetId);
+			let existingAsset = Array.from(
+				userAssets.assets.crypto.values(),
+			).find(
+				(asset) =>
+					asset.cryptoId.toLowerCase() ===
+					cryptoId.toLowerCase(),
+			);
 
 			if (existingAsset) {
-				existingAsset.amount = amount;
+				existingAsset.amount += amount;
 			} else {
 				const newAsset: Asset = {
 					id: new mongoose.Types.ObjectId(),
@@ -232,7 +237,7 @@ router.patch(
 			const cryptoQuotes: any[] = [];
 			const errors: string[] = [];
 
-			for (const [id, asset] of cryptoAssets.entries()) {
+			for (const asset of cryptoAssets.values()) {
 				const cryptoData = data.find(
 					(item: any) =>
 						item.id.toLowerCase() ===
@@ -262,6 +267,7 @@ router.patch(
 		}
 	},
 );
+
 
 
 

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { AppSettingsProvider } from '../../../../config';
 import Button from '../../../button/Button';
 import { Loader } from '../../../loader/Loader';
+import { Modal } from '../../../modal/Modal';
 import styles from './MyAssets.module.scss';
+import { AddCryptoModal } from './addCryptoModal/AddCryptoModal';
 import { AssetRow } from './assetRow/AssetRow';
 
 export interface Crypto {
@@ -26,8 +28,7 @@ export interface Crypto {
 export const MyAssets = () => {
   const { appSettings } = AppSettingsProvider();
   const [crypto, setCrypto] = useState<Crypto[]>([]);
-  const [inputAmount, setInputAmount] = useState<number>(0);
-  const [inputCryptoId, setInputCryptoId] = useState<string>('');
+  const [toggleModal, setToggleModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +37,6 @@ export const MyAssets = () => {
           `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
         );
         const result = await response.json()
-        console.log('111', result.data)
         setCrypto(result.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -74,8 +74,8 @@ export const MyAssets = () => {
     }
   }
 
-  const addCrypto = async (id: string, amount: number, cryptoId: string) => {
-    if (!id || !amount || !cryptoId) {
+  const addCrypto = async (amount: number, cryptoId: string) => {
+    if (!amount || !cryptoId) {
       return;
     }
 
@@ -88,7 +88,6 @@ export const MyAssets = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            assetId: id,
             amount,
             cryptoId,
           }),
@@ -107,39 +106,6 @@ export const MyAssets = () => {
     }
   };
 
-  const updateCryptoAmount = async (
-    amount: number,
-    id: string,
-    cryptoId: string,
-  ): Promise<void> => {
-    try {
-      const response = await fetch(
-        `${appSettings.apiHost}:${appSettings.apiPort}/assets/crypto/${appSettings.user_id}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            assetId: id,
-            amount,
-            cryptoId
-          }),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to update crypto amount');
-      }
-
-      const updatedCrypto = await response.json();
-      console.log(updatedCrypto)
-      setCrypto(updatedCrypto.data);
-    } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
-    }
-  };
-
   let totalAssetsPrice = 0;
 
   const cryptoRows = crypto?.map((row: Crypto, index: number) => {
@@ -151,7 +117,6 @@ export const MyAssets = () => {
         index={index}
         row={row}
         deleteCryptoAsset={deleteCryptoAsset}
-        updateCryptoAmount={updateCryptoAmount}
       />
     );
   });
@@ -159,7 +124,11 @@ export const MyAssets = () => {
 
   return (
     <div className={styles.assetsContainer}>
-      <h2>Portfolio value: {totalAssetsPrice.toLocaleString('en-US')}$</h2>
+      <div className={styles.chartBoxHeader}>
+        <h2>Portfolio value: {totalAssetsPrice.toLocaleString('en-US')}$</h2>
+        <Button onClick={() => { setToggleModal(!toggleModal) }}>+ Add Crypto</Button>
+      </div>
+
       <div className={styles.sortHeader}>
         <div>#</div>
         <div>Name</div>
@@ -175,29 +144,10 @@ export const MyAssets = () => {
       <div className={styles.assetsList}>
         {crypto ? cryptoRows : <Loader />}
       </div>
-      <div>
-        <div>
-          <span>Amount:</span>
-          <input
-            name="amount"
-            type="number"
-            min={0.000001}
-            step={0.01}
-            value={inputAmount}
-            onChange={(e) => setInputAmount(parseFloat(e.target.value))}
-          />
-        </div>
-        <div>
-          <span>Crypto:</span>
-          <input
-            name="symbol"
-            type="string"
-            value={inputCryptoId}
-            onChange={(e) => setInputCryptoId(e.target.value)}
-          />
-        </div>
-        <Button onClick={() => addCrypto(inputCryptoId, inputAmount)}>Add</Button>
-      </div>
+
+      {toggleModal && <Modal>
+        {<AddCryptoModal setToggleModal={setToggleModal} addCrypto={addCrypto} />}
+      </Modal>}
     </div>
   );
 };

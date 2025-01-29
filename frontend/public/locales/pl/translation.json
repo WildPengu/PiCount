@@ -8,7 +8,8 @@
   "create": "Załóż konto",
   "reset": "Resetuj",
   "cancel": "Anuluj",
-  "today": "DZISIAJ",
+  "add": "Dodaj",
+  "today": "Dzisiaj",
   "expList": "Lista moich wydatków",
   "chart": "Mój wykres",
   "chartNav": "Wykresy",
@@ -17,6 +18,7 @@
   "settings": "Ustawienia",
   "history": "Historia",
   "logout": "Wyloguj",
+  "search": "Szukaj",
 
   "settingsComponent": {
     "theme": "Tryb ciemny / jasny",
