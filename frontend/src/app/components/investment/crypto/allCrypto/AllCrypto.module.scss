@@ -3,7 +3,8 @@
   display: grid;
   width: 100%;
   padding: 16px 0;
-
+  overflow-x: auto;
+  
   .sortHeader {
     display: grid;
     grid-template-columns: 30px 200px 150px 85px 85px 85px 85px 250px 200px 250px;

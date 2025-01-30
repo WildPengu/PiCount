@@ -4,6 +4,8 @@
   width: 100%;
   padding: 16px;
   font-size: 14px;
+  box-sizing: border-box;
+  overflow-x: auto;
 
   .chartBoxHeader {
     display: flex;
@@ -27,7 +29,9 @@
 
   .assetsList {
     overflow-y: scroll;
-
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    min-width: 1200px;
     &::-webkit-scrollbar {
       width: 0;
       display: none;
