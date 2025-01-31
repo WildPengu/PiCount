@@ -19,18 +19,14 @@ export const Crypto: React.FC<InvestProps> = () => {
     <div>
       <div className={styles.cryptoHeader}>
         <h2
-          className={styles.cryptoHeaderText}
-          onClick={() => {
-            setActiveView(ActiveView.AllCrypto);
-          }}
+          className={`${styles.cryptoHeaderText} ${activeView === ActiveView.AllCrypto ? styles.activeTab : ''}`}
+          onClick={() => setActiveView(ActiveView.AllCrypto)}
         >
           All Crypto
         </h2>
         <h2
-          className={styles.cryptoHeaderText}
-          onClick={() => {
-            setActiveView(ActiveView.MyAssets);
-          }}
+          className={`${styles.cryptoHeaderText} ${activeView === ActiveView.MyAssets ? styles.activeTab : ''}`}
+          onClick={() => setActiveView(ActiveView.MyAssets)}
         >
           My Assets
         </h2>
