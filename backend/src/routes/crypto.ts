@@ -1,14 +1,17 @@
 import axios from 'axios';
 import express from 'express';
+import { mapCryptoData, sortCryptoData } from './utils';
 
 const router = express.Router();
 
-const COINGECKO_API_BASE = 'https://api.coingecko.com/api/v3';
+const COINGECKO_API_BASE =
+	'https://api.coingecko.com/api/v3';
 
 router.get('/latest', async (req, res) => {
-  const limit = req.query.limit || 10;
+	const limit = req.query.limit || 10;
+	const { sortBy, sortOrder = 'asc' } = req.query;
 
-  try {
+	try {
 		const response = await axios.get(
 			`${COINGECKO_API_BASE}/coins/markets`,
 			{
@@ -23,44 +26,21 @@ router.get('/latest', async (req, res) => {
 			},
 		);
 
-		const modifiedData = response.data.map((coin: any) => {
-			coin.price_change_percentage_1h_in_currency =
-				coin.price_change_percentage_1h_in_currency !== null
-					? parseFloat(
-							coin.price_change_percentage_1h_in_currency.toFixed(
-								2,
-							),
-					  )
-					: 'N/A';
-			coin.price_change_percentage_24h_in_currency =
-				coin.price_change_percentage_24h_in_currency !==
-				null
-					? parseFloat(
-							coin.price_change_percentage_24h_in_currency.toFixed(
-								2,
-							),
-					  )
-					: 'N/A';
-			coin.price_change_percentage_7d_in_currency =
-				coin.price_change_percentage_7d_in_currency !== null
-					? parseFloat(
-							coin.price_change_percentage_7d_in_currency.toFixed(
-								2,
-							),
-					  )
-					: 'N/A';
-			coin.price_change_percentage_30d_in_currency =
-				coin.price_change_percentage_30d_in_currency !==
-				null
-					? parseFloat(
-							coin.price_change_percentage_30d_in_currency.toFixed(
-								2,
-							),
-					  )
-					: 'N/A';
+		let modifiedData = response.data.map((coin: any) =>
+			mapCryptoData(
+				{ id: coin.id, cryptoId: coin.id },
+				coin,
+			),
+		);
 
-			return coin;
-		});
+		if (sortBy) {
+			modifiedData = sortCryptoData(
+				modifiedData,
+				sortBy,
+				sortOrder,
+			);
+		}
+
 		res.json(modifiedData);
 	} catch (error: any) {
 		console.error('Error fetching data:', error.message);

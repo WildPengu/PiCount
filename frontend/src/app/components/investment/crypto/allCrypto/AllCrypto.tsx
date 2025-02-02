@@ -8,11 +8,22 @@ import { CryptoRow } from './cryptoRow/CryptoRow';
 export const AllCrypto = () => {
   const { appSettings } = AppSettingsProvider();
   const [allCrypto, setAllCrypto] = useState<any>(null);
+  const [sortBy, setSortBy] = useState<string>("market_cap");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const handleSort = (field: string) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
+  };
 
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=50`,
+        `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=50&sortBy=${sortBy}&sortOrder=${sortOrder}`,
       );
       const result = await response.json();
       if (result.error) {
@@ -28,7 +39,7 @@ export const AllCrypto = () => {
 
   useEffect(() => {
     fetchData();
-  }, [appSettings.apiHost, appSettings.apiPort, appSettings.user_id]);
+  }, [sortOrder, sortBy]);
 
   const cryptoRows = allCrypto?.map((row: Cryptocurrency, index: number) => {
     return (
@@ -45,14 +56,14 @@ export const AllCrypto = () => {
     <div className={styles.assetsContainer}>
       <div className={styles.sortHeader}>
         <div>#</div>
-        <div>Name</div>
-        <div className={styles.alignRight}>Price</div>
-        <div className={styles.alignRight}>1h %</div>
-        <div className={styles.alignRight}>24h %</div>
-        <div className={styles.alignRight}>7d %</div>
-        <div className={styles.alignRight}>30d %</div>
-        <div className={styles.alignRight}>Circulating Supply</div>
-        <div className={styles.alignRight}>Market Cap</div>
+        <div onClick={() => handleSort("name")}>Name</div>
+        <div className={styles.alignRight} onClick={() => handleSort("price")}>Price</div>
+        <div className={styles.alignRight} onClick={() => handleSort("percent_change_1h")}>1h %</div>
+        <div className={styles.alignRight} onClick={() => handleSort("percent_change_24h")}>24h %</div>
+        <div className={styles.alignRight} onClick={() => handleSort("percent_change_7d")}>7d %</div>
+        <div className={styles.alignRight} onClick={() => handleSort("percent_change_30d")}>30d %</div>
+        <div className={styles.alignRight} onClick={() => handleSort("circulating_supply")}>Circulating Supply</div>
+        <div className={styles.alignRight} onClick={() => handleSort("marketCap")}>Market Cap</div>
         <div className={styles.alignRight}>Last 7 days</div>
       </div>
       <div className={styles.assetsList}>

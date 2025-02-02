@@ -10,6 +10,38 @@
   .chartBoxHeader {
     display: flex;
     justify-content: space-between;
+
+    .headerContainer {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 32px;
+
+      h2 {
+        margin: 8px 0 4px 0;
+        font-size: 32px;
+      }
+
+      .headerAvatar {
+        background-color: rgb(207, 214, 228);
+        border-radius: 50%;
+      }
+
+      .headerDesc {
+        color: #9FA5B9;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+
+        .headerAvatar {
+          margin-right: 6px;
+          padding: 2.5px;
+        }
+      }
+
+      .portfolioChange {
+        font-size: 16px;
+      }
+    }
   }
 
   .sortHeader {

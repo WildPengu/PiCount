@@ -1,38 +1,39 @@
 import express, { Request, Response } from 'express';
 import { Asset, UserAssets } from '../models/assets';
+import { mapCryptoData, sortCryptoData } from './utils';
 const axios = require('axios');
 const mongoose = require('mongoose');
 
 const router = express.Router();
 
 interface Crypto {
-  cryptoId: string;
-  name: string;
-  symbol: string;
-  amount: number;
-  logo: string;
-  quote: Quote;
+	cryptoId: string;
+	name: string;
+	symbol: string;
+	amount: number;
+	logo: string;
+	quote: Quote;
 }
 
 interface QuoteData {
-  price: number;
-  volume_24h: number;
-  volume_change_24h: number;
-  percent_change_1h: number;
-  percent_change_24h: number;
-  percent_change_7d: number;
-  percent_change_30d: number;
-  percent_change_60d: number;
-  percent_change_90d: number;
-  market_cap: number;
-  market_cap_dominance: number;
-  fully_diluted_market_cap: number;
-  tvl: number | null;
-  last_updated: string;
+	price: number;
+	volume_24h: number;
+	volume_change_24h: number;
+	percent_change_1h: number;
+	percent_change_24h: number;
+	percent_change_7d: number;
+	percent_change_30d: number;
+	percent_change_60d: number;
+	percent_change_90d: number;
+	market_cap: number;
+	market_cap_dominance: number;
+	fully_diluted_market_cap: number;
+	tvl: number | null;
+	last_updated: string;
 }
 
 interface Quote {
-  USD: QuoteData;
+	USD: QuoteData;
 }
 
 const COINGECKO_API_BASE =
@@ -56,35 +57,9 @@ async function fetchCryptoData(ids: string): Promise<any> {
 	return response.data;
 }
 
-function mapCryptoData(asset: any, symbolData: any) {
-	return {
-		id: asset.id,
-		cryptoId: asset.cryptoId,
-		amount: asset.amount,
-		symbol: symbolData.symbol,
-		name: symbolData.name,
-		image: symbolData.image,
-		price: symbolData.current_price,
-		marketCap: symbolData.market_cap,
-		volume24h: symbolData.total_volume,
-		change24h: symbolData.price_change_percentage_24h,
-		lastUpdated: symbolData.last_updated,
-		percent_change_1h:
-			symbolData.price_change_percentage_1h_in_currency,
-		percent_change_24h:
-			symbolData.price_change_percentage_24h_in_currency,
-		percent_change_7d:
-			symbolData.price_change_percentage_7d_in_currency,
-		percent_change_30d:
-			symbolData.price_change_percentage_30d_in_currency,
-		circulating_supply: symbolData.circulating_supply,
-		max_supply: symbolData.max_supply,
-		sparkline_in_7d: symbolData.sparkline_in_7d,
-	};
-}
-
 router.get('/crypto/:id', async (req, res) => {
 	const userId = req.params.id;
+	const { sortBy, sortOrder = 'asc' } = req.query;
 
 	try {
 		const userAssets = await UserAssets.findOne({ userId });
@@ -103,32 +78,37 @@ router.get('/crypto/:id', async (req, res) => {
 
 		const data = await fetchCryptoData(ids);
 
-		const cryptoQuotes: any[] = [];
-		const errors: string[] = [];
+		let cryptoQuotes = Array.from(cryptoAssets.values())
+			.map((asset) => {
+				const cryptoData = data.find(
+					(item: any) =>
+						item.id.toLowerCase() ===
+						asset.cryptoId.toLowerCase(),
+				);
+				return cryptoData
+					? mapCryptoData(asset, cryptoData)
+					: null;
+			})
+			.filter(Boolean);
 
-		for (const [id, asset] of cryptoAssets.entries()) {
-			const cryptoData = data.find(
-				(item: any) =>
-					item.id.toLowerCase() ===
-					asset.cryptoId.toLowerCase(),
+		if (sortBy) {
+			cryptoQuotes = sortCryptoData(
+				cryptoQuotes,
+				sortBy,
+				sortOrder,
 			);
-
-			if (cryptoData) {
-				cryptoQuotes.push(mapCryptoData(asset, cryptoData));
-			} else {
-				errors.push(`Data for ${asset.cryptoId} not found`);
-			}
 		}
 
-		res.json({ success: true, data: cryptoQuotes, errors });
-	} catch (error: unknown) {
-		const errorMessage =
-			error instanceof Error
-				? error.message
-				: 'Unknown error';
-		res
-			.status(500)
-			.json({ success: false, message: errorMessage });
+		res.json({ success: true, data: cryptoQuotes });
+	} catch (error) {
+		console.error(
+			'Error fetching sorted crypto data:',
+			error,
+		);
+		res.status(500).json({
+			success: false,
+			message: 'Internal Server Error',
+		});
 	}
 });
 

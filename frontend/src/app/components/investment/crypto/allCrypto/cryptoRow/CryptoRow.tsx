@@ -13,13 +13,13 @@ export const CryptoRow: React.FC<RowProps> = ({ index, row }) => {
     image,
     name,
     symbol,
-    current_price,
-    price_change_percentage_1h_in_currency,
-    price_change_percentage_24h_in_currency,
-    price_change_percentage_7d_in_currency,
-    price_change_percentage_30d_in_currency,
+    price,
+    percent_change_1h,
+    percent_change_24h,
+    percent_change_7d,
+    percent_change_30d,
     circulating_supply,
-    market_cap,
+    marketCap,
     max_supply,
     sparkline_in_7d,
   } = row;
@@ -36,19 +36,19 @@ export const CryptoRow: React.FC<RowProps> = ({ index, row }) => {
         </div>
       </div>
 
-      <div className={`${styles.price} ${styles.alignRight}`}>${current_price.toFixed(2)}</div>
+      <div className={`${styles.price} ${styles.alignRight}`}>${price.toFixed(2)}</div>
 
       <div className={styles.alignRight}>
-        <PercentageChange value={price_change_percentage_1h_in_currency} />
+        <PercentageChange value={percent_change_1h} />
       </div>
       <div className={styles.alignRight}>
-        <PercentageChange value={price_change_percentage_24h_in_currency} />
+        <PercentageChange value={percent_change_24h} />
       </div>
       <div className={styles.alignRight}>
-        <PercentageChange value={price_change_percentage_7d_in_currency} />
+        <PercentageChange value={percent_change_7d} />
       </div>
       <div className={styles.alignRight}>
-        <PercentageChange value={price_change_percentage_30d_in_currency} />
+        <PercentageChange value={percent_change_30d} />
       </div>
 
       <div className={`${styles.alignRight} ${styles.circulatingSupply}`}>
@@ -59,11 +59,11 @@ export const CryptoRow: React.FC<RowProps> = ({ index, row }) => {
         />
       </div>
 
-      <div className={styles.alignRight}>${market_cap.toLocaleString('en-US')}</div>
+      <div className={styles.alignRight}>${marketCap.toLocaleString('en-US')}</div>
 
       <CryptoSparkline
         prices={sparkline_in_7d.price}
-        priceChangePercentage={price_change_percentage_7d_in_currency}
+        priceChangePercentage={percent_change_7d}
       />
     </div>
   );
