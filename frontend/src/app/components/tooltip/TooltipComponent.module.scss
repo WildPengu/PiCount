@@ -1,0 +1,57 @@
+@import './../../../scss/Variables.module.scss';
+
+.tooltipWrapper {
+  position: relative;
+  left: 2%;
+  width: 17px;
+  .tooltipIconContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 17px;
+    width: 100%;
+    background-color: #636c7f;
+    transition: all 0.3s;
+
+    p {
+      font: italic bold 12px/17px sans-serif;
+    }
+  }
+
+  .tooltipComponentContainer {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 300px;
+    transition: transform 0.2s ease-out;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 3px 0px #636c7f;
+    z-index: 10;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      z-index: 10;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
