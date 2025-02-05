@@ -146,6 +146,19 @@ export const MyAssets = () => {
     portfolioChangePercentage = (portfolioChange / totalAssetsPrice) * 100;
   }
 
+  const columns = [
+    { key: "#", label: "#" },
+    { key: "name", label: "Name", sortable: true },
+    { key: "amount", label: "Holdings", sortable: true, alignRight: true },
+    { key: "price", label: "Price", sortable: true, alignRight: true },
+    { key: "todayProfit", label: "Today's PnL", sortable: true, alignRight: true },
+    { key: "percent_change_1h", label: "1h %", sortable: true, alignRight: true },
+    { key: "percent_change_24h", label: "24h %", sortable: true, alignRight: true },
+    { key: "percent_change_7d", label: "7d %", sortable: true, alignRight: true },
+    { key: "percent_change_30d", label: "30d %", sortable: true, alignRight: true },
+    { key: "last7days", label: "Last 7 days", alignRight: true }
+  ];
+
   return (
     <div className={styles.assetsContainer}>
       <div className={styles.chartBoxHeader}>
@@ -166,16 +179,15 @@ export const MyAssets = () => {
       </div>
 
       <div className={styles.sortHeader}>
-        <div>#</div>
-        <div className={styles.pointer} onClick={() => handleSort("name")}>Name</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("amount")}>Holdings</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("price")}>Price</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("todayProfit")}>Today's PnL</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_1h")}>1h %</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_24h")}>24h %</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_7d")}>7d %</div>
-        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_30d")}>30d %</div>
-        <div className={styles.alignRight}>Last 7 days</div>
+        {columns.map(({ key, label, sortable, alignRight }) => (
+          <div
+            key={key}
+            className={`${alignRight ? styles.alignRight : ""} ${sortable ? styles.pointer : ""}`}
+            onClick={sortable ? () => handleSort(key) : undefined}
+          >
+            {label}
+          </div>
+        ))}
       </div>
       <div className={styles.assetsList}>
         {crypto ? cryptoRows : <Loader />}
