@@ -51,7 +51,6 @@
     padding: 8px;
 
     div {
-      cursor: pointer;
       margin-right: 32px;
       &:hover {
         color: #dadce0;
@@ -73,4 +72,8 @@
 
 .alignRight {
   text-align: right;
+}
+
+.pointer {
+  cursor: pointer;
 }

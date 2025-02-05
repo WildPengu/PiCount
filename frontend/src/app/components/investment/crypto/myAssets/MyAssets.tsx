@@ -167,14 +167,14 @@ export const MyAssets = () => {
 
       <div className={styles.sortHeader}>
         <div>#</div>
-        <div onClick={() => handleSort("name")}>Name</div>
-        <div className={styles.alignRight} onClick={() => handleSort("amount")}>Holdings</div>
-        <div className={styles.alignRight} onClick={() => handleSort("price")}>Price</div>
-        <div className={styles.alignRight} onClick={() => handleSort("todayProfit")}>Today's PnL</div>
-        <div className={styles.alignRight} onClick={() => handleSort("percent_change_1h")}>1h %</div>
-        <div className={styles.alignRight} onClick={() => handleSort("percent_change_24h")}>24h %</div>
-        <div className={styles.alignRight} onClick={() => handleSort("percent_change_7d")}>7d %</div>
-        <div className={styles.alignRight} onClick={() => handleSort("percent_change_30d")}>30d %</div>
+        <div className={styles.pointer} onClick={() => handleSort("name")}>Name</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("amount")}>Holdings</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("price")}>Price</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("todayProfit")}>Today's PnL</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_1h")}>1h %</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_24h")}>24h %</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_7d")}>7d %</div>
+        <div className={`${styles.alignRight} + ${styles.pointer}`} onClick={() => handleSort("percent_change_30d")}>30d %</div>
         <div className={styles.alignRight}>Last 7 days</div>
       </div>
       <div className={styles.assetsList}>

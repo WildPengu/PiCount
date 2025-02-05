@@ -14,7 +14,6 @@
     border-top: 1px solid #202434;
 
     div {
-      cursor: pointer;
       margin-right: 32px;
 
       &:hover {
@@ -35,4 +34,8 @@
 
 .alignRight {
   text-align: right;
+}
+
+.pointer {
+  cursor: pointer;
 }
