@@ -3,8 +3,8 @@ type Cryptocurrency = {
   symbol: string;
   name: string;
   image: string;
-  current_price: number;
-  market_cap: number;
+  price: number;
+  marketCap: number;
   market_cap_rank: number;
   fully_diluted_valuation: number | null;
   total_volume: number;
@@ -32,8 +32,8 @@ type Cryptocurrency = {
   sparkline_in_7d: {
     price: number[];
   };
-  price_change_percentage_1h_in_currency: number;
-  price_change_percentage_24h_in_currency: number;
-  price_change_percentage_7d_in_currency: number;
-  price_change_percentage_30d_in_currency: number;
+  percent_change_1h: number;
+  percent_change_24h: number;
+  percent_change_7d: number;
+  percent_change_30d: number;
 };

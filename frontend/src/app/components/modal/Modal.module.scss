@@ -6,10 +6,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
   height: auto;
   text-align: center;
   border: 1px solid transparent;
-  box-shadow: 0 0 10px 1px $blue;
+  box-shadow: 0 0 5px 1px $blue;
   z-index: 10;
+  padding: 16px;
+  border-radius: 16px;
+  box-sizing: border-box;
 }
