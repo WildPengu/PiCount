@@ -7,6 +7,9 @@
   width: calc(100vw - 200px);
 
   .TopPanelContainer {
+    display: flex;
+    align-items: center;
+
     button {
       background-image: none;
     }
