@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
-import styles from './TooltipComponent.module.scss';
-import { TooltipComponent } from './TooltipComponent';
+import { useContext, useState } from 'react';
 import { ThemeContext } from '../../Theme';
+import { TooltipComponent } from './TooltipComponent';
+import styles from './TooltipComponent.module.scss';
 
 interface TooltipIconComponentProps {
   text: string;
@@ -26,15 +26,13 @@ export const TooltipIcon: React.FC<TooltipIconComponentProps> = ({
       >
         <p>i</p>
       </div>
-      {visible ? (
-        <TooltipComponent
-          visible={visible}
-          showTooltip={showTooltip}
-          hideTooltip={hideTooltip}
-          content={text}
-          link={link}
-        />
-      ) : null}
+      <TooltipComponent
+        visible={visible}
+        showTooltip={showTooltip}
+        hideTooltip={hideTooltip}
+        content={text}
+        link={link}
+      />
     </div>
   );
 };

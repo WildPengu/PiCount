@@ -14,6 +14,7 @@ export const TooltipComponent: React.FC<TooltipComponentProps> = ({
   hideTooltip,
   content,
   link,
+  visible,
 }) => {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
@@ -51,7 +52,7 @@ export const TooltipComponent: React.FC<TooltipComponentProps> = ({
   return (
     <section
       ref={tooltipRef}
-      className={styles.tooltipComponentContainer}
+      className={`${styles.tooltipComponentContainer} ${visible ? styles.visible : styles.hidden}`}
       style={tooltipStyle}
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}

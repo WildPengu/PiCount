@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AppSettingsProvider } from '../../../../config';
 import { Loader } from '../../../loader/Loader';
+import { TooltipIcon } from '../../../tooltip/TooltipIcon';
 import styles from './AllCrypto.module.scss';
 import { CryptoRow } from './cryptoRow/CryptoRow';
 
@@ -59,8 +60,8 @@ export const AllCrypto = () => {
     { key: "percent_change_24h", label: "24h %", sortable: true, alignRight: true },
     { key: "percent_change_7d", label: "7d %", sortable: true, alignRight: true },
     { key: "percent_change_30d", label: "30d %", sortable: true, alignRight: true },
-    { key: "circulating_supply", label: "Circulating Supply", sortable: true, alignRight: true },
-    { key: "marketCap", label: "Market Cap", sortable: true, alignRight: true },
+    { key: "circulating_supply", label: "Circulating Supply", sortable: true, alignRight: true, tooltip: true },
+    { key: "marketCap", label: "Market Cap", sortable: true, alignRight: true, tooltip: true },
     { key: "last7days", label: "Last 7 days", alignRight: true }
   ];
 
@@ -68,13 +69,19 @@ export const AllCrypto = () => {
   return (
     <div className={styles.assetsContainer}>
       <div className={styles.sortHeader}>
-        {columns.map(({ key, label, sortable, alignRight }) => (
+        {columns.map(({ key, label, sortable, alignRight, tooltip }) => (
           <div
             key={key}
-            className={`${alignRight ? styles.alignRight : ""} ${sortable ? styles.pointer : ""}`}
+            className={` ${styles.labelContainer} ${alignRight ? styles.alignRight : ""}`}
             onClick={sortable ? () => handleSort(key) : undefined}
           >
-            {label}
+            <div className={` ${styles.labelItem} ${sortable ? styles.pointer : ""}`}>{label}</div>
+            {tooltip ? <TooltipIcon
+              text={`The amount of coins that are circulating in the market and are in public hands. It is analogous to the flowing shares in the stock market.`}
+              link={
+                'https://support.coinmarketcap.com/hc/en-us/articles/360043396252-Supply-Circulating-Total-Max'
+              }
+            /> : null}
           </div>
         ))}
       </div>

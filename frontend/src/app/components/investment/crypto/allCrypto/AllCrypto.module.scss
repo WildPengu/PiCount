@@ -7,18 +7,15 @@
   
   .sortHeader {
     display: grid;
-    grid-template-columns: 30px 200px 150px 85px 85px 85px 85px 250px 200px 250px;
+    grid-template-columns: 30px 200px 150px 140px 140px 140px 140px 250px 200px 250px;
+    gap: 16px;
     color: #848e9c;
     padding: 8px;
     border-bottom: 1px solid #202434;
     border-top: 1px solid #202434;
 
-    div {
-      margin-right: 32px;
-
-      &:hover {
-        color: #dadce0;
-      }
+    .labelContainer {
+      display: flex;
     }
   }
 
@@ -40,4 +37,8 @@
 
 .pointer {
   cursor: pointer;
+  
+  &:hover {
+    color: #dadce0;
+  }
 }
