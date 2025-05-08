@@ -1,6 +1,7 @@
 .assetRow {
   display: grid;
-  grid-template-columns: 30px 200px 150px 85px 85px 85px 85px 250px 200px 250px;
+  grid-template-columns: 30px 200px 150px 140px 140px 140px 140px 250px 200px 210px;
+  gap: 16px;
   padding: 16px 8px;
   align-items: center;
   transition: 0.3s;
@@ -10,10 +11,6 @@
 
   &:hover {
     background-color: #222531;
-  }
-
-  & > div {
-    margin-right: 32px;
   }
 
   .alignRight {

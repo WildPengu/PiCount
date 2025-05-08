@@ -1,3 +1,4 @@
+import { formatCryptoPrice } from '../../utils/formatCryptoPrice';
 import { CryptoSparkline } from '../CryptoSparkLine';
 import { CirculatingSupply } from './circulatingSupply/CirculatingSupply';
 import styles from './CryptoRow.module.scss';
@@ -36,7 +37,7 @@ export const CryptoRow: React.FC<RowProps> = ({ index, row }) => {
         </div>
       </div>
 
-      <div className={`${styles.price} ${styles.alignRight}`}>${price.toFixed(2)}</div>
+      <div className={`${styles.price} ${styles.alignRight}`}>${formatCryptoPrice(price)}</div>
 
       <div className={styles.alignRight}>
         <PercentageChange value={percent_change_1h} />
