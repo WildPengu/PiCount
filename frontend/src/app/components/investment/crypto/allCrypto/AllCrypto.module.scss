@@ -1,0 +1,41 @@
+.assetsContainer {
+  color: #dadce0;
+  display: grid;
+  width: 100%;
+  padding: 16px 0;
+  overflow-x: auto;
+  
+  .sortHeader {
+    display: grid;
+    grid-template-columns: 30px 200px 150px 85px 85px 85px 85px 250px 200px 250px;
+    color: #848e9c;
+    padding: 8px;
+    border-bottom: 1px solid #202434;
+    border-top: 1px solid #202434;
+
+    div {
+      margin-right: 32px;
+
+      &:hover {
+        color: #dadce0;
+      }
+    }
+  }
+
+  .assetsList {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      display: none;
+    }
+  }
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.pointer {
+  cursor: pointer;
+}

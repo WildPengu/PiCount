@@ -1,12 +1,15 @@
-import { test, expect } from '@playwright/test';
-
-//all tests in english app version
+import { expect, test } from '@playwright/test';
+import { URL_EXPENSE, USER_NAME, USER_PASSWORD } from './utils/constants';
+import { login } from './utils/login';
 
 test.describe('Expense list tests', () => {
-  const urlExpense = 'http://localhost:5173/expenseList';
-
   test('successful adding new expense', async ({ page }) => {
-    await page.goto(urlExpense);
+    await login(page, USER_NAME, USER_PASSWORD);
+
+    await page.waitForTimeout(1500);
+
+    const currentUrl = page.url();
+    expect(currentUrl).toEqual(URL_EXPENSE);
 
     await page.getByTestId('add-expense-btn').click();
 
@@ -14,13 +17,9 @@ test.describe('Expense list tests', () => {
       'Add New Expense',
     );
 
-    await page.getByLabel('Select category').selectOption('Transport');
-    await page.getByPlaceholder('Write sth...').fill('washing and clean car');
-    await page.getByPlaceholder('Amount').fill('16');
-    await page.getByRole('button', { name: 'Add expense' }).click();
-    await page.getByRole('heading', { name: 'TODAY' }).click();
-    await page.getByText('Transport').first().click();
-    await page.getByText('fuel').click();
-    await page.getByText('- 200 ZŁ').first().click();
+    await page.locator('#typeOfExpense').selectOption({ value: 'Transport' });
+    await page.locator('#desc').fill('washing and cleaning the car');
+    await page.locator('#amount').fill('16');
+    await page.getByTestId('add-expense-submit').click();
   });
 });

@@ -106,8 +106,8 @@ PATCH http://localhost:3000/assets/crypto/65f5ff49f8197629d2048b28
 Content-Type: application/json
 
 {
-  "symbol": "JUP",
-  "amount": 1500
+  "cryptoId": "solana",
+  "amount": 12.42
 }
 
 ###

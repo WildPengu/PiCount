@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AllCrypto } from './allCrypto/AllCrypto';
 import styles from './Crypto.module.scss';
 import { MyAssets } from './myAssets/MyAssets';
 
@@ -7,52 +8,31 @@ interface InvestProps {
 }
 
 enum ActiveView {
-  Chart = 'chart',
+  AllCrypto = 'chart',
   MyAssets = 'myAssets',
 }
 
 export const Crypto: React.FC<InvestProps> = () => {
-  //const { appSettings } = AppSettingsProvider();
-  const [activeView, setActiveView] = useState(ActiveView.MyAssets);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `${appSettings.apiHost}:${appSettings.apiPort}/cryptocurrency/latest?limit=15`
-  //       );
-
-  //       console.log(await response.json());
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
+  const [activeView, setActiveView] = useState(ActiveView.AllCrypto);
 
   return (
     <div>
       <div className={styles.cryptoHeader}>
         <h2
-          className={styles.cryptoHeaderText}
-          onClick={() => {
-            setActiveView(ActiveView.MyAssets);
-          }}
-        >
-          My Assets
-        </h2>
-        <h2
-          className={styles.cryptoHeaderText}
-          onClick={() => {
-            setActiveView(ActiveView.Chart);
-          }}
+          className={`${styles.cryptoHeaderText} ${activeView === ActiveView.AllCrypto ? styles.activeTab : ''}`}
+          onClick={() => setActiveView(ActiveView.AllCrypto)}
         >
           All Crypto
         </h2>
+        <h2
+          className={`${styles.cryptoHeaderText} ${activeView === ActiveView.MyAssets ? styles.activeTab : ''}`}
+          onClick={() => setActiveView(ActiveView.MyAssets)}
+        >
+          My Assets
+        </h2>
       </div>
+      {activeView === ActiveView.AllCrypto && <AllCrypto />}
       {activeView === ActiveView.MyAssets && <MyAssets />}
-      {activeView === ActiveView.Chart && <div>hik</div>}
     </div>
   );
 };

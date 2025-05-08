@@ -8,7 +8,8 @@
   "create": "Create account",
   "reset": "Reset",
   "cancel": "Cancel",
-  "today": "TODAY",
+  "add": "Add",
+  "today": "Today",
   "expList": "My Expense List",
   "chart": "My Chart",
   "chartNav": "Charts",
@@ -17,6 +18,7 @@
   "settings": "Settings",
   "history": "History",
   "logout": "Logout",
+  "search": "Search",
 
   "settingsComponent": {
     "theme": "Dark / Light Mode",

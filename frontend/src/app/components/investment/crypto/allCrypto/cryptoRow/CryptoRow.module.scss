@@ -1,0 +1,46 @@
+.assetRow {
+  display: grid;
+  grid-template-columns: 30px 200px 150px 85px 85px 85px 85px 250px 200px 250px;
+  padding: 16px 8px;
+  align-items: center;
+  transition: 0.3s;
+  font-weight: 700;
+  font-size: 14px;
+  border-bottom: 1px solid #202434;
+
+  &:hover {
+    background-color: #222531;
+  }
+
+  & > div {
+    margin-right: 32px;
+  }
+
+  .alignRight {
+    text-align: right;
+  }
+
+  .nameColumn {
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    .image {
+      width: 25px;
+      height: 25px;
+      margin-right: 8px;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+
+    .lowerItem {
+      color: #848e9c;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+  }
+}
